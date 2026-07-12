@@ -139,7 +139,8 @@
     }
   },
   "filtering": {
-    "ai_score_threshold": 7.5,
+    "ai_score_threshold": 7.0,
+    "minimum_items": 5,
     "time_window_hours": 24,
     "max_items": 20,
     "aihot_score_weight": 0.25,

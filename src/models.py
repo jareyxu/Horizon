@@ -499,6 +499,7 @@ class FilteringConfig(BaseModel):
     """Content filtering configuration."""
 
     ai_score_threshold: float = 7.0
+    minimum_items: int = Field(default=0, ge=0)
     time_window_hours: int = 24
     max_items: Optional[int] = Field(default=None, gt=0)
     category_groups: Dict[str, CategoryGroupConfig] = Field(default_factory=dict)
