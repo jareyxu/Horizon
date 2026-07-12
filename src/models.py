@@ -19,6 +19,8 @@ class SourceType(str, Enum):
     OSSINSIGHT = "ossinsight"
     GDELT = "gdelt"
     GOOGLE_NEWS = "google_news"
+    AIHOT = "aihot"
+    FOLLOW_BUILDERS = "follow_builders"
 
 
 class ContentItem(BaseModel):
@@ -288,7 +290,9 @@ class GDELTConfig(BaseModel):
     mode: str = "ArtList"
     max_records: int = 75  # GDELT DOC API caps at 250; keep modest
     timespan: Optional[str] = None  # e.g. "24h"; overrides since-derived window
-    language: Optional[str] = None  # sourcelang filter, e.g. "english"; None = no filter
+    language: Optional[str] = (
+        None  # sourcelang filter, e.g. "english"; None = no filter
+    )
     country: Optional[str] = None  # sourcecountry filter; None = no filter
     category: Optional[str] = None  # Horizon category label for downstream grouping
 
@@ -310,6 +314,78 @@ class GoogleNewsConfig(BaseModel):
     category: Optional[str] = None
 
 
+class AIHotConfig(BaseModel):
+    """AI HOT public API source configuration."""
+
+    enabled: bool = False
+    base_url: str = "https://aihot.virxact.com"
+    mode: str = "selected"
+    take: int = Field(default=50, ge=1, le=100)
+    max_pages: int = Field(default=2, ge=1, le=5)
+    min_score: int = Field(default=55, ge=0, le=100)
+    categories: List[str] = Field(default_factory=list)
+    category_mapping: Dict[str, str] = Field(
+        default_factory=lambda: {
+            "ai-models": "models",
+            "ai-products": "products",
+            "industry": "industry",
+            "paper": "research",
+            "tip": "insights",
+        }
+    )
+    use_remote_summary: bool = True
+    prefer_permalink: bool = True
+    user_agent: str = (
+        "jareyxu-horizon/0.1 (+https://github.com/jareyxu/Horizon; "
+        "source=aihot-public-api)"
+    )
+
+
+class FollowBuildersConfig(BaseModel):
+    """Follow Builders public JSON feed configuration."""
+
+    enabled: bool = False
+    x_feed: HttpUrl = HttpUrl(
+        "https://raw.githubusercontent.com/zarazhangrui/follow-builders/main/feed-x.json"
+    )
+    podcast_feed: HttpUrl = HttpUrl(
+        "https://raw.githubusercontent.com/zarazhangrui/follow-builders/main/feed-podcasts.json"
+    )
+    blog_feed: HttpUrl = HttpUrl(
+        "https://raw.githubusercontent.com/zarazhangrui/follow-builders/main/feed-blogs.json"
+    )
+    max_feed_age_hours: int = Field(default=48, gt=0)
+    transcript_max_chars: int = Field(default=24000, ge=4000, le=100000)
+    category_mapping: Dict[str, str] = Field(
+        default_factory=lambda: {
+            "x": "builders",
+            "podcast": "podcasts",
+            "blog": "official-blogs",
+        }
+    )
+
+
+class ProfileConfig(BaseModel):
+    """Personal interests used by the AI relevance scorer."""
+
+    interests: List[str] = Field(default_factory=list)
+    negative_topics: List[str] = Field(default_factory=list)
+    preferred_content: List[str] = Field(default_factory=list)
+
+
+class VerificationConfig(BaseModel):
+    """Original-source verification policy for shortlisted items."""
+
+    enabled: bool = False
+    top_n: int = Field(default=5, ge=0, le=20)
+    aihot_min_score: int = Field(default=75, ge=0, le=100)
+    max_excerpt_chars: int = Field(default=4000, ge=500, le=12000)
+    concurrency: int = Field(default=3, ge=1, le=10)
+    user_agent: str = (
+        "jareyxu-horizon/0.1 (+https://github.com/jareyxu/Horizon; verifier)"
+    )
+
+
 class SourcesConfig(BaseModel):
     """All sources configuration."""
 
@@ -323,6 +399,8 @@ class SourcesConfig(BaseModel):
     ossinsight: OSSInsightConfig = Field(default_factory=OSSInsightConfig)
     gdelt: Optional[GDELTConfig] = None
     google_news: Optional[GoogleNewsConfig] = None
+    aihot: Optional[AIHotConfig] = None
+    follow_builders: Optional[FollowBuildersConfig] = None
 
 
 class WebhookConfig(BaseModel):
@@ -426,12 +504,17 @@ class FilteringConfig(BaseModel):
     category_groups: Dict[str, CategoryGroupConfig] = Field(default_factory=dict)
     default_group: str = "other"
     default_group_limit: Optional[int] = Field(default=None, gt=0)
+    aihot_score_weight: float = Field(default=0.25, ge=0.0, le=1.0)
+    multi_source_bonus_2_3: float = Field(default=0.3, ge=0.0, le=2.0)
+    multi_source_bonus_4_plus: float = Field(default=0.6, ge=0.0, le=2.0)
 
 
 class Config(BaseModel):
     """Main configuration model."""
 
     version: str = "1.0"
+    profile: ProfileConfig = Field(default_factory=ProfileConfig)
+    verification: VerificationConfig = Field(default_factory=VerificationConfig)
     ai: AIConfig
     sources: SourcesConfig
     filtering: FilteringConfig

@@ -24,6 +24,11 @@ VALID_SOURCES = {
     "telegram",
     "twitter",
     "openbb",
+    "ossinsight",
+    "gdelt",
+    "google_news",
+    "aihot",
+    "follow_builders",
 }
 ENV_KEY_RE = re.compile(r"^[A-Z_][A-Z0-9_]*$")
 
@@ -215,6 +220,16 @@ def apply_source_filter(
     if "openbb" not in wanted and getattr(clone.sources, "openbb", None):
         clone.sources.openbb.enabled = False
         clone.sources.openbb.watchlists = []
+    for source_name in (
+        "ossinsight",
+        "gdelt",
+        "google_news",
+        "aihot",
+        "follow_builders",
+    ):
+        source = getattr(clone.sources, source_name, None)
+        if source_name not in wanted and source:
+            source.enabled = False
 
     return clone, chosen, unknown
 
@@ -237,6 +252,15 @@ def get_enabled_sources(config: Any) -> list[str]:
         enabled.append("twitter")
     if getattr(getattr(config.sources, "openbb", None), "enabled", False):
         enabled.append("openbb")
+    for source_name in (
+        "ossinsight",
+        "gdelt",
+        "google_news",
+        "aihot",
+        "follow_builders",
+    ):
+        if getattr(getattr(config.sources, source_name, None), "enabled", False):
+            enabled.append(source_name)
     return enabled
 
 

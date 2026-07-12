@@ -1,7 +1,7 @@
 """Daily summary generation — pure programmatic rendering."""
 
 import re
-from typing import List, Dict
+from typing import List
 
 from ..models import ContentItem
 
@@ -25,6 +25,14 @@ LABELS = {
         "discussion": "Discussion",
         "references": "References",
         "tags": "Tags",
+        "reader": "Chinese reading",
+        "verification": "Verification",
+        "verification_states": {
+            "corroborated": "corroborated by multiple sources",
+            "original_checked": "original source checked",
+            "original_reachable": "original source reachable",
+            "unverified": "unverified",
+        },
         "selected_items": "From {total} items, {selected} important content pieces were selected",
         "empty_analyzed": "Analyzed {total} items, but none met the importance threshold.",
         "empty_body": (
@@ -45,6 +53,14 @@ LABELS = {
         "discussion": "社区讨论",
         "references": "参考链接",
         "tags": "标签",
+        "reader": "中文阅读",
+        "verification": "核验",
+        "verification_states": {
+            "corroborated": "多源印证",
+            "original_checked": "已核对原文",
+            "original_reachable": "原文可访问",
+            "unverified": "待核验",
+        },
         "selected_items": "从 {total} 条内容中筛选出 {selected} 条重要资讯。",
         "empty_analyzed": "已分析 {total} 条内容，但没有达到重要性阈值的条目。",
         "empty_body": (
@@ -109,7 +125,10 @@ class DailySummarizer:
             toc_entries.append(f"{i + 1}. [{t}](#item-{i + 1}) \u2b50\ufe0f {score}/10")
         toc = "\n".join(toc_entries) + "\n\n---\n\n"
 
-        parts = [self._format_item(item, labels, language, i + 1) for i, item in enumerate(items)]
+        parts = [
+            self._format_item(item, labels, language, i + 1)
+            for i, item in enumerate(items)
+        ]
 
         return header + toc + "".join(parts)
 
@@ -140,7 +159,11 @@ class DailySummarizer:
 
         entries = []
         for i, item in enumerate(items, start=1):
-            title = str(item.metadata.get(f"title_{language}") or item.title).replace("[", "(").replace("]", ")")
+            title = (
+                str(item.metadata.get(f"title_{language}") or item.title)
+                .replace("[", "(")
+                .replace("]", ")")
+            )
             if language == "zh":
                 title = _pangu(title)
             score = item.ai_score or "?"
@@ -157,10 +180,16 @@ class DailySummarizer:
     ) -> str:
         """Generate one item message for multi-message webhook delivery."""
         labels = LABELS.get(language, LABELS["en"])
-        prefix = f"第 {index}/{total} 条\n\n" if language == "zh" else f"Item {index}/{total}\n\n"
+        prefix = (
+            f"第 {index}/{total} 条\n\n"
+            if language == "zh"
+            else f"Item {index}/{total}\n\n"
+        )
         return prefix + self._format_item(item, labels, language, index).rstrip("-\n ")
 
-    def _format_item(self, item: ContentItem, labels: dict, language: str, index: int) -> str:
+    def _format_item(
+        self, item: ContentItem, labels: dict, language: str, index: int
+    ) -> str:
         """Format a single ContentItem into Markdown."""
         _title = item.metadata.get(f"title_{language}") or item.title
         title = str(_title).replace("[", "(").replace("]", ")")
@@ -211,7 +240,18 @@ class DailySummarizer:
         if discussion_url:
             discussion_url = str(discussion_url)
             if discussion_url != url:
-                source_line += f' · [{labels["discussion"]}]({discussion_url})'
+                source_line += f" · [{labels['discussion']}]({discussion_url})"
+
+        reader_url = meta.get("reader_url")
+        if reader_url and str(reader_url) != url:
+            source_line += f" · [{labels['reader']}]({reader_url})"
+
+        source_count = int(meta.get("source_count") or 1)
+        if source_count > 1:
+            if language == "zh":
+                source_line += f" · {source_count} 个来源"
+            else:
+                source_line += f" · {source_count} sources"
 
         lines = [
             f'<a id="item-{index}"></a>',
@@ -222,16 +262,26 @@ class DailySummarizer:
             source_line,
         ]
 
+        verification_status = str(meta.get("verification_status") or "")
+        if verification_status:
+            verification_text = labels["verification_states"].get(
+                verification_status,
+                verification_status,
+            )
+            lines.extend(["", f"**{labels['verification']}**: {verification_text}"])
+
         if background:
             lines.append("")
             lines.append(f"**{labels['background']}**: {background}")
 
         sources = meta.get("sources") or []
         if sources:
-            items_html = "".join(f'<li><a href="{s["url"]}">{s["title"]}</a></li>\n' for s in sources)
+            items_html = "".join(
+                f'<li><a href="{s["url"]}">{s["title"]}</a></li>\n' for s in sources
+            )
             lines += [
                 "",
-                f'<details><summary>{labels["references"]}</summary>\n<ul>\n{items_html}\n</ul>\n</details>',
+                f"<details><summary>{labels['references']}</summary>\n<ul>\n{items_html}\n</ul>\n</details>",
             ]
 
         if discussion:
@@ -248,7 +298,9 @@ class DailySummarizer:
 
         return "\n".join(lines) + "\n\n"
 
-    def _generate_empty_summary(self, date: str, total_fetched: int, labels: dict) -> str:
+    def _generate_empty_summary(
+        self, date: str, total_fetched: int, labels: dict
+    ) -> str:
         """Generate summary when no high-scoring items were found."""
         return (
             f"# {labels['header']} - {date}\n\n"

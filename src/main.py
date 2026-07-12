@@ -35,8 +35,15 @@ def main():
     """Main CLI entry point."""
     print_banner()
 
-    parser = argparse.ArgumentParser(description="Horizon - AI-Driven Information Aggregation System")
+    parser = argparse.ArgumentParser(
+        description="Horizon - AI-Driven Information Aggregation System"
+    )
     parser.add_argument("--hours", type=int, help="Force fetch from last N hours")
+    parser.add_argument(
+        "--no-delivery",
+        action="store_true",
+        help="Generate local and GitHub Pages output without email/webhook delivery",
+    )
     args = parser.parse_args()
 
     try:
@@ -73,7 +80,11 @@ def main():
             sys.exit(1)
 
         # Create and run orchestrator
-        orchestrator = HorizonOrchestrator(config, storage)
+        orchestrator = HorizonOrchestrator(
+            config,
+            storage,
+            delivery_enabled=not args.no_delivery,
+        )
         asyncio.run(orchestrator.run(force_hours=args.hours))
 
     except KeyboardInterrupt:
@@ -82,6 +93,7 @@ def main():
     except Exception as e:
         console.print(f"\n[bold red]❌ Fatal error: {e}[/bold red]")
         import traceback
+
         traceback.print_exc()
         sys.exit(1)
 

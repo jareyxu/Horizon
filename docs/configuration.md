@@ -36,6 +36,21 @@ Common API key variable names:
 | Aliyun DashScope | `DASHSCOPE_API_KEY` |
 | Doubao | `DOUBAO_API_KEY` |
 | DeepSeek | `DEEPSEEK_API_KEY` |
+| SiliconFlow (OpenAI compatible) | `SILICONFLOW_API_KEY` |
+
+**SiliconFlow / GLM-5.2**:
+
+```json
+{
+  "ai": {
+    "provider": "openai",
+    "model": "zai-org/GLM-5.2",
+    "base_url": "https://api.siliconflow.cn/v1",
+    "api_key_env": "SILICONFLOW_API_KEY",
+    "languages": ["zh"]
+  }
+}
+```
 
 **Anthropic Claude**:
 
@@ -196,6 +211,47 @@ For OpenAI-compatible gateways, Horizon sends `temperature` by default. If a new
 ## Information Sources
 
 All sources are configured under the top-level `sources` key in `config.json`.
+
+### Personal profile and verification
+
+The optional top-level `profile` object injects personal interests, preferred
+content, and negative topics into the relevance scorer. The optional
+`verification` policy checks the original page for top-ranked items and marks
+unreachable claims as unverified instead of silently presenting them as facts.
+
+### AI HOT
+
+```json
+{
+  "sources": {
+    "aihot": {
+      "enabled": true,
+      "mode": "selected",
+      "take": 50,
+      "max_pages": 2,
+      "min_score": 55,
+      "prefer_permalink": true
+    }
+  }
+}
+```
+
+### Follow Builders
+
+```json
+{
+  "sources": {
+    "follow_builders": {
+      "enabled": true,
+      "x_feed": "https://raw.githubusercontent.com/zarazhangrui/follow-builders/main/feed-x.json",
+      "podcast_feed": "https://raw.githubusercontent.com/zarazhangrui/follow-builders/main/feed-podcasts.json",
+      "blog_feed": "https://raw.githubusercontent.com/zarazhangrui/follow-builders/main/feed-blogs.json",
+      "max_feed_age_hours": 48,
+      "transcript_max_chars": 24000
+    }
+  }
+}
+```
 
 ### GitHub
 
