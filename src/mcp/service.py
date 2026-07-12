@@ -44,7 +44,9 @@ class HorizonPipelineService:
     """High-level staged pipeline service."""
 
     def __init__(self, runs_root: Path | None = None):
-        self.runs_root = Path(runs_root).resolve() if runs_root else _default_runs_root().resolve()
+        self.runs_root = (
+            Path(runs_root).resolve() if runs_root else _default_runs_root().resolve()
+        )
         self._run_store: RunStore | None = None
 
     @property
@@ -96,7 +98,9 @@ class HorizonPipelineService:
         """Read staged item payload (JSON)."""
 
         if max_items <= 0:
-            raise HorizonMcpError(code="HZ_INVALID_INPUT", message="max_items must be greater than 0.")
+            raise HorizonMcpError(
+                code="HZ_INVALID_INPUT", message="max_items must be greater than 0."
+            )
         try:
             items = self.run_store.load_items(run_id, stage)
         except ValueError as exc:
@@ -181,15 +185,27 @@ class HorizonPipelineService:
                     missing_env.append(key)
 
             if ctx.config.sources.github and not os.getenv("GITHUB_TOKEN"):
-                warnings.append("GITHUB_TOKEN is not set; GitHub fetching may hit strict rate limits.")
+                warnings.append(
+                    "GITHUB_TOKEN is not set; GitHub fetching may hit strict rate limits."
+                )
 
-            if getattr(ctx.config, "email", None) and ctx.config.email and ctx.config.email.enabled:
+            if (
+                getattr(ctx.config, "email", None)
+                and ctx.config.email
+                and ctx.config.email.enabled
+            ):
                 pwd_key = ctx.config.email.password_env
                 if not os.getenv(pwd_key):
                     missing_env.append(pwd_key)
 
-            if getattr(ctx.config, "webhook", None) and ctx.config.webhook and ctx.config.webhook.enabled:
-                if ctx.config.webhook.url_env and not os.getenv(ctx.config.webhook.url_env):
+            if (
+                getattr(ctx.config, "webhook", None)
+                and ctx.config.webhook
+                and ctx.config.webhook.enabled
+            ):
+                if ctx.config.webhook.url_env and not os.getenv(
+                    ctx.config.webhook.url_env
+                ):
                     missing_env.append(ctx.config.webhook.url_env)
 
         return {
@@ -228,7 +244,9 @@ class HorizonPipelineService:
         sources: list[str] | None = None,
     ) -> dict[str, Any]:
         if hours <= 0:
-            raise HorizonMcpError(code="HZ_INVALID_INPUT", message="hours must be greater than 0.")
+            raise HorizonMcpError(
+                code="HZ_INVALID_INPUT", message="hours must be greater than 0."
+            )
 
         ctx, selected_sources, unknown_sources = self._build_context(
             horizon_path=horizon_path,
@@ -265,7 +283,9 @@ class HorizonPipelineService:
             "fetched": len(merged_items),
             "raw_before_merge": len(raw_items),
             "source_counts": get_source_counts(merged_items),
-            "artifact": str((self.run_store.run_dir(run_id) / "raw_items.json").resolve()),
+            "artifact": str(
+                (self.run_store.run_dir(run_id) / "raw_items.json").resolve()
+            ),
             "meta": meta,
         }
 
@@ -284,15 +304,24 @@ class HorizonPipelineService:
         )
 
         if not items:
-            raise HorizonMcpError(code="HZ_EMPTY_INPUT", message="No items available for scoring.")
+            raise HorizonMcpError(
+                code="HZ_EMPTY_INPUT", message="No items available for scoring."
+            )
 
         ai_client = ctx.runtime.create_ai_client(ctx.config.ai)
-        analyzer = ctx.runtime.ContentAnalyzer(ai_client)
+        analyzer = ctx.runtime.ContentAnalyzer(ai_client, ctx.config.profile)
         scored_items = await analyzer.analyze_batch(items)
+        orchestrator = ctx.runtime.HorizonOrchestrator(
+            ctx.config,
+            ctx.runtime.StorageManager(data_dir=str(ctx.config_path.parent)),
+        )
+        orchestrator._apply_source_scoring(scored_items)
 
         self.run_store.save_items(run_id, "scored", items_to_dicts(scored_items))
         score_threshold = ctx.config.filtering.ai_score_threshold
-        above_threshold = [x for x in scored_items if x.ai_score and x.ai_score >= score_threshold]
+        above_threshold = [
+            x for x in scored_items if x.ai_score and x.ai_score >= score_threshold
+        ]
 
         meta = self.run_store.update_meta(
             run_id,
@@ -308,7 +337,9 @@ class HorizonPipelineService:
             "scored": len(scored_items),
             "above_threshold": len(above_threshold),
             "score_distribution": self._score_distribution(scored_items),
-            "artifact": str((self.run_store.run_dir(run_id) / "scored_items.json").resolve()),
+            "artifact": str(
+                (self.run_store.run_dir(run_id) / "scored_items.json").resolve()
+            ),
             "meta": meta,
         }
 
@@ -328,9 +359,17 @@ class HorizonPipelineService:
             config_path=config_path,
         )
 
-        effective_threshold = threshold if threshold is not None else ctx.config.filtering.ai_score_threshold
+        effective_threshold = (
+            threshold
+            if threshold is not None
+            else ctx.config.filtering.ai_score_threshold
+        )
 
-        important_items = [item for item in items if item.ai_score and item.ai_score >= effective_threshold]
+        important_items = [
+            item
+            for item in items
+            if item.ai_score and item.ai_score >= effective_threshold
+        ]
         important_items.sort(key=lambda x: x.ai_score or 0, reverse=True)
 
         before_dedup = len(important_items)
@@ -381,7 +420,9 @@ class HorizonPipelineService:
             "balanced_digest_enabled": balanced_enabled,
             "group_counts": balanced_group_counts,
             "source_counts": get_source_counts(important_items),
-            "artifact": str((self.run_store.run_dir(run_id) / "filtered_items.json").resolve()),
+            "artifact": str(
+                (self.run_store.run_dir(run_id) / "filtered_items.json").resolve()
+            ),
             "meta": meta,
         }
 
@@ -400,7 +441,9 @@ class HorizonPipelineService:
         )
 
         if not items:
-            raise HorizonMcpError(code="HZ_EMPTY_INPUT", message="No items available for enrichment.")
+            raise HorizonMcpError(
+                code="HZ_EMPTY_INPUT", message="No items available for enrichment."
+            )
 
         ai_client = ctx.runtime.create_ai_client(ctx.config.ai)
         enricher = ctx.runtime.ContentEnricher(ai_client)
@@ -424,7 +467,9 @@ class HorizonPipelineService:
             "run_id": run_id,
             "enriched": len(items),
             "citation_count": citation_count,
-            "artifact": str((self.run_store.run_dir(run_id) / "enriched_items.json").resolve()),
+            "artifact": str(
+                (self.run_store.run_dir(run_id) / "enriched_items.json").resolve()
+            ),
             "meta": meta,
         }
 
@@ -460,7 +505,9 @@ class HorizonPipelineService:
         published_path = None
         if save_to_horizon_data:
             storage = make_storage(ctx.runtime, ctx.config_path)
-            published_path = storage.save_daily_summary(date_str, summary, language=language)
+            published_path = storage.save_daily_summary(
+                date_str, summary, language=language
+            )
 
         summary_meta = {
             "summary_stage": stage,
@@ -479,7 +526,9 @@ class HorizonPipelineService:
             "total_fetched": total_fetched,
             "items_used": len(items),
             "summary_path": str(run_summary_path.resolve()),
-            "published_path": str(Path(published_path).resolve()) if published_path else None,
+            "published_path": str(Path(published_path).resolve())
+            if published_path
+            else None,
             "preview": summary[:1200],
             "meta": meta,
         }
@@ -568,7 +617,9 @@ class HorizonPipelineService:
         runtime = load_runtime(resolved_horizon)
         resolved_config = resolve_config_path(resolved_horizon, config_path)
         config = load_config(runtime, resolved_config)
-        effective_config, selected_sources, unknown_sources = apply_source_filter(config, sources)
+        effective_config, selected_sources, unknown_sources = apply_source_filter(
+            config, sources
+        )
 
         return (
             PipelineContext(
@@ -588,7 +639,9 @@ class HorizonPipelineService:
         horizon_path: str | None,
         config_path: str | None,
     ) -> tuple[list[Any], PipelineContext]:
-        ctx, _, _ = self._build_context(horizon_path=horizon_path, config_path=config_path, sources=None)
+        ctx, _, _ = self._build_context(
+            horizon_path=horizon_path, config_path=config_path, sources=None
+        )
         try:
             payload = self.run_store.load_items(run_id, stage)
         except FileNotFoundError as exc:
@@ -677,5 +730,8 @@ class HorizonPipelineService:
 
         return {
             "sent": True,
-            "variables": {k: (v if k != "summary" else f"<{len(v)} chars>") for k, v in variables.items()},
+            "variables": {
+                k: (v if k != "summary" else f"<{len(v)} chars>")
+                for k, v in variables.items()
+            },
         }

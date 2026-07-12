@@ -66,6 +66,7 @@ CONTENT_ANALYSIS_USER = """Analyze the following content and provide a JSON resp
 - tags: Relevant topic tags (3-5 tags)
 
 Content:
+{profile_section}
 Title: {title}
 Source: {source}
 Author: {author}

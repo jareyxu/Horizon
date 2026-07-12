@@ -1,16 +1,20 @@
 """Content analysis using AI."""
 
 import asyncio
-import json
-import re
 from typing import List, Optional
 from tenacity import retry, stop_after_attempt, wait_exponential
-from rich.progress import Progress, SpinnerColumn, BarColumn, TextColumn, MofNCompleteColumn
+from rich.progress import (
+    Progress,
+    SpinnerColumn,
+    BarColumn,
+    TextColumn,
+    MofNCompleteColumn,
+)
 
 from .client import AIClient
 from .prompts import CONTENT_ANALYSIS_SYSTEM, CONTENT_ANALYSIS_USER
 from .utils import parse_json_response
-from ..models import ContentItem
+from ..models import ContentItem, ProfileConfig
 
 DEFAULT_THROTTLE_SEC = 0.0
 
@@ -18,8 +22,9 @@ DEFAULT_THROTTLE_SEC = 0.0
 class ContentAnalyzer:
     """Analyzes content items using AI to determine importance."""
 
-    def __init__(self, ai_client: AIClient):
+    def __init__(self, ai_client: AIClient, profile: ProfileConfig | None = None):
         self.client = ai_client
+        self.profile = profile or ProfileConfig()
 
     @staticmethod
     def _parse_json_response(response: str) -> Optional[dict]:
@@ -68,17 +73,12 @@ class ContentAnalyzer:
             transient=True,
         ) as progress:
             task = progress.add_task("Analyzing", total=len(items))
-            coros = [
-                _process(item, i, task) for i, item in enumerate(items)
-            ]
+            coros = [_process(item, i, task) for i, item in enumerate(items)]
             analyzed_items = await asyncio.gather(*coros)
 
         return analyzed_items
 
-    @retry(
-        stop=stop_after_attempt(3),
-        wait=wait_exponential(min=2, max=10)
-    )
+    @retry(stop=stop_after_attempt(3), wait=wait_exponential(min=2, max=10))
     async def _analyze_item(self, item: ContentItem) -> None:
         """Analyze a single content item.
 
@@ -130,13 +130,28 @@ class ContentAnalyzer:
         discussion_section = "\n".join(discussion_parts) if discussion_parts else ""
 
         # Generate user prompt
+        profile_lines = []
+        if self.profile.interests:
+            profile_lines.append("User interests: " + ", ".join(self.profile.interests))
+        if self.profile.preferred_content:
+            profile_lines.append(
+                "Preferred content: " + ", ".join(self.profile.preferred_content)
+            )
+        if self.profile.negative_topics:
+            profile_lines.append(
+                "Strongly down-rank these topics: "
+                + ", ".join(self.profile.negative_topics)
+            )
+        profile_section = "\n".join(profile_lines)
+
         user_prompt = CONTENT_ANALYSIS_USER.format(
+            profile_section=profile_section,
             title=item.title,
             source=f"{item.source_type.value}",
             author=item.author or "Unknown",
             url=str(item.url),
             content_section=content_section,
-            discussion_section=discussion_section
+            discussion_section=discussion_section,
         )
 
         # Get AI completion
@@ -148,7 +163,9 @@ class ContentAnalyzer:
         # Parse JSON response with robust fallback
         result = self._parse_json_response(response)
         if result is None:
-            print(f"Warning: could not parse analysis response for {item.id}, using defaults")
+            print(
+                f"Warning: could not parse analysis response for {item.id}, using defaults"
+            )
             item.ai_score = 0.0
             item.ai_reason = "Analysis response parse failed"
             item.ai_summary = item.title
@@ -157,6 +174,7 @@ class ContentAnalyzer:
 
         # Update item with analysis results
         item.ai_score = float(result.get("score", 0))
+        item.metadata["personal_ai_score"] = item.ai_score
         item.ai_reason = result.get("reason", "")
         item.ai_summary = result.get("summary", item.title)
         item.ai_tags = result.get("tags", [])

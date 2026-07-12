@@ -7,6 +7,25 @@ title: Source Scrapers
 
 Horizon fetches content from multiple source types. All scrapers inherit from `BaseScraper`, share an async HTTP client, and implement a `fetch(since)` method that returns a list of `ContentItem` objects. Sources are fetched concurrently via `asyncio.gather`.
 
+## AI HOT
+
+**File**: `src/scrapers/aihot.py`
+
+Reads the key-less public REST API at `/api/public/items`, supports cursor
+pagination, filters by upstream score/category, and preserves both the original
+article URL and the AI HOT Chinese reader permalink. Automated requests use an
+identifiable project User-Agent.
+
+## Follow Builders
+
+**File**: `src/scrapers/follow_builders.py`
+
+Reads the public X, podcast, and blog JSON feeds maintained by Follow Builders.
+Each feed is isolated so a partial failure does not stop the others. The scraper
+validates `generatedAt`, emits stable IDs, and compacts very long podcast
+transcripts before the selected episode is summarized across chunks by the AI
+pipeline.
+
 ## Hacker News
 
 **File**: `src/scrapers/hackernews.py`

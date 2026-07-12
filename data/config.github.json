@@ -1,150 +1,189 @@
 {
   "version": "1.0",
-  "ai": {
-    "provider": "deepseek",
-    "model": "deepseek-v4-flash",
-    "base_url": "https://api.deepseek.com",
-    "api_key_env": "DEEPSEEK_API_KEY",
-    "temperature": 0.3,
-    "max_tokens": 8192,
-    "throttle_sec": 1,
-    "languages": [
-      "zh",
-      "en"
+  "profile": {
+    "interests": [
+      "AI agents",
+      "Codex",
+      "Claude Code",
+      "MCP",
+      "AI developer tools",
+      "开源 AI 工具",
+      "个人开发者产品",
+      "AI 产品设计",
+      "自动化工作流"
     ],
-    "analysis_concurrency": 5,
-    "enrichment_concurrency": 5
+    "negative_topics": [
+      "体育",
+      "娱乐八卦",
+      "没有技术细节的营销内容",
+      "纯融资新闻"
+    ],
+    "preferred_content": [
+      "产品发布",
+      "技术实现",
+      "开发经验",
+      "行业判断",
+      "可执行教程"
+    ]
+  },
+  "verification": {
+    "enabled": true,
+    "top_n": 5,
+    "aihot_min_score": 75,
+    "max_excerpt_chars": 4000,
+    "concurrency": 3
+  },
+  "ai": {
+    "provider": "openai",
+    "model": "zai-org/GLM-5.2",
+    "base_url": "https://api.siliconflow.cn/v1",
+    "api_key_env": "SILICONFLOW_API_KEY",
+    "temperature": 0.2,
+    "max_tokens": 8192,
+    "throttle_sec": 0.5,
+    "languages": [
+      "zh"
+    ],
+    "analysis_concurrency": 4,
+    "enrichment_concurrency": 2
   },
   "sources": {
+    "aihot": {
+      "enabled": true,
+      "base_url": "https://aihot.virxact.com",
+      "mode": "selected",
+      "take": 50,
+      "max_pages": 2,
+      "min_score": 55,
+      "categories": [
+        "ai-models",
+        "ai-products",
+        "industry",
+        "paper",
+        "tip"
+      ],
+      "use_remote_summary": true,
+      "prefer_permalink": true
+    },
+    "follow_builders": {
+      "enabled": true,
+      "x_feed": "https://raw.githubusercontent.com/zarazhangrui/follow-builders/main/feed-x.json",
+      "podcast_feed": "https://raw.githubusercontent.com/zarazhangrui/follow-builders/main/feed-podcasts.json",
+      "blog_feed": "https://raw.githubusercontent.com/zarazhangrui/follow-builders/main/feed-blogs.json",
+      "max_feed_age_hours": 48,
+      "transcript_max_chars": 24000
+    },
     "github": [
       {
         "type": "user_events",
         "username": "karpathy",
-        "enabled": true
+        "enabled": true,
+        "category": "builders"
       },
       {
         "type": "repo_releases",
-        "owner": "vllm-project",
-        "repo": "vllm",
-        "enabled": true
+        "owner": "anthropics",
+        "repo": "claude-code",
+        "enabled": true,
+        "category": "releases"
       },
       {
         "type": "repo_releases",
-        "owner": "sgl-project",
-        "repo": "sglang",
-        "enabled": true
-      },
-      {
-        "type": "repo_releases",
-        "owner": "triton-lang",
-        "repo": "triton",
-        "enabled": true
+        "owner": "openai",
+        "repo": "codex",
+        "enabled": true,
+        "category": "releases"
       }
     ],
     "hackernews": {
       "enabled": true,
       "fetch_top_stories": 30,
-      "min_score": 150
+      "min_score": 100,
+      "category": "tech-community"
     },
     "rss": [
       {
         "name": "Simon Willison",
         "url": "https://simonwillison.net/atom/everything/",
         "enabled": true,
-        "category": "ai-tools"
-      },
-      {
-        "name": "GitHub Trending - Daily",
-        "url": "https://mshibanami.github.io/GitHubTrendingRSS/daily/all.xml",
-        "enabled": true,
-        "category": "github-trending"
-      },
-      {
-        "name": "Semianalysis",
-        "url": "https://newsletter.semianalysis.com/feed",
-        "enabled": true,
-        "category": "semiconductors"
-      },
-      {
-        "name": "LWN.net",
-        "url": "https://lwn.net/headlines/full_text?key=${LWN_KEY}",
-        "enabled": true,
-        "category": "linux-kernel"
+        "category": "ai-engineering"
       }
     ],
     "reddit": {
-      "enabled": true,
-      "subreddits": [
-        {
-          "subreddit": "MachineLearning",
-          "enabled": true,
-          "sort": "hot",
-          "time_filter": "day",
-          "fetch_limit": 10,
-          "min_score": 60
-        },
-        {
-          "subreddit": "LocalLLaMA",
-          "enabled": true,
-          "sort": "hot",
-          "time_filter": "day",
-          "fetch_limit": 10,
-          "min_score": 60
-        }
-      ],
+      "enabled": false,
+      "subreddits": [],
       "users": [],
-      "fetch_comments": 10
+      "fetch_comments": 0
     },
     "telegram": {
+      "enabled": false,
+      "channels": []
+    },
+    "ossinsight": {
       "enabled": true,
-      "channels": [
-        {
-          "channel": "zaihuapd",
-          "enabled": true,
-          "fetch_limit": 20
-        }
-      ]
+      "period": "past_24_hours",
+      "languages": [
+        "Python",
+        "TypeScript"
+      ],
+      "keywords": [
+        "agent",
+        "llm",
+        "mcp",
+        "claude",
+        "codex"
+      ],
+      "min_stars": 20,
+      "max_items": 20,
+      "category": "oss-trending"
     }
   },
   "filtering": {
-    "ai_score_threshold": 8.0,
-    "time_window_hours": 24
-  },
-  "webhook": {
-    "enabled": true,
-    "url_env": "HORIZON_WEBHOOK_URL",
-    "delivery": "summary_and_items",
-    "overview_position": "last",
-    "platform": "feishu",
-    "layout": "collapsible",
-    "fallback_layout": "markdown",
-    "languages": [
-      "zh"
-    ],
-    "request_body": {
-      "msg_type": "interactive",
-      "card": {
-        "schema": "2.0",
-        "config": {
-          "wide_screen_mode": true
-        },
-        "header": {
-          "title": {
-            "tag": "plain_text",
-            "content": "#{message_title}"
-          },
-          "template": "blue"
-        },
-        "body": {
-          "elements": [
-            {
-              "tag": "markdown",
-              "content": "#{summary}"
-            }
-          ]
-        }
+    "ai_score_threshold": 7.5,
+    "time_window_hours": 24,
+    "max_items": 20,
+    "aihot_score_weight": 0.25,
+    "multi_source_bonus_2_3": 0.3,
+    "multi_source_bonus_4_plus": 0.6,
+    "category_groups": {
+      "builders": {
+        "name": "建设者与播客",
+        "limit": 6,
+        "categories": [
+          "builders",
+          "podcasts",
+          "official-blogs"
+        ]
+      },
+      "engineering": {
+        "name": "工程与开源",
+        "limit": 6,
+        "categories": [
+          "ai-engineering",
+          "releases",
+          "oss-trending",
+          "research"
+        ]
+      },
+      "industry": {
+        "name": "产品与行业",
+        "limit": 4,
+        "categories": [
+          "models",
+          "products",
+          "industry"
+        ]
+      },
+      "community": {
+        "name": "社区与洞察",
+        "limit": 4,
+        "categories": [
+          "tech-community",
+          "insights"
+        ]
       }
     },
-    "headers": ""
+    "default_group": "other",
+    "default_group_limit": 2
   }
 }

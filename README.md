@@ -343,6 +343,8 @@ Horizon works great as a **GitHub Actions** cron job. See [`.github/workflows/da
 | **Twitter / X** | Tweets from specific users | Yes (top N replies) |
 | **GitHub** | User events & repo releases | — |
 | **OpenBB** | Financial company news by watchlist/provider | — |
+| **AI HOT** | Curated Chinese AI news, upstream scores, and reader pages | — |
+| **Follow Builders** | AI builder posts, podcast transcripts, and official blogs | — |
 
 ## Where Your Briefing Goes
 

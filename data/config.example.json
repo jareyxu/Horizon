@@ -1,5 +1,17 @@
 {
   "version": "1.0",
+  "profile": {
+    "interests": ["AI agents", "developer tools"],
+    "negative_topics": ["off-topic entertainment"],
+    "preferred_content": ["technical implementation", "product releases"]
+  },
+  "verification": {
+    "enabled": false,
+    "top_n": 5,
+    "aihot_min_score": 75,
+    "max_excerpt_chars": 4000,
+    "concurrency": 3
+  },
   "ai": {
     "provider": "openai",
     "model": "gpt-4",
@@ -22,6 +34,25 @@
     "unsubscribe_keyword": "UNSUBSCRIBE"
   },
   "sources": {
+    "aihot": {
+      "enabled": false,
+      "base_url": "https://aihot.virxact.com",
+      "mode": "selected",
+      "take": 50,
+      "max_pages": 2,
+      "min_score": 55,
+      "categories": [],
+      "use_remote_summary": true,
+      "prefer_permalink": true
+    },
+    "follow_builders": {
+      "enabled": false,
+      "x_feed": "https://raw.githubusercontent.com/zarazhangrui/follow-builders/main/feed-x.json",
+      "podcast_feed": "https://raw.githubusercontent.com/zarazhangrui/follow-builders/main/feed-podcasts.json",
+      "blog_feed": "https://raw.githubusercontent.com/zarazhangrui/follow-builders/main/feed-blogs.json",
+      "max_feed_age_hours": 48,
+      "transcript_max_chars": 24000
+    },
     "github": [
       {
         "type": "user_events",
@@ -134,7 +165,10 @@
     "max_items": null,
     "category_groups": {},
     "default_group": "other",
-    "default_group_limit": null
+    "default_group_limit": null,
+    "aihot_score_weight": 0.25,
+    "multi_source_bonus_2_3": 0.3,
+    "multi_source_bonus_4_plus": 0.6
   },
   "webhook": {
     "enabled": false,
