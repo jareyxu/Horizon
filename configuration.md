@@ -489,6 +489,7 @@ Content is scored 0-10:
 {
   "filtering": {
     "ai_score_threshold": 7.0,
+    "minimum_items": 5,
     "time_window_hours": 24,
     "max_items": 20,
     "category_groups": {
@@ -510,6 +511,9 @@ Content is scored 0-10:
 ```
 
 - `ai_score_threshold`: Only include content scoring >= this value
+- `minimum_items`: If fewer items reach the threshold, backfill with the
+  highest positive-scoring items so the digest remains useful. Set to `0` to
+  disable backfilling.
 - `time_window_hours`: Fetch content from last N hours
 - `max_items`: Optional final cap after all group limits are applied
 - `category_groups`: Optional map of quota groups. Each group requires a positive
