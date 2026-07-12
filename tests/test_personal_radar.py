@@ -100,6 +100,27 @@ def test_aihot_and_multi_source_score_are_combined(tmp_path):
     assert item.ai_score == 8.3
 
 
+def test_selection_backfills_minimum_digest_with_highest_scores(tmp_path):
+    config = _config()
+    config.filtering.minimum_items = 3
+    orchestrator = HorizonOrchestrator(config, StorageManager(str(tmp_path)))
+    items = [
+        ContentItem(
+            id=f"rss:item:{index}",
+            source_type=SourceType.RSS,
+            title=f"Item {index}",
+            url=f"https://example.com/{index}",
+            published_at=datetime(2026, 7, 12, tzinfo=timezone.utc),
+            ai_score=score,
+        )
+        for index, score in enumerate([7.8, 6.9, 5.5, 0.0])
+    ]
+
+    selected = orchestrator.select_important_items(items)
+
+    assert [item.ai_score for item in selected] == [7.8, 6.9, 5.5]
+
+
 def test_verifier_extracts_original_and_renderer_shows_status():
     html = "<html><head><title>Original title</title></head><body><article>Verified facts here.</article></body></html>"
 

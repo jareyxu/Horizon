@@ -130,16 +130,22 @@ class HorizonOrchestrator:
 
             # 5. Filter by score threshold
             threshold = self.config.filtering.ai_score_threshold
-            important_items = [
-                item
-                for item in analyzed_items
-                if item.ai_score and item.ai_score >= threshold
-            ]
-            important_items.sort(key=lambda x: x.ai_score or 0, reverse=True)
+            important_items = self.select_important_items(analyzed_items)
+            threshold_items = sum(
+                1
+                for item in important_items
+                if item.ai_score is not None and item.ai_score >= threshold
+            )
+            fallback_items = len(important_items) - threshold_items
 
             self.console.print(
-                f"⭐️ {len(important_items)} items scored ≥ {threshold}\n"
+                f"⭐️ {threshold_items} items scored ≥ {threshold}\n"
             )
+            if fallback_items:
+                self.console.print(
+                    f"🛟 Added {fallback_items} highest-scoring fallback items "
+                    f"to reach the minimum digest size\n"
+                )
 
             # 5.5 Semantic deduplication: drop items covering the same topic
             deduped_items = await self.merge_topic_duplicates(important_items)
@@ -568,6 +574,31 @@ class HorizonOrchestrator:
                 score += filtering.multi_source_bonus_2_3
 
             item.ai_score = round(min(max(score, 0.0), 10.0), 2)
+
+    def select_important_items(self, items: List[ContentItem]) -> List[ContentItem]:
+        """Select threshold-qualified items and backfill a useful minimum digest."""
+        filtering = self.config.filtering
+        ranked = sorted(items, key=lambda item: item.ai_score or 0, reverse=True)
+        selected = [
+            item
+            for item in ranked
+            if item.ai_score is not None
+            and item.ai_score >= filtering.ai_score_threshold
+        ]
+
+        missing = max(filtering.minimum_items - len(selected), 0)
+        if missing:
+            selected_ids = {item.id for item in selected}
+            fallback = [
+                item
+                for item in ranked
+                if item.id not in selected_ids
+                and item.ai_score is not None
+                and item.ai_score > 0
+            ]
+            selected.extend(fallback[:missing])
+
+        return selected
 
     async def merge_topic_duplicates(
         self, items: List[ContentItem]

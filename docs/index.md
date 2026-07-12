@@ -7,7 +7,7 @@ title: Home
 
 <div id="lang-zh" class="lang-section" markdown="1">
 
-欢迎来到 [Horizon](https://github.com/thysrael/Horizon)，一个 AI 驱动的信息聚合系统。
+欢迎来到 [Jarey's AI Radar](https://github.com/jareyxu/Horizon)，一个 AI 驱动的个人信息雷达。
 
 ## 文档
 
@@ -32,7 +32,7 @@ title: Home
 
 <div id="lang-en" class="lang-section" markdown="1">
 
-Welcome to [Horizon](https://github.com/thysrael/Horizon), an AI-driven information aggregation system.
+Welcome to [Jarey's AI Radar](https://github.com/jareyxu/Horizon), a personal AI-driven information radar.
 
 ## Documentation
 
