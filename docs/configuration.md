@@ -395,7 +395,8 @@ read-only v2 user timeline endpoint.
           "username": "karpathy",
           "rest_id": "33836629",
           "enabled": true,
-          "category": "builders"
+          "category": "builders",
+          "fetch_every_days": 1
         }
       ]
     }
@@ -409,6 +410,12 @@ read-only v2 user timeline endpoint.
 - `rapidapi_users[].rest_id` — the account's public numeric X ID. Store it in
   configuration so the daily job does not spend a second request resolving the
   username every day.
+- `rapidapi_users[].fetch_every_days` — account polling interval. Use `1` for
+  core accounts, `2` for alternate-day accounts, or a larger interval for
+  lower-priority accounts.
+- `rapidapi_users[].schedule_offset` — optional zero-based bucket override for
+  interval scheduling. If omitted, Horizon assigns a stable bucket from the
+  username so ordinary accounts are distributed across different days.
 - `rapidapi_max_requests_per_run` — hard per-run request budget. The scraper
   makes exactly one timeline request per enabled configured account, does not
   paginate, and does not retry.
@@ -420,6 +427,12 @@ free BASIC plan is a hard 100 requests per month, and every endpoint call counts
 as one request. Two accounts on one daily run consume about 60 requests in a
 30-day month. The API is third-party and unofficial, so schema and availability
 can change independently of Horizon.
+
+GitHub Pages keeps the high-scoring digest at the top. Every Twitter135 post
+that was fetched but did not survive score, topic-deduplication, or balanced
+digest filtering is appended to an **Other tracked X posts** section at the
+bottom. Selected posts are not duplicated there. Email and webhook delivery
+continue to include only the main digest.
 
 Resolve the public `rest_id` once before enabling an account (one request per
 username):

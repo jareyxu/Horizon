@@ -4,6 +4,7 @@ from __future__ import annotations
 
 from datetime import datetime, timezone
 from email.utils import parsedate_to_datetime
+import hashlib
 from html import unescape
 import logging
 import os
@@ -34,11 +35,26 @@ class TwitterRapidAPIScraper(BaseScraper):
         if not self.config.enabled:
             return []
 
-        accounts = [
+        enabled_accounts = [
             account for account in self.config.rapidapi_users if account.enabled
         ]
-        if not accounts:
+        if not enabled_accounts:
             logger.debug("No RapidAPI X users configured, skipping.")
+            return []
+
+        run_day = datetime.now(timezone.utc).date().toordinal()
+        accounts = [
+            account
+            for account in enabled_accounts
+            if self._account_is_due(account, run_day)
+        ]
+        skipped_by_schedule = len(enabled_accounts) - len(accounts)
+        if skipped_by_schedule:
+            logger.info(
+                "Twitter135 schedule deferred %d configured accounts.",
+                skipped_by_schedule,
+            )
+        if not accounts:
             return []
 
         api_key = os.environ.get(self.config.rapidapi_key_env)
@@ -170,10 +186,23 @@ class TwitterRapidAPIScraper(BaseScraper):
                 "category": category,
                 "source_variant": "twitter135_rapidapi",
                 "rapidapi_account_rest_id": account.rest_id,
+                "rapidapi_account_username": account.username,
                 "original_url": url,
                 "verification_status": "unverified",
             },
         )
+
+    @staticmethod
+    def _account_is_due(account: RapidAPIXUserConfig, run_day: int) -> bool:
+        """Return whether an account belongs to today's deterministic bucket."""
+        interval = account.fetch_every_days
+        if interval == 1:
+            return True
+        offset = account.schedule_offset
+        if offset is None:
+            digest = hashlib.sha256(account.username.lower().encode("utf-8")).digest()
+            offset = int.from_bytes(digest[:4], "big") % interval
+        return run_day % interval == offset % interval
 
     @classmethod
     def _iter_tweet_results(cls, value: Any) -> Iterator[dict[str, Any]]:

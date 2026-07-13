@@ -109,6 +109,12 @@ class HorizonOrchestrator:
             all_items = await self.fetch_all_sources(since)
             self.console.print(f"📥 Fetched {len(all_items)} items from all sources\n")
 
+            tracked_x_items = [
+                item
+                for item in all_items
+                if item.metadata.get("source_variant") == "twitter135_rapidapi"
+            ]
+
             if not all_items:
                 self.console.print("[yellow]No new content found. Exiting.[/yellow]")
                 return
@@ -185,6 +191,11 @@ class HorizonOrchestrator:
                 summary = await summarizer.generate_summary(
                     important_items, today, len(all_items), language=lang
                 )
+                tracked_x_archive = summarizer.generate_tracked_x_archive(
+                    tracked_x_items,
+                    {item.id for item in important_items},
+                    language=lang,
+                )
 
                 # Save to data/summaries/
                 summary_path = self.storage.save_daily_summary(
@@ -223,7 +234,7 @@ class HorizonOrchestrator:
                             summary_content = parts[1].strip()
 
                     with open(dest_path, "w", encoding="utf-8") as f:
-                        f.write(front_matter + summary_content)
+                        f.write(front_matter + summary_content + tracked_x_archive)
 
                     self.console.print(
                         f"📄 Copied {lang.upper()} summary to GitHub Pages: {dest_path}\n"

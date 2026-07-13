@@ -225,13 +225,16 @@ the provider.
 
 Quota controls:
 
-1. One configured account produces at most one request per run.
+1. One due configured account produces at most one request per run.
 2. `rapidapi_max_requests_per_run` caps the total even if more accounts are
    configured.
 3. The scraper does not paginate and does not retry.
 4. A failure for one account is isolated; HTTP 429 stops the remaining calls.
 5. Tweet IDs are stable Horizon IDs, so existing storage deduplication removes
    posts seen on earlier runs.
+6. `fetch_every_days` supports daily core accounts and lower-frequency ordinary
+   accounts. A deterministic username bucket spreads accounts across days;
+   `schedule_offset` can override that bucket.
 
 Replies and retweets are excluded by default. Long Note Tweet text is preferred
 over the truncated legacy text when present.
@@ -249,10 +252,20 @@ read from `RAPIDAPI_KEY` and is never printed.
   "rapidapi_host": "twitter135.p.rapidapi.com",
   "rapidapi_max_requests_per_run": 3,
   "rapidapi_users": [
-    {"username": "karpathy", "rest_id": "33836629", "enabled": true}
+    {
+      "username": "karpathy",
+      "rest_id": "33836629",
+      "enabled": true,
+      "fetch_every_days": 1
+    }
   ]
 }
 ```
+
+For GitHub Pages, all posts fetched through Twitter135 remain visible. Posts
+that enter the main digest appear normally; the remaining fetched posts are
+rendered with their original text and engagement metadata in a bottom archive.
+This archive is Pages-only and does not expand email or webhook notifications.
 
 **Extracted data**: full post text, canonical `x.com` URL, display name,
 publish time, likes, reposts, replies, quotes, views, conversation ID, account

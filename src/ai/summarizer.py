@@ -1,6 +1,7 @@
 """Daily summary generation — pure programmatic rendering."""
 
 import re
+from datetime import timezone
 from typing import List
 
 from ..models import ContentItem
@@ -27,6 +28,11 @@ LABELS = {
         "tags": "Tags",
         "reader": "Chinese reading",
         "verification": "Verification",
+        "tracked_x_archive": "Other tracked X posts",
+        "tracked_x_archive_intro": (
+            "These posts were fetched today but did not enter the main digest. "
+            "They are preserved here so every tracked post remains available."
+        ),
         "verification_states": {
             "corroborated": "corroborated by multiple sources",
             "original_checked": "original source checked",
@@ -55,6 +61,10 @@ LABELS = {
         "tags": "标签",
         "reader": "中文阅读",
         "verification": "核验",
+        "tracked_x_archive": "其他追踪推文",
+        "tracked_x_archive_intro": (
+            "以下推文已于今日成功抓取，但未进入上方主列表。页面保留原文，确保当天追踪内容完整可查。"
+        ),
         "verification_states": {
             "corroborated": "多源印证",
             "original_checked": "已核对原文",
@@ -131,6 +141,84 @@ class DailySummarizer:
         ]
 
         return header + toc + "".join(parts)
+
+    def generate_tracked_x_archive(
+        self,
+        items: List[ContentItem],
+        selected_ids: set[str],
+        language: str = "en",
+    ) -> str:
+        """Render non-selected Twitter135 posts for GitHub Pages only."""
+        labels = LABELS.get(language, LABELS["en"])
+        archived = sorted(
+            (
+                item
+                for item in items
+                if item.metadata.get("source_variant") == "twitter135_rapidapi"
+                and item.id not in selected_ids
+            ),
+            key=lambda item: item.published_at,
+            reverse=True,
+        )
+        if not archived:
+            return ""
+
+        parts = [
+            "\n\n---\n\n",
+            f"## {labels['tracked_x_archive']}\n\n",
+            f"> {labels['tracked_x_archive_intro']}\n\n",
+        ]
+        for index, item in enumerate(archived, start=1):
+            title = str(item.metadata.get(f"title_{language}") or item.title)
+            title = title.replace("[", "(").replace("]", ")")
+            content = str(item.content or item.ai_summary or "").strip()
+            if language == "zh":
+                title = _pangu(title)
+                content = _pangu(content)
+
+            score = item.ai_score if item.ai_score is not None else "?"
+            username = str(
+                item.metadata.get("rapidapi_account_username")
+                or item.author
+                or "unknown"
+            ).lstrip("@")
+            published = item.published_at.astimezone(timezone.utc)
+            if language == "zh":
+                source_line = (
+                    f"Twitter/X · @{username} · "
+                    f"{published.month}月{published.day}日 {published:%H:%M} UTC"
+                )
+            else:
+                source_line = (
+                    f"Twitter/X · @{username} · {published:%Y-%m-%d %H:%M} UTC"
+                )
+
+            engagement = self._format_x_engagement(item, language)
+            quoted_content = "\n".join(
+                f"> {line}" if line else ">" for line in content.splitlines()
+            )
+            parts.extend(
+                [
+                    f'<a id="tracked-x-{index}"></a>\n',
+                    f"### [{title}]({item.url}) ⭐️ {score}/10\n\n",
+                    f"{source_line}{engagement}\n\n",
+                    f"{quoted_content}\n\n" if quoted_content else "",
+                ]
+            )
+
+        return "".join(parts).rstrip() + "\n"
+
+    @staticmethod
+    def _format_x_engagement(item: ContentItem, language: str) -> str:
+        meta = item.metadata
+        values = [
+            ("喜欢" if language == "zh" else "likes", meta.get("favorite_count")),
+            ("转发" if language == "zh" else "reposts", meta.get("retweet_count")),
+            ("回复" if language == "zh" else "replies", meta.get("reply_count")),
+            ("浏览" if language == "zh" else "views", meta.get("view_count")),
+        ]
+        rendered = [f"{label} {value}" for label, value in values if value is not None]
+        return f" · {' · '.join(rendered)}" if rendered else ""
 
     def generate_webhook_overview(
         self,
