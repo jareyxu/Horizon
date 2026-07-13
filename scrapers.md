@@ -209,7 +209,56 @@ Behavior:
 
 ## Twitter
 
-**File**: `src/scrapers/twitter.py`
+**Files**:
+
+- `src/scrapers/twitter.py` — Apify
+- `src/scrapers/twitter_playwright.py` — browser cookies
+- `src/scrapers/twitter_rapidapi.py` — Twitter135 / RapidAPI
+
+### Twitter135 / RapidAPI mode
+
+Uses Twitter135's current read-only `/v2/UserTweets/` endpoint. The request
+contains the account's public numeric `id` (`rest_id`) and `count`, plus
+`X-RapidAPI-Key` and `X-RapidAPI-Host` headers. Horizon recursively normalizes
+the timeline response so it tolerates the nested timeline variants returned by
+the provider.
+
+Quota controls:
+
+1. One configured account produces at most one request per run.
+2. `rapidapi_max_requests_per_run` caps the total even if more accounts are
+   configured.
+3. The scraper does not paginate and does not retry.
+4. A failure for one account is isolated; HTTP 429 stops the remaining calls.
+5. Tweet IDs are stable Horizon IDs, so existing storage deduplication removes
+   posts seen on earlier runs.
+
+Replies and retweets are excluded by default. Long Note Tweet text is preferred
+over the truncated legacy text when present.
+
+Use `scripts/resolve_twitter135_user.py` once to resolve usernames through
+`/v2/UserByScreenName/`. Each supplied username consumes one request; the key is
+read from `RAPIDAPI_KEY` and is never printed.
+
+```json
+{
+  "enabled": true,
+  "mode": "rapidapi",
+  "fetch_limit": 10,
+  "rapidapi_key_env": "RAPIDAPI_KEY",
+  "rapidapi_host": "twitter135.p.rapidapi.com",
+  "rapidapi_max_requests_per_run": 3,
+  "rapidapi_users": [
+    {"username": "karpathy", "rest_id": "33836629", "enabled": true}
+  ]
+}
+```
+
+**Extracted data**: full post text, canonical `x.com` URL, display name,
+publish time, likes, reposts, replies, quotes, views, conversation ID, account
+`rest_id`, source variant, and category.
+
+### Apify mode
 
 Uses the [Apify](https://apify.com) platform to bypass Twitter's anti-scraping measures. The actor `altimis~scweet` is called via the Apify REST API.
 
