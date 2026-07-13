@@ -371,34 +371,69 @@ Telegram scraping uses the public web preview at `https://t.me/s/<channel>`, so 
 
 ### Twitter
 
-Requires an [Apify](https://apify.com) account. Set `APIFY_TOKEN` in your `.env` file. The free tier includes $5/month of credit, enough for roughly 20,000 tweets.
+Twitter supports three modes: `apify`, `playwright`, and `rapidapi`. The
+`rapidapi` mode uses the unofficial
+[Twitter135 API](https://rapidapi.com/Glavier/api/twitter135) and only calls its
+read-only v2 user timeline endpoint.
 
 ```json
 {
   "sources": {
     "twitter": {
       "enabled": true,
-      "users": ["karpathy", "ylecun"],
+      "mode": "rapidapi",
       "fetch_limit": 10,
-      "category": "social",
+      "category": "builders",
       "fetch_reply_text": false,
-      "max_replies_per_tweet": 3,
-      "max_tweets_to_expand": 10,
-      "reply_min_likes": 5
+      "rapidapi_key_env": "RAPIDAPI_KEY",
+      "rapidapi_host": "twitter135.p.rapidapi.com",
+      "rapidapi_max_requests_per_run": 3,
+      "rapidapi_include_replies": false,
+      "rapidapi_include_retweets": false,
+      "rapidapi_users": [
+        {
+          "username": "karpathy",
+          "rest_id": "33836629",
+          "enabled": true,
+          "category": "builders"
+        }
+      ]
     }
   }
 }
 ```
 
-- `users` — Twitter screen names to monitor, without the `@` prefix
-- `fetch_limit` — maximum tweets to fetch per run (across all users combined; minimum 100 due to actor constraint)
-- `category` — optional tag for balanced digest grouping (applies to all tweets from this source)
-- `fetch_reply_text` — when `true`, fetch actual reply bodies for important tweets and append them under `--- Top Comments ---` so the AI can factor in community discussion. Disabled by default.
-- `max_replies_per_tweet` — maximum reply lines to append per tweet (default: 3)
-- `max_tweets_to_expand` — cap on how many tweets get reply expansion per run, to control Apify credit usage (default: 10)
-- `reply_min_likes` — only include replies with at least this many likes (default: 0)
+- `mode` — `rapidapi`, `apify`, or `playwright`
+- `fetch_limit` — maximum posts accepted per account from the single returned page
+- `rapidapi_users` — public accounts to monitor in RapidAPI mode
+- `rapidapi_users[].rest_id` — the account's public numeric X ID. Store it in
+  configuration so the daily job does not spend a second request resolving the
+  username every day.
+- `rapidapi_max_requests_per_run` — hard per-run request budget. The scraper
+  makes exactly one timeline request per enabled configured account, does not
+  paginate, and does not retry.
+- `rapidapi_include_replies` / `rapidapi_include_retweets` — disabled by default
+  to keep the radar focused on original posts
 
-The scraper uses the `altimis/scweet` actor by default. You can override it with `actor_id` if needed.
+Set `RAPIDAPI_KEY` in `.env` locally or as a GitHub Actions secret. Twitter135's
+free BASIC plan is a hard 100 requests per month, and every endpoint call counts
+as one request. Two accounts on one daily run consume about 60 requests in a
+30-day month. The API is third-party and unofficial, so schema and availability
+can change independently of Horizon.
+
+Resolve the public `rest_id` once before enabling an account (one request per
+username):
+
+```bash
+uv run python scripts/resolve_twitter135_user.py karpathy sama
+```
+
+The command reads `RAPIDAPI_KEY` from the environment and prints a ready-to-copy
+`rapidapi_users` JSON array. It never prints the key.
+
+For Apify mode, use `users`, `actor_id`, and `apify_token_env`. Reply expansion
+is supported only in Apify mode. Playwright mode continues to use browser
+cookies and the existing `cookie_dir` settings.
 
 ### OpenBB Financial News
 

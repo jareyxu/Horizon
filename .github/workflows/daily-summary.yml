@@ -43,6 +43,7 @@ jobs:
       - name: Run Horizon
         env:
           SILICONFLOW_API_KEY: ${{ secrets.SILICONFLOW_API_KEY }}
+          RAPIDAPI_KEY: ${{ secrets.RAPIDAPI_KEY }}
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           HOURS: ${{ inputs.hours || '24' }}
         run: uv run horizon --hours "$HOURS"

@@ -21,6 +21,7 @@ from .scrapers.reddit import RedditScraper
 from .scrapers.telegram import TelegramScraper
 from .scrapers.twitter import TwitterScraper
 from .scrapers.twitter_playwright import TwitterPlaywrightScraper
+from .scrapers.twitter_rapidapi import TwitterRapidAPIScraper
 from .scrapers.openbb import OpenBBScraper
 from .scrapers.ossinsight import OSSInsightScraper
 from .scrapers.gdelt import GDELTScraper
@@ -138,9 +139,7 @@ class HorizonOrchestrator:
             )
             fallback_items = len(important_items) - threshold_items
 
-            self.console.print(
-                f"⭐️ {threshold_items} items scored ≥ {threshold}\n"
-            )
+            self.console.print(f"⭐️ {threshold_items} items scored ≥ {threshold}\n")
             if fallback_items:
                 self.console.print(
                     f"🛟 Added {fallback_items} highest-scoring fallback items "
@@ -337,11 +336,13 @@ class HorizonOrchestrator:
                     self._fetch_with_progress("Telegram", telegram_scraper, since)
                 )
 
-            # Twitter (Apify or Playwright mode)
+            # Twitter (Apify, Playwright, or Twitter135/RapidAPI mode)
             if self.config.sources.twitter and self.config.sources.twitter.enabled:
                 tw_cfg = self.config.sources.twitter
                 if tw_cfg.mode == "playwright":
                     twitter_scraper = TwitterPlaywrightScraper(tw_cfg)
+                elif tw_cfg.mode == "rapidapi":
+                    twitter_scraper = TwitterRapidAPIScraper(tw_cfg, client)
                 else:
                     twitter_scraper = TwitterScraper(tw_cfg, client)
                 tasks.append(
@@ -845,9 +846,9 @@ class HorizonOrchestrator:
         )
 
         async with httpx.AsyncClient(timeout=30.0) as client:
-            if tw_cfg.mode == "playwright":
+            if tw_cfg.mode in {"playwright", "rapidapi"}:
                 self.console.print(
-                    "   [yellow]Reply expansion not yet supported in Playwright mode.[/yellow]"
+                    f"   [yellow]Reply expansion not supported in {tw_cfg.mode} mode.[/yellow]"
                 )
                 return
             scraper = TwitterScraper(tw_cfg, client)

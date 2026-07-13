@@ -195,18 +195,36 @@ class TelegramConfig(BaseModel):
     channels: List[TelegramChannelConfig] = Field(default_factory=list)
 
 
+class RapidAPIXUserConfig(BaseModel):
+    """One public X account fetched through Twitter135 on RapidAPI."""
+
+    username: str
+    rest_id: str = Field(pattern=r"^\d+$")
+    enabled: bool = True
+    category: Optional[str] = None
+
+    @field_validator("username")
+    @classmethod
+    def normalize_username(cls, value: str) -> str:
+        username = value.strip().lstrip("@")
+        if not username:
+            raise ValueError("Twitter username cannot be empty")
+        return username
+
+
 class TwitterConfig(BaseModel):
     """Twitter source configuration.
 
-    Two modes are supported:
+    Three modes are supported:
     - "apify": Use Apify scweet actor (requires APIFY_TOKEN, more reliable)
     - "playwright": Use Playwright + browser cookies (free, no token needed)
+    - "rapidapi": Use Twitter135 read-only v2 endpoints on RapidAPI
     """
 
     enabled: bool = True
-    mode: str = "apify"  # "apify" or "playwright"
+    mode: str = "apify"  # "apify", "playwright", or "rapidapi"
     users: List[str] = Field(default_factory=list)
-    fetch_limit: int = 10
+    fetch_limit: int = Field(default=10, ge=1, le=100)
     category: Optional[str] = None
     fetch_reply_text: bool = False
     max_replies_per_tweet: int = 3
@@ -218,6 +236,21 @@ class TwitterConfig(BaseModel):
     # Playwright settings (used when mode == "playwright")
     cookie_dir: str = "data"
     cookie_file_pattern: str = "x_cookies_*.json"
+    # Twitter135 / RapidAPI settings (used when mode == "rapidapi")
+    rapidapi_key_env: str = "RAPIDAPI_KEY"
+    rapidapi_host: str = "twitter135.p.rapidapi.com"
+    rapidapi_users: List[RapidAPIXUserConfig] = Field(default_factory=list)
+    rapidapi_max_requests_per_run: int = Field(default=3, ge=1, le=100)
+    rapidapi_include_replies: bool = False
+    rapidapi_include_retweets: bool = False
+
+    @field_validator("mode")
+    @classmethod
+    def validate_mode(cls, value: str) -> str:
+        allowed = {"apify", "playwright", "rapidapi"}
+        if value not in allowed:
+            raise ValueError(f"twitter.mode must be one of {allowed}, got '{value}'")
+        return value
 
 
 class OpenBBWatchlist(BaseModel):
