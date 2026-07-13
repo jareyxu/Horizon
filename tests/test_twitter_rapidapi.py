@@ -214,6 +214,51 @@ def test_account_config_normalizes_username():
     assert account.username == "karpathy"
 
 
+def test_account_schedule_supports_daily_and_deterministic_intervals():
+    daily = RapidAPIXUserConfig(username="daily", rest_id="1", fetch_every_days=1)
+    alternating = RapidAPIXUserConfig(
+        username="alternating",
+        rest_id="2",
+        fetch_every_days=2,
+        schedule_offset=1,
+    )
+
+    assert TwitterRapidAPIScraper._account_is_due(daily, 100) is True
+    assert TwitterRapidAPIScraper._account_is_due(daily, 101) is True
+    assert TwitterRapidAPIScraper._account_is_due(alternating, 100) is False
+    assert TwitterRapidAPIScraper._account_is_due(alternating, 101) is True
+
+
+def test_fetch_skips_accounts_not_due_without_spending_request(monkeypatch):
+    monkeypatch.setenv("RAPIDAPI_KEY", "test-key")
+    run_day = datetime.now(timezone.utc).date().toordinal()
+    config = _config(
+        rapidapi_users=[
+            {
+                "username": "deferred",
+                "rest_id": "1",
+                "fetch_every_days": 2,
+                "schedule_offset": (run_day + 1) % 2,
+            },
+            {"username": "daily", "rest_id": "2", "fetch_every_days": 1},
+        ]
+    )
+    requested_ids: list[str] = []
+
+    def handler(request: httpx.Request) -> httpx.Response:
+        requested_ids.append(request.url.params["id"])
+        return httpx.Response(200, json={})
+
+    async def run():
+        async with httpx.AsyncClient(transport=httpx.MockTransport(handler)) as client:
+            scraper = TwitterRapidAPIScraper(config, client)
+            await scraper.fetch(datetime.now(timezone.utc) - timedelta(hours=24))
+            return scraper.requests_used
+
+    assert asyncio.run(run()) == 1
+    assert requested_ids == ["2"]
+
+
 def test_finds_rest_id_in_user_lookup_response():
     payload = {
         "data": {

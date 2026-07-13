@@ -136,13 +136,15 @@
           "username": "dotey",
           "rest_id": "3178231",
           "enabled": true,
-          "category": "builders"
+          "category": "builders",
+          "fetch_every_days": 1
         },
         {
           "username": "op7418",
           "rest_id": "1669276256",
           "enabled": true,
-          "category": "builders"
+          "category": "builders",
+          "fetch_every_days": 1
         }
       ]
     },

@@ -127,7 +127,8 @@
           "username": "karpathy",
           "rest_id": "33836629",
           "enabled": true,
-          "category": "builders"
+          "category": "builders",
+          "fetch_every_days": 1
         }
       ]
     },

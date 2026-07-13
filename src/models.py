@@ -202,6 +202,8 @@ class RapidAPIXUserConfig(BaseModel):
     rest_id: str = Field(pattern=r"^\d+$")
     enabled: bool = True
     category: Optional[str] = None
+    fetch_every_days: int = Field(default=1, ge=1, le=31)
+    schedule_offset: Optional[int] = Field(default=None, ge=0, le=30)
 
     @field_validator("username")
     @classmethod
