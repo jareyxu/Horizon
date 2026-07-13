@@ -428,11 +428,12 @@ as one request. Two accounts on one daily run consume about 60 requests in a
 30-day month. The API is third-party and unofficial, so schema and availability
 can change independently of Horizon.
 
-GitHub Pages keeps the high-scoring digest at the top. Every Twitter135 post
-that was fetched but did not survive score, topic-deduplication, or balanced
-digest filtering is appended to an **Other tracked X posts** section at the
-bottom. Selected posts are not duplicated there. Email and webhook delivery
-continue to include only the main digest.
+GitHub Pages keeps the high-scoring digest at the top. Items fetched from
+Twitter135 or Follow Builders that did not survive score, topic-deduplication,
+or balanced digest filtering are preserved in a two-tab archive at the bottom:
+**Other tracked X posts** and **Other Follow Builders stories**. Selected items
+are not duplicated there. Email and webhook delivery continue to include only
+the main digest.
 
 Resolve the public `rest_id` once before enabling an account (one request per
 username):
