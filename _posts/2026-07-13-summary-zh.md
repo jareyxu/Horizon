@@ -5,209 +5,207 @@ date: 2026-07-13
 lang: zh
 ---
 
-> 从 47 条内容中筛选出 11 条重要资讯。
+> 从 44 条内容中筛选出 9 条重要资讯。
 
 ---
 
-1. [xAI 官方 Grok CLI 被曝静默上传整个代码库及用户密钥](#item-1) ⭐️ 8.45/10
-2. [借助现代编程智能体构建新旧应用](#item-2) ⭐️ 8.0/10
-3. [Claude Code 在读取用户提示前消耗的 Token 是 OpenCode 的 4.7 倍](#item-3) ⭐️ 8.0/10
-4. [geohot 博文：LLM 确实有价值，但前沿实验室难以捕获其价值](#item-4) ⭐️ 8.0/10
-5. [@dotey：Anthropic 于 7 月 10 日发布了一场关于 Agent 基础设施的对谈。Claude 平台工程负责人 Katelyn Lesse、产品负责人 Angela Jiang 和产品经理……](#item-5) ⭐️ 8.0/10
-6. [Mesh LLM：基于 iroh P2P 网络的分布式大模型推理](#item-6) ⭐️ 7.92/10
-7. [Ploy 将生产 AI 智能体迁移至 GPT-5.6：速度提升 2.2 倍，成本降低 27%](#item-7) ⭐️ 7.3/10
-8. [腾讯混元发布 Hy3 模型：295B 参数 MoE 架构，定位为面向 Agent 的 LLM，已集成微信服务超 10 亿用户](#item-8) ⭐️ 7.12/10
-9. [Mindwalk：在 3D 代码库地图上回放 AI 编码代理会话](#item-9) ⭐️ 7.1/10
-10. [JetBrains 实测打脸 Caveman：声称省 65% Token 实际仅省 8.5%](#item-10) ⭐️ 7.0/10
-11. [Swyx 论断：杰文斯悖论将从编程扩展至所有知识工作](#item-11) ⭐️ 7.0/10
+1. [Grok CLI 被曝静默上传整个代码库及 API 密钥至 xAI 云存储](#item-1) ⭐️ 9.05/10
+2. [George Hotz：LLM 有价值，但前沿实验室的估值被高估了](#item-2) ⭐️ 8.0/10
+3. [Anthropic 负责人分享 Agent 基础设施演进洞察](#item-3) ⭐️ 8.0/10
+4. [纳德拉提出](#item-4) ⭐️ 7.88/10
+5. [Ploy 将生产级 AI Agent 迁移至 GPT-5.6：速度提升 2.2 倍，成本降低 27%](#item-5) ⭐️ 7.3/10
+6. [腾讯混元发布 Hy3 模型：295B 参数 MoE 架构，面向 Agent 的 LLM 定位，已集成微信服务超 10 亿用户](#item-6) ⭐️ 7.12/10
+7. [Mindwalk：在代码库 3D 地图上回放编码代理会话](#item-7) ⭐️ 7.1/10
+8. [Claude Code 在读取提示前发送 33k tokens，OpenCode 仅 7k](#item-8) ⭐️ 7.0/10
+9. [JetBrains 实测：号称省 65% Token 的 Caveman 技能在真实智能体场景仅省 8.5%](#item-9) ⭐️ 7.0/10
 
 ---
 
 <a id="item-1"></a>
-## [xAI 官方 Grok CLI 被曝静默上传整个代码库及用户密钥](https://mp.weixin.qq.com/s/6c6vGMJAVMbh6UhNVw4dcg) ⭐️ 8.45/10
+## [Grok CLI 被曝静默上传整个代码库及 API 密钥至 xAI 云存储](https://x.com/Khazix0918/status/2076504273282908170) ⭐️ 9.05/10
 
-安全研究者发现 xAI 官方 Grok CLI（npm 包`@xai-official/grok` 0.2.93 版）在每轮任务前后，通过独立旁路通道将整个工作目录静默上传至 xAI 的 Google Cloud Storage 存储桶`grok-code-session-traces`，上传内容还包括仓库外的`~/.claude.json`、API 密钥和 Claude Code 设置等文件。7 月 13 日，xAI 通过服务端远程开关新增`disable_codebase_upload`字段，悄悄关闭了该默认上传行为，但此前该功能一直默认开启。 这对 AI 开发者工具的信任构成了严重打击：一个在未经明确同意且独立于模型交互的情况下静默窃取整个代码库和密钥的 CLI，动摇了开发者对 AI 编码智能体生态系统的整体信心。xAI 通过远程开关悄悄关闭该功能而非透明披露，进一步加剧了信任危机，引发了关于 AI 编码工具数据处理实践的紧迫质疑。 网络流量分析显示，即使提示
+安全研究者发现 xAI 官方 Grok CLI（npm 包 @xai-official/grok v0.2.93）会通过旁路通道 POST /v1/storage 将整个项目目录打包为 tar.gz 静默上传至 xAI 的 Google Cloud Storage 存储桶（grok-code-session-traces），即使模型仅回复一个单词且未调用任何文件工具，上传仍然发生。该工具还跨项目扫描并上传包含 API 密钥的 Claude Code 配置文件（~/.claude.json、settings.local.json），并以明文传输 .env 文件；7 月 13 日 xAI 通过服务端远程开关关闭了上传功能，但代码管线仍保留。 这是一起重大安全事件：一家头部 AI 公司的开发者工具在未经同意的情况下窃取整个代码库和凭证，对任何安装了 Grok CLI 的开发者构成直接威胁。xAI 通过远程开关而非代码更新来关闭该功能，同时保留上传管线的做法，暗示数据收集是有意为之且随时可能被重新启用，从根本上动摇了开发者对 AI 编程工具的信任。 网络流量分析显示，在 12 GB 仓库测试中，/v1/storage 端点传输了 5.10 GiB 数据，而模型对话通道仅传输 192 KB，比例约为 27,800:1。关闭
 
-aihot · 公众号：数字生命卡兹克 · 7月13日 00:05 · [中文阅读](https://aihot.virxact.com/items/cmriguktg00arbijpt0l7c2vh) · 2 个来源
+aihot · X：卡兹克 (@Khazix0918) · 7月13日 03:09 · [中文阅读](https://aihot.virxact.com/items/cmrinwb3900yebilkxv3esdnc) · 3 个来源
 
 **核验**: 多源印证
 
-**背景**: Grok CLI 是 xAI 官方的命令行编码智能体工具，以 npm 包`@xai-official/grok`分发，由 Grok 4.5 驱动，旨在将 AI 辅助编码直接带入开发者的终端。`git bundle`是 Git 的一项功能，可将整个仓库（包括分支、历史和标签）打包成单个二进制文件，实质上创建了仓库的完整可移植副本。Claude Code 是 Anthropic 的智能体编码工具，其配置文件（如`~/.claude.json`）可能包含敏感设置和 API 凭证，因此这些文件被纳入静默上传尤其令人担忧。
+**背景**: Grok CLI 是 xAI 的官方命令行编程代理（npm 包 @xai-official/grok），目前由 Grok 4.5 驱动，旨在与 Anthropic 的 Claude Code 等 AI 辅助编程工具竞争。Claude Code 将配置和凭证存储在 ~/.claude.json 和 settings.local.json 等文件中，这些文件可能包含 Anthropic 服务的 API 密钥。Grok CLI 上传时使用的 git bundle 格式是 Git 的标准机制，可将引用和 Git 对象打包到单个文件中，实际上捕获了整个仓库的完整历史。
 
 <details><summary>参考链接</summary>
 <ul>
 <li><a href="https://x.ai/cli">Grok Build | SpaceXAI</a></li>
-<li><a href="https://docs.x.ai/build/overview">Grok Build | SpaceXAI Docs</a></li>
-<li><a href="https://git-scm.com/docs/git-bundle">Git - git-bundle Documentation</a></li>
+<li><a href="https://git-scm.com/docs/bundle-format">Git - bundle-format Documentation</a></li>
 
 </ul>
 </details>
 
-**标签**: `#AI安全`, `#Grok CLI`, `#代码泄露`, `#AI开发者工具`, `#供应链安全`
+**社区讨论**: 安全研究者 @Khazix0918 的原始帖子引发了广泛关注，社区将其与此前 Anthropic 在 Claude Code 中植入隐形代码识别中国用户的事件相提并论。社区情绪普遍为震惊和被背叛感，用户呼吁立即卸载 Grok CLI，并担忧主流 AI 厂商的编程工具无法被信任来处理敏感代码库和凭证。
+
+**标签**: `#AI安全`, `#Grok CLI`, `#API密钥泄露`, `#AI开发者工具`, `#数据隐私`
 
 ---
 
 <a id="item-2"></a>
-## [借助现代编程智能体构建新旧应用](https://terrytao.wordpress.com/2026/07/11/old-and-new-apps-via-modern-coding-agents/) ⭐️ 8.0/10
+## [George Hotz：LLM 有价值，但前沿实验室的估值被高估了](https://geohot.github.io//blog/jekyll/update/2026/07/12/i-love-llms.html) ⭐️ 8.0/10
 
-菲尔兹奖得主陶哲轩展示了如何使用现代编程智能体构建交互式数学可视化与应用，并对其在学术工作中的能力与局限性进行了客观评估。
-
-hackernews · subset · 7月12日 11:09 · [社区讨论](https://news.ycombinator.com/item?id=48880170)
-
-**核验**: 已核对原文
-
-**标签**: `#AI coding agents`, `#Claude Code`, `#academic computing`, `#software demand`, `#AI developer tools`
-
----
-
-<a id="item-3"></a>
-## [Claude Code 在读取用户提示前消耗的 Token 是 OpenCode 的 4.7 倍](https://systima.ai/blog/claude-code-vs-opencode-token-overhead) ⭐️ 8.0/10
-
-Systima 的一项对比研究发现，Claude Code 在读取用户提示之前就会向 Anthropic 的 API 发送约 33,000 个 token，而 OpenCode 仅发送约 7,000 个 token——开销相差 4.7 倍。研究人员在编码代理与 Anthropic 端点之间添加了日志记录以捕获所有请求和使用数据，明确发现 Claude Code 的缓存策略和框架 token 使用效率显著较低。 4.7 倍的 token 开销直接意味着使用 Claude Code 的开发者面临更高的 API 成本和更快的预算消耗，使其在同等任务下显著更昂贵。这一发现引发了关于激励一致性的更广泛质疑——当提供编码代理的公司同时从按 token 计费中获利时——并凸显了开发者在选择 AI 编码工具时评估总拥有成本的必要性。 该研究测量了框架 token 开销——即在用户实际提示被处理之前发送的系统提示、工具定义和编排指令——并发现 Claude Code 的缓存策略尤其浪费。作者承认了社区的一个合理批评，即仅凭 token 数量无法衡量任务质量，并承诺将更新研究，加入更深入的任务分析、定性结果对比以及可复现的输入和输出。
-
-hackernews · systima · 7月12日 18:25 · [社区讨论](https://news.ycombinator.com/item?id=48883275)
-
-**核验**: 已核对原文
-
-**背景**: Claude Code 是 Anthropic 的代理式编码工具，运行在终端中，帮助开发者编辑文件、运行命令和浏览代码库。OpenCode 是一个开源的 AI 编码代理替代方案，在 GitHub 上拥有超过 16 万颗星。这两个工具都作为开发者与 LLM 端点之间的中间层，用系统指令、工具定义和上下文包装用户提示——统称为
-
-**标签**: `#Claude Code`, `#token efficiency`, `#AI coding agents`, `#developer tools`, `#cost optimization`
-
----
-
-<a id="item-4"></a>
-## [geohot 博文：LLM 确实有价值，但前沿实验室难以捕获其价值](https://geohot.github.io//blog/jekyll/update/2026/07/12/i-love-llms.html) ⭐️ 8.0/10
-
-George Hotz（geohot）于 2026 年 7 月 12 日发布博文，认为 LLM 确实是有价值的工具，但前沿 AI 实验室可能难以捕获其所创造的经济价值。该文引发了 195 条社区评论的深入讨论，涵盖软件开发经济学的变化、fork 开源项目变得轻而易举、以及生产力提升主要体现为私人一次性工具而非可见的公开软件等话题。 这一批评质疑 OpenAI 和 Anthropic 等前沿 AI 实验室能否将其模型生成的价值充分货币化，从而挑战了它们的高估值。它还引发了对开源软件未来的重要担忧——LLM 辅助的 fork 降低了向上游贡献的动力，可能导致开源生态系统碎片化。 在当前订阅价格下（每月 100-200 美元，有令牌用量上限），前沿模型对开发者来说已是理所当然的选择，但博文认为这种定价可能无法支撑实验室追求的万亿美元估值。社区评论者指出，Sonnet 4 和 Opus 4.5 等新模型在能力上代表了显著跃升，并且虽然 LLM 能生成代码，开发者仍需清楚要构建什么以及它应如何运作，以避免低质量输出。
+George Hotz 发布了一篇博客文章，认为虽然 LLM 确实创造了巨大价值，但前沿 AI 实验室（如 OpenAI、Anthropic 等）无法按比例捕获这些价值，因此它们的高估值从根本上存在偏差。他的核心论点是价值创造不等于价值捕获——这一区别解释了为什么实验室在技术真正有用的同时仍在积极推动按 token 计费的订阅模式。 这一观点挑战了前沿实验室估值由 AI 变革性潜力所支撑的主流叙事，暗示经济收益将广泛扩散而非集中于模型提供商。这一讨论对 AI 投资者、开源可持续性以及理解 LLM 生产力提升究竟在哪里体现具有重要意义。 Hotz 的论点基于价值创造（做大经济收益的蛋糕）与价值捕获（为自己切取最大一块）之间的经济学区别，指出历史上创造巨大价值的先驱者往往无法捕获太多价值。社区评论者强调，生产力提升主要表现为针对高度特定个人用例构建的私有一次性软件，而非公开发布的产品，并担忧随着随意 fork 项目成为常态，开源的可持续性面临挑战。
 
 hackernews · therepanic · 7月12日 18:31 · [社区讨论](https://news.ycombinator.com/item?id=48883343)
 
 **核验**: 多源印证
 
-**背景**: George Hotz（geohot）是 comma.ai（自动驾驶）和 tinygrad（神经网络框架）的创始人，以直言不讳且常常持逆向观点而闻名。OpenAI、Anthropic、Meta 和 Google DeepMind 等前沿 AI 实验室正在大规模投资和高估值的支撑下竞相开发能力更强的 AI 模型。这些实验室能否捕获足够的经济价值来证明其估值的合理性，是当前 AI 行业讨论的核心议题，尤其是在开源模型和本地部署方案日益具有竞争力的情况下。
+**背景**: 价值创造与价值捕获是经济学中的基础概念：价值创造指产品或服务提供的总感知收益，而价值捕获是提供者能够变现的那部分收益。前沿 AI 实验室如 OpenAI、Anthropic、Meta 和 Google DeepMind 是开发最先进 AI 模型的主要组织，它们基于 AI 将带来变革性影响的预期获得了巨额估值。George Hotz 是 comma.ai 的创始人，也是知名黑客和工程师，以其独立且常常反主流的技术观点而闻名。
 
 <details><summary>参考链接</summary>
 <ul>
 <li><a href="https://intelligence.org/2025/06/11/so-you-want-to-work-at-a-frontier-ai-lab/">So You Want to Work at a Frontier AI Lab - Machine Intelligence Research Institute</a></li>
+<li><a href="https://farrellymitchell.com/value-creation-implementation/value-creation-vs-value-capture/">Value creation vs value capture | Farrelly Mitchell</a></li>
+<li><a href="https://www.linkedin.com/pulse/20121112204533-16553-value-creation-vs-value-capture-musings-on-the-new-economy">Value Creation vs . Value Capture : Musings on the New Economy</a></li>
 
 </ul>
 </details>
 
-**社区讨论**: 社区在很大程度上认同 geohot 的判断，SwellJoe 赞赏其对价值捕获问题的精炼表述。hamandcheese 对"随心所欲"时代表示担忧——fork 现在变得轻而易举，可能削弱开源上游贡献模式。TheAceOfHearts 指出生产力提升体现为私人一次性工具，而 kenforthewin 则反驳称 Sonnet 4 和 Opus 4.5 等新模型正在以超出 geohot 预期的速度加速提升能力。
+**社区讨论**: 讨论中强烈认同 Hotz 关于价值创造与价值捕获的框架，评论者指出在当前订阅价格下前沿模型物超所值，但仍无法支撑万亿级估值。多位评论者观察到生产力提升是真实的，但主要体现在私人层面——用户为个人用例构建一次性软件而非发布公开项目——这引发了对 fork 变得轻而易举的时代开源可持续性的担忧。也有评论者持不同意见，认为 Sonnet 4 和 Opus 4.5 等近期模型发布代表了真正的阶跃式进步，正在加速时间线，可能会让怀疑者感到意外。
 
-**标签**: `#LLM`, `#AI行业判断`, `#开源AI`, `#开发者工具`, `#AI生产力`
+**标签**: `#LLM`, `#AI行业判断`, `#开源AI`, `#AI生产力`, `#frontier labs`
+
+---
+
+<a id="item-3"></a>
+## [Anthropic 负责人分享 Agent 基础设施演进洞察](https://x.com/dotey/status/2076174130135674907) ⭐️ 8.0/10
+
+7 月 10 日，Anthropic 发布了一场对谈，Claude 平台工程负责人 Katelyn Lesse、产品负责人 Angela Jiang 和产品经理 Jess Yann 分享了来自一线的 Agent 基础设施观察。核心洞察包括编排层（harness）正在变薄、多 Agent 协作模式兴起，以及从个人生产力出发务实衡量 ROI 的方法。 这些洞察直接来自构建最广泛使用的 Agent 平台之一的 Anthropic 领导层，使其成为 Agent 基础设施发展方向的可信风向标。从逐步控制转向多 Agent 协作设计，加上自下而上的企业采纳策略，为开发者和企业推进 AI 转型提供了可操作的指导。 讨论强调，随着模型推理和工具调用能力增强，开发者不再需要规定每一步，只需给出目标和边界，让模型自行决定执行路径。Angela Jiang 特别提醒，虽然 Agent 能放大个人能力，但不会自动解决团队的协调、取舍和决策问题——当每个人都能快速做出原型并独立上线时，容易出现产品无序扩张的风险。
+
+twitter · 宝玉 · 7月12日 05:17
+
+**核验**: 多源印证
+
+**背景**: Agent harness 是围绕大语言模型的控制层，负责指导模型执行任务，包括管理工具调用、反馈循环和项目完成决策。随着 LLM 在推理和工具使用方面的能力提升，这些编排层过去需要大量流程控制代码来处理分支、条件判断和错误恢复。多 Agent 编排是一种较新的范式，多个 Agent 之间相互协作——提方案、挑错或升级求助——而非遵循单一刚性流水线。讨论中提到的 Shopify River 系统是一个端到端 Agent 工作流的典型案例，将需求文档、开发环境、代码实现和 QA 测试串联成统一流水线。
+
+<details><summary>参考链接</summary>
+<ul>
+<li><a href="https://en.wikipedia.org/wiki/Agent_harness">Agent harness</a></li>
+<li><a href="https://shopify.engineering/under-the-river">Under the River (2026) - Shopify</a></li>
+
+</ul>
+</details>
+
+**社区讨论**: 该帖子获得了 357 个点赞和 39 条回复，显示出社区对 Agent 基础设施趋势的强烈关注。讨论引起了正在经历从刚性编排向灵活多 Agent 协作模式转变的开发者和从业者的共鸣，也吸引了寻求务实 AI 采纳策略的企业关注。
+
+**标签**: `#AI Agents`, `#Anthropic`, `#Agent Infrastructure`, `#AI Developer Tools`, `#Enterprise AI`
+
+---
+
+<a id="item-4"></a>
+## [纳德拉提出](https://x.com/satyanadella/status/2076323181154230284) ⭐️ 7.88/10
+
+微软 CEO 萨提亚·纳德拉提出了 这一概念为企业 AI 采用提出了一个根本性的战略挑战：使用 AI 工具的行为本身可能通过向模型提供商泄露专有知识来削弱企业的竞争优势。随着 AI 深入核心业务流程，保护组织学习循环和维持数据主权的能力将决定企业是从 AI 中获益，还是在无意中交出自己的智力资本。 纳德拉明确指出企业需要对私有评估、组织记忆所有权和适配权重拥有控制权，未经同意数据不得外泄至信任边界之外。他还主张企业应有权使用模型输出来微调或训练自有模型，实质上是要求企业掌控自身的学习循环，而非将其反馈给提供商的模型。
+
+aihot · X：Satya Nadella (@satyanadella) · 7月12日 15:09 · [中文阅读](https://aihot.virxact.com/items/cmrhyer8a01q3biidlr8xr6rm)
+
+**核验**: 多源印证
+
+**背景**: 诺贝尔经济学奖得主肯尼斯·阿罗曾描述了经典的
+
+<details><summary>参考链接</summary>
+<ul>
+<li><a href="https://snscratchpad.com/posts/reverse-information-paradox/">The Reverse Information Paradox | sn scratchpad</a></li>
+<li><a href="https://digg.com/tech/u4a9rpdr">Microsoft CEO Satya Nadella describes AI reverse information ...</a></li>
+<li><a href="https://www.startuphub.ai/ai-news/technology/2026/the-ai-reverse-information-paradox">The AI ' Reverse Information Paradox ' | StartupHub.ai</a></li>
+
+</ul>
+</details>
+
+**标签**: `#AI治理`, `#数据隐私`, `#企业AI策略`, `#反向信息悖论`, `#行业判断`
 
 ---
 
 <a id="item-5"></a>
-## [@dotey：Anthropic 于 7 月 10 日发布了一场关于 Agent 基础设施的对谈。Claude 平台工程负责人 Katelyn Lesse、产品负责人 Angela Jiang 和产品经理……](https://x.com/dotey/status/2076174130135674907) ⭐️ 8.0/10
+## [Ploy 将生产级 AI Agent 迁移至 GPT-5.6：速度提升 2.2 倍，成本降低 27%](https://ploy.ai/blog/migrating-a-production-ai-agent-to-gpt-5-6) ⭐️ 7.3/10
 
-Anthropic 工程和产品负责人分享了关于 Agent 基础设施演变的洞察，指出 Agent 编排层正在变薄、多 Agent 协作成为趋势，并建议企业从个人生产力提升开始衡量 AI 的投资回报率。
+Ploy 是一家用 AI Agent 构建和编辑营销网站的公司，他们将其生产级 Agent 从 Anthropic 的 Opus（4.7/4.8）迁移至 GPT-5.6 Sol 作为默认模型，报告构建速度提升 2.2 倍、成本降低 27%，且完成质量达到或超过原有模型。Opus 此前占据默认位置达四个月之久。 这为 GPT-5.6 在涉及规划、代码生成、图像生成和自我评估的复杂 Agent 工作流中的表现提供了具体的真实生产数据，对评估前沿模型迁移的开发者具有直接参考价值。结果表明 GPT-5.6 可能在速度、成本和质量方面提供了极具竞争力的组合，可能改变生产级 AI Agent 的竞争格局。 该 Agent 的工作负载要求极高：它需要规划页面、阅读代码库、编写组件、生成图像、截取自己的工作截图，并自行判断何时完成。社区成员 thiagoperes 独立验证了类似结果——从 GPT-5.4 nano/mini 迁移到 5.6 后，在多种简单工作流中均观察到类似幅度的改善，并指出对许多公司而言，模型升级本质上只是一行代码的改动，即使已拥有复杂的模型路由架构也是如此。
 
-twitter · 宝玉 · 7月12日 05:17
+hackernews · brryant · 7月12日 17:13 · [社区讨论](https://news.ycombinator.com/item?id=48882716) · [中文阅读](https://aihot.virxact.com/items/cmrig9mkx0024bijp9pr04hss) · 2 个来源
 
 **核验**: 已核对原文
 
-**标签**: `#AI Agents`, `#Claude`, `#Agent Infrastructure`, `#AI Engineering`, `#Workflow Automation`
+**背景**: 执行复杂多步骤任务的生产级 AI Agent 需要能够在单一工作流中处理规划、代码生成、视觉生成和自我评估的模型。像 Ploy 这样的公司会持续将前沿模型发布版本与生产工作负载进行基准测试，以找到速度、成本和输出质量的最佳平衡。模型路由架构可以将不同子任务分配给不同的专用模型，但正如本次迁移所示，一个强大的单一模型有时能在简化运营的同时仍提供更优的结果。
+
+<details><summary>参考链接</summary>
+<ul>
+<li><a href="https://ploy.ai/blog/migrating-a-production-ai-agent-to-gpt-5-6">Migrating a production AI agent to GPT-5.6: 2.2x faster, 27% cheaper</a></li>
+<li><a href="https://ploy.ai/blog/migrating-a-production-ai-agent-to-gpt-5-6">Ploy 将 AI 智能体默认模型从 Claude Opus 4.8 切换至 GPT-5.6 Sol</a></li>
+
+</ul>
+</details>
+
+**社区讨论**: thiagoperes 独立验证了性能改善，报告从 GPT-5.4 nano/mini 迁移到 5.6 后在多种工作流中获得了类似提升，并认为模型升级通常只是简单的一行代码改动，即使拥有复杂的路由架构也是如此。kristianp 批评了文章的 LLM 生成写作风格，希望指导 LLM 的人能重写最糟糕的部分。bob1029 建议采用混合方案——用 Luna 处理涉及工具的工作负载，用 Sol 负责人机交互和编排，而 arikrahman 则指出在非补贴的美国提供商上，Deepseek 配合缓存命中可以让请求几乎免费。
+
+**标签**: `#AI agents`, `#GPT-5.6`, `#model migration`, `#production AI`, `#cost optimization`
 
 ---
 
 <a id="item-6"></a>
-## [Mesh LLM：基于 iroh P2P 网络的分布式大模型推理](https://www.iroh.computer/blog/mesh-llm) ⭐️ 7.92/10
+## [腾讯混元发布 Hy3 模型：295B 参数 MoE 架构，面向 Agent 的 LLM 定位，已集成微信服务超 10 亿用户](https://x.com/AYi_AInotes/status/2076341952023310580) ⭐️ 7.12/10
 
-Mesh LLM 是一个开源项目，通过 iroh 的 P2P 网络将多台机器的 GPU 和内存池化，无需中央服务器即可支持最高 235B MoE 参数模型的分布式推理。它在 localhost:9337/v1 暴露兼容 OpenAI 的 API，内置 40 多个预配置模型，并使用内部称为「Skippy」的层分区机制将大模型流水线式拆分到多台普通机器上运行。 该项目为个人开发者和小团队提供了一种实用方式，利用已有的硬件运行超大模型，绕过按量计费的云 API，同时完全掌控数据隐私和模型版本。通过 P2P 网络消除对中央服务器的依赖，大幅降低了分布式 LLM 推理的基础设施门槛。 Mesh LLM 的「Skippy」拆分模式按层范围将模型划分为流水线阶段（例如第 0–15 层在一个节点，16–31 层在下一个节点），激活值通过名为 skippy-stage/2 的低延迟 QUIC ALPN 协议在阶段间传输。软件体积约 18 MB，使用三种 ALPN 协议处理不同类型的流量，并在不同区域运行两个 iroh 中继节点作为无法直连时的回退路径。
-
-aihot · Hacker News 热门（buzzing.cc 中文翻译） · 7月12日 02:23 · [中文阅读](https://aihot.virxact.com/items/cmrh78s5t00w5bir7mozf8oyb)
-
-**核验**: 多源印证
-
-**背景**: iroh 是一个基于 Rust 的 P2P 网络库，使用公钥而非 IP 地址在设备间建立直接认证连接，自动处理 NAT 穿透和打洞，底层基于 QUIC 协议。流水线并行是一种分布式推理技术，按层范围将模型拆分到多台机器上，使每台机器只需容纳模型的一部分——当单台设备内存不足以加载整个模型时尤为有用。混合专家（MoE）是一种模型架构，通过将 token 路由到专门的专家子网络来提升模型容量，在不按比例增加每 token 计算成本的情况下实现更高的参数规模。
-
-<details><summary>参考链接</summary>
-<ul>
-<li><a href="https://github.com/n0-computer/iroh">GitHub - n0-computer/iroh: IP addresses break, dial keys instead. A library that adds QUIC + NAT Traversal to your apps. · GitHub</a></li>
-<li><a href="https://www.newline.co/@Dipen/pipeline-parallelism-for-faster-llm-inference--a40371cd">Pipeline Parallelism for Faster LLM Inference | newline</a></li>
-<li><a href="https://huggingface.co/blog/moe">Mixture of Experts Explained - Hugging Face</a></li>
-
-</ul>
-</details>
-
-**标签**: `#分布式推理`, `#开源AI工具`, `#P2P计算`, `#LLM部署`, `#GPU池化`
-
----
-
-<a id="item-7"></a>
-## [Ploy 将生产 AI 智能体迁移至 GPT-5.6：速度提升 2.2 倍，成本降低 27%](https://ploy.ai/blog/migrating-a-production-ai-agent-to-gpt-5-6) ⭐️ 7.3/10
-
-Ploy 将其生产 AI 智能体的默认模型从 Claude Opus 4.8 切换至 OpenAI 的 GPT-5.6，报告显示完成工作的速度提升 2.2 倍、成本降低 27%，同时质量保持不变。GPT-5.6 由 OpenAI 于 2026 年 7 月 9 日公开发布。 这是一份带有硬性指标的生产环境迁移报告，表明 GPT-5.6 在涉及多步骤编码和网站构建的复杂智能体工作负载上能够超越 Claude Opus。对于在生产环境中运行 AI 智能体的公司而言，这样的提升意味着模型升级可以以相对较小的架构改动带来显著的性能和成本收益。 Ploy 的智能体负责构建和编辑真实的营销网站——它需要规划页面、阅读代码库、编写组件、生成图像、截取自己的工作截图并判断何时完成，这对模型能力设定了极高的门槛。Claude Opus 在被 GPT-5.6 替代之前占据了默认模型位置长达四个月（先是 Opus 4.7，后是 4.8），期间没有其他测试过的模型能超越它。
-
-hackernews · brryant · 7月12日 17:13 · [社区讨论](https://news.ycombinator.com/item?id=48882716) · [中文阅读](https://aihot.virxact.com/items/cmrig9mkx0024bijp9pr04hss) · 2 个来源
-
-**核验**: 多源印证
-
-**背景**: GPT-5.6 是 OpenAI 最新发布的旗舰大语言模型，于 2026 年 7 月 9 日公开发布，被描述为其迄今为止最强大的模型。Claude Opus 是 Anthropic 最强大的模型系列，专为复杂编码和智能体任务设计，其中 Opus 4.7 和 4.8 版本可作为直接替代方案，为现实中的多步骤问题提供卓越性能。执行端到端任务（如构建网站）的生产级 AI 智能体需要具备强大推理、编码、工具调用和自我评估能力的模型，因此模型选择是一个关键运营决策。
-
-<details><summary>参考链接</summary>
-<ul>
-<li><a href="https://en.wikipedia.org/wiki/GPT-5.6">GPT-5.6 - Wikipedia</a></li>
-<li><a href="https://www.anthropic.com/claude/opus">Claude Opus \ Anthropic</a></li>
-
-</ul>
-</details>
-
-**社区讨论**: thiagoperes 独立验证了类似改进，在将多种工作流从 GPT-5.4-nano 和 mini 迁移至 5.6 后注意到全面提升，并指出对许多公司而言模型升级本质上只是一行代码的改动。kristianp 批评了文章的写作质量，认为其由 LLM 生成，带有冒号分隔短句等典型风格问题。redfather918 提出了一个重要关切：提示工程或工具调用工作流是否需要大幅调整，并强调对于生产智能体而言，一致性比成本降低更为重要。
-
-**标签**: `#AI agents`, `#GPT-5.6`, `#model migration`, `#production AI`, `#performance benchmarks`
-
----
-
-<a id="item-8"></a>
-## [腾讯混元发布 Hy3 模型：295B 参数 MoE 架构，定位为面向 Agent 的 LLM，已集成微信服务超 10 亿用户](https://x.com/AYi_AInotes/status/2076341952023310580) ⭐️ 7.12/10
-
-腾讯混元团队发布了 295B 参数的 MoE 模型 Hy3，定位为面向 Agent 的大语言模型。该模型现已接入微信服务，覆盖超 10 亿用户，并在任务成功率和执行效率上展现出显著提升。
+腾讯混元团队发布了拥有 295B 参数的 MoE 模型 Hy3，该模型定位为面向 Agent 的大语言模型。目前它已集成至服务超 10 亿用户的微信服务中，在任务成功率和推理效率上均有显著提升。
 
 aihot · X：阿易 AI Notes (@AYi_AInotes) · 7月12日 16:24 · [中文阅读](https://aihot.virxact.com/items/cmri0lo1e00irbixecx7cj2f5)
 
 **核验**: 已核对原文
 
-**标签**: `#AI Agents`, `#MoE Architecture`, `#Tencent Hunyuan`, `#LLM Deployment`, `#WeChat Integration`
+**标签**: `#AI Agents`, `#MoE架构`, `#腾讯混元`, `#LLM`, `#AI产品发布`
 
 ---
 
-<a id="item-9"></a>
-## [Mindwalk：在 3D 代码库地图上回放 AI 编码代理会话](https://github.com/cosmtrek/mindwalk) ⭐️ 7.1/10
+<a id="item-7"></a>
+## [Mindwalk：在代码库 3D 地图上回放编码代理会话](https://github.com/cosmtrek/mindwalk) ⭐️ 7.1/10
 
-Mindwalk 是一款新发布的本地优先可视化工具，可在代码库的 3D 地图上回放 Claude Code 和 Codex 代理会话，文件以颜色编码状态（未访问、已查看、已读取、已编辑）发光显示代理的触达范围。它以单个 Go 二进制文件分发，所有会话数据完全在本地处理，不会发送到外部服务器。 随着 Claude Code 和 Codex 等 AI 编码代理日益普及，开发者面临一个关键痛点：难以理解代理在代码库中究竟做了什么——Mindwalk 将不透明的会话日志转化为直观的可视化回放，使代理审计和调试变得切实可行。摩擦信号面板（错误率、文件修改量）和时间轴标记（上下文压缩事件、子代理启动）为开发者提供了代理在何处遇到困难或犯错的 actionable 洞察。 该工具提供树状图和地形图两种视图模式，以及四种文件触达状态的颜色标记以便快速扫描。回放界面包含显示错误率和文件修改量的摩擦信号面板，以及上下文压缩事件、子代理启动和用户交互的时间轴标记，支持键盘快捷键控制播放速度并跳转到编辑点或错误点。
+Mindwalk 是一款新发布的开源 Go 工具，可在代码库的 3D 地图上回放 Claude Code 和 Codex 代理会话，用颜色标记代理搜索、读取或编辑过的文件。它以单个 Go 二进制文件运行，所有会话数据完全在本地处理，并包含显示错误率、文件修改量等摩擦信号面板，以及上下文压缩和子代理启动等时间轴标记。 随着 Claude Code 和 Codex 等 AI 编码代理成为主流，开发者需要审计和理解这些代理如何导航复杂代码库的方法——这正是 Mindwalk 直接解决的盲点。通过让代理行为可视化透明，它帮助开发者发现低效环节、调试失败会话，并建立对 AI 辅助开发工作流的信任。 该工具提供树状图和地形图两种视图模式，文件触达状态分为未访问、已查看、已读取、已编辑四种颜色标记。播放控制包含键盘快捷键，可调节速度并跳转到编辑点或错误点，摩擦信号面板则展示错误率和文件修改量等指标，同时时间轴上标记了上下文压缩事件和子代理激活等节点。
 
 aihot · Hacker News 热门（buzzing.cc 中文翻译） · 7月12日 13:51 · [中文阅读](https://aihot.virxact.com/items/cmrhvwe6k00y7biidjabepmem)
 
 **核验**: 多源印证
 
-**背景**: Claude Code 是 Anthropic 推出的基于命令行的 AI 编码代理，能够自主浏览代码库、读取文件、进行编辑并完成软件工程任务。Codex 是 OpenAI 的编码代理平台，由针对软件工程优化的 o3 推理模型版本驱动，能够编写功能、修复漏洞并提交拉取请求。这两种代理都会生成记录其操作的详细会话日志，但这些日志通常是冗长的文本，难以整体审阅。上下文压缩是 LLM 代理中用于管理不断增长的上下文窗口的技术，当接近 token 限制时会对较早的对话历史进行摘要或丢弃。
+**背景**: Claude Code 是 Anthropic 的代理式编码工具，通过 CLI 或桌面应用运行，能够理解代码库、编辑文件并执行命令。Codex 是 OpenAI 的竞争性 AI 编码代理，集成在 ChatGPT 中，用于处理拉取请求、代码重构和代码审查等并行工作流。两类代理都会自主导航大型代码库，进行搜索、读取和编辑文件，但其决策过程往往不透明——上下文压缩机制使这一问题更加复杂，代理会摘要或丢弃早期对话上下文以保持在 token 限制内，可能丢失重要信息。
 
 <details><summary>参考链接</summary>
 <ul>
-<li><a href="https://en.wikipedia.org/wiki/Codex_(AI_agent)">Codex (AI agent) - Wikipedia</a></li>
-<li><a href="https://code.claude.com/docs/en/cli-reference">CLI reference - Claude Code Docs</a></li>
-<li><a href="https://medium.com/the-ai-forum/automatic-context-compression-in-llm-agents-why-agents-need-to-forget-and-how-to-help-them-do-it-43bff14c341d">Automatic Context Compression in LLM Agents: Why Agents Need to Forget — and How to Help Them Do It Well | by Plaban Nayak | The AI Forum | Medium</a></li>
+<li><a href="https://claude.com/product/claude-code">Claude Code by Anthropic | AI Coding Agent, Terminal, IDE</a></li>
+<li><a href="https://openai.com/codex/">Codex in ChatGPT | AI Coding Agents for Software Engineering | OpenAI</a></li>
+<li><a href="https://www.anthropic.com/research/claude-code-expertise">How Claude Code is used in practice \ Anthropic</a></li>
 
 </ul>
 </details>
 
-**标签**: `#AI agents`, `#Claude Code`, `#visualization`, `#developer tools`, `#Codex`
+**标签**: `#AI agents`, `#Claude Code`, `#Codex`, `#可视化工具`, `#开源 AI 工具`
 
 ---
 
-<a id="item-10"></a>
-## [JetBrains 实测打脸 Caveman：声称省 65% Token 实际仅省 8.5%](https://x.com/dotey/status/2076371173244588135) ⭐️ 7.0/10
+<a id="item-8"></a>
+## [Claude Code 在读取提示前发送 33k tokens，OpenCode 仅 7k](https://systima.ai/blog/claude-code-vs-opencode-token-overhead) ⭐️ 7.0/10
 
-JetBrains 用 Claude Code 在 SkillsBench 的 86 个真实编程任务上进行了约 240 次计费试验，总花费 106 美元，发现 Caveman 技能实际仅节省了 8.5%的输出 Token，远低于其声称的 65%。而且这 8.5%还是在强制每次回复都启用技能的情况下达到的天花板，日常使用中实际节省会更少。 这一分析揭示了 AI 代理 Token 经济学中的一个根本性误解：当工具调用、系统提示词、MCP 集成和其他技能占据账单大头时，优化聊天输出的收益微乎其微。同时它也指出，过于简短的代理沟通存在隐性成本——开发者看不懂代理做了什么，最终会触发额外的工具调用，很快就把省下的 Token 消耗回去。 Caveman 技能本身每轮会增加约 1–1.5k 输入 Token，且只缩减输出 Token 而不影响输入和推理 Token，这意味着整场会话的节省幅度更小，在本身已很简洁的工作负载上甚至可能净亏损。65%这一数字源自聊天场景中 AI 生成大段对话回复的情况，而非工具调用和系统提示词占主导的代理工作流。
+Systima.ai 的一项对比研究发现，Claude Code 在处理用户提示前会发送约 33,000 个 tokens，而 OpenCode 仅发送 7,000 个 tokens。该研究通过在编程代理工具与 Anthropic API 端点之间添加日志记录来捕获所有请求，明确显示 Claude Code 在缓存策略和框架 token 使用方面远不如 OpenCode 高效。 这一 token 开销直接影响开发者成本，尤其是对按 token 付费的 API 用户而言，同时也引发了关于 AI 编程代理厂商是否有动机增加 token 使用量的疑问。随着代理式编程工具成为主流开发基础设施，效率已成为工具选择中的关键因素。 研究人员在编程代理工具与 Anthropic 端点之间添加了日志记录，以捕获所有请求和返回的使用量数据。在社区反馈质疑 token 开销是否是正确的衡量指标后，作者承诺将更新研究，加入更深入的任务分析、定性结果对比以及可复现的输入输出。
+
+hackernews · systima · 7月12日 18:25 · [社区讨论](https://news.ycombinator.com/item?id=48883275)
+
+**背景**: Claude Code 是 Anthropic 的代理式编程工具，运行在终端中，帮助开发者编辑文件、运行命令并加速代码交付。OpenCode 是一个基于 Go 语言的开源 CLI 替代方案，提供终端用户界面以与各种 AI 模型交互，常被定位为 Claude Code 的免费替代品。Token 开销是指每次 API 请求中在处理实际用户提示之前发送的系统提示、工具定义和其他元数据所消耗的 tokens，这些 tokens 需要用户付费。两种工具都充当
+
+**标签**: `#Claude Code`, `#token efficiency`, `#AI coding agents`, `#developer tools`, `#cost optimization`
+
+---
+
+<a id="item-9"></a>
+## [JetBrains 实测：号称省 65% Token 的 Caveman 技能在真实智能体场景仅省 8.5%](https://x.com/dotey/status/2076371173244588135) ⭐️ 7.0/10
+
+JetBrains 使用 Claude Code 在 SkillsBench 上跑了 86 个真实编程任务，分别测试装与不装 Caveman 技能，共进行约 240 次计费实验，花费 106 美元。结果显示，Caveman 在智能体场景中仅省了 8.5% 的输出 Token，远低于其宣称的 65%，因为工具调用、系统提示词和 MCP 等才是 Token 消耗的大头，而非聊天输出。 这暴露了 AI 开发者社区对智能体工作流中 Token 成本来源的一个根本性误解——优化输出冗余度对总账单几乎只是杯水车薪。真正想省钱的开发者应关注上下文管理、减少不必要的 MCP 和 Skills 加载，以及用更聪明的模型减少返工，而不是压缩输出语言。 65% 的数字来自聊天场景，AI 会生成大段文字，但在智能体工作流中，输出 Token 仅占总消耗的一小部分。Caveman 技能本身每轮还会增加约 1–1.5k 输入 Token，而且过于简短的输出会导致开发者追问，触发额外的工具调用，把省下的 Token 又吃回去。即便是 8.5% 这个数字也是天花板，因为测试中强制每次回复都生效，日常使用中触发频率只会更低。
 
 twitter · 宝玉 · 7月12日 18:20
 
 **核验**: 多源印证
 
-**背景**: Caveman 是 2026 年 4 月由荷兰莱顿大学 19 岁学生 Julius Brussee 创建的 GitHub 项目，它在 Claude Code、Codex 等 AI 编程工具的提示词中加入指令，让 AI 删去冠词、客套话和连接词，只保留技术要素。该项目迅速获得了 8.7 万颗 GitHub 星标。SkillsBench 是首个用于评估 AI 代理技能的基准测试，包含 87 个独立编程任务，采用配对评估和确定性评分。MCP（模型上下文协议）是 Anthropic 于 2024 年 11 月推出的开放标准，用于将 AI 应用连接到外部工具和数据源，是代理 Token 消耗的主要来源之一。
+**背景**: Caveman 项目由荷兰莱顿大学 19 岁的大一新生 Julius Brussee 创建，它在 Claude Code、Codex 等 AI 编程工具的提示词中加入一段指令，让 AI 像原始人一样说话——删除冠词、客套和连接词，只保留技术要素。SkillsBench 是一个基准测试平台，通过在装与不装相关技能的情况下分别运行模型来评估编程智能体在独立编程任务上的表现。MCP（Model Context Protocol）是 Anthropic 于 2024 年 11 月推出的开放标准，用于连接 AI 系统与外部工具和数据源，是智能体工作流中 Token 消耗的主要来源之一。
 
 <details><summary>参考链接</summary>
 <ul>
@@ -218,30 +216,206 @@ twitter · 宝玉 · 7月12日 18:20
 </ul>
 </details>
 
-**标签**: `#AI代理`, `#Token优化`, `#Claude Code`, `#AI开发工具`, `#技术评测`
+**社区讨论**: 该帖子产生了约 20 条回复，说明有一定讨论度。整体 sentiment 与作者的分析一致——认为 Caveman 这类省 Token 技巧是过渡期产物，随着模型单价下降和提示词缓存将重复上下文成本降低约九成，这类优化的意义会越来越小。评论者普遍认同，啰嗦的输出本质上是通信协议中自带的纠错码，而且编程智能体与开发者之间的共享背景远不如人际电报场景可靠。
+
+**标签**: `#AI智能体`, `#Token优化`, `#Claude Code`, `#实证测试`, `#AI开发工具`
 
 ---
 
-<a id="item-11"></a>
-## [Swyx 论断：杰文斯悖论将从编程扩展至所有知识工作](https://x.com/swyx/status/2076155833428431012) ⭐️ 7.0/10
-
-Swyx 认为，杰文斯悖论——即效率提升反而导致总消费量增加——不仅适用于软件需求，更适用于所有知识工作，因为 AI 编程代理正在突破工程领域，向所有知识工作扩展。他将编程领域发生的变化称为更广泛变革的'先兆'，认为 AI 驱动的效率提升将使对熟练劳动力的需求上升而非下降。 这一观点挑战了 AI 将取代知识工作者的主流叙事，认为能够熟练运用 AI 的工作者（Swyx 称之为'AI Engineer'）将面临更大的需求，因为知识工作的单位成本正在下降。该论断对劳动力战略、教育政策以及各组织在所有知识密集型领域推进 AI 采用的方式具有重要启示。 Swyx 特别强调了两个条件：能够熟练使用编程代理的人类（他称之为'AI Engineer'），以及编程代理'突破边界'进入所有其他知识工作领域。其核心机制是，随着劳动效率提升和知识工作单位成本普遍下降，对总工作量和更高质量知识的需求不降反升。
-
-follow_builders · Swyx · 7月12日 04:04
-
-**核验**: 多源印证
-
-**背景**: 杰文斯悖论由英国经济学家威廉·斯坦利·杰文斯于 1865 年首次提出，指的是提高资源使用效率的技术进步反而可能导致该资源总消费量的增加而非减少，因为更低的有效成本会刺激额外需求。在 AI 领域，这一理论被用来论证：随着 AI 使智能和知识工作变得更便宜、更高效，对知识工作的总需求将会增加。'Agentic engineering'指的是使用自主 AI 代理在人类监督下规划、执行、测试和优化代码的新兴实践，而'AI Engineer'是 Swyx 推广的一个术语，用来描述能够有效运用 AI 编程工具的新一代开发者。
-
-<details><summary>参考链接</summary>
-<ul>
-<li><a href="https://en.wikipedia.org/wiki/Jevons_paradox">Jevons paradox</a></li>
-<li><a href="https://www.npr.org/sections/planet-money/2025/02/04/g-s1-46018/ai-deepseek-economics-jevons-paradox">Why the AI world is suddenly obsessed with Jevons paradox ... Jevons Paradox - Definition and Explanation - Economics Help The Jevons Paradox: Flawed Consensus View On Efficiency - Forbes What Is the Jevons Paradox and Why Does It Matter? A 160-year-old paradox explains why AI will create more ... Jevons Paradox: A Deeper Dive - by Gene Bellinger</a></li>
-<li><a href="https://grokipedia.com/page/Agentic_Engineering">Agentic Engineering</a></li>
-
-</ul>
-</details>
-
-**标签**: `#AI agents`, `#Jevons Paradox`, `#AI engineering`, `#industry analysis`, `#knowledge work`
-
----
+<hr class="archive-divider">
+<section class="archive-tabs" data-archive-tabs>
+<h2>更多追踪内容</h2>
+<p class="archive-intro">以下内容已于今日成功抓取，但未进入上方主列表。</p>
+<div class="archive-tablist" role="tablist" aria-label="更多追踪内容来源" hidden>
+<button type="button" role="tab" id="archive-tab-tracked-x" aria-controls="archive-panel-tracked-x" aria-selected="true" tabindex="0" data-archive-tab="tracked-x" data-count="13"><span>其他追踪推文</span><span class="archive-tab-count">13</span></button>
+<button type="button" role="tab" id="archive-tab-follow-builders" aria-controls="archive-panel-follow-builders" aria-selected="false" tabindex="-1" data-archive-tab="follow-builders" data-count="4"><span>其他 Follow Builders 资讯</span><span class="archive-tab-count">4</span></button>
+</div>
+<div class="archive-panel" role="tabpanel" id="archive-panel-tracked-x" aria-labelledby="archive-tab-tracked-x" data-archive-panel="tracked-x">
+<h3 class="archive-panel-title">其他追踪推文</h3>
+<article class="archive-item">
+<div class="archive-item-heading">
+<h3><a href="https://x.com/op7418/status/2076478706462367832">@op7418: 在 Anthropic 重置和延长 Fable5 使用时间之后 OpenAI 直接取消了 Codex 的五小时使用限制，同时进行了新一次的重置</a></h3>
+<span class="score-badge" data-tier="mid" aria-label="5.0 out of 10">5.0</span>
+</div>
+<p class="source-line">Twitter/X · @op7418 · 7月13日 01:27 UTC · 喜欢 14 · 转发 0 · 回复 11 · 浏览 10132</p>
+<p class="archive-item-content">在 Anthropic 重置和延长 Fable5 使用时间之后<br>
+<br>
+OpenAI 直接取消了 Codex 的五小时使用限制，同时进行了新一次的重置</p>
+</article>
+<article class="archive-item">
+<div class="archive-item-heading">
+<h3><a href="https://x.com/dotey/status/2076372677577576864">@dotey: 给 Codex 点赞👍 暂时移除 5 小时使用限制，GPT 5.6 Sol 更省 token，下一小时内进行使用量重置</a></h3>
+<span class="score-badge" data-tier="mid" aria-label="5.0 out of 10">5.0</span>
+</div>
+<p class="source-line">Twitter/X · @dotey · 7月12日 18:26 UTC · 喜欢 174 · 转发 3 · 回复 40 · 浏览 42865</p>
+<p class="archive-item-content">给 Codex 点赞👍<br>
+暂时移除 5 小时使用限制，GPT 5.6 Sol 更省 token，下一小时内进行使用量重置</p>
+</article>
+<article class="archive-item">
+<div class="archive-item-heading">
+<h3><a href="https://x.com/thsottiaux/status/2076365965915467978">@thsottiaux: Morning. The last 48 hours of Codex and ChatGPT Work have been intense! Three important updat...</a></h3>
+<span class="score-badge" data-tier="mid" aria-label="6.3 out of 10">6.3</span>
+</div>
+<p class="source-line">Twitter/X · @dotey · 7月12日 17:59 UTC · 喜欢 21829 · 转发 1723 · 回复 2545 · 浏览 2708372</p>
+<p class="archive-item-content">Morning. The last 48 hours of Codex and ChatGPT Work have been intense! Three important updates:<br>
+<br>
+- Temporarily removing the 5 hour usage limit restriction for all Plus, Business and Pro plans<br>
+- Rolling out changes that will make GPT 5.6 Sol more efficient across the board and that will be reflected in less usage being used so that it can take you further. Exact impact to be quantified and shared<br>
+- We hit 6M active users, and are landing a usage reset in the next hour<br>
+<br>
+Go do things<br>
+<br>
+--- From aihot ---<br>
+早上好。过去 48 小时里，Codex 和 ChatGPT Work 非常忙碌！三项重要更新：<br>
+<br>
+- 暂时取消所有 Plus、Business 和 Pro 计划的 5 小时使用限制<br>
+- 正在推出变更，使 GPT 5.6 Sol 整体更高效，这将体现在使用量减少上，从而让你能走得更远。具体影响待量化后公布<br>
+- 我们已达到 600 万活跃用户，并将在接下来一小时内进行使用量重置<br>
+<br>
+去创造吧。</p>
+</article>
+<article class="archive-item">
+<div class="archive-item-heading">
+<h3><a href="https://x.com/thsottiaux/status/2076365965915467978">@thsottiaux: Morning. The last 48 hours of Codex and ChatGPT Work have been intense! Three important updat...</a></h3>
+<span class="score-badge" data-tier="low" aria-label="? out of 10">?</span>
+</div>
+<p class="source-line">Twitter/X · @op7418 · 7月12日 17:59 UTC · 喜欢 21824 · 转发 1722 · 回复 2545 · 浏览 2708372</p>
+<p class="archive-item-content">Morning. The last 48 hours of Codex and ChatGPT Work have been intense! Three important updates:<br>
+<br>
+- Temporarily removing the 5 hour usage limit restriction for all Plus, Business and Pro plans<br>
+- Rolling out changes that will make GPT 5.6 Sol more efficient across the board and that will be reflected in less usage being used so that it can take you further. Exact impact to be quantified and shared<br>
+- We hit 6M active users, and are landing a usage reset in the next hour<br>
+<br>
+Go do things</p>
+</article>
+<article class="archive-item">
+<div class="archive-item-heading">
+<h3><a href="https://x.com/dotey/status/2076355165645361559">@dotey: Claude 延长了 Claude Fable 5 的访问到 7/19！ 从来没见过这么傻逼的公司，跟儿戏一样！</a></h3>
+<span class="score-badge" data-tier="low" aria-label="3.0 out of 10">3.0</span>
+</div>
+<p class="source-line">Twitter/X · @dotey · 7月12日 17:17 UTC · 喜欢 472 · 转发 7 · 回复 101 · 浏览 99677</p>
+<p class="archive-item-content">Claude 延长了 Claude Fable 5 的访问到 7/19！<br>
+<br>
+从来没见过这么傻逼的公司，跟儿戏一样！</p>
+</article>
+<article class="archive-item">
+<div class="archive-item-heading">
+<h3><a href="https://x.com/op7418/status/2076352559263207806">@op7418: 哈哈 果然延长了，Fable 5 的计划延长一周到 7 月 19 号 https://t.co/pzdlnWHJGw</a></h3>
+<span class="score-badge" data-tier="low" aria-label="2.0 out of 10">2.0</span>
+</div>
+<p class="source-line">Twitter/X · @op7418 · 7月12日 17:06 UTC · 喜欢 17 · 转发 1 · 回复 11 · 浏览 11313</p>
+<p class="archive-item-content">哈哈 果然延长了，Fable 5 的计划延长一周到 7 月 19 号 https://t.co/pzdlnWHJGw</p>
+</article>
+<article class="archive-item">
+<div class="archive-item-heading">
+<h3><a href="https://x.com/claudeai/status/2076351399999557669">@claudeai: We&#x27;re extending Claude Fable 5 access on all paid plans, as well as keeping Claude Code’s wee...</a></h3>
+<span class="score-badge" data-tier="mid" aria-label="5.0 out of 10">5.0</span>
+</div>
+<p class="source-line">Twitter/X · @dotey · 7月12日 17:02 UTC · 喜欢 62670 · 转发 6390 · 回复 5594 · 浏览 13764507</p>
+<p class="archive-item-content">We&#x27;re extending Claude Fable 5 access on all paid plans, as well as keeping Claude Code’s weekly rate limits 50% higher, through July 19.</p>
+</article>
+<article class="archive-item">
+<div class="archive-item-heading">
+<h3><a href="https://x.com/op7418/status/2076335432321929585">@op7418: 今天是 Fable 5 在 Claude 套餐的最后一天了，还没用完的使劲蹬啊</a></h3>
+<span class="score-badge" data-tier="low" aria-label="2.0 out of 10">2.0</span>
+</div>
+<p class="source-line">Twitter/X · @op7418 · 7月12日 15:58 UTC · 喜欢 33 · 转发 0 · 回复 44 · 浏览 33009</p>
+<p class="archive-item-content">今天是 Fable 5 在 Claude 套餐的最后一天了，还没用完的使劲蹬啊</p>
+</article>
+<article class="archive-item">
+<div class="archive-item-heading">
+<h3><a href="https://x.com/op7418/status/2076326449955602659">@op7418: 哈哈 这个 GPT 的模型选择器交互可以的，比现在 OpenAI 官方的直观</a></h3>
+<span class="score-badge" data-tier="low" aria-label="2.0 out of 10">2.0</span>
+</div>
+<p class="source-line">Twitter/X · @op7418 · 7月12日 15:22 UTC · 喜欢 20 · 转发 1 · 回复 10 · 浏览 12185</p>
+<p class="archive-item-content">哈哈 这个 GPT 的模型选择器交互可以的，比现在 OpenAI 官方的直观</p>
+</article>
+<article class="archive-item">
+<div class="archive-item-heading">
+<h3><a href="https://x.com/Tz_2022/status/2076301177994559794">@Tz_2022: 我这里再放一个暴论： 当前所有以节约 token 为目标的各种 skill / harness，都是阶段性产物，很快就会扫入历史的垃圾堆。。。 这就是短消息按字数收费的那个时代，在钻研怎...</a></h3>
+<span class="score-badge" data-tier="low" aria-label="4.0 out of 10">4.0</span>
+</div>
+<p class="source-line">Twitter/X · @dotey · 7月12日 13:42 UTC · 喜欢 396 · 转发 13 · 回复 46 · 浏览 58490</p>
+<p class="archive-item-content">我这里再放一个暴论：<br>
+<br>
+当前所有以节约 token 为目标的各种 skill / harness，都是阶段性产物，很快就会扫入历史的垃圾堆。。。<br>
+<br>
+这就是短消息按字数收费的那个时代，在钻研怎么发尽可能少字数的短信把事说清楚的那些奇技淫巧。。。</p>
+</article>
+<article class="archive-item">
+<div class="archive-item-heading">
+<h3><a href="https://x.com/maria_rcks/status/2076176709221552447">@maria_rcks: I solved the model picker problem, no need to thank me Tibo https://t.co/e7youjMILD</a></h3>
+<span class="score-badge" data-tier="mid" aria-label="5.0 out of 10">5.0</span>
+</div>
+<p class="source-line">Twitter/X · @op7418 · 7月12日 05:27 UTC · 喜欢 9529 · 转发 313 · 回复 365 · 浏览 1251113</p>
+<p class="archive-item-content">I solved the model picker problem, no need to thank me Tibo https://t.co/e7youjMILD</p>
+</article>
+<article class="archive-item">
+<div class="archive-item-heading">
+<h3><a href="https://x.com/Arcadia_Bao/status/2076158266145669517">@Arcadia_Bao: 有人可能会说。我不管这种文字是不是套路，我只要保证外在形式不犯错就行。我就是借一下 AI 文案的壳，里面装上高价值的信息和内容，不就够了吗？ 道理是这个道理没错。但你权衡利弊时还需要考虑 2 个...</a></h3>
+<span class="score-badge" data-tier="low" aria-label="2.0 out of 10">2.0</span>
+</div>
+<p class="source-line">Twitter/X · @dotey · 7月12日 04:14 UTC · 喜欢 16 · 转发 2 · 回复 3 · 浏览 6494</p>
+<p class="archive-item-content">有人可能会说。我不管这种文字是不是套路，我只要保证外在形式不犯错就行。我就是借一下 AI 文案的壳，里面装上高价值的信息和内容，不就够了吗？<br>
+道理是这个道理没错。但你权衡利弊时还需要考虑 2 个巨大的盲点<br>
+1、你的内容真的有高价值吗？写真正过硬的内容其实比单纯写好文案要难得多。<br>
+2、在你的内容真的很好的时候，放弃个性化的表达，你未来失去的好处，可能远远重于眼前的一点便利。<br>
+这就还是我说的老问题。当你有好东西的时候，装在平庸、可能随时过时的 AI 文壳子里，是一种暴殄天物，是一种自毁。</p>
+</article>
+<article class="archive-item">
+<div class="archive-item-heading">
+<h3><a href="https://x.com/Arcadia_Bao/status/2076153508689248425">@Arcadia_Bao: 文字这种东西，当 LLM 能够稳定产出「看似没有 AI 味道」的作品的的时候，说明你选取的那个写作赛道，本身就具有非常严重的模版化倾向。 比方说营销号自媒体，比如口播稿。 一个模版框架里，正好塞...</a></h3>
+<span class="score-badge" data-tier="low" aria-label="3.0 out of 10">3.0</span>
+</div>
+<p class="source-line">Twitter/X · @dotey · 7月12日 03:55 UTC · 喜欢 8 · 转发 1 · 回复 1 · 浏览 7258</p>
+<p class="archive-item-content">文字这种东西，当 LLM 能够稳定产出「看似没有 AI 味道」的作品的的时候，说明你选取的那个写作赛道，本身就具有非常严重的模版化倾向。<br>
+比方说营销号自媒体，比如口播稿。<br>
+一个模版框架里，正好塞进了严丝合缝的新模板。因为本身对高度八股文就有容忍度。所以看似也问题不大。仅此而已。<br>
+但要明确一点，对模板有容忍度不代表容忍度是无限。赛道容忍八股文模板，也不代表你发八股文模板就是好。更不代表这种趋同的写作方式，能给你带来任何额外的好处。<br>
+因为，你说到底就只是做到了「和大部分人差不多」而已。<br>
+而且，这种现在看上去 OK 的「无 AI 味写作」，也都逃不脱最终沦为「AI 味道」的宿命。<br>
+好比说前一段时间 GPT 和 Claude 的某些调教的比较过头的版本严重偏好短句。出现这种情况的原因，我推测，有一部分是针对前两年的老模型喜欢写固定套路的长句、容易出现 AI 八股文的矫枉过正。<br>
+因为以短句替代长句作为段落，超短句写诗一样排列，就能够很容易去掉所有易被识别的短语搭配和长句模版。<br>
+从训练的结果上，这显然是更加讨喜的。<br>
+废话，句子都被打散成原子了。 ABCDEFG 被打散成 A B D G K 一个一个单字母蹦了，还能找出什么固定模式？<br>
+但是阅读体验也彻底拉完了。<br>
+因为彻底去模版化本身也是一种最严重的模版。这种狗屎短句很快就就把所有人整疯了。<br>
+现在的所谓 GPT-5.6 写作自然也是如此。说白了都是为了某种场景某种特定姿态，凹姿势凹出来的，一旦要做变化，一旦脱离具体的模版情境，比如进行风格化改写，推广到更多的场景，一样会原形毕露。</p>
+</article>
+</div>
+<div class="archive-panel" role="tabpanel" id="archive-panel-follow-builders" aria-labelledby="archive-tab-follow-builders" data-archive-panel="follow-builders">
+<h3 class="archive-panel-title">其他 Follow Builders 资讯</h3>
+<article class="archive-item">
+<div class="archive-item-heading">
+<h3><a href="https://x.com/swyx/status/2076155833428431012">Swyx: if you only learned about jevons paradox primarily wrt software demand in the age of agentic...</a></h3>
+<span class="score-badge" data-tier="mid" aria-label="5.0 out of 10">5.0</span>
+</div>
+<p class="source-line">Follow Builders · X 动态 · Swyx · 7月12日 04:04 UTC · 喜欢 143 · 转发 9 · 回复 28</p>
+<p class="archive-item-content">Swyx argues that as coding agents make knowledge work more efficient, demand for work will increase rather than decrease, and what&#x27;s happening in coding is just the beginning of a broader trend across all knowledge work.</p>
+</article>
+<article class="archive-item">
+<div class="archive-item-heading">
+<h3><a href="https://x.com/rauchg/status/2076151956440261008">Guillermo Rauch: Easy money (Swiss francs)</a></h3>
+<span class="score-badge" data-tier="low" aria-label="1.0 out of 10">1.0</span>
+</div>
+<p class="source-line">Follow Builders · X 动态 · Guillermo Rauch · 7月12日 03:49 UTC · 喜欢 298 · 转发 6 · 回复 26</p>
+<p class="archive-item-content">Guillermo Rauch posts a cryptic tweet about &#x27;easy money (Swiss francs)&#x27; with no technical context or substance.</p>
+</article>
+<article class="archive-item">
+<div class="archive-item-heading">
+<h3><a href="https://x.com/petergyang/status/2076151105080447404">Peter Yang: The score is 3 vs 1 but imo this was a very mixed performance from Argentina. Not sure how th...</a></h3>
+<span class="score-badge" data-tier="low" aria-label="0.0 out of 10">0.0</span>
+</div>
+<p class="source-line">Follow Builders · X 动态 · Peter Yang · 7月12日 03:46 UTC · 喜欢 31 · 转发 0 · 回复 17</p>
+<p class="archive-item-content">A tweet commenting on Argentina&#x27;s mixed performance in a sports match despite a 3-1 scoreline.</p>
+</article>
+<article class="archive-item">
+<div class="archive-item-heading">
+<h3><a href="https://x.com/nikunj/status/2076150076087611433">Nikunj Kothari: Argentina has the mandate of heaven.. what a strike by Alvarez. England vs. Argentina France...</a></h3>
+<span class="score-badge" data-tier="low" aria-label="1.0 out of 10">1.0</span>
+</div>
+<p class="source-line">Follow Builders · X 动态 · Nikunj Kothari · 7月12日 03:42 UTC · 喜欢 23 · 转发 1 · 回复 6</p>
+<p class="archive-item-content">A social media post commenting on football matches involving Argentina, England, France, and Spain.</p>
+</article>
+</div>
+</section>
