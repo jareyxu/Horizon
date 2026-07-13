@@ -145,7 +145,7 @@ def test_generate_empty_summary_zh_uses_localized_analyzed_line():
     assert "Analyzed 10 items" not in result
 
 
-def test_tracked_x_archive_renders_only_unselected_posts_with_full_content():
+def test_pages_archive_tabs_render_unselected_x_and_follow_builders_content():
     summarizer = DailySummarizer()
     selected = _make_item(1)
     selected.source_type = SourceType.TWITTER
@@ -173,16 +173,40 @@ def test_tracked_x_archive_renders_only_unselected_posts_with_full_content():
         },
         ai_score=4.5,
     )
-
-    result = summarizer.generate_tracked_x_archive(
-        [selected, archived], {selected.id}, language="zh"
+    follow_builders = ContentItem(
+        id="follow_builders:blog:3",
+        source_type=SourceType.FOLLOW_BUILDERS,
+        title="A Follow Builders article",
+        url="https://example.com/follow-builders/3",
+        content="Raw article content",
+        author="Builder Team",
+        published_at=datetime(2026, 7, 13, 1, 0, tzinfo=timezone.utc),
+        metadata={"source_variant": "blog"},
+        ai_score=6.0,
+        ai_summary="Article summary with <unsafe> markup.",
     )
 
-    assert "## 其他追踪推文" in result
+    result = summarizer.generate_pages_archive_tabs(
+        [selected, archived],
+        [follow_builders],
+        {selected.id},
+        language="zh",
+    )
+
+    assert 'role="tablist"' in result
+    assert 'role="tab"' in result
+    assert 'role="tabpanel"' in result
+    assert 'data-archive-tab="tracked-x" data-count="1"' in result
+    assert 'data-archive-tab="follow-builders" data-count="1"' in result
+    assert "其他追踪推文" in result
+    assert "其他 Follow Builders 资讯" in result
     assert "@op7418" in result
-    assert "⭐️ 4.5/10" in result
-    assert "> 完整推文第一行\n>\n> 完整推文第二行" in result
+    assert 'data-tier="low"' in result
+    assert "完整推文第一行<br>\n<br>\n完整推文第二行" in result
     assert "喜欢 5 · 转发 2 · 回复 1 · 浏览 100" in result
+    assert "A Follow Builders article" in result
+    assert "Article summary with &lt;unsafe&gt; markup." in result
+    assert "Follow Builders · 博客 · Builder Team" in result
     assert "Important Item 1" not in result
 
 
@@ -195,3 +219,18 @@ def test_tracked_x_archive_is_empty_when_every_post_is_selected():
     )
 
     assert result == ""
+
+
+def test_pages_archive_tabs_keep_empty_source_as_a_switchable_panel():
+    item = _make_item(1)
+    item.source_type = SourceType.FOLLOW_BUILDERS
+    item.metadata["source_variant"] = "podcast"
+
+    result = DailySummarizer().generate_pages_archive_tabs(
+        [], [item], set(), language="en"
+    )
+
+    assert 'data-archive-tab="tracked-x" data-count="0"' in result
+    assert 'data-archive-tab="follow-builders" data-count="1"' in result
+    assert "No additional items from this source today." in result
+    assert "Follow Builders · Podcast · tester" in result

@@ -124,9 +124,58 @@
     }
   }
 
+  /** Enhance the Pages archive into accessible source tabs. */
+  function setupArchiveTabs() {
+    var archives = document.querySelectorAll('[data-archive-tabs]');
+    archives.forEach(function (archive) {
+      var tablist = archive.querySelector('[role="tablist"]');
+      var tabs = Array.prototype.slice.call(archive.querySelectorAll('[role="tab"]'));
+      var panels = Array.prototype.slice.call(archive.querySelectorAll('[role="tabpanel"]'));
+      if (!tablist || tabs.length === 0 || panels.length === 0) return;
+
+      var initialIndex = tabs.findIndex(function (tab) {
+        return Number(tab.getAttribute('data-count') || 0) > 0;
+      });
+      if (initialIndex < 0) initialIndex = 0;
+
+      function activateTab(index, moveFocus) {
+        tabs.forEach(function (tab, tabIndex) {
+          var active = tabIndex === index;
+          tab.setAttribute('aria-selected', active ? 'true' : 'false');
+          tab.setAttribute('tabindex', active ? '0' : '-1');
+        });
+        panels.forEach(function (panel, panelIndex) {
+          panel.hidden = panelIndex !== index;
+        });
+        if (moveFocus) tabs[index].focus();
+      }
+
+      tabs.forEach(function (tab, index) {
+        tab.addEventListener('click', function () {
+          activateTab(index, false);
+        });
+        tab.addEventListener('keydown', function (event) {
+          var nextIndex = index;
+          if (event.key === 'ArrowRight') nextIndex = (index + 1) % tabs.length;
+          else if (event.key === 'ArrowLeft') nextIndex = (index - 1 + tabs.length) % tabs.length;
+          else if (event.key === 'Home') nextIndex = 0;
+          else if (event.key === 'End') nextIndex = tabs.length - 1;
+          else return;
+          event.preventDefault();
+          activateTab(nextIndex, true);
+        });
+      });
+
+      archive.classList.add('is-enhanced');
+      tablist.hidden = false;
+      activateTab(initialIndex, false);
+    });
+  }
+
   document.addEventListener('DOMContentLoaded', function () {
     processScoreBadges();
     markSemanticElements();
     setupLanguageToggle();
+    setupArchiveTabs();
   });
 })();

@@ -2,6 +2,7 @@
 
 import re
 from datetime import timezone
+from html import escape
 from typing import List
 
 from ..models import ContentItem
@@ -29,10 +30,17 @@ LABELS = {
         "reader": "Chinese reading",
         "verification": "Verification",
         "tracked_x_archive": "Other tracked X posts",
-        "tracked_x_archive_intro": (
-            "These posts were fetched today but did not enter the main digest. "
-            "They are preserved here so every tracked post remains available."
+        "follow_builders_archive": "Other Follow Builders stories",
+        "archive_heading": "More tracked content",
+        "archive_tabs_label": "More tracked content sources",
+        "archive_intro": (
+            "Fetched items that did not enter the main digest remain available here."
         ),
+        "archive_empty": "No additional items from this source today.",
+        "archive_content_empty": "Open the original link to read this item.",
+        "archive_variant_x": "X post",
+        "archive_variant_podcast": "Podcast",
+        "archive_variant_blog": "Blog",
         "verification_states": {
             "corroborated": "corroborated by multiple sources",
             "original_checked": "original source checked",
@@ -62,9 +70,15 @@ LABELS = {
         "reader": "中文阅读",
         "verification": "核验",
         "tracked_x_archive": "其他追踪推文",
-        "tracked_x_archive_intro": (
-            "以下推文已于今日成功抓取，但未进入上方主列表。页面保留原文，确保当天追踪内容完整可查。"
-        ),
+        "follow_builders_archive": "其他 Follow Builders 资讯",
+        "archive_heading": "更多追踪内容",
+        "archive_tabs_label": "更多追踪内容来源",
+        "archive_intro": "以下内容已于今日成功抓取，但未进入上方主列表。",
+        "archive_empty": "今天该来源没有其他未入选内容。",
+        "archive_content_empty": "请打开原文链接查看完整内容。",
+        "archive_variant_x": "X 动态",
+        "archive_variant_podcast": "播客",
+        "archive_variant_blog": "博客",
         "verification_states": {
             "corroborated": "多源印证",
             "original_checked": "已核对原文",
@@ -142,71 +156,212 @@ class DailySummarizer:
 
         return header + toc + "".join(parts)
 
+    def generate_pages_archive_tabs(
+        self,
+        tracked_x_items: List[ContentItem],
+        follow_builders_items: List[ContentItem],
+        selected_ids: set[str],
+        language: str = "en",
+    ) -> str:
+        """Render Pages-only tab panels for non-selected tracked content."""
+        labels = LABELS.get(language, LABELS["en"])
+        tracked_x = self._archive_items(
+            tracked_x_items,
+            selected_ids,
+            lambda item: item.metadata.get("source_variant") == "twitter135_rapidapi",
+        )
+        follow_builders = self._archive_items(
+            follow_builders_items,
+            selected_ids,
+            lambda item: item.source_type.value == "follow_builders",
+        )
+        if not tracked_x and not follow_builders:
+            return ""
+
+        parts = [
+            '\n\n<hr class="archive-divider">\n',
+            '<section class="archive-tabs" data-archive-tabs>\n',
+            f"<h2>{escape(labels['archive_heading'])}</h2>\n",
+            f'<p class="archive-intro">{escape(labels["archive_intro"])}</p>\n',
+            (
+                '<div class="archive-tablist" role="tablist" '
+                f'aria-label="{escape(labels["archive_tabs_label"], quote=True)}" hidden>\n'
+            ),
+            self._archive_tab_button(
+                "tracked-x",
+                labels["tracked_x_archive"],
+                len(tracked_x),
+                selected=True,
+            ),
+            self._archive_tab_button(
+                "follow-builders",
+                labels["follow_builders_archive"],
+                len(follow_builders),
+                selected=False,
+            ),
+            "</div>\n",
+            self._archive_panel(
+                "tracked-x",
+                labels["tracked_x_archive"],
+                tracked_x,
+                labels,
+                language,
+                archive_kind="twitter135",
+            ),
+            self._archive_panel(
+                "follow-builders",
+                labels["follow_builders_archive"],
+                follow_builders,
+                labels,
+                language,
+                archive_kind="follow_builders",
+            ),
+            "</section>\n",
+        ]
+        return "".join(parts)
+
     def generate_tracked_x_archive(
         self,
         items: List[ContentItem],
         selected_ids: set[str],
         language: str = "en",
     ) -> str:
-        """Render non-selected Twitter135 posts for GitHub Pages only."""
-        labels = LABELS.get(language, LABELS["en"])
-        archived = sorted(
-            (
-                item
-                for item in items
-                if item.metadata.get("source_variant") == "twitter135_rapidapi"
-                and item.id not in selected_ids
-            ),
+        """Backward-compatible wrapper for the original Pages archive API."""
+        return self.generate_pages_archive_tabs(
+            items, [], selected_ids, language=language
+        )
+
+    @staticmethod
+    def _archive_items(
+        items: List[ContentItem], selected_ids: set[str], predicate
+    ) -> List[ContentItem]:
+        return sorted(
+            (item for item in items if item.id not in selected_ids and predicate(item)),
             key=lambda item: item.published_at,
             reverse=True,
         )
-        if not archived:
-            return ""
 
+    @staticmethod
+    def _archive_tab_button(key: str, label: str, count: int, *, selected: bool) -> str:
+        selected_text = "true" if selected else "false"
+        tab_index = "0" if selected else "-1"
+        return (
+            f'<button type="button" role="tab" id="archive-tab-{key}" '
+            f'aria-controls="archive-panel-{key}" aria-selected="{selected_text}" '
+            f'tabindex="{tab_index}" data-archive-tab="{key}" data-count="{count}">'
+            f'<span>{escape(label)}</span><span class="archive-tab-count">'
+            f"{count}</span></button>\n"
+        )
+
+    def _archive_panel(
+        self,
+        key: str,
+        title: str,
+        items: List[ContentItem],
+        labels: dict,
+        language: str,
+        *,
+        archive_kind: str,
+    ) -> str:
         parts = [
-            "\n\n---\n\n",
-            f"## {labels['tracked_x_archive']}\n\n",
-            f"> {labels['tracked_x_archive_intro']}\n\n",
+            f'<div class="archive-panel" role="tabpanel" id="archive-panel-{key}" '
+            f'aria-labelledby="archive-tab-{key}" data-archive-panel="{key}">\n',
+            f'<h3 class="archive-panel-title">{escape(title)}</h3>\n',
         ]
-        for index, item in enumerate(archived, start=1):
-            title = str(item.metadata.get(f"title_{language}") or item.title)
-            title = title.replace("[", "(").replace("]", ")")
-            content = str(item.content or item.ai_summary or "").strip()
-            if language == "zh":
-                title = _pangu(title)
-                content = _pangu(content)
+        if not items:
+            parts.append(
+                f'<p class="archive-empty">{escape(labels["archive_empty"])}</p>\n'
+            )
+        else:
+            for item in items:
+                parts.append(
+                    self._format_archive_item_html(
+                        item,
+                        labels,
+                        language,
+                        archive_kind=archive_kind,
+                    )
+                )
+        parts.append("</div>\n")
+        return "".join(parts)
 
-            score = item.ai_score if item.ai_score is not None else "?"
+    def _format_archive_item_html(
+        self,
+        item: ContentItem,
+        labels: dict,
+        language: str,
+        *,
+        archive_kind: str,
+    ) -> str:
+        title = str(item.metadata.get(f"title_{language}") or item.title)
+        if archive_kind == "twitter135":
+            content = str(item.content or item.ai_summary or "").strip()
+        else:
+            content = str(item.ai_summary or item.content or "").strip()
+            if len(content) > 1200:
+                content = content[:1197].rstrip() + "..."
+        if language == "zh":
+            title = _pangu(title)
+            content = _pangu(content)
+
+        score = item.ai_score if item.ai_score is not None else "?"
+        score_tier = self._score_tier(item.ai_score)
+        source_line = self._format_archive_source(
+            item, labels, language, archive_kind=archive_kind
+        )
+        safe_content = escape(content or labels["archive_content_empty"]).replace(
+            "\n", "<br>\n"
+        )
+        return (
+            '<article class="archive-item">\n'
+            '<div class="archive-item-heading">\n'
+            f'<h3><a href="{escape(str(item.url), quote=True)}">{escape(title)}</a></h3>\n'
+            f'<span class="score-badge" data-tier="{score_tier}" '
+            f'aria-label="{escape(str(score), quote=True)} out of 10">{escape(str(score))}</span>\n'
+            "</div>\n"
+            f'<p class="source-line">{escape(source_line)}</p>\n'
+            f'<p class="archive-item-content">{safe_content}</p>\n'
+            "</article>\n"
+        )
+
+    def _format_archive_source(
+        self,
+        item: ContentItem,
+        labels: dict,
+        language: str,
+        *,
+        archive_kind: str,
+    ) -> str:
+        published = item.published_at.astimezone(timezone.utc)
+        if archive_kind == "twitter135":
             username = str(
                 item.metadata.get("rapidapi_account_username")
                 or item.author
                 or "unknown"
             ).lstrip("@")
-            published = item.published_at.astimezone(timezone.utc)
-            if language == "zh":
-                source_line = (
-                    f"Twitter/X · @{username} · "
-                    f"{published.month}月{published.day}日 {published:%H:%M} UTC"
-                )
-            else:
-                source_line = (
-                    f"Twitter/X · @{username} · {published:%Y-%m-%d %H:%M} UTC"
-                )
+            source = f"Twitter/X · @{username}"
+        else:
+            variant = str(item.metadata.get("source_variant") or "blog")
+            variant_label = labels.get(f"archive_variant_{variant}", variant)
+            source = f"Follow Builders · {variant_label} · {item.author or 'unknown'}"
 
-            engagement = self._format_x_engagement(item, language)
-            quoted_content = "\n".join(
-                f"> {line}" if line else ">" for line in content.splitlines()
-            )
-            parts.extend(
-                [
-                    f'<a id="tracked-x-{index}"></a>\n',
-                    f"### [{title}]({item.url}) ⭐️ {score}/10\n\n",
-                    f"{source_line}{engagement}\n\n",
-                    f"{quoted_content}\n\n" if quoted_content else "",
-                ]
-            )
+        if language == "zh":
+            source += f" · {published.month}月{published.day}日 {published:%H:%M} UTC"
+        else:
+            source += f" · {published:%Y-%m-%d %H:%M} UTC"
+        if archive_kind == "twitter135" or item.metadata.get("source_variant") == "x":
+            source += self._format_x_engagement(item, language)
+        return source
 
-        return "".join(parts).rstrip() + "\n"
+    @staticmethod
+    def _score_tier(score: float | None) -> str:
+        if score is None or score < 5:
+            return "low"
+        if score < 7:
+            return "mid"
+        if score < 9:
+            return "good"
+        return "high"
 
     @staticmethod
     def _format_x_engagement(item: ContentItem, language: str) -> str:
