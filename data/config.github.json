@@ -119,6 +119,33 @@
       "enabled": false,
       "channels": []
     },
+    "twitter": {
+      "enabled": true,
+      "mode": "rapidapi",
+      "users": [],
+      "fetch_limit": 10,
+      "category": "builders",
+      "fetch_reply_text": false,
+      "rapidapi_key_env": "RAPIDAPI_KEY",
+      "rapidapi_host": "twitter135.p.rapidapi.com",
+      "rapidapi_max_requests_per_run": 2,
+      "rapidapi_include_replies": false,
+      "rapidapi_include_retweets": false,
+      "rapidapi_users": [
+        {
+          "username": "dotey",
+          "rest_id": "3178231",
+          "enabled": true,
+          "category": "builders"
+        },
+        {
+          "username": "op7418",
+          "rest_id": "1669276256",
+          "enabled": true,
+          "category": "builders"
+        }
+      ]
+    },
     "ossinsight": {
       "enabled": true,
       "period": "past_24_hours",

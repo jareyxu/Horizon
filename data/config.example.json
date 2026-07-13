@@ -109,12 +109,27 @@
     },
     "twitter": {
       "enabled": false,
+      "mode": "rapidapi",
       "users": ["karpathy", "ylecun"],
       "fetch_limit": 10,
+      "category": "builders",
       "fetch_reply_text": false,
       "max_replies_per_tweet": 3,
       "max_tweets_to_expand": 10,
-      "reply_min_likes": 5
+      "reply_min_likes": 5,
+      "rapidapi_key_env": "RAPIDAPI_KEY",
+      "rapidapi_host": "twitter135.p.rapidapi.com",
+      "rapidapi_max_requests_per_run": 3,
+      "rapidapi_include_replies": false,
+      "rapidapi_include_retweets": false,
+      "rapidapi_users": [
+        {
+          "username": "karpathy",
+          "rest_id": "33836629",
+          "enabled": true,
+          "category": "builders"
+        }
+      ]
     },
     "openbb": {
       "enabled": false,
