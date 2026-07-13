@@ -264,8 +264,9 @@ read from `RAPIDAPI_KEY` and is never printed.
 
 For GitHub Pages, all posts fetched through Twitter135 remain visible. Posts
 that enter the main digest appear normally; the remaining fetched posts are
-rendered with their original text and engagement metadata in a bottom archive.
-This archive is Pages-only and does not expand email or webhook notifications.
+rendered with their original text and engagement metadata in the bottom source
+archive. Twitter135 and Follow Builders use separate accessible tabs. This
+archive is Pages-only and does not expand email or webhook notifications.
 
 **Extracted data**: full post text, canonical `x.com` URL, display name,
 publish time, likes, reposts, replies, quotes, views, conversation ID, account
