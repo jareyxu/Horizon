@@ -343,7 +343,7 @@ Horizon 非常适合作为 **GitHub Actions** 定时任务运行。查看 [`.git
 - Follow Builders 负责建设者动态与播客；
 - RSS、GitHub、Hacker News 和 OSS Insight 补充个人关注内容；
 - 个人兴趣画像参与 AI 评分，高分内容执行分级原文核验；
-- 使用硅基流动 OpenAI 兼容接口和 `zai-org/GLM-5.2`，只需在 GitHub Secrets 中设置 `SILICONFLOW_API_KEY`；
+- 使用硅基流动 OpenAI 兼容接口和 `deepseek-ai/DeepSeek-V4-Flash`，只需在 GitHub Secrets 中设置 `SILICONFLOW_API_KEY`；
 - 每天生成中文日报并发布到 GitHub Pages，不启用邮件或 Webhook。
 
 ## 日报可以去哪里

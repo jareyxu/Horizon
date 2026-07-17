@@ -38,13 +38,13 @@ Common API key variable names:
 | DeepSeek | `DEEPSEEK_API_KEY` |
 | SiliconFlow (OpenAI compatible) | `SILICONFLOW_API_KEY` |
 
-**SiliconFlow / GLM-5.2**:
+**SiliconFlow / DeepSeek-V4-Flash**:
 
 ```json
 {
   "ai": {
     "provider": "openai",
-    "model": "zai-org/GLM-5.2",
+    "model": "deepseek-ai/DeepSeek-V4-Flash",
     "base_url": "https://api.siliconflow.cn/v1",
     "api_key_env": "SILICONFLOW_API_KEY",
     "languages": ["zh"]
