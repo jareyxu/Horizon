@@ -322,6 +322,27 @@ h1, h2, h3, h4, h5, h6 {
   margin: 0.65rem 0;
 }
 
+.archive-item-translation {
+  margin: 0.65rem 0 0;
+  padding: 0.7rem 0.8rem;
+  border-left: 3px solid var(--hz-accent);
+  background: var(--hz-code-bg);
+  overflow-wrap: anywhere;
+  line-height: 1.7;
+}
+
+.archive-item-translation span {
+  display: inline-block;
+  margin-right: 0.55rem;
+  color: var(--hz-text-muted);
+  font-size: 0.82em;
+  font-weight: 700;
+}
+
+.archive-title-translation {
+  margin-top: 0.45rem;
+}
+
 .archive-item-content {
   margin-bottom: 0;
   overflow-wrap: anywhere;
