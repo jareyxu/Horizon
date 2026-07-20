@@ -41,6 +41,8 @@ LABELS = {
         "archive_variant_x": "X post",
         "archive_variant_podcast": "Podcast",
         "archive_variant_blog": "Blog",
+        "archive_title_translation": "Chinese title",
+        "archive_summary_translation": "Chinese summary",
         "verification_states": {
             "corroborated": "corroborated by multiple sources",
             "original_checked": "original source checked",
@@ -79,6 +81,8 @@ LABELS = {
         "archive_variant_x": "X 动态",
         "archive_variant_podcast": "播客",
         "archive_variant_blog": "博客",
+        "archive_title_translation": "中文标题",
+        "archive_summary_translation": "中文摘要",
         "verification_states": {
             "corroborated": "多源印证",
             "original_checked": "已核对原文",
@@ -294,15 +298,27 @@ class DailySummarizer:
         archive_kind: str,
     ) -> str:
         title = str(item.metadata.get(f"title_{language}") or item.title)
+        title_translation = ""
+        content_translation = ""
         if archive_kind == "twitter135":
             content = str(item.content or item.ai_summary or "").strip()
         else:
+            if language == "zh":
+                title = item.title
+                title_translation = str(item.metadata.get("title_zh") or "").strip()
+                content_translation = str(
+                    item.metadata.get("summary_zh")
+                    or item.metadata.get("detailed_summary_zh")
+                    or ""
+                ).strip()
             content = str(item.ai_summary or item.content or "").strip()
             if len(content) > 1200:
                 content = content[:1197].rstrip() + "..."
         if language == "zh":
             title = _pangu(title)
             content = _pangu(content)
+            title_translation = _pangu(title_translation)
+            content_translation = _pangu(content_translation)
 
         score = item.ai_score if item.ai_score is not None else "?"
         score_tier = self._score_tier(item.ai_score)
@@ -312,6 +328,21 @@ class DailySummarizer:
         safe_content = escape(content or labels["archive_content_empty"]).replace(
             "\n", "<br>\n"
         )
+        title_translation_html = ""
+        content_translation_html = ""
+        if title_translation and title_translation != title:
+            title_translation_html = (
+                '<p class="archive-item-translation archive-title-translation">'
+                f"<span>{escape(labels['archive_title_translation'])}</span>"
+                f"{escape(title_translation)}</p>\n"
+            )
+        if content_translation and content_translation != content:
+            safe_translation = escape(content_translation).replace("\n", "<br>\n")
+            content_translation_html = (
+                '<p class="archive-item-translation">'
+                f"<span>{escape(labels['archive_summary_translation'])}</span>"
+                f"{safe_translation}</p>\n"
+            )
         return (
             '<article class="archive-item">\n'
             '<div class="archive-item-heading">\n'
@@ -319,8 +350,10 @@ class DailySummarizer:
             f'<span class="score-badge" data-tier="{score_tier}" '
             f'aria-label="{escape(str(score), quote=True)} out of 10">{escape(str(score))}</span>\n'
             "</div>\n"
+            f"{title_translation_html}"
             f'<p class="source-line">{escape(source_line)}</p>\n'
             f'<p class="archive-item-content">{safe_content}</p>\n'
+            f"{content_translation_html}"
             "</article>\n"
         )
 
