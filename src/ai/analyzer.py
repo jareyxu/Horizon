@@ -144,6 +144,19 @@ class ContentAnalyzer:
             )
         profile_section = "\n".join(profile_lines)
 
+        translation_requirements = ""
+        translation_fields = ""
+        if item.source_type.value == "follow_builders":
+            translation_requirements = (
+                "- title_zh: A faithful Simplified Chinese translation of the title\n"
+                "- summary_zh: A faithful one-sentence Simplified Chinese translation "
+                "of the summary"
+            )
+            translation_fields = (
+                ',\n  "title_zh": "<Simplified Chinese title>",'
+                '\n  "summary_zh": "<one-sentence summary in Simplified Chinese>"'
+            )
+
         user_prompt = CONTENT_ANALYSIS_USER.format(
             profile_section=profile_section,
             title=item.title,
@@ -152,6 +165,8 @@ class ContentAnalyzer:
             url=str(item.url),
             content_section=content_section,
             discussion_section=discussion_section,
+            translation_requirements=translation_requirements,
+            translation_fields=translation_fields,
         )
 
         # Get AI completion
@@ -178,3 +193,8 @@ class ContentAnalyzer:
         item.ai_reason = result.get("reason", "")
         item.ai_summary = result.get("summary", item.title)
         item.ai_tags = result.get("tags", [])
+        if item.source_type.value == "follow_builders":
+            if result.get("title_zh"):
+                item.metadata["title_zh"] = str(result["title_zh"]).strip()
+            if result.get("summary_zh"):
+                item.metadata["summary_zh"] = str(result["summary_zh"]).strip()

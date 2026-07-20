@@ -181,7 +181,11 @@ def test_pages_archive_tabs_render_unselected_x_and_follow_builders_content():
         content="Raw article content",
         author="Builder Team",
         published_at=datetime(2026, 7, 13, 1, 0, tzinfo=timezone.utc),
-        metadata={"source_variant": "blog"},
+        metadata={
+            "source_variant": "blog",
+            "title_zh": "一篇 Follow Builders 文章",
+            "summary_zh": "这是一篇带有安全转义标记的中文摘要。",
+        },
         ai_score=6.0,
         ai_summary="Article summary with <unsafe> markup.",
     )
@@ -206,8 +210,17 @@ def test_pages_archive_tabs_render_unselected_x_and_follow_builders_content():
     assert "喜欢 5 · 转发 2 · 回复 1 · 浏览 100" in result
     assert "A Follow Builders article" in result
     assert "Article summary with &lt;unsafe&gt; markup." in result
+    assert "中文标题</span>一篇 Follow Builders 文章" in result
+    assert "中文摘要</span>这是一篇带有安全转义标记的中文摘要。" in result
     assert "Follow Builders · 博客 · Builder Team" in result
     assert "Important Item 1" not in result
+
+    english_result = summarizer.generate_pages_archive_tabs(
+        [], [follow_builders], set(), language="en"
+    )
+    assert "Chinese title" not in english_result
+    assert "Chinese summary" not in english_result
+    assert "一篇 Follow Builders 文章" not in english_result
 
 
 def test_tracked_x_archive_is_empty_when_every_post_is_selected():

@@ -40,7 +40,11 @@ def test_analyze_batch_does_not_sleep_by_default(monkeypatch):
 def test_analyze_batch_sleeps_between_items_when_throttle_configured(monkeypatch):
     client = SimpleNamespace(config=SimpleNamespace(throttle_sec=1.5))
     analyzer = ContentAnalyzer(client)
-    items = [_make_item("rss:test:1"), _make_item("rss:test:2"), _make_item("rss:test:3")]
+    items = [
+        _make_item("rss:test:1"),
+        _make_item("rss:test:2"),
+        _make_item("rss:test:3"),
+    ]
     sleep_calls = []
 
     async def fake_analyze_item(item):
@@ -77,7 +81,9 @@ def test_analyze_batch_concurrent_processing(monkeypatch):
     asyncio.run(analyzer.analyze_batch(items))
 
     assert max_active == 3
-    assert all(item.ai_score is None for item in items)  # None because fake_analyze_item doesn't set it
+    assert all(
+        item.ai_score is None for item in items
+    )  # None because fake_analyze_item doesn't set it
 
 
 def test_analyze_batch_concurrent_preserves_order(monkeypatch):
@@ -94,3 +100,51 @@ def test_analyze_batch_concurrent_preserves_order(monkeypatch):
     result = asyncio.run(analyzer.analyze_batch(items))
 
     assert [item.id for item in result] == [item.id for item in items]
+
+
+def test_follow_builders_analysis_requests_and_stores_chinese_translation():
+    class FakeClient:
+        def __init__(self):
+            self.user_prompt = ""
+
+        async def complete(self, *, system, user):
+            self.user_prompt = user
+            return """{
+                "score": 6,
+                "reason": "Useful workflow example",
+                "summary": "An English summary.",
+                "tags": ["AI"],
+                "title_zh": "中文标题",
+                "summary_zh": "一条中文摘要。"
+            }"""
+
+    client = FakeClient()
+    analyzer = ContentAnalyzer(client)
+    item = _make_item("follow_builders:x:1")
+    item.source_type = SourceType.FOLLOW_BUILDERS
+
+    asyncio.run(analyzer._analyze_item(item))
+
+    assert "title_zh" in client.user_prompt
+    assert "summary_zh" in client.user_prompt
+    assert item.metadata["title_zh"] == "中文标题"
+    assert item.metadata["summary_zh"] == "一条中文摘要。"
+
+
+def test_non_follow_builders_analysis_does_not_request_translation():
+    class FakeClient:
+        def __init__(self):
+            self.user_prompt = ""
+
+        async def complete(self, *, system, user):
+            self.user_prompt = user
+            return '{"score": 5, "reason": "Okay", "summary": "Summary", "tags": []}'
+
+    client = FakeClient()
+    analyzer = ContentAnalyzer(client)
+    item = _make_item("rss:test:translation")
+
+    asyncio.run(analyzer._analyze_item(item))
+
+    assert "title_zh" not in client.user_prompt
+    assert "summary_zh" not in client.user_prompt
