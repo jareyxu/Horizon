@@ -28,7 +28,7 @@ def _config() -> Config:
             },
             "ai": {
                 "provider": "openai",
-                "model": "deepseek-ai/DeepSeek-V4-Flash",
+                "model": "deepseek-ai/DeepSeek-V3.2",
                 "base_url": "https://api.siliconflow.cn/v1",
                 "api_key_env": "SILICONFLOW_API_KEY",
                 "languages": ["zh"],
