@@ -5,266 +5,398 @@ date: 2026-08-14
 lang: zh
 ---
 
-> 从 61 条内容中筛选出 10 条重要资讯。
+> 从 64 条内容中筛选出 15 条重要资讯。
 
 ---
 
-1. [Google DeepMind 推出 Gemini 3.7 Flash：面向编程与智能体的高性能模型](#item-1) ⭐️ 8.85/10
-2. [OpenAI 发布 GPT-5.6：以前沿智能体性能实现成本大幅降低](#item-2) ⭐️ 8.75/10
-3. [DeepSeek Harness v0.1 发布，这是一个采用'一切皆插件'架构的开源 AI 智能体框架，现已开放开发者预览。](#item-3) ⭐️ 8.6/10
-4. [DeepSeek-V4-Pro 正式版上线，智能体能力大幅增强](#item-4) ⭐️ 8.03/10
-5. [Cerebras 与 OpenAI 合作，将 GPT-5.6 Sol 在‘极速’模式下的推理速度提升 7 倍。](#item-5) ⭐️ 8.0/10
-6. [理解复杂系统成为 AI 辅助开发的新瓶颈](#item-6) ⭐️ 8.0/10
-7. [安全研究员演示'意面化 DRAM'漏洞利用技术，可获取不受限制的内存访问权限。](#item-7) ⭐️ 8.0/10
-8. [Anthropic 研究揭示多智能体系统的效能与涌现风险](#item-8) ⭐️ 7.97/10
-9. [阿里开源 Qwen3.8-2.4T-A95B，这是一个拥有 2.4 万亿参数的代码与智能体模型，硅基流动已提供即时 API 支持。](#item-9) ⭐️ 7.67/10
-10. [小红书 Dots 团队开源 20B 参数连续自回归语音合成模型 Dots.tts](#item-10) ⭐️ 7.12/10
+1. [神经外科博士生据称使用 GPT-5.6 解决了矩阵分析中长期未解的 Crouzeix 猜想。](#item-1) ⭐️ 9.0/10
+2. [阿里通义千问开源 Qwen3.8 系列模型，包含高性能 27B 多模态模型](#item-2) ⭐️ 8.83/10
+3. [智谱 AI 发布 GLM-5.3，在开源编程和网络安全能力上实现重大突破。](#item-3) ⭐️ 8.6/10
+4. [SpaceX 正式收购 AI 代码编辑器 Cursor，获得海量 GPU 资源。](#item-4) ⭐️ 8.45/10
+5. [Claude Opus 5 可用性下降引发关于 AI 智能体优化的讨论](#item-5) ⭐️ 8.0/10
+6. [谷歌宣布在同态加密技术方面取得进展，使私有 AI 走向实用。](#item-6) ⭐️ 8.0/10
+7. [GLM-5.3 AI 模型在自动化网络安全研究中展现出涌现能力。](#item-7) ⭐️ 8.0/10
+8. [AI 编程的隐藏危险：速度模糊理解，破坏软件工程反馈循环](#item-8) ⭐️ 8.0/10
+9. [据报道，通过添加编程框架，ARC-AGI-3 基准测试接近被解决，支持编程有助于 LLM 泛化的观点。](#item-9) ⭐️ 8.0/10
+10. [小红书开源 dots3-note Preview：一款 280B 参数、面向长程智能体与多模态推理的模型](#item-10) ⭐️ 7.97/10
+11. [2026 年夏季开源模型报告：中国实验室规模领先，AMD 与 NVIDIA 主导发布](#item-11) ⭐️ 7.78/10
+12. [Anthropic 为 Claude 模型实施文本水印机制以遵守欧盟《AI 法案》](#item-12) ⭐️ 7.62/10
+13. [数据分析揭示 DeepSeek Harness 的快速开发、插件架构与 AI 辅助编码实践。](#item-13) ⭐️ 7.3/10
+14. [新型内容标记方法：利用 LLM'幻觉'和向量搜索映射至现有分类体系。](#item-14) ⭐️ 7.0/10
+15. [开发者分享将 CLI 工具演进为易用 Mac 应用的经验，强调国际化用户反馈的价值。](#item-15) ⭐️ 7.0/10
 
 ---
 
 <a id="item-1"></a>
-## [Google DeepMind 推出 Gemini 3.7 Flash：面向编程与智能体的高性能模型](https://deepmind.google/blog/introducing-gemini-3-7-flash) ⭐️ 8.85/10
+## [神经外科博士生据称使用 GPT-5.6 解决了矩阵分析中长期未解的 Crouzeix 猜想。](https://x.com/turingbook/status/2088113079959888068) ⭐️ 9.0/10
 
-Google DeepMind 发布了 Gemini 3.7 Flash，这是一款针对编程和智能体任务优化的新模型，距离其前代模型 Gemini 3.6 Flash 的发布仅三周。该模型的定价为每百万输入 token 0.75 美元，每百万输出 token 3.75 美元，是上一代 3.6 Flash 模型成本的一半。 此次发布显著降低了开发者和公司构建 AI 驱动的编码助手和自主智能体的成本门槛，可能加速 AI 在软件开发工作流程中的应用。在上一代模型发布仅数周后就推出重要新版本，这种快速的迭代周期表明基础模型市场竞争激烈、进展迅速，尤其是在高性价比的'主力'模型领域。 该模型采用了'推广期定价'，计划在 2026 年 12 月 31 日价格翻倍，这一细节引发了社区讨论。虽然针对编码和智能体进行了优化，但早期用户测试表明，它在图像转 HTML 等多模态任务上表现良好，尽管在该特定任务上可能尚未超越顶尖模型。
+北京协和医学院的一名神经外科博士生金山木，其本科专业为地质学，据称使用 AI 模型 GPT-5.6 解决了矩阵分析领域一个核心的未解难题——2004 年提出的 Crouzeix 猜想。据报道，该证明已得到猜想提出者 Michel Crouzeix 本人及其他数学家的确认。 这标志着一个潜在的范式转变，表明先进的人工智能可以直接助力解决纯数学中长期存在的基础性问题。它凸显了 AI 作为科学发现协作工具日益增长的作用，并可能降低跨学科研究者的参与门槛。 据报道，该学生使用的是 OpenAI 于 2026 年 7 月发布的大语言模型系列 GPT-5.6，该系列包含 Sol、Terra 和 Luna 等不同变体。Crouzeix 猜想涉及为矩阵多项式与其数值域相关的范数建立一个普适的上界，这是算子理论和数值线性代数中的一个基本问题。
 
-aihot · Google DeepMind：Blog（RSS） · 8月13日 17:04 · [中文阅读](https://aihot.virxact.com/items/cmsrscwfn03f7ro0n7qijclds) · 2 个来源
+twitter · 刘江/LIU Jiang · 8月14日 03:58
 
 **核验**: 多源印证
 
-**背景**: Google DeepMind 的 Gemini Flash 系列是一个多模态推理模型家族，被设计为高性价比的'主力'模型，用于摘要、解析和格式化等高吞吐量任务。编程中的 AI 智能体是指能够自主执行编码任务的系统，例如生成、审查或调试代码，通常可以跨项目并行工作。LLM API 的定价通常基于 token（文本单位），不同模型的输入（处理提示词）和输出（生成回复）成本各不相同。
+**背景**: 矩阵分析是数学的一个分支，专注于矩阵的性质和应用，与处理涉及矩阵的算法计算的数值线性代数密切相关。Crouzeix 猜想由 Michel Crouzeix 于 2004 年提出，是该领域一个关于矩阵多项式范数的著名未解问题。GPT-5.6 是由 OpenAI 开发的最先进的大语言模型，以其高级推理和问题解决能力而闻名。
 
 <details><summary>参考链接</summary>
 <ul>
-<li><a href="https://blog.google/innovation-and-ai/models-and-research/gemini-models/introducing-gemini-3-7-flash/">Gemini 3.7 Flash: our most intelligent workhorse model</a></li>
-<li><a href="https://deepmind.google/models/model-cards/gemini-3-6-flash/">Gemini 3.6 Flash - Model Card — Google DeepMind</a></li>
-<li><a href="https://lmspeed.net/">LMSpeed - LLM API Pricing Comparison & Speed Benchmarks</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Crouzeix's_conjecture">Crouzeix's conjecture - Wikipedia</a></li>
+<li><a href="https://en.wikipedia.org/wiki/GPT-5.6">GPT-5.6 - Wikipedia</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Matrix_analysis">Matrix analysis - Wikipedia</a></li>
 
 </ul>
 </details>
 
-**社区讨论**: 社区情绪复杂，讨论焦点集中在定价和性能比较上。一些用户测试了其多模态能力，指出其性价比很高，但尚未达到顶尖水平。另一些用户则质疑其长期的'推广期定价'策略，认为考虑到模型迭代速度之快，将 2026 年底的价格上涨计划显得无关紧要。用户还将该模型与'Luna'和'Terra'等竞争模型进行了比较，并就 Flash 模型的成本和性能定位是否足够有竞争力展开了辩论。
+**社区讨论**: 讨论既包含对该故事励志层面的浓厚兴趣，也对其个人背景提出了疑问，提及了其过去的升学途径和博士论文争议。这表明了人们对 AI 成就的兴奋与对个人叙述的审视并存。
 
-**标签**: `#AI Models`, `#AI Agents`, `#Developer Tools`, `#Google DeepMind`, `#LLM Pricing`
+**标签**: `#AI Research`, `#Mathematics`, `#GPT-5.6`, `#Breakthrough`, `#AI Agents`
 
 ---
 
 <a id="item-2"></a>
-## [OpenAI 发布 GPT-5.6：以前沿智能体性能实现成本大幅降低](https://openai.com/index/builders-guide-to-gpt-5-6) ⭐️ 8.75/10
+## [阿里通义千问开源 Qwen3.8 系列模型，包含高性能 27B 多模态模型](https://x.com/Alibaba_Qwen/status/2088280182356611304) ⭐️ 8.83/10
 
-OpenAI 发布了 GPT-5.6 模型家族，该系列模型以显著降低的成本，在智能体基准测试中实现了前沿性能。其关键的新 API 能力包括推理持久化、原生多智能体编排和程序化工具调用。 这标志着在使高级 AI 智能体在经济上可行、便于广泛开发和部署方面的一次范式转变。成本的大幅降低，加上新的编排功能，为企业和个人开发者构建复杂的多步骤自主系统降低了门槛。 在 ARC-AGI-3 基准测试中，启用保留推理和压缩功能后，Sol 模型的得分从 13.3%跃升至 38.3%，同时输出 token 减少了约 6 倍。在 BrowseComp 基准测试中，Luna 模型以 84.04%的得分追平了 GPT-5.5（84.36%），而成本从 33.27 美元降至 1.33 美元。
+阿里通义千问团队开源了 Qwen3.8 系列模型，其中 Qwen3.8-27B 是一个拥有 270 亿参数的原生多模态稠密模型，其性能全面超越了前代 Qwen3.7-Plus。该模型原生支持 262K 上下文长度，可通过 YaRN 技术扩展至 1M tokens，并采用 Apache 2.0 许可协议发布。 此次发布为开源社区提供了一个能力强大、可商用的模型，它在编码、长上下文任务和多模态推理方面表现出色，且参数量相对较小。这标志着前沿 AI 能力走向普及化的重要一步，挑战了美国大公司的专有模型，并为全球开发者提供了先进且易获取的工具。 Qwen3.8-27B 模型原生支持 262K 上下文，并可通过 YaRN 技术扩展至 1M tokens，这使其在处理长文档或视频方面具有优势。团队还同步发布了超大规模模型 Qwen3.8-2.4T-A95B（Max 级）的开放权重，不过要充分利用其全部能力可能需要巨大的计算资源。
 
-aihot · OpenAI：官网动态（RSS · 排除企业/客户案例） · 8月13日 11:00 · [中文阅读](https://aihot.virxact.com/items/cmsruetoy027hrozeecu4ixrc)
+aihot · X：通义千问 / Qwen (@Alibaba_Qwen) · 8月14日 15:02 · [中文阅读](https://aihot.virxact.com/items/cmst3j53e03ncro068tgsr4xn) · 2 个来源
 
 **核验**: 多源印证
 
-**背景**: ARC-AGI-3 是近期推出的一个交互式推理基准测试，旨在通过挑战 AI 智能体探索新环境和推断目标，来测量类人的智能体智能。推理持久化是 GPT-5.6 的一个关键特性，指的是智能体在多次交互中保持和利用记忆与状态的能力，这对于复杂的多步骤任务至关重要。BrowseComp 是一个用于评估 AI 智能体在网页浏览和信息检索任务中性能的基准测试。
+**背景**: 通义千问（Qwen）是阿里云开发的一系列大语言和多模态模型。Apache 2.0 许可证是一种宽松的开源许可，允许商业使用、修改和分发，因此成为 AI 模型发布的热门选择。YaRN（Yet another RoPE extensioN method）是一种高效的技术，用于扩展基于 Transformer 的模型的上下文窗口，而无需完全重新训练，这对于处理长序列至关重要。
 
 <details><summary>参考链接</summary>
 <ul>
-<li><a href="https://arcprize.org/arc-agi/3">ARC-AGI-3</a></li>
-<li><a href="https://machinelearningmastery.com/5-architectural-patterns-for-persistent-memory-and-state-in-ai-agents/">5 Architectural Patterns for Persistent Memory and State in AI Agents - MachineLearningMastery.com</a></li>
-<li><a href="https://ukgovernmentbeis.github.io/inspect_evals/evals/browse_comp/index.html">BrowseComp : A Simple Yet Challenging Benchmark for Browsing ...</a></li>
+<li><a href="https://openlm.ai/qwen3.8/">Qwen3.8 | OpenLM.ai</a></li>
+<li><a href="https://arxiv.org/abs/2309.00071">YaRN : Efficient Context Window Extension of Large Language Models</a></li>
+<li><a href="https://qubittool.com/blog/open-source-ai-license-compliance-guide">Open Source AI Licenses [2026]: Apache 2.0 to RAIL Guide</a></li>
 
 </ul>
 </details>
 
-**标签**: `#AI Agents`, `#OpenAI`, `#LLM`, `#Developer Tools`, `#Cost Optimization`
+**社区讨论**: 社区反响非常积极，用户赞扬了模型的推理能力和在特定基准测试中的表现，指出它在其他模型失败的任务上取得了成功。一些用户强调了令人印象深刻的实践结果，例如根据描述生成详细图像，而另一些用户则讨论了实现更快推理的技术优化。更广泛的讨论围绕着高端 AI 能力的快速普及化及其对主要专有模型提供商的潜在影响展开。
+
+**标签**: `#AI Models`, `#Open Source`, `#Multimodal AI`, `#Large Language Models`, `#Developer Tools`
 
 ---
 
 <a id="item-3"></a>
-## [DeepSeek Harness v0.1 发布，这是一个采用'一切皆插件'架构的开源 AI 智能体框架，现已开放开发者预览。](https://x.com/deepseek_ai/status/2087887408440164663) ⭐️ 8.6/10
+## [智谱 AI 发布 GLM-5.3，在开源编程和网络安全能力上实现重大突破。](https://x.com/dotey/status/2088141236511064464) ⭐️ 8.6/10
 
-深度求索（DeepSeek AI）发布了 DeepSeek Harness v0.1 的开发者预览版，并以宽松的 MIT 许可证开源了其代码库。该框架基于 Cordis 元框架构建，其核心设计理念是'一切皆插件'，模型、工具、UI、编排等所有组件都以插件形式实现。 此次发布意义重大，因为它为开发者构建 AI 智能体提供了一个高度模块化、可扩展的开源基础，有望加速智能体生态的创新和定制。其'一切皆插件'的理念允许以空前的灵活性替换组件，这可能会为智能体框架设计树立新的标准。 该框架由 Cordis v4 提供支持，这是一个支持插件热重载和动态管理的元框架，能够干净地卸载插件并回滚其状态。这是一个早期预览版本，正如项目作者所指出的，开发者应预期其存在不完善之处和可能破坏兼容性的更改。
+智谱 AI 于 2026 年 8 月 14 日发布了 GLM-5.3，该模型与 GLM-5.2 共享同一个 7430 亿参数的基座模型，所有性能提升均来自后训练阶段的强化学习。该模型在多个编程基准测试中取得开源模型最高分，并在训练过程中意外地涌现出自主规划漏洞利用链的能力。 此次发布确立了开源模型在编程和长周期智能体任务上的新标杆，缩小了与顶尖闭源模型的差距。更重要的是，模型未经专门训练就涌现出的漏洞利用链规划能力，预示着 AI 驱动的网络安全领域可能出现范式转变，同时也对强大开源 AI 模型的安全性和双重用途提出了重要的考量。 GLM-5.3 在 Terminal Bench 3.0 上的得分从 GLM-5.2 的 4.6 分跃升至 28.3 分，在白盒代码审计基准 CyberGym 上取得了 84.5%的分数，超过了部分闭源模型。该模型的权重将在大约两周后以 MIT 许可证公开发布，并且已被用于在 269 个开源项目中发现了 2,436 个真实漏洞。
 
-twitter · DeepSeek · 8月13日 13:02 · [中文阅读](https://aihot.virxact.com/items/cmsrjqqfg02z0ro469zple5jl) · 8 个来源
+twitter · 宝玉 · 8月14日 05:50 · 4 个来源
 
 **核验**: 多源印证
 
-**背景**: AI 智能体框架（agent harness）是将语言模型转变为能够执行任务的自主智能体所需的软件脚手架，包括工具、记忆和控制循环等组件。DeepSeek Harness 所基于的 Cordis 元框架，专为构建具有时空可组合性插件的应用程序而设计，允许在运行时动态加载和卸载组件。
+**背景**: GLM-5.3 是智谱 AI 大语言模型系列的一部分。后训练强化学习是在初始预训练阶段之后使用的一种技术，旨在进一步使模型的行为与期望目标（如遵循指令或生成有用的代码）对齐。Terminal Bench 3.0 等基准测试用于评估 AI 在终端环境中执行复杂多步骤任务的能力，而 ExploitBench 和 CyberGym 则是专门用于评估 AI 在漏洞发现和利用方面能力的基准测试。
 
 <details><summary>参考链接</summary>
 <ul>
-<li><a href="https://www.databricks.com/blog/ai-harness">What is an AI Agent Harness? | Databricks Blog</a></li>
-<li><a href="https://github.com/cordiverse/cordis">GitHub - cordiverse/ cordis : Meta - Framework of Spatiotemporal...</a></li>
+<li><a href="https://byteiota.com/glm-53-open-weight-coding-emergent-cyber/">GLM-5.3: Open-Weight Coding SOTA and Emergent Cyber Risk</a></li>
+<li><a href="https://benchlm.ai/benchmarks/terminal-bench-3">Terminal-Bench 3.0 Leaderboard & Scores — August 2026</a></li>
+<li><a href="https://exploitbench.ai/">ExploitBench</a></li>
 
 </ul>
 </details>
 
-**社区讨论**: 社区讨论强调了该框架新颖的可追溯性功能，它能将所有智能体操作记录在一个仅追加的日志中供检查和回放，这被视为优于某些专有模型的关键优势。一些开发者表达了'插件疲劳'，而另一些人则指出了底层 Cordis 框架的技术深度及其热重载能力。
+**社区讨论**: 社区讨论指出，该模型的改进重点在于安全能力和长周期任务执行，例如终端操作和大代码库修复。人们对于仅通过对同一基座模型进行多版本的后训练扩展就实现如此显著的性能提升感到惊讶和赞赏。
 
-**标签**: `#AI Agents`, `#Open Source`, `#Developer Tools`, `#AI Frameworks`, `#Automation`
+**标签**: `#AI Models`, `#Open Source`, `#Reinforcement Learning`, `#Code Generation`, `#AI Security`
 
 ---
 
 <a id="item-4"></a>
-## [DeepSeek-V4-Pro 正式版上线，智能体能力大幅增强](https://api-docs.deepseek.com/zh-cn/updates#%E6%97%B6%E9%97%B4-2026-08-13) ⭐️ 8.03/10
+## [SpaceX 正式收购 AI 代码编辑器 Cursor，获得海量 GPU 资源。](https://cursor.com/blog/joining-spacex) ⭐️ 8.45/10
 
-DeepSeek 已在 APP、网页端和 API 同步上线 V4-Pro 正式版，其智能体能力显著提升，在 HLE（42.7/60.0）和 Terminal Bench 2.1（87.9）等基准测试中表现出色。此次更新还原生支持 OpenAI Responses API 格式，并引入了低/高/最大三档思考强度控制。 此次发布意义重大，标志着在创建更强大、更自主的 AI 智能体方面迈出了一大步，这对于自动化软件开发、数据分析等复杂任务至关重要。提升的基准测试分数和新的 API 兼容性使其成为开发者构建智能体应用更强大、更易用的工具。 API 定价将于 2026 年 8 月 17 日起调整为峰谷定价模式，闲时价格为高峰时段的一半。该模型在其他智能体专项基准测试，如 NL2Repo（61.5）和 Cybergym（83.3）上也表现出色。
+AI 驱动的代码编辑器 Cursor 已被 SpaceX 正式收购，完成了自 4 月启动的收购流程。合并后，Cursor 将获得据称是全球最大的 GPU 集群，用于构建更强大且更具成本效益的 AI 模型，而最新发布的 Grok 4.6 就是双方合作的早期成果。 此次收购标志着一项重大战略举措，一家领先的 AI 开发工具与科技巨头的庞大计算基础设施相结合。这可能会加速开发更先进、更实惠的 AI 编码智能体，从而可能重塑软件开发工具的格局，让更强大的 AI 辅助功能对开发者而言更加触手可及。 此次收购使 Cursor 能够使用 SpaceX 庞大的 GPU 资源，预计将降低其 AI 模型的运行成本。交易后不久发布的 Grok 4.6 模型被强调为第一个具体成果，展示了其在长周期智能体和交互式工作方面改进的能力。
 
-aihot · DeepSeek：API 更新日志 · 8月13日 11:16 · [中文阅读](https://aihot.virxact.com/items/cmsrfaw5c0xo2roz2s8b4p2sv)
+aihot · Cursor Blog · 8月14日 12:00 · [中文阅读](https://aihot.virxact.com/items/cmst3joqo03pwro0658o4g1m3)
 
 **核验**: 多源印证
 
-**背景**: DeepSeek-V4-Pro 是中国 AI 公司深度求索推出的旗舰级大语言模型。'智能体能力'指的是 AI 自主使用工具、进行多步推理并执行任务的能力，通常通过 HLE（Humanity's Last Exam）和 Terminal Bench 等基准进行评估。OpenAI Responses API 是一种较新的接口，旨在与 AI 模型创建有状态的、结构化的交互。
+**背景**: Cursor 是一个 AI 驱动的集成开发环境（IDE），其功能超越了简单的代码补全，可以作为一个编码智能体，理解代码库、规划功能并修复错误。SpaceXAI 是 SpaceX 旗下的人工智能部门，以开发 Grok 系列 AI 模型而闻名，该系列是具有高级推理和编码能力的聊天机器人。双方的合作最初于 4 月宣布，旨在加速模型训练，最终促成了此次全面收购。
 
 <details><summary>参考链接</summary>
 <ul>
-<li><a href="https://www.madebyagents.com/benchmarks/hle">HLE Benchmark : Scores, Methodology, and Top AI Models</a></li>
-<li><a href="https://artificialanalysis.ai/evaluations/artificial-analysis-intelligence-index">Artificial Analysis Intelligence Index | Artificial Analysis</a></li>
-<li><a href="https://developers.openai.com/api/reference/responses/overview">Responses Overview | OpenAI API Reference</a></li>
+<li><a href="https://cursor.com/">AI Coding Agent for Building Ambitious Software | Cursor</a></li>
+<li><a href="https://cursor.com/docs">Cursor Docs — Agent, Rules, MCP, Skills & CLI</a></li>
+<li><a href="https://x.ai/news/grok-4-6">Introducing Grok 4 . 6 | SpaceXAI</a></li>
 
 </ul>
 </details>
 
-**标签**: `#AI Agents`, `#LLM Release`, `#Developer Tools`, `#API Updates`
+**标签**: `#AI Developer Tools`, `#Mergers and Acquisitions`, `#AI Code Generation`, `#SpaceX`, `#Product Announcement`
 
 ---
 
 <a id="item-5"></a>
-## [Cerebras 与 OpenAI 合作，将 GPT-5.6 Sol 在‘极速’模式下的推理速度提升 7 倍。](https://www.cerebras.ai/blog/accelerating-gpt-5-6-sol-ultrafast-with-openai) ⭐️ 8.0/10
+## [Claude Opus 5 可用性下降引发关于 AI 智能体优化的讨论](https://mun-logadan.github.io/why-does-opus-5-feel-worse/) ⭐️ 8.0/10
 
-Cerebras 与 OpenAI 展示，GPT-5.6 Sol 在全新的‘极速’模式下，仅用 11 小时 11 分钟就完成了包含 2500 个 HLE 问题的大型基准测试，这比竞争对手 Claude Fable 5 所需的 78 小时快了近 7 倍。 推理速度的显著提升对于 AI 智能体开发和复杂推理任务至关重要，因为更快的迭代速度能够实现更复杂、类似人类认知的多轮次‘思考’过程，从而可能解锁新的 AI 能力和工作流程。 本次基准测试使用了 HLE 问题集，速度对比对象是 Claude Fable 5 和 Opus 4.8 的快速模式。然而，官方发布并未明确确认‘极速’模式是否保持了与标准 GPT-5.6 Sol 模型完全相同的准确性。
+一篇详细分析和一场高参与度的社区讨论指出，与之前的版本相比，Anthropic 的 Claude Opus 5 模型对人类开发者来说感觉更不直观、更啰嗦。用户报告称，它的写作风格过于抽象、迂回，并且经常偏离指令。 这种开发者体验的下降暗示了 LLM 设计可能发生了战略转变，即优化 AI 智能体间的通信可能被置于比人类可用性更优先的位置。如果属实，这一趋势可能会扩大开发者的可用性鸿沟，并影响未来模型的训练和评估方式。 该模型在技术任务上被描述为能力更强，但其语言啰嗦、带有忏悔性质，并且倾向于使用无生命名词作为句子主语以达到某种文体效果。一些开发者已切换回 Claude 4.8 或 OpenAI 的模型，以获得更好的工作流体验。
 
-hackernews · pr337h4m · 8月13日 18:10 · [社区讨论](https://news.ycombinator.com/item?id=49289844)
+hackernews · numeri · 8月14日 10:12 · [社区讨论](https://news.ycombinator.com/item?id=49296740)
 
 **核验**: 多源印证
 
-**背景**: GPT-5.6 Sol 是 OpenAI 于 2026 年 7 月发布的 GPT-5.6 大语言模型家族中能力最强的版本。Cerebras Systems 以其晶圆级 AI 硬件闻名，例如 WSE-3，它在单芯片上集成了数百万个 AI 优化核心，旨在高效运行超大规模模型。‘极速’模式是一种优化的推理配置，旨在极大缩短大语言模型的输出时间，这通常涉及预填充和自回归解码等阶段。
+**背景**: Claude Opus 5 是 Anthropic 于 2026 年 7 月发布的最新主要语言模型，被宣传为一款强大的智能体编码模型，专为长期、多步骤的工作而构建。更广泛的 AI 行业正在积极研究语义驱动的通信和上下文压缩技术，以优化 AI 智能体之间的交互，这可能涉及与人类可读输出之间的权衡。LLM 的可用性通常需要在原始能力、成本以及有效与模型交互所需的认知负荷之间取得平衡。
 
 <details><summary>参考链接</summary>
 <ul>
-<li><a href="https://en.wikipedia.org/wiki/GPT-5.6">GPT-5.6 - Wikipedia</a></li>
-<li><a href="https://en.wikipedia.org/wiki/Cerebras">Cerebras Systems - Wikipedia</a></li>
-<li><a href="https://developer.nvidia.com/blog/mastering-llm-techniques-inference-optimization/">Mastering LLM Techniques: Inference Optimization | NVIDIA Technical...</a></li>
+<li><a href="https://www.anthropic.com/news/claude-opus-5">Introducing Claude Opus 5 - Anthropic</a></li>
+<li><a href="https://arxiv.org/html/2510.00381v1">Semantic-Driven AI Agent Communications: Challenges and Solutions</a></li>
+<li><a href="https://arxiv.org/html/2505.17767v1">The Real Barrier to LLM Agent Usability is Agentic ROI</a></li>
 
 </ul>
 </details>
 
-**社区讨论**: 社区情绪混杂着兴奋与怀疑。一些用户对速度突破及其对 AI 迭代式思考过程的影响印象深刻，而另一些用户则对官方未明确确认‘极速’模式是否保持与标准模型相同的性能（准确性）表示担忧。此外，社区也讨论了这一新模式缺乏定价信息的问题。
+**社区讨论**: 社区情绪主要批评 Opus 5 的沟通风格，用户形容其令人疲惫、迂回且不必要的抽象。一个突出的推测是，该模型的后训练现在可能针对 AI 智能体通信（'智能体语言'）进行了优化，而非针对人类开发者，这解释了用户体验的下降。一些评论者报告称，由于这些可用性问题，他们已回退到旧模型或转向了竞争对手的产品。
 
-**标签**: `#AI Performance`, `#LLM Inference`, `#OpenAI`, `#AI Hardware`, `#Benchmarking`
+**标签**: `#AI Agents`, `#LLM Usability`, `#Developer Experience`, `#Anthropic Claude`, `#AI Tooling`
 
 ---
 
 <a id="item-6"></a>
-## [理解复杂系统成为 AI 辅助开发的新瓶颈](https://www.geoffreylitt.com/2026/07/02/understanding-is-the-new-bottleneck) ⭐️ 8.0/10
+## [谷歌宣布在同态加密技术方面取得进展，使私有 AI 走向实用。](https://blog.google/security/how-google-is-making-private-ai-practical-with-homomorphic-encryption/) ⭐️ 8.0/10
 
-一篇观点文章指出，随着 AI 让代码生成变得轻而易举，开发者的主要挑战正从编写代码转向理解复杂系统和意图。这一观点在开发者社区中引发了广泛共鸣和讨论。 这一转变从根本上重新定义了软件工程所需的核心技能，强调系统理解、架构推理和意图澄清，而非语法实现。它将影响开发者工作流、工具设计，以及工程师在 AI 增强的未来中的长期角色。 文章指出，当前的 AI 工具虽然擅长生成代码，但常常无法捕捉系统的底层动机或架构模型。这带来了新的风险层：生成的代码可能“能运行”，却破坏了预期的系统设计，因此需要深入的人工监督。
+谷歌宣布在同态加密技术应用方面取得重大进展，该技术允许直接在加密数据上进行计算而无需先解密，这使私有 AI 走向实用化。 这一进展意义重大，因为它实现了隐私保护的机器学习，允许 AI 模型处理敏感数据而无需暴露原始信息，这可能影响医疗和金融等行业。这是在协调 AI 能力与日益增长的数据隐私需求方面迈出的关键一步。 正如社区讨论所指出的，一个主要的限制是同态加密技术历来会产生非常高的计算开销，估计推理任务速度会减慢高达 1000 倍，这限制了其商业可行性。谷歌的公告表明他们正在努力将这种开销降低到更实用的水平。
 
-hackernews · sebg · 8月13日 18:47 · [社区讨论](https://news.ycombinator.com/item?id=49290299)
+hackernews · u1hcw9nx · 8月14日 15:43 · [社区讨论](https://news.ycombinator.com/item?id=49300314)
 
 **核验**: 多源印证
 
-**背景**: 像 GitHub Copilot 这样的大型语言模型（LLM）已经极大地自动化了代码生成，使得生成功能代码片段的速度更快。然而，代码理解——即理解代码如何融入更大的系统、其依赖关系以及原始意图——仍然是一项复杂且高度依赖上下文的任务。被归类为“代码理解工具”的软件旨在帮助开发者浏览和理解复杂的代码库，但它们通常是补充而非替代深度的理解。
+**背景**: 同态加密是一种加密形式，允许在加密数据上执行计算，而无需先对其进行解密。这对于“私有 AI”或隐私保护机器学习至关重要，其目标是在不暴露原始敏感信息的情况下对数据进行模型训练或运行。全同态加密（FHE）是一种特定类型，允许对加密数据进行任意计算。由于其在实现安全云计算和数据分析方面的潜力，该领域一直是研究的热点。
 
 <details><summary>参考链接</summary>
 <ul>
-<li><a href="https://en.wikipedia.org/wiki/Category:Code_comprehension_tools">Category: Code comprehension tools - Wikipedia</a></li>
-<li><a href="https://www.toolcentral.ai/ai-tools/onboard-ai-2/">Onboard AI: Master Complex Codebases Quickly - ToolCentral</a></li>
-<li><a href="https://www.aideploy.dev/tutorials/cursor-ai-workflow.html">Using Cursor AI in Your Development Workflow | www.aideploy.dev</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Homomorphic_encryption">Homomorphic encryption - Wikipedia</a></li>
+<li><a href="https://medium.com/@hadi.naim12340/fully-homomorphic-encryption-and-the-inco-network-pioneering-privacy-in-web3-68b2c5542b23">Fully Homomorphic Encryption and the Inco Network... | Medium</a></li>
 
 </ul>
 </details>
 
-**社区讨论**: 社区评论认同核心问题，但提供了多元视角。有人指出 LLM 生成的解释缺乏对动机的理解，另一些人则强调确保正确性仍然需要人类理解，如果 LLM 同时用于生成和理解，就会产生悖论。一个反复出现的主题是工程师对代码拥有所有权和进行理解的持久责任。
+**社区讨论**: 社区讨论揭示了技术上的怀疑态度以及对谷歌隐私立场的更广泛批评。在技术层面，评论者强调了同态加密历来存在的高计算开销（例如，速度减慢约 1000 倍），质疑其直接的商业可行性。另一些人则表达了讽刺或不信任，指出谷歌作为“反隐私”公司的声誉，并指出其其他产品中存在的隐私缺陷，例如其密码管理器默认不提供端到端加密。
 
-**标签**: `#AI Development`, `#Software Engineering`, `#LLM Limitations`, `#Developer Workflow`, `#Code Comprehension`
+**标签**: `#AI Privacy`, `#Homomorphic Encryption`, `#Google Research`, `#Machine Learning`, `#Security`
 
 ---
 
 <a id="item-7"></a>
-## [安全研究员演示'意面化 DRAM'漏洞利用技术，可获取不受限制的内存访问权限。](https://github.com/xoreaxeaxeax/skitter-creek-bath-salts) ⭐️ 8.0/10
+## [GLM-5.3 AI 模型在自动化网络安全研究中展现出涌现能力。](https://z.ai/blog/glm-5.3) ⭐️ 8.0/10
 
-安全研究员 Christopher Domas 发布了一个名为 'skitter-creek-bath-salts' 的项目，展示了一种名为'意面化 DRAM'的新型硬件漏洞利用技术。该技术通过利用特定的 DRAM 控制器行为，从特权级（ring 0）绕过内存保护，获取系统范围内不受限制的内存访问权限。 该漏洞利用揭示了现代内存系统中一个重要的底层攻击面，可能破坏基于硬件的安全边界。它对游戏机（如 Xbox、PlayStation）等系统有重大影响，因为突破其软件沙箱是关键的安全挑战，而该技术可能让攻击者获得深入且持久的访问权限。 该概念验证已确认可在较旧的 AMD Jaguar（2013 年）架构上运行，并有注释指出，由于内存控制器寄存器的相似性，该技术可能与更新的 Zen 3 CPU 相关。该漏洞利用要求攻击者已具备 ring 0（内核级）访问权限，但之后可让他们访问通常对最高软件特权级也隐藏的内存区域。
+Z.ai 发布了 GLM-5.3，这是一个新的 AI 模型，在自动化安全研究（包括漏洞发现和执行红队/蓝队场景）中展现出涌现能力。它基于与 GLM-5.2 相同的基座模型，所有改进均来自后训练。 这标志着 AI 在执行复杂的、多步骤的攻防安全任务方面的能力取得了重大进步，可能降低漏洞发现的成本并扩大其规模。这使 GLM-5.3 成为编码和基于智能体的网络安全应用领域的领先开源模型。 该模型已展示出执行复杂攻击链的能力，包括利用 WordPress 插件零日漏洞和适配内核漏洞利用，同时也能模拟防御行动。它在 Z.ai Code Bench 上比 GLM-5.2 提升了 50%，并在 Terminal-Bench 3.0 等基准测试中创造了新的开源最先进结果。
 
-hackernews · matt_d · 8月13日 14:17 · [社区讨论](https://news.ycombinator.com/item?id=49286341)
+hackernews · pella · 8月14日 05:19 · [社区讨论](https://news.ycombinator.com/item?id=49294997)
 
 **核验**: 多源印证
 
-**背景**: DRAM（动态随机存取存储器）是计算机中的主要工作内存，由 CPU 或芯片组上的内存控制器管理。现代 DRAM 控制器高度复杂，使用数据加扰和纠错码（ECC）等技术来管理性能和可靠性。直接内存访问（DMA）漏洞利用是一类已知的硬件攻击，可绕过 CPU 直接读写内存，而这项新技术似乎是从 CPU 特权模式内部利用了控制器的内部逻辑。
+**背景**: AI 中的涌现能力指的是在训练过程中未明确编程、却突然出现的重大新能力。在网络安全中，红队演练模拟攻击以发现漏洞，而蓝队演练则专注于防御；两者共同构成了测试安全态势的关键实践。GLM 系列是由 Z.ai 开发的大型语言模型，GLM-5.3 是其最新的旗舰模型，专注于编码和长程任务。
 
 <details><summary>参考链接</summary>
 <ul>
-<li><a href="https://github.com/scynesthesia/BIOS-Optimization-Guide/blob/main/AMD/AMD_Guide.md">BIOS-Optimization-Guide/AMD/AMD_Guide.md at main...</a></li>
-<li><a href="https://www.darkreading.com/vulnerabilities-threats/how-to-cheat-hardware-memory-access">How to Cheat Hardware Memory Access</a></li>
+<li><a href="https://docs.z.ai/guides/llm/glm-5.3">GLM-5.3 - Overview - Z.AI DEVELOPER DOCUMENT</a></li>
+<li><a href="https://www.centeraipolicy.org/work/emergence-overview">Overview of Emergent and Novel Behavior in AI Systems | Center for AI Policy | CAIP</a></li>
+<li><a href="https://www.crowdstrike.com/en-us/cybersecurity-101/advisory-services/red-team-vs-blue-team/">Red Team VS Blue Team: What's the Difference? | CrowdStrike</a></li>
 
 </ul>
 </details>
 
-**社区讨论**: 社区赞扬了作者的专业知识，并对即将举行的 Black Hat 演讲表示期待。讨论强调了现代 DRAM 子系统日益增长的复杂性和攻击面，有人指出了其对游戏机安全的具体影响。有评论提出疑问，除了已演示的 AMD Jaguar，哪些更新的 CPU 系列可能也容易受到类似攻击。
+**社区讨论**: 社区情绪非常积极，用户报告了该模型在真实世界安全研究场景中的突破性表现，例如让模型对一个防御性的 GLM 智能体执行红队攻击。一些用户指出它已接近 Sol 和 Fable 等竞争模型，而另一些用户则赞赏其公告以研究为导向的基调。社区还讨论了该模型进行大规模自动化漏洞扫描的潜力，一个相关的漏洞披露门户网站也印证了这一点。
 
-**标签**: `#hardware-security`, `#reverse-engineering`, `#dram`, `#exploit`, `#low-level`
+**标签**: `#AI Agents`, `#Code Generation`, `#Cybersecurity`, `#Large Language Models`, `#Developer Tools`
 
 ---
 
 <a id="item-8"></a>
-## [Anthropic 研究揭示多智能体系统的效能与涌现风险](https://www.anthropic.com/research/multiagent-systems) ⭐️ 7.97/10
+## [AI 编程的隐藏危险：速度模糊理解，破坏软件工程反馈循环](https://x.com/frxiaobei/status/2088299848722424197) ⭐️ 8.0/10
 
-Anthropic 的 Frontier Red Team 于 2026 年 8 月 13 日发布研究，实验表明，一个由 45 个 AI 智能体组成的协调系统在 2700 万 token 的运行中发现了 266 个漏洞，其表现显著优于并行独立智能体方法（后者在 650 万 token 中仅发现 21 个漏洞）。该研究同时指出，个体层面看似良性的行为怪癖可能叠加导致意外的系统性失败。 这项研究意义重大，因为它为协调型多智能体系统在代码安全等任务中可能具备的卓越效率和涌现的专业化分工提供了具体证据，预示着一个智能体间交互可能占主导的未来。它同时也对规模化部署此类系统所固有的系统性风险发出了关键的早期预警，这对于 AI 智能体变得更加自主并融入社会基础设施时的安全开发和治理至关重要。 协调智能体在一个共享论坛中运作以进行同行评审，并利用一个独立的仲裁智能体来验证发现，导致与并行方法仅重叠 12 个漏洞，突显了截然不同的发现模式。该实验使用了 Claude Mythos Preview 模型（Anthropic 专注于安全的前沿研究的一部分），并针对 15 个开源软件项目进行。
+一项基于团队讨论的详细分析揭示，AI 编程工具生成代码的速度过快，导致开发者可能不清楚构建了什么，从而破坏了传统的软件工程反馈循环。这导致进度模糊不清，调试和集成时间增加，沟通成本上升，尽管最初看起来完成得更快。 这很重要，因为它凸显了 AI 辅助开发中一个关键的新兴风险：为了原始速度而牺牲代码可追溯性和人类理解，最终可能降低整体工程效率和软件质量。分析认为，软件开发的下一轮竞争优势将不是更快的 AI，而是建立能够保持清晰度、可验证性和人类监督的新流程。 作者指出，一个五天的任务在 AI 生成后第一天可能看起来就“完成”了，但剩余四天的工作常常转化为大量的修复 Bug 和回归测试。一个关键见解是，生成速度不等于功能或工程上的完成，这要求人类主动创建用于理解和验证的检查点。
 
-aihot · Anthropic：Research（发表成果 · 网页） · 8月13日 01:20 · [中文阅读](https://aihot.virxact.com/items/cmsqu0nr604oeroz2rh6b6mqt)
+twitter · 凡人小北 · 8月14日 16:20
 
 **核验**: 多源印证
 
-**背景**: 多智能体系统涉及多个 AI 智能体交互，常导致涌现行为——即由简单的个体规则组合产生的、未被明确编程的复杂系统级模式。Anthropic 的 Frontier Red Team 是一个专门研究团队，致力于主动识别和缓解来自先进 AI 能力的未来风险。在 AI 语境中，'token'是模型处理数据的基本单位，token 的消耗量是衡量智能体操作规模和成本的常见指标。
+**背景**: AI 编程工具，如 GitHub Copilot、Claude Code 和 Cursor，使用大语言模型通过生成、补全或解释代码来辅助开发者。在软件工程中，反馈循环是为开发者提供关于其工作信息的机制，从即时语法错误到长期用户验证，这对于学习、迭代和保持质量至关重要。代码可追溯性是指理解代码变更的起源、原理和影响的能力，当 AI 生成大量不透明的代码块时，这一概念受到了挑战。
 
 <details><summary>参考链接</summary>
 <ul>
-<li><a href="https://medium.com/@billygareth01/emergent-behavior-in-multi-agent-systems-when-ai-starts-acting-beyond-design-2c8448102410">Emergent Behavior in Multi - Agent Systems : When AI... | Medium</a></li>
-<li><a href="https://www.anthropic.com/news/frontier-threats-red-teaming-for-ai-safety">Frontier threats red teaming for AI safety \ Anthropic</a></li>
-<li><a href="https://blogs.nvidia.com/blog/ai-tokens-explained/">What Are AI Tokens ? The Language and Currency... | NVIDIA Blog</a></li>
+<li><a href="https://grokipedia.com/page/AI_Coding_Tools_for_Beginners_in_2026">AI Coding Tools for Beginners in 2026</a></li>
+<li><a href="https://carlsendk.github.io/tech-leadership/wiki/engineering-effectiveness/managing-feedback-loops/">Managing Feedback Loops - carlsendk.github.io</a></li>
+<li><a href="https://medium.com/@selvakumarsubramanian/ai-footprint-making-ai-generated-code-traceable-in-a-git-first-world-2f450ea315a3">AI Footprint: Making AI -Generated Code Traceable in ... | Medium</a></li>
 
 </ul>
 </details>
 
-**标签**: `#AI Agents`, `#Multi-Agent Systems`, `#AI Research`, `#Code Security`, `#Emergent Behavior`
+**标签**: `#AI Coding`, `#Software Engineering`, `#Developer Workflow`, `#AI Agents`, `#Productivity`
 
 ---
 
 <a id="item-9"></a>
-## [阿里开源 Qwen3.8-2.4T-A95B，这是一个拥有 2.4 万亿参数的代码与智能体模型，硅基流动已提供即时 API 支持。](https://x.com/SiliconFlowAI/status/2087903227224412222) ⭐️ 7.67/10
+## [据报道，通过添加编程框架，ARC-AGI-3 基准测试接近被解决，支持编程有助于 LLM 泛化的观点。](https://x.com/amasad/status/2088124774824521786) ⭐️ 8.0/10
 
-阿里巴巴开源了 Qwen3.8-2.4T-A95B 模型，这是一个拥有 2.4 万亿总参数和 950 亿激活参数的巨型模型，主打自主编码和端到端智能体执行。该模型的 API 已在硅基流动平台即日上线，定价为输入每百万 token 2.00 美元，输出每百万 token 6.00 美元，缓存输入每百万 token 0.25 美元。 此次发布极大地推进了大规模、专业化开源 AI 模型的边界，为开发者和研究人员提供了处理复杂编码任务和开发自主智能体的强大工具。该模型在硅基流动平台上的即时商用可用性，降低了实验和部署此类巨型模型的门槛，有望加速 AI 智能体和软件开发自动化领域的创新。 该模型采用了混合专家架构，其名称后缀 'A95B' 即表示每次前向传播激活 950 亿参数。需要注意的是，虽然模型权重已开源，但最初的访问方式主要是通过硅基流动等平台的托管 API，而非直接提供完整的模型文件供本地部署。
+Amjad Masad 宣布，仅仅通过添加一个编程框架，ARC-AGI-3 基准测试就接近被解决。这一进展支持了之前的预测，即进行编程任务有助于大型语言模型（LLM）泛化其能力。 这具有重要意义，因为它表明在复杂的、交互式 AI 推理基准测试上取得高性能可能有一条更简单的路径，这些基准测试旨在衡量智能体智能和泛化能力。如果得到验证，通过利用代码生成框架，它可以加速开发更强大、更高效的 AI 智能体。 这一说法基于初步结果，具体的'编程框架'解决方案的实现细节或性能分数尚未公开。ARC-AGI-3 是一个交互式基准测试，用于评估智能体在全新环境中通过探索和规划进行学习的能力，因此通过编码解决它是一个值得注意的技术见解。
 
-aihot · X：硅基流动 SiliconFlow (@SiliconFlowAI) · 8月13日 14:04 · [中文阅读](https://aihot.virxact.com/items/cmsrlvwfp05gdro46mbfqtsgm)
+follow_builders · Amjad Masad · 8月14日 04:45
 
 **核验**: 多源印证
 
-**背景**: Qwen 是阿里巴巴云开发的一系列大语言模型。'Day-0 支持'指的是平台在模型发布当天就通过 API 提供推理服务，这对于希望立即使用的开发者而言是一个关键特性。硅基流动是一个 AI 基础设施平台，为众多模型提供高性能推理 API，使开发者无需管理底层基础设施即可快速集成模型。
+**背景**: ARC-AGI-3 是第三代抽象与推理语料库（ARC）基准测试，被设计为针对 AI 智能体的交互式推理测试。它挑战智能体在全新的抽象环境中，通过行动和反馈来学习不熟悉的任务机制，侧重于流体的自适应效率。AI 编程框架是一个位于 LLM 之上的编排层，它协调智能体、管理项目上下文，并根据真实的构建和测试来验证代码输出。
 
 <details><summary>参考链接</summary>
 <ul>
-<li><a href="https://www.siliconflow.com/">SiliconFlow – AI Infrastructure for LLMs & Multimodal Models</a></li>
-<li><a href="https://www.amd.com/en/developer/resources/technical-articles/2026/day-0-support-for-qwen-3-8-on-amd-instinct-gpus.html">Day 0 Support for Qwen 3 8 on AMD Instinct GPUs</a></li>
+<li><a href="https://arcprize.org/arc-agi/3">ARC-AGI-3</a></li>
+<li><a href="https://arxiv.org/abs/2603.24621">ARC-AGI-3: A New Challenge for Frontier Agentic Intelligence ARC-AGI-3 Leaderboard & Scores — August 2026 | BenchLM.ai ARC-AGI-3 Leaderboard - ARC Prize ARC-AGI-3: A New Challenge for Frontier Agentic Intelligence ARC-AGI-3 Leaderboard - llm-stats.com ARC-AGI-3 Quickstart - ARC-AGI-3 Docs</a></li>
+<li><a href="https://thevibefather.com/ai-coding-harness">What Is an AI Coding Harness — TheVibeFather</a></li>
 
 </ul>
 </details>
 
-**标签**: `#AI Agents`, `#Large Language Models`, `#Open Source`, `#Developer Tools`, `#Model Release`
+**标签**: `#AI Agents`, `#LLM Benchmarking`, `#Code Generation`, `#AGI Research`, `#Developer Tools`
 
 ---
 
 <a id="item-10"></a>
-## [小红书 Dots 团队开源 20B 参数连续自回归语音合成模型 Dots.tts](https://mp.weixin.qq.com/s?__biz=Mzg4OTc2MzczNg%3D%3D&mid=2247496062&idx=1&sn=d4c48926c5d7607f129dfea03699a6c0) ⭐️ 7.12/10
+## [小红书开源 dots3-note Preview：一款 280B 参数、面向长程智能体与多模态推理的模型](https://mp.weixin.qq.com/s?__biz=Mzg4OTc2MzczNg%3D%3D&mid=2247496140&idx=1&sn=5239a5fbb115c58d2ae0056bb32789ff) ⭐️ 7.97/10
 
-小红书 Dots 团队开源了名为 dots.tts 的语音合成模型，这是一个拥有 200 亿参数、全连续、端到端的自回归模型。该模型在 Seed-TTS-Eval 基准测试的三个子集上均取得了最佳的平均内容准确度和平均说话人相似度。 此次开源意义重大，它提供了一个大规模、开源的语音合成基础模型，能够加速 AI 智能体、语音克隆和多语言 TTS 应用的研究与开发。该模型在严格的零样本评估基准上取得顶级性能，表明其具备生成高质量、可泛化语音的强大潜力。 该模型被描述为“全连续”，这可能意味着它避免了将语音信号离散化为 token 的常见步骤，从而可能生成更自然、流畅的音频。它在 Seed-TTS-Eval 上的评估使用了领域外的英文和中文样本，证明了其在零样本、跨语言场景下的能力。
+小红书 Dots 模型实验室开源了 dots3-note Preview 模型，这是 dots3 系列的首个开源版本。该模型总参数量为 2800 亿，激活参数量为 160 亿，支持 512K 上下文长度，具备文本、视觉和语音多模态理解能力，并针对复杂推理和长程智能体任务进行了优化。 此次发布为开源社区提供了一个强大的、专门用于构建需要长期记忆和多模态推理的复杂 AI 智能体的模型，直接应对了开发实用、长周期 AI 应用的一个关键挑战。这标志着大型科技公司开始向开源生态贡献先进的、以智能体为中心的模型，可能加速在自主助手和复杂工作流自动化等领域的创新。 该模型采用了“显式推理模式”，这可以提升复杂问题的解决能力，但可能会增加延迟和令牌消耗。它被定位为面向复杂专业工作负载的“Dots Studio 模型”，并且自 2026 年 8 月中旬起已在 Writingmate 等平台上线。
 
-aihot · 公众号：小红书技术（dots.llm） · 8月13日 09:59 · [中文阅读](https://aihot.virxact.com/items/cmsrcljcc0uanroz24r5ebcz9)
+aihot · 公众号：小红书技术（dots.llm） · 8月14日 11:25 · [中文阅读](https://aihot.virxact.com/items/cmssv94cg0h4mroffsb9e7a88)
 
 **核验**: 多源印证
 
-**背景**: 文本转语音（TTS）模型将书面文本转换为语音音频。传统的自回归 TTS 模型通常依赖两阶段过程：首先将连续的语音信号（例如使用 VQ-VAE）离散化为一系列编码，然后使用 Transformer 对这些编码进行自回归建模。Seed-TTS-Eval 基准是一个用于评估零样本 TTS 和语音转换的客观标准，它使用领域外的数据，重点关注语音清晰度和说话人一致性。
+**背景**: 大语言模型是在海量数据上训练的 AI 系统，其中的“参数”是模型在训练过程中调整以进行预测的内部变量。“激活参数”指的是对于给定输入被显著调用的那部分参数，它们影响着模型的具体输出和效率。“长程智能体”是指设计用于在长时间交互或处理长文档的 AI 系统，它们需要诸如检查点等技术来在标准上下文窗口限制之外保持连贯状态，这对于实现现实、持久的应用至关重要。
 
 <details><summary>参考链接</summary>
 <ul>
-<li><a href="https://evalscope.readthedocs.io/en/latest/benchmarks/seed_tts_eval.html">Seed - TTS - Eval | EvalScope</a></li>
-<li><a href="https://arxiv.org/abs/2502.01084">[2502.01084] Continuous Autoregressive Modeling with Stochastic...</a></li>
+<li><a href="https://eu.36kr.com/en/p/3938759517896072">Xiaohongshu Open-Sourced Dots3-Note: The Same-Series Model ...</a></li>
+<li><a href="https://writingmate.ai/blog/dots3-note-preview-writingmate-release-2026">Dots3-Note Preview Is on Writingmate | Writingmate Blog</a></li>
+<li><a href="https://benchlm.ai/models/dots3-note-preview">dots3-note Preview Benchmarks & Context (August 2026)</a></li>
+<li><a href="https://grokipedia.com/page/Checkpointing_and_context_rollover_in_long-running_AI_agents">Checkpointing and context rollover in long-running AI agents</a></li>
 
 </ul>
 </details>
 
-**标签**: `#TTS`, `#Speech Synthesis`, `#Open Source`, `#AI Research`, `#Autoregressive Models`
+**标签**: `#AI Agents`, `#Large Language Models`, `#Open Source`, `#Multimodal AI`, `#Developer Tools`
+
+---
+
+<a id="item-11"></a>
+## [2026 年夏季开源模型报告：中国实验室规模领先，AMD 与 NVIDIA 主导发布](https://huggingface.co/blog/state-of-open-models-summer-2026) ⭐️ 7.78/10
+
+Hugging Face 对 2026 年前八个月的分析显示，模型下载量高度集中，1.5%的仓库占据了 99.2%的下载量。报告还指出，中国实验室发布的最大模型参数规模高达 2.78 万亿，而 AMD 和 NVIDIA 各自发布了超过 200 个新模型仓库，成为发布量最多的机构。 这揭示了开源 AI 生态中“赢家通吃”的动态，即极少数模型吸引了几乎所有的使用。中国实验室在规模上的领先地位，以及主要芯片制造商在发布上的主导地位，标志着竞争格局的变化，也体现了开源模型对硬件供应商的战略重要性。 报告指出，85.6%的模型下载量不足 200 次，表明存在大量未被充分利用的“长尾”模型。中国实验室月度最大模型参数规模在 7540 亿至 2.78 万亿之间波动，而美国实验室在七个月中有五个月的最大规模低于 1300 亿。
+
+aihot · Hugging Face：Blog（RSS） · 8月14日 00:00 · [中文阅读](https://aihot.virxact.com/items/cmst4z2qp05boro06ce7kxtgd)
+
+**核验**: 多源印证
+
+**背景**: Hugging Face Hub 是一个用于托管和共享机器学习模型、数据集及应用程序的中心化平台，它使用 Git 仓库进行版本控制。模型参数指的是训练过程中学习到的权重，更大的模型（如提到的 2.78 万亿参数的 Kimi K3）通常具有更强的能力，但也需要更高的计算成本。下载量的集中反映了社区倾向于聚集在少数高质量或知名的模型上。
+
+<details><summary>参考链接</summary>
+<ul>
+<li><a href="https://korshunov.ai/en/article/18548-state-of-open-models-summer-2026-observations/">State of Open Models : Summer 2026 Observations · korshunov.ai</a></li>
+<li><a href="https://github.com/sqliteai/warp">sqliteai/warp: Run the full 2 . 78 - trillion - parameter Kimi K3 model ...</a></li>
+<li><a href="https://huggingface.co/docs/hub/repositories">Repositories · Hugging Face</a></li>
+
+</ul>
+</details>
+
+**标签**: `#AI Models`, `#Open Source`, `#Industry Analysis`, `#Machine Learning`
+
+---
+
+<a id="item-12"></a>
+## [Anthropic 为 Claude 模型实施文本水印机制以遵守欧盟《AI 法案》](https://www.anthropic.com/news/claude-text-watermark) ⭐️ 7.62/10
+
+Anthropic 宣布，未来的 Claude 模型将在生成的文本中嵌入不可见的水印，用于判断文本由 Claude 撰写的可能性。这一基于 Google DeepMind 的 SynthID-Text 技术的实施，是为了遵守欧盟《AI 法案》而进行的变更，已于 8 月 2 日生效。 此举意义重大，因为它代表了一家主要的 AI 提供商主动调整其技术以满足关于内容认证和透明度的新监管要求。它开创了在不降低用户体验的前提下大规模识别 AI 生成内容的先例，可能成为合规与信任领域的行业标准。 该水印方法的工作原理是在文本生成过程中微调 token 的概率分数，从而形成一种可检测的模式，且不影响输出质量、创造力或可读性。关键点在于，水印对读者而言是不可感知的，不会为输出增加额外的 token，也不会提高生成成本。
+
+aihot · Anthropic：Newsroom（网页） · 8月14日 19:22 · [中文阅读](https://aihot.virxact.com/items/cmstc3u8j02xhro0xf5o1ouas)
+
+**核验**: 多源印证
+
+**背景**: 欧盟《AI 法案》于 2024 年 7 月发布，是欧盟针对人工智能的综合性监管框架，根据不同的风险等级制定了相应规则。针对 AI 模型的文本水印技术，例如 Google 的 SynthID-Text，涉及在生成内容中嵌入一种细微的、机器可检测的信号，以识别其 AI 来源，同时不改变人类可感知的质量。这有助于解决关于错误信息和内容来源的担忧。
+
+<details><summary>参考链接</summary>
+<ul>
+<li><a href="https://deepmind.google/blog/watermarking-ai-generated-text-and-video-with-synthid/">Watermarking AI-generated text and video with SynthID — Google DeepMind</a></li>
+<li><a href="https://www.consilium.europa.eu/en/policies/artificial-intelligence-act/">Artificial intelligence act - Consilium</a></li>
+<li><a href="https://www.anthropic.com/news/claude-text-watermark">How Claude's text watermarking works \ Anthropic</a></li>
+
+</ul>
+</details>
+
+**标签**: `#AI Ethics & Safety`, `#Claude`, `#AI Regulation`, `#Content Authentication`, `#AI Developer Tools`
+
+---
+
+<a id="item-13"></a>
+## [数据分析揭示 DeepSeek Harness 的快速开发、插件架构与 AI 辅助编码实践。](https://x.com/op7418/status/2088199058313957734) ⭐️ 7.3/10
+
+对新发布的 DeepSeek Harness 进行的数据分析显示，其插件系统与 Koishi 平台的相似度高达 75%，主干 PR 中有 21.2% 由 Codex 命名，该项目在 65 天内产出了 84 万行代码。该项目在发布后 20 小时内 GitHub star 数超过 8 万，并发表了一篇 88 页的学术论文。 该分析为一个主流开源 AI 智能体框架背后快速、AI 辅助的开发实践提供了具体证据，突显了行业可能向高度自动化、数据驱动的软件工程转变的趋势。巨大的社区采用率和插件生态增长，表明了开发者对可组合、基于插件的智能体架构的强烈兴趣。 分析指出，虽然已有 1425 个项目使用了 'DSH plugin' 标签，但其中许多并非真正的插件，这表明存在蹭热度的行为。此外，团队最初同时支持 TUI 和 Web UI，但后来删除了所有 TUI 代码，完全转向基于网页的界面。
+
+twitter · 歸藏(guizang.ai) · 8月14日 09:40 · 2 个来源
+
+**核验**: 多源印证
+
+**背景**: DeepSeek Harness 是深度求索公司推出的开源智能体框架，基于“万物皆插件”的架构，与 LangChain 等传统框架不同。Koishi 是一个以其插件系统闻名的跨平台聊天机器人框架。Claude Code 是 Anthropic 公司推出的 AI 编码助手，可帮助进行代码分析、编辑和 Git 自动化。
+
+<details><summary>参考链接</summary>
+<ul>
+<li><a href="https://codepick.dev/en/guides/deepseek-harness-intro/">Getting Started with DeepSeek Harness : The Open-Source... | CodePick</a></li>
+<li><a href="https://koishi.chat/en-US/guide/plugin/">About Plugin | Koishi</a></li>
+<li><a href="https://claude.com/product/claude-code">Claude Code by Anthropic | AI Coding Agent, Terminal, IDE</a></li>
+
+</ul>
+</details>
+
+**社区讨论**: 伴随分析发布的推文表达了启发之意，指出 DeepSeek Harness 促使人们重新考虑之前的技术选择，并强调了开源创新在推动新视角方面的价值。
+
+**标签**: `#AI Agents`, `#Developer Tools`, `#Code Analysis`, `#Open Source`, `#Product Launch`
+
+---
+
+<a id="item-14"></a>
+## [新型内容标记方法：利用 LLM'幻觉'和向量搜索映射至现有分类体系。](https://simonwillison.net/2026/Aug/14/dont-classify-hallucinate/) ⭐️ 7.0/10
+
+Doug Turnbull 在一篇博客文章中描述了一种技术：提示大型语言模型为内容发明新的标签，然后使用向量嵌入将这些'幻觉'生成的标签映射到大型、预先存在的分类体系中最接近的匹配项。这种方法避免了将整个标签词汇表直接提供给 LLM 进行分类的需求。 这种方法意义重大，因为它为使用广泛、预定义的分类体系对大量内容进行追溯性标记提供了一个实用且可扩展的解决方案，这是内容管理和电子商务中的常见挑战。它创造性地利用了 LLM 的生成能力和向量搜索的语义匹配能力，来自动化复杂的分类任务。 提示词会指导 LLM 以特定的分层格式生成分类，并使用示例来引导输出结构。其核心创新在于两步流程：首先，不受现有列表约束地生成假设性标签；其次，使用向量相似性搜索来寻找与生成标签在语义上一致的真实标签。
+
+rss · Simon Willison · 8月14日 21:54
+
+**核验**: 多源印证
+
+**背景**: 向量嵌入是数据（如单词或文档）的密集数值表示，能够捕捉语义含义，使得相似的项目在向量空间中位置接近。传统的基于 LLM 的分类通常涉及向模型提供可能的类别列表（分类体系）并要求其选择一个，这在分类体系非常庞大时变得不切实际。提示工程涉及设计指令来引导 LLM 针对特定任务（如分类）的输出。
+
+<details><summary>参考链接</summary>
+<ul>
+<li><a href="https://en.wikipedia.org/wiki/Vector_embedding">Vector embedding</a></li>
+<li><a href="https://www.promptingguide.ai/prompts/classification">LLMs for Classification | Prompt Engineering Guide</a></li>
+
+</ul>
+</details>
+
+**标签**: `#LLM`, `#Vector Search`, `#Content Tagging`, `#AI Automation`, `#Developer Tools`
+
+---
+
+<a id="item-15"></a>
+## [开发者分享将 CLI 工具演进为易用 Mac 应用的经验，强调国际化用户反馈的价值。](https://x.com/HiTw93/status/2088274560877732134) ⭐️ 7.0/10
+
+一位开发者在将其工具 'Mole' 从面向工程师的命令行界面 (CLI) 演进为易用的 Mac 桌面应用后，分享了来自国际用户的详细反馈。这些反馈涵盖了文化适配（如温度单位默认值）、定价心理学、无障碍需求以及教育用途等多个方面。 这很重要，因为它为开发者和产品构建者提供了关于将技术工具过渡到大众市场产品时所面临的挑战和机遇的具体、真实的见解。它强调了来自全球多样化用户的直接反馈对于改进可用性、文化相关性和定价策略至关重要，最终有助于打造更成功、更具包容性的产品。 具体经验包括：在美国市场，技术工具应默认使用摄氏度；价格以 9 或 5 结尾在心理上更易被接受；为满足无障碍需求，需要提供明暗模式配置选项；以及教育定价的价值。该工具 'Mole' 被定位为类似 CleanMyMac 等系统工具的替代品。
+
+twitter · Tw93 · 8月14日 14:40
+
+**核验**: 多源印证
+
+**背景**: 命令行界面 (CLI) 是一种基于文本的与软件交互的方式，通常由开发者和技术用户使用。CleanMyMac 是一款知名的商业 macOS 系统优化和清理工具，常被用作同类工具的基准。像 fastfetch 和 neofetch 这样的工具是显示系统信息的 CLI 程序，即使在美國，它们也通常在技术规格的温度读数上使用摄氏度。
+
+<details><summary>参考链接</summary>
+<ul>
+<li><a href="https://en.wikipedia.org/wiki/Command-line_interface">Command-line interface - Wikipedia</a></li>
+<li><a href="https://en.wikipedia.org/wiki/CleanMyMac">CleanMyMac</a></li>
+<li><a href="https://github.com/fastfetch-cli/fastfetch">GitHub - fastfetch-cli/fastfetch: A maintained, feature-rich ...</a></li>
+
+</ul>
+</details>
+
+**标签**: `#Product Design`, `#Developer Experience`, `#User Feedback`, `#Internationalization`, `#Pricing Strategy`
 
 ---
 
@@ -273,340 +405,317 @@ aihot · 公众号：小红书技术（dots.llm） · 8月13日 09:59 · [中文
 <h2>更多追踪内容</h2>
 <p class="archive-intro">以下内容已于今日成功抓取，但未进入上方主列表。</p>
 <div class="archive-tablist" role="tablist" aria-label="更多追踪内容来源" hidden>
-<button type="button" role="tab" id="archive-tab-tracked-x" aria-controls="archive-panel-tracked-x" aria-selected="true" tabindex="0" data-archive-tab="tracked-x" data-count="18"><span>其他追踪推文</span><span class="archive-tab-count">18</span></button>
-<button type="button" role="tab" id="archive-tab-follow-builders" aria-controls="archive-panel-follow-builders" aria-selected="false" tabindex="-1" data-archive-tab="follow-builders" data-count="6"><span>其他 Follow Builders 资讯</span><span class="archive-tab-count">6</span></button>
+<button type="button" role="tab" id="archive-tab-tracked-x" aria-controls="archive-panel-tracked-x" aria-selected="true" tabindex="0" data-archive-tab="tracked-x" data-count="12"><span>其他追踪推文</span><span class="archive-tab-count">12</span></button>
+<button type="button" role="tab" id="archive-tab-follow-builders" aria-controls="archive-panel-follow-builders" aria-selected="false" tabindex="-1" data-archive-tab="follow-builders" data-count="14"><span>其他 Follow Builders 资讯</span><span class="archive-tab-count">14</span></button>
 </div>
 <div class="archive-panel" role="tabpanel" id="archive-panel-tracked-x" aria-labelledby="archive-tab-tracked-x" data-archive-panel="tracked-x">
 <h3 class="archive-panel-title">其他追踪推文</h3>
 <article class="archive-item">
 <div class="archive-item-heading">
-<h3><a href="https://x.com/grapeot/status/2088019011561005382">@grapeot: DeepSeek 开源的第一个 agent harness DSH，论文里堆满了范畴论符号，很容易让人觉得又是研究员在真空里搞出来的理论产物。但在仔细读完源码并与 Codex 逐行对照后...</a></h3>
-<span class="score-badge" data-tier="good" aria-label="7.0 out of 10">7.0</span>
-</div>
-<p class="source-line">Twitter/X · @dotey · 8月13日 21:45 UTC · 喜欢 11 · 转发 5 · 回复 2 · 浏览 1010</p>
-<p class="archive-item-content">DeepSeek 开源的第一个 agent harness DSH，论文里堆满了范畴论符号，很容易让人觉得又是研究员在真空里搞出来的理论产物。但在仔细读完源码并与 Codex 逐行对照后，我的工程判断很明确：对绝大多数日常写代码的开发者来说，它重得毫无必要；但对探索自进化 agent 的工程团队来说，它搭建了一套目前其他方案完全没有的底层骨架。<br>
-<br>
-架构上最本质的差距在于插件模型的选择。<br>
-<br>
-Codex 代表了典型的声明式路线：插件只是磁盘上的文件夹，贡献的是 Markdown 写的 skill 文件、MCP server 配置或 shell 脚本。插件不进 harness 进程，也不在同一进程里跑代码，改完配置重启独立进程只需两三秒。对于搜索、加工具这类绝大多数日常需求，声明式模型简单可靠，门槛接近于零。<br>
-<br>
-DSH 走的是命令式路线：插件带着自己的状态，直接跑在 harness 进程内部，互相注册与调用。一旦要在运行时替换插件，悬空引用清理、后台任务终止、依赖链协同以及崩溃回滚都会变成棘手难题。为此，DSH 引入了一套叫 Cordis 的重型运行时，单是管理 fiber 生命周期的核心模块就有 750 行代码。<br>
-<br>
-如果只是为了替换搜索服务或挂载常用工具，让开发者背上 Cordis 这套复杂度完全是过度设计。但 DeepSeek 包这盘饺子的真实意图，隐藏在控制流结构里。<br>
-<br>
-在 Codex 中，agent loop 的控制流被硬编码在 Rust 核心逻辑里，开发者只能在预设时刻挂载 hook，无法在运行时把单 agent 循环改成多 agent 协作循环。而在 DSH 里，agent loop 本身是放在 packages/core/agent-loop 中的一个普通 TypeScript 插件，向外提供 ctx.agentLoop 服务。只要实现相同的接口，运行中的控制流骨架随时可以整体卸载并替换。<br>
-<br>
-Cordis 打造的那些副作用跟踪、依赖变动通知和事务性 HMR，本质上全是在支撑 agent loop 可替换这个核心目标。它保证了 agent 在运行期如果动态生成了新工具或新 loop，系统能在不中断进程的前提下平滑加载；一旦生成的代码出现错误，又能通过事务性回滚退回上一个稳定状态。<br>
-<br>
-Codex 交付的是结构固定的成品家具，而 DSH 交付的是允许动态改造的生成内核。DSH 不会让你的日常 coding 变得更快，但它让 harness 本身具备了面向自进化进行物理扩展的可能。<br>
-<br>
-深度剖析与两套架构的完整对照：<br>
-<br>
-https://t.co/tqJua5Yi2y</p>
-</article>
-<article class="archive-item">
-<div class="archive-item-heading">
-<h3><a href="https://x.com/dotey/status/2087966960386470339">@dotey: DeepSeek 作为一个模型厂商，最有价值的肯定还是做 Agent Harness Product 而不是 SDK，因为 SDK 它不容易拿到用户行为数据。 做 Agent Harne...</a></h3>
-<span class="score-badge" data-tier="mid" aria-label="5.0 out of 10">5.0</span>
-</div>
-<p class="source-line">Twitter/X · @dotey · 8月13日 18:18 UTC · 喜欢 22 · 转发 0 · 回复 28 · 浏览 8600</p>
-<p class="archive-item-content">DeepSeek 作为一个模型厂商，最有价值的肯定还是做 Agent Harness Product 而不是 SDK，因为 SDK 它不容易拿到用户行为数据。<br>
-<br>
-做 Agent Harness Product 那就得追求用户量，追求用户量就要先做好用户体验，其次才是插件可定制化。</p>
-</article>
-<article class="archive-item">
-<div class="archive-item-heading">
-<h3><a href="https://x.com/dotey/status/2087963724577435813">@dotey: 软件自进化可能是个伪命题，只会带来更大的混乱。 插件要么是一次性用完就扔的，要么就得要设计、验证和维护的，不是现在模型能力可以“自进化”的。 OpenClaw 的一坨能“自进化”的 Sk...</a></h3>
-<span class="score-badge" data-tier="mid" aria-label="6.0 out of 10">6.0</span>
-</div>
-<p class="source-line">Twitter/X · @dotey · 8月13日 18:05 UTC · 喜欢 52 · 转发 3 · 回复 34 · 浏览 10092</p>
-<p class="archive-item-content">软件自进化可能是个伪命题，只会带来更大的混乱。<br>
-<br>
-插件要么是一次性用完就扔的，要么就得要设计、验证和维护的，不是现在模型能力可以“自进化”的。<br>
-<br>
-OpenClaw 的一坨能“自进化”的 Skills 已经做了示范。<br>
-<br>
-还是等模型自学习自进化更靠谱点。</p>
-</article>
-<article class="archive-item">
-<div class="archive-item-heading">
-<h3><a href="https://x.com/fkysly/status/2087954203339804919">@fkysly: 目前根据已有的 DeepSeek Harness 的内容，我觉得 Claude Code/Codex 就像苹果一样，什么都做，追求体验极致；而 DeepSeek Harness 可能是一...</a></h3>
-<span class="score-badge" data-tier="mid" aria-label="5.0 out of 10">5.0</span>
-</div>
-<p class="source-line">Twitter/X · @dotey · 8月13日 17:27 UTC · 喜欢 8 · 转发 0 · 回复 24 · 浏览 10281</p>
-<p class="archive-item-content">目前根据已有的 DeepSeek Harness 的内容，我觉得 Claude Code/Codex 就像苹果一样，什么都做，追求体验极致；而 DeepSeek Harness 可能是一种安卓的理念，就是走开源，社区自己 DIY 玩，OEM（比如一些企业定制、政府定制等等）可以私有化魔改等等。而这个基础上，最核心的就是插件生态。</p>
-</article>
-<article class="archive-item">
-<div class="archive-item-heading">
-<h3><a href="https://x.com/dotey/status/2087953969498706138">@dotey: 我只是作为一个“普通用户”的角度去用 DeepSeek Harness，一些感受： 1. 启动方式偏极客，程序员没问题，但是普通用户估计都没有 nodejs 环境，很难跑起来 2. 速度飞快...</a></h3>
-<span class="score-badge" data-tier="mid" aria-label="6.0 out of 10">6.0</span>
-</div>
-<p class="source-line">Twitter/X · @dotey · 8月13日 17:26 UTC · 喜欢 196 · 转发 8 · 回复 41 · 浏览 35653</p>
-<p class="archive-item-content">我只是作为一个“普通用户”的角度去用 DeepSeek Harness，一些感受：<br>
-<br>
-1. 启动方式偏极客，程序员没问题，但是普通用户估计都没有 nodejs 环境，很难跑起来<br>
-<br>
-2. 速度飞快，这点特别好<br>
-<br>
-3. Thinking 部分由于 Flash 模型速度过快，导致文字闪的厉害，可以做一下节流，攒一批一起显示，配合动画动效会好一点。<br>
-<br>
-4. Codex 右侧的多 Tab Panel 相当重要，和当前 DSH 的插件机制是很好的搭配，强烈建议借鉴下，比如我写完 PPT 还要新开窗口去预览，来回切换很麻烦，不如显示在右侧直观<br>
-<br>
-5. Trajectory 和 Session log 对普通用户价值不大，不需要那么重要的位置<br>
-<br>
-6. 现在能列出产出物很好，但最好能直接打开，能看到 diff （开箱配置好相关插件了，不要用户二次配置，当然可以关闭）<br>
-<br>
-7. 模型早点支持多模态吧，多模态也是 AGI 的一部分<br>
-<br>
-8. 一切皆插件的理念很好，普通用户的使用体验也很重要。<br>
-<br>
-开发者愿意去折腾插件的前提一定是你的 Agent Harness 有大量普通用户了，否则没有多少开发者坚持在上面，新鲜劲过了就没人了。<br>
-<br>
-插件和用户体验并不冲突，核心还是看开箱设置/出厂配置，用户第一次用不需要太多配置就能用起来，用的时候也没什么不方便，后续再慢慢折腾插件也不迟。<br>
-<br>
-BTW，DSH 给我做的 PPT 质量还不错。</p>
-</article>
-<article class="archive-item">
-<div class="archive-item-heading">
-<h3><a href="https://x.com/jiayuan_jy/status/2087911060154314963">@jiayuan_jy: 有幸一个月前就被 @tianyi 拉进了仓库。当时 DSH 还是一个只实现了 core framework 的毛坯房。过去一个月，基本上每次 pull 代码，都是上千个 commits...</a></h3>
-<span class="score-badge" data-tier="good" aria-label="8.0 out of 10">8.0</span>
-</div>
-<p class="source-line">Twitter/X · @dotey · 8月13日 14:36 UTC · 喜欢 493 · 转发 59 · 回复 57 · 浏览 138084</p>
-<p class="archive-item-content">有幸一个月前就被 @tianyi 拉进了仓库。当时 DSH 还是一个只实现了 core framework 的毛坯房。过去一个月，基本上每次 pull 代码，都是上千个 commits 的速度在涨。<br>
-<br>
-说一下我对 DSH 的一些理解，不一定对：<br>
-<br>
-1. 首先是怎么理解 DeepSeek Harness 这个东西。我觉得 DSH 既是一个可以直接运行的 Coding Agent，目前官方提供了 Web 和 headless 两种形式；同时它也是一套 Agent 开发框架。TUI 之类的其他交互方式，也可以通过外部 profile 和插件接进来。<br>
-<br>
-2. 如果拿 Coding Agent 的标准来说，当前 DSH 的体验确实不如 Claude Code / Codex 那么完善。整个项目还很早期，接口一直在变化，插件生态也才刚刚开始，质量肯定是层次不齐的。<br>
-<br>
-3. 但如果从开发框架的角度来看，可以把 DSH 想象成一个乐高汽车玩具。DeepSeek 官方提供的这个 Coding Agent，只是他们自己拼出来的一套官方预置。你完全可以把里面的零件换成自己喜欢的：换引擎、换轮胎、换挡风玻璃，或者加装其他模组。甚至最后拼出来的东西，也不一定还是一辆汽车。<br>
-<br>
-4. DSH 的核心是「一切皆插件」。模型、工具、文件系统、Shell、沙箱、会话存储、Subagent、UI，甚至 Agent Loop 本身，都是插件。正因为这样，你可以把 DSH DIY 成任何自己想要的样子，这也给后面的社区生态留下了很大的空间。<br>
-<br>
-5. 再往前想一步，这其实有一点「自进化软件」的雏形了。DSH 现在已经可以让 Agent 检查自己的 runtime，现场写一个插件并挂载上去，然后在后续的任务里直接使用这个刚刚获得的能力。<br>
-<br>
-当然，现在这部分还比较实验性：动态生成的插件只存在于内存里，重启就没了，也还不能自动沉淀成一个永久插件。<br>
-<br>
-但可以想象一下：假设某个功能现在没有，你和 Agent 随便聊两句，这个功能就被做好了，而且可以直接开始使用。甚至 Agent 在执行任务的时候，可以自己发现缺少某种能力，然后自己完成开发、安装和调用。<br>
-<br>
-6. 接下来就需要等待一批真正优秀的插件了。DSH 现在还很早，但我相信它的潜力非常大。<br>
-<br>
----<br>
-<br>
-另外从代码上来看，DSH 有非常多函数式编程的影子，不熟悉 Ocaml/Haskell 可能一上来会比较难理解，可以多让 Agent ELI5 一下。</p>
-</article>
-<article class="archive-item">
-<div class="archive-item-heading">
-<h3><a href="https://x.com/op7418/status/2087903809205108832">@op7418: 别的不说，Deepseek harness 这个 star 的涨势是真猛，一个多小时都快两万 star 了 https://t.co/OB8jJ0KfpZ</a></h3>
-<span class="score-badge" data-tier="mid" aria-label="6.0 out of 10">6.0</span>
-</div>
-<p class="source-line">Twitter/X · @op7418 · 8月13日 14:07 UTC · 喜欢 22 · 转发 1 · 回复 41 · 浏览 9124</p>
-<p class="archive-item-content">别的不说，Deepseek harness 这个 star 的涨势是真猛，一个多小时都快两万 star 了 https://t.co/OB8jJ0KfpZ</p>
-</article>
-<article class="archive-item">
-<div class="archive-item-heading">
-<h3><a href="https://x.com/dotey/status/2087893881496985988">@dotey: DeepSeek Harness 正式发布了，也是开源的</a></h3>
-<span class="score-badge" data-tier="good" aria-label="8.0 out of 10">8.0</span>
-</div>
-<p class="source-line">Twitter/X · @dotey · 8月13日 13:27 UTC · 喜欢 36 · 转发 1 · 回复 23 · 浏览 14110</p>
-<p class="archive-item-content">DeepSeek Harness 正式发布了，也是开源的</p>
-</article>
-<article class="archive-item">
-<div class="archive-item-heading">
-<h3><a href="https://x.com/tianyi/status/2087888089759015218">@tianyi: DeepSeek Harness was just released with MIT license. The current 0.1.0 version is a developer...</a></h3>
-<span class="score-badge" data-tier="good" aria-label="8.0 out of 10">8.0</span>
-</div>
-<p class="source-line">Twitter/X · @dotey · 8月13日 13:04 UTC · 喜欢 1812 · 转发 142 · 回复 190 · 浏览 195406</p>
-<p class="archive-item-content">DeepSeek Harness was just released with MIT license. The current 0.1.0 version is a developer preview, and may still have many rough edges. Feedback is welcome! <br>
-<br>
-DeepSeek Harness 已经以 MIT 协议开源发布。现在的 0.1.0 版本是一个面向 Harness 开发者的预览版，还很不完善。恳请大家多提提宝贵意见。 <br>
-<br>
-https://t.co/aBToa3b3L9 https://t.co/VMZC5i2sG0</p>
-</article>
-<article class="archive-item">
-<div class="archive-item-heading">
-<h3><a href="https://x.com/op7418/status/2087887711881597009">@op7418: Deepseek Harness 0.1 版本正式发布了，而且开源！ 看起来主打的是他们那套插件系统，有点复杂。</a></h3>
-<span class="score-badge" data-tier="mid" aria-label="6.0 out of 10">6.0</span>
-</div>
-<p class="source-line">Twitter/X · @op7418 · 8月13日 13:03 UTC · 喜欢 42 · 转发 0 · 回复 46 · 浏览 26122</p>
-<p class="archive-item-content">Deepseek Harness 0.1 版本正式发布了，而且开源！<br>
-<br>
-看起来主打的是他们那套插件系统，有点复杂。</p>
-</article>
-<article class="archive-item">
-<div class="archive-item-heading">
-<h3><a href="https://x.com/op7418/status/2087869793974292483">@op7418: Deepseek Harness 内测群说晚上 8:25 左右发布。 https://t.co/6CHmUIwHWO</a></h3>
+<h3><a href="https://x.com/dotey/status/2088330456022311109">@dotey: 这篇 Pi 压缩的文章，太过于朴实无华，就真的只是写个 prompt 让 LLM 把上下文总结一下，然后保留前面的 system prompt 和工具调用，在摘要后可能还会保留最近几次对话...</a></h3>
 <span class="score-badge" data-tier="low" aria-label="4.0 out of 10">4.0</span>
 </div>
-<p class="source-line">Twitter/X · @op7418 · 8月13日 11:52 UTC · 喜欢 35 · 转发 3 · 回复 23 · 浏览 26206</p>
-<p class="archive-item-content">Deepseek Harness 内测群说晚上 8:25 左右发布。 https://t.co/6CHmUIwHWO</p>
+<p class="source-line">Twitter/X · @dotey · 8月14日 18:22 UTC · 喜欢 85 · 转发 11 · 回复 21 · 浏览 19418</p>
+<p class="archive-item-content">这篇 Pi 压缩的文章，太过于朴实无华，就真的只是写个 prompt 让 LLM 把上下文总结一下，然后保留前面的 system prompt 和工具调用，在摘要后可能还会保留最近几次对话。<br>
+<br>
+这种压缩是有损的，不知道是不是有机制会去历史会话检索上下文？<br>
+<br>
+当然这确实是压缩上下文的最简单有效方案。</p>
 </article>
 <article class="archive-item">
 <div class="archive-item-heading">
-<h3><a href="https://x.com/op7418/status/2087868251242184839">@op7418: 关于 Deepseek 这次涨价，这张图做的清晰一点。 但不知道图是谁做的，从群里拿来的。 我才发现那个 Pro 的缓存命中最高涨了 12 倍价格。 https://t.co/g2jU2...</a></h3>
+<h3><a href="https://x.com/DLKFZWilliam2/status/2088305839203651834">@DLKFZWilliam2: 又小型做了一个工具类 Web 应用站的实验，几乎隔一天就是一个订单。 复盘总结一下，分享一种工具类快速赚小钱的打法： 找一个正在赚钱的行业，自己冲上去做。不过不是真做，而是“假装做这个行业”...</a></h3>
 <span class="score-badge" data-tier="mid" aria-label="5.0 out of 10">5.0</span>
 </div>
-<p class="source-line">Twitter/X · @op7418 · 8月13日 11:45 UTC · 喜欢 19 · 转发 1 · 回复 19 · 浏览 13658</p>
-<p class="archive-item-content">关于 Deepseek 这次涨价，这张图做的清晰一点。<br>
+<p class="source-line">Twitter/X · @dotey · 8月14日 16:44 UTC · 喜欢 65 · 转发 7 · 回复 16 · 浏览 5904</p>
+<p class="archive-item-content">又小型做了一个工具类 Web 应用站的实验，几乎隔一天就是一个订单。 复盘总结一下，分享一种工具类快速赚小钱的打法：<br>
 <br>
-但不知道图是谁做的，从群里拿来的。<br>
-<br>
-我才发现那个 Pro 的缓存命中最高涨了 12 倍价格。 https://t.co/g2jU2hLJbO</p>
+找一个正在赚钱的行业，自己冲上去做。不过不是真做，而是“假装做这个行业”，然后把整个流程走一遍（我用 computer skill 直接让 AI 跑，然后 AI 会有很多 blocker 或 gate），这个时候 1/3👇 https://t.co/z4ZMPuXjFD</p>
 </article>
 <article class="archive-item">
 <div class="archive-item-heading">
-<h3><a href="https://x.com/op7418/status/2087865228122108037">@op7418: 卧槽，V4 Pro 08313 正式版涨价，那个峰值最高比原来涨了 4 倍多，这回真成梁子了。 https://t.co/tK4cnhQTy5</a></h3>
+<h3><a href="https://x.com/op7418/status/2088304412657901833">@op7418: 智谱发了一篇关于他们为 GLM-5.3 开源发布做准备的文章，主要是关于他们开源模型的网络防御观点： 网络防御能力不应该掌握在少数资源雄厚的机构手中，开源维护者、独立开发者和小型团队同样...</a></h3>
+<span class="score-badge" data-tier="mid" aria-label="6.0 out of 10">6.0</span>
+</div>
+<p class="source-line">Twitter/X · @op7418 · 8月14日 16:39 UTC · 喜欢 6 · 转发 0 · 回复 17 · 浏览 3305</p>
+<p class="archive-item-content">智谱发了一篇关于他们为 GLM-5.3 开源发布做准备的文章，主要是关于他们开源模型的网络防御观点：<br>
+<br>
+网络防御能力不应该掌握在少数资源雄厚的机构手中，开源维护者、独立开发者和小型团队同样需要这些工具。<br>
+<br>
+这次 5.3 版本大幅强化了网络安全任务的能力。</p>
+</article>
+<article class="archive-item">
+<div class="archive-item-heading">
+<h3><a href="https://x.com/dotey/status/2088282286529618286">@dotey: Pi 作者对 DeekSeek Harness 评价 https://t.co/U7NcKf3AOn</a></h3>
+<span class="score-badge" data-tier="low" aria-label="3.0 out of 10">3.0</span>
+</div>
+<p class="source-line">Twitter/X · @dotey · 8月14日 15:11 UTC · 喜欢 320 · 转发 22 · 回复 44 · 浏览 85550</p>
+<p class="archive-item-content">Pi 作者对 DeekSeek Harness 评价 https://t.co/U7NcKf3AOn</p>
+</article>
+<article class="archive-item">
+<div class="archive-item-heading">
+<h3><a href="https://x.com/Zai_org/status/2088280509474320693">@Zai_org: https://t.co/fbjLdFGKez</a></h3>
 <span class="score-badge" data-tier="low" aria-label="2.0 out of 10">2.0</span>
 </div>
-<p class="source-line">Twitter/X · @op7418 · 8月13日 11:33 UTC · 喜欢 19 · 转发 0 · 回复 10 · 浏览 25179</p>
-<p class="archive-item-content">卧槽，V4 Pro 08313 正式版涨价，那个峰值最高比原来涨了 4 倍多，这回真成梁子了。 https://t.co/tK4cnhQTy5</p>
+<p class="source-line">Twitter/X · @op7418 · 8月14日 15:04 UTC · 喜欢 976 · 转发 90 · 回复 27 · 浏览 90002</p>
+<p class="archive-item-content">https://t.co/fbjLdFGKez</p>
 </article>
 <article class="archive-item">
 <div class="archive-item-heading">
-<h3><a href="https://x.com/op7418/status/2087863955150799113">@op7418: V4 Pro 0813 的正式更新公告来了，同时涨价额度也确定了。 看来下午的 V4 Pro 0813 模型是有点不对，现在他们正式发了更新公告，这次估计是没啥问题了。 同时涨价也尘埃落...</a></h3>
-<span class="score-badge" data-tier="mid" aria-label="5.0 out of 10">5.0</span>
+<h3><a href="https://x.com/dotey/status/2088278385621409959">@dotey: 我不喜欢用 grill-me，可能因为我不擅长空想，也不喜欢被拷问。我需要那种看得见摸得着的东西才能进一步得出结论。 我更喜欢用 Claude Design 这种快速出一版原型，做出来一...</a></h3>
+<span class="score-badge" data-tier="low" aria-label="3.0 out of 10">3.0</span>
 </div>
-<p class="source-line">Twitter/X · @op7418 · 8月13日 11:28 UTC · 喜欢 75 · 转发 6 · 回复 27 · 浏览 99704</p>
-<p class="archive-item-content">V4 Pro 0813 的正式更新公告来了，同时涨价额度也确定了。<br>
+<p class="source-line">Twitter/X · @dotey · 8月14日 14:55 UTC · 喜欢 65 · 转发 3 · 回复 28 · 浏览 19684</p>
+<p class="archive-item-content">我不喜欢用 grill-me，可能因为我不擅长空想，也不喜欢被拷问。我需要那种看得见摸得着的东西才能进一步得出结论。<br>
 <br>
-看来下午的 V4 Pro 0813 模型是有点不对，现在他们正式发了更新公告，这次估计是没啥问题了。<br>
+我更喜欢用 Claude Design 这种快速出一版原型，做出来一个真实的东西，才能感觉出来哪不对；或者 AI 写一份文档来理解方案，或者干脆 AI 实现一个 PoC 版本出来。<br>
 <br>
-同时涨价也尘埃落定了，采用峰谷定价，峰值定价 Pro 模型输出比原来贵了 4 倍多。<br>
-<br>
-空闲时段的 Pro 模型定价比原来贵了一倍多。 https://t.co/z2OdsUCe8P</p>
+这在以前是很成本很高的事情，现在 AI 生成真的太容易了，所以对我来说不依赖 grill me 也还好。</p>
 </article>
 <article class="archive-item">
 <div class="archive-item-heading">
-<h3><a href="https://x.com/op7418/status/2087816107298316415">@op7418: DeepSeek V4 Pro 的 0831 版本不太对劲，他们是不是又把模型给撤了？ 现在的情况非常奇怪： API 确实是有的，在 API 的模型和价格这部分写的是 0813，但是更新...</a></h3>
+<h3><a href="https://x.com/op7418/status/2088253680361550230">@op7418: 今天的骑行到位了，夏天晚上骑真是容易胖。 这个视频是用我下面的这个运动分析 Skills 做的，支持徒步、骑行和跑步。 如果你也想这样分享你的运动轨迹，可以装一个试试 https://t...</a></h3>
+<span class="score-badge" data-tier="low" aria-label="1.0 out of 10">1.0</span>
+</div>
+<p class="source-line">Twitter/X · @op7418 · 8月14日 13:17 UTC · 喜欢 60 · 转发 7 · 回复 19 · 浏览 12664</p>
+<p class="archive-item-content">今天的骑行到位了，夏天晚上骑真是容易胖。<br>
+<br>
+这个视频是用我下面的这个运动分析 Skills 做的，支持徒步、骑行和跑步。<br>
+<br>
+如果你也想这样分享你的运动轨迹，可以装一个试试 https://t.co/CFYnn0MCHg</p>
+</article>
+<article class="archive-item">
+<div class="archive-item-heading">
+<h3><a href="https://x.com/mitsuhiko/status/2088189145952731317">@mitsuhiko: I don&#x27;t think the DeepSeek Harness is perfect but this is for sure the first time I have been...</a></h3>
+<span class="score-badge" data-tier="good" aria-label="7.0 out of 10">7.0</span>
+</div>
+<p class="source-line">Twitter/X · @dotey · 8月14日 09:01 UTC · 喜欢 1540 · 转发 60 · 回复 51 · 浏览 224304</p>
+<p class="archive-item-content">I don&#x27;t think the DeepSeek Harness is perfect but this is for sure the first time I have been looking at something new in the space and felt quite inspired to revisit some of our choices. I love that part about Open Source a lot!</p>
+</article>
+<article class="archive-item">
+<div class="archive-item-heading">
+<h3><a href="https://x.com/op7418/status/2088180816128143829">@op7418: GLM-5.3 发布了，看了一下，着重提升的主要是两部分： 1. 安全能力：看来 Hugging Face 在拿 GLM-5.2 防御了 OpenAI 的模型入侵以后，智谱也看到了这方面...</a></h3>
+<span class="score-badge" data-tier="good" aria-label="7.0 out of 10">7.0</span>
+</div>
+<p class="source-line">Twitter/X · @op7418 · 8月14日 08:27 UTC · 喜欢 60 · 转发 3 · 回复 31 · 浏览 21850</p>
+<p class="archive-item-content">GLM-5.3 发布了，看了一下，着重提升的主要是两部分：<br>
+<br>
+1. 安全能力：看来 Hugging Face 在拿 GLM-5.2 防御了 OpenAI 的模型入侵以后，智谱也看到了这方面的价值，尤其是大家最近都在聊这块，他们针对性地做了一些优化。<br>
+<br>
+2. 长程任务的执行：<br>
+比如终端里的任务、工具调用，以及大代码库的修复任务，都有非常大的提升。<br>
+<br>
+这个模型依然是只进行了后训练，没有重新进行预训练。这都几个版本了，还能有这么大的提升，确实猛啊！</p>
+</article>
+<article class="archive-item">
+<div class="archive-item-heading">
+<h3><a href="https://x.com/op7418/status/2088172365750645091">@op7418: Twitter 完全开源了他们的推荐算法 用 Codex 分析了一下，感觉跟以前我们的认知还是有不少变化的。 总结了六条创作者应该做的事情： 1. 应该做值得转发的原创内容。 2. 尽量...</a></h3>
 <span class="score-badge" data-tier="mid" aria-label="6.0 out of 10">6.0</span>
 </div>
-<p class="source-line">Twitter/X · @op7418 · 8月13日 08:18 UTC · 喜欢 57 · 转发 4 · 回复 33 · 浏览 88910</p>
-<p class="archive-item-content">DeepSeek V4 Pro 的 0831 版本不太对劲，他们是不是又把模型给撤了？<br>
+<p class="source-line">Twitter/X · @op7418 · 8月14日 07:54 UTC · 喜欢 130 · 转发 17 · 回复 17 · 浏览 23628</p>
+<p class="archive-item-content">Twitter 完全开源了他们的推荐算法<br>
 <br>
-现在的情况非常奇怪：<br>
+用 Codex 分析了一下，感觉跟以前我们的认知还是有不少变化的。<br>
 <br>
-API 确实是有的，在 API 的模型和价格这部分写的是 0813，但是更新日志页面完全没有提到 0813 的更新。<br>
+总结了六条创作者应该做的事情：<br>
 <br>
-官网上面原本关于“DeepSeek V4 Pro 更新正式版”的横幅也被撤掉了。<br>
+1. 应该做值得转发的原创内容。<br>
 <br>
-模型的文档里写的是 0813，更新日志里却没有。<br>
+2. 尽量少用首贴写钩子，把重要内容放在第二条推串里这种发帖形式（这个和大家的认知不太一样，比较重要）。<br>
 <br>
-因为我们没办法直接知道他们到底更没更新，只能通过官方公告来确认，但他们现在既没有发正式的公众号文章，也没有发布任何公告。<br>
+3. 应该优先争取阅读、回复、引用和关注，点赞的权重其实没有那么高。<br>
 <br>
-Artificial Analysis 测出来的得分也很怪，V4 Pro 正式版只比 V4 Flash 高了一分，两者的得分几乎是一样的。<br>
+4. 拉开发帖间隔，不要频繁刷屏。<br>
 <br>
-他们现在什么也不说，测出来的得分又不对。这不让昨天熬夜测试的人都成小丑了吗？我去</p>
+5. 深耕一个垂类，不要频繁更换账号类型。<br>
+<br>
+6. 少做那些互动诱饵（比如互关、回复发送等），不要让别人讨厌你、对你点“不感兴趣”或举报。</p>
 </article>
 <article class="archive-item">
 <div class="archive-item-heading">
-<h3><a href="https://x.com/dotey/status/2087783863741256149">@dotey: 最近一直在忙着把我的 App 变成跨平台的，试了几种方案还是决定用 Rust + GPUI。 一开始就是用的 Electron，但是视频编辑这种场景纯网页实现性能优化还是挺不容易的，尤其...</a></h3>
-<span class="score-badge" data-tier="mid" aria-label="6.0 out of 10">6.0</span>
+<h3><a href="https://x.com/kevinma_dev_zh/status/2088171980571001338">@kevinma_dev_zh: 说真的, @mattpocockuk 的 grill-me，应该是我使用频率最高，同时也觉得最有用的 Skill 之一。 我在做产品和技术设计时，经常会用它来帮我检查，还有哪些地方没有真...</a></h3>
+<span class="score-badge" data-tier="good" aria-label="7.0 out of 10">7.0</span>
 </div>
-<p class="source-line">Twitter/X · @dotey · 8月13日 06:10 UTC · 喜欢 269 · 转发 26 · 回复 85 · 浏览 46340</p>
-<p class="archive-item-content">最近一直在忙着把我的 App 变成跨平台的，试了几种方案还是决定用 Rust + GPUI。<br>
+<p class="source-line">Twitter/X · @dotey · 8月14日 07:52 UTC · 喜欢 101 · 转发 8 · 回复 9 · 浏览 30842</p>
+<p class="archive-item-content">说真的, @mattpocockuk  的 grill-me，应该是我使用频率最高，同时也觉得最有用的 Skill 之一。<br>
 <br>
-一开始就是用的 Electron，但是视频编辑这种场景纯网页实现性能优化还是挺不容易的，尤其是视频一长、字幕一多就会很卡，内存占用也很夸张。我不怀疑持续优化下去能是能有一个还不错的性能的，但要花不少时间精力。<br>
+我在做产品和技术设计时，经常会用它来帮我检查，还有哪些地方没有真正想清楚。<br>
 <br>
-所以我后来就决定先做一个 Mac 版本（图 1），Swift + AppKit，用 Fable 5 开发，效果特别好，跟设计稿几乎一样。必须说 Fable 5 在还原 UI 能力上是最强的，没有之一。<br>
+很多时候，大的交互框架、产品流程和技术方向其实已经比较明确了，但往下落到细节，就会发现还有很多模糊的地方。有些是自己遗漏了，有些是之前压根没有想到，还有一些更常见的情况是，AI 已经给出了方案，甚至做出了 Mock UI，我看完却总觉得不太对。<br>
 <br>
-但现在想要支持跨平台，就还得考虑其他方案。先是用 Rust 做了一个跨平台 cli 的 PoC，效果很好，音频转录和视频导出的性能比 Swift 还好，还能支持 Mac、Windows 多平台。<br>
+麻烦就在这里。<br>
 <br>
-接下来就是把 Swift 版本移植到 cli 之上，工作量还是挺大的，前期开发的功能越多，现在迁移工作就越难。初步是完成了，但接下来就是 Windows 版本的支持。<br>
+我知道自己不满意，却又很难立刻说清楚，到底哪里有问题，以及我真正想要的是什么。<br>
 <br>
-再去基于 cli 开发个 windows 版本成本还是挺高，尤其是要去 windows 电脑上开发测试，各种逻辑同步想想都头大。现在 AI 让写代码变得成本很低，但是测试和验收成本还在那里，跨平台的好处就是你核心逻辑测试没问题，后面只有少量兼容性的问题需要去测试，工作量小很多。<br>
+这时候我通常会先把目前的想法、目标和已有方案告诉 Agent，然后直接来一句：grill me。<br>
 <br>
-因为 cli 已经是 rust 写的，所以自然而然就会想到用 rust 的 GPUI 去做跨平台，不过决定之前肯定是要先做 PoC 验证的。<br>
+接下来，Agent 就会开始不断盘问我。<br>
 <br>
-跟 Fable 5 一起写了个技术方案文档，由于上个周期额度到了，后面就先让 GPT 5.6 Sol 去实现了一个 PoC 版本（图 2），还不错了。<br>
+它会沿着设计中的一个个分支继续往下问，把那些原本模糊的地方一点点挖出来：这个功能到底解决什么问题？这个状态应该怎么处理？用户为什么要在这里做这个动作？两种方案之间你真正看重的是什么？<br>
 <br>
-今天 Grok 4.6 发布，又用 Cursor + Grok 4.6 实现了一个版本（图 3），效果要差一些。Grok 4.6 有点好处就是生成的速度极快<br>
+很多问题，我其实从来没有认真想过。<br>
 <br>
-今天晚上 Claude 的额度终于刷新了，再让 Fable 去实现了一个版本（图 4），相对来说是最好的一个，但离成品也还有不小的差距。<br>
+而在一轮轮回答这些问题的过程中，原本只是脑子里一个模糊的感觉，会逐渐变成非常具体的产品决策。<br>
 <br>
-经过这三个 PoC 版本，至少可行性上是没什么问题了，性能也很好，接下来就沿着这个方向走下去了。<br>
+这也是我觉得 grill-me 最有价值的地方。<br>
 <br>
----<br>
-<br>
-对了，现在 BaoCut Skill 从 Windows 下也可以转录和翻译视频了：<br>
-https://t.co/lU5E1qFsNe</p>
+有时候你缺的并不是 AI 再给你一个方案，而是有人不断追问，帮你把自己真正想要的东西想明白。</p>
 </article>
 <article class="archive-item">
 <div class="archive-item-heading">
-<h3><a href="https://x.com/op7418/status/2087740011781460214">@op7418: 又重置了 朋友们</a></h3>
-<span class="score-badge" data-tier="low" aria-label="0.0 out of 10">0.0</span>
+<h3><a href="https://x.com/Zai_org/status/2088132965922476159">@Zai_org: Introducing GLM-5.3: Built to Code. Ready for Cyber Defense. - Top-tier coding and agentic ca...</a></h3>
+<span class="score-badge" data-tier="good" aria-label="8.0 out of 10">8.0</span>
 </div>
-<p class="source-line">Twitter/X · @op7418 · 8月13日 03:16 UTC · 喜欢 15 · 转发 0 · 回复 46 · 浏览 13505</p>
-<p class="archive-item-content">又重置了 朋友们</p>
-</article>
-<article class="archive-item">
-<div class="archive-item-heading">
-<h3><a href="https://x.com/thsottiaux/status/2087706104814023111">@thsottiaux: Old news actually from a bunch of days ago, but crossed that 15M. Enjoy a nice reset everyone...</a></h3>
-<span class="score-badge" data-tier="low" aria-label="2.3 out of 10">2.3</span>
-</div>
-<p class="source-line">Twitter/X · @op7418 · 8月13日 01:01 UTC · 喜欢 13886 · 转发 671 · 回复 2955 · 浏览 2006543</p>
-<p class="archive-item-content">Old news actually from a bunch of days ago, but crossed that 15M. Enjoy a nice reset everyone. Landing in the next hour or so, go /fast.</p>
+<p class="source-line">Twitter/X · @op7418 · 8月14日 05:17 UTC · 喜欢 17725 · 转发 2188 · 回复 847 · 浏览 4074176</p>
+<p class="archive-item-content">Introducing GLM-5.3: Built to Code. Ready for Cyber Defense.<br>
+<br>
+- Top-tier coding and agentic capabilities, achieved through post-training on the 743B base model<br>
+- A major leap in cybersecurity, setting a new standard among open models<br>
+<br>
+Tech Blog: https://t.co/ekQkO83jCv https://t.co/y3Y2AB0wxr</p>
 </article>
 </div>
 <div class="archive-panel" role="tabpanel" id="archive-panel-follow-builders" aria-labelledby="archive-tab-follow-builders" data-archive-panel="follow-builders">
 <h3 class="archive-panel-title">其他 Follow Builders 资讯</h3>
 <article class="archive-item">
 <div class="archive-item-heading">
-<h3><a href="https://x.com/joshwoodward/status/2087751559606407615">Josh Woodward: Gemini gets things done across the apps you use every day. Starting today, another wave of in...</a></h3>
-<span class="score-badge" data-tier="low" aria-label="4.0 out of 10">4.0</span>
-</div>
-<p class="archive-item-translation archive-title-translation"><span>中文标题</span>Josh Woodward: Gemini 开始集成到您日常使用的应用程序中</p>
-<p class="source-line">Follow Builders · X 动态 · Josh Woodward · 8月13日 04:02 UTC · 喜欢 241 · 转发 11 · 回复 20</p>
-<p class="archive-item-content">Gemini is rolling out a new wave of integrations with consumer apps like OpenTable, Wix, and Ticketmaster.</p>
-<p class="archive-item-translation"><span>中文摘要</span>Gemini 正在推出与 OpenTable、Wix 和 Ticketmaster 等消费类应用的新一轮集成。</p>
-</article>
-<article class="archive-item">
-<div class="archive-item-heading">
-<h3><a href="https://x.com/rauchg/status/2087736311885218160">Guillermo Rauch: Endless opportunity everywhere you look</a></h3>
-<span class="score-badge" data-tier="low" aria-label="2.0 out of 10">2.0</span>
-</div>
-<p class="archive-item-translation archive-title-translation"><span>中文标题</span>Guillermo Rauch：机遇无处不在</p>
-<p class="source-line">Follow Builders · X 动态 · Guillermo Rauch · 8月13日 03:01 UTC · 喜欢 1091 · 转发 87 · 回复 76</p>
-<p class="archive-item-content">A brief, optimistic statement about perceived opportunities in the current landscape.</p>
-<p class="archive-item-translation"><span>中文摘要</span>一个关于当前环境中机遇的简短、乐观的陈述。</p>
-</article>
-<article class="archive-item">
-<div class="archive-item-heading">
-<h3><a href="https://x.com/levie/status/2087719356763672917">Aaron Levie: Awesome day in terms of new model releases from both Deepseek and Grok. Both of these new mod...</a></h3>
-<span class="score-badge" data-tier="mid" aria-label="6.0 out of 10">6.0</span>
-</div>
-<p class="archive-item-translation archive-title-translation"><span>中文标题</span>Aaron Levie：Deepseek 和 Grok 发布新模型，这是了不起的一天</p>
-<p class="source-line">Follow Builders · X 动态 · Aaron Levie · 8月13日 01:54 UTC · 喜欢 212 · 转发 13 · 回复 21</p>
-<p class="archive-item-content">Aaron Levie comments that new, low-cost AI model releases from Deepseek and Grok will accelerate enterprise demand by enabling previously cost-prohibitive agent use cases like code security scanning and document review.</p>
-<p class="archive-item-translation"><span>中文摘要</span>Aaron Levie 评论称，Deepseek 和 Grok 发布的新型低成本 AI 模型将通过实现代码安全扫描和文档审阅等此前成本高昂的智能体用例，加速企业需求。</p>
-</article>
-<article class="archive-item">
-<div class="archive-item-heading">
-<h3><a href="https://x.com/realmadhuguru/status/2087706598542290958">Madhu Guru: I miss when teams actually whiteboarded. Sad casualty of the Covid wfh era. There was somethi...</a></h3>
-<span class="score-badge" data-tier="low" aria-label="3.0 out of 10">3.0</span>
-</div>
-<p class="archive-item-translation archive-title-translation"><span>中文标题</span>Madhu Guru: 我怀念团队真正使用白板协作的时光。这是新冠疫情远程办公时代的一个悲哀牺牲品。</p>
-<p class="source-line">Follow Builders · X 动态 · Madhu Guru · 8月13日 01:03 UTC · 喜欢 30 · 转发 1 · 回复 3</p>
-<p class="archive-item-content">The author laments the loss of in-person whiteboarding sessions as a playful, collaborative casualty of the work-from-home era.</p>
-<p class="archive-item-translation"><span>中文摘要</span>作者哀叹，作为远程办公时代的一个牺牲品，那种充满趣味、共同协作的线下白板会议文化已经消失。</p>
-</article>
-<article class="archive-item">
-<div class="archive-item-heading">
-<h3><a href="https://x.com/thsottiaux/status/2087706104814023111">Thibault Sottiaux: Old news actually from a bunch of days ago, but crossed that 15M. Enjoy a nice reset everyone...</a></h3>
-<span class="score-badge" data-tier="low" aria-label="? out of 10">?</span>
-</div>
-<p class="source-line">Follow Builders · X 动态 · Thibault Sottiaux · 8月13日 01:01 UTC · 喜欢 10790 · 转发 580 · 回复 2378</p>
-<p class="archive-item-content">Old news actually from a bunch of days ago, but crossed that 15M. Enjoy a nice reset everyone. Landing in the next hour or so, go /fast.</p>
-</article>
-<article class="archive-item">
-<div class="archive-item-heading">
-<h3><a href="https://x.com/rauchg/status/2087698195120116064">Guillermo Rauch: This is such a nice improvement. Try 𝚗𝚙𝚡 𝚜𝚊𝚗𝚍𝚋𝚘𝚡@𝚕𝚊𝚝𝚎𝚜𝚝 𝚜𝚑 – it&#x27;s mind-blowing. It feels fast...</a></h3>
+<h3><a href="https://x.com/thsottiaux/status/2088133823619895712">Thibault Sottiaux: Ask ChatGPT to roast your computer usage after a day. Install the Computer History plugin, do...</a></h3>
 <span class="score-badge" data-tier="mid" aria-label="5.0 out of 10">5.0</span>
 </div>
-<p class="archive-item-translation archive-title-translation"><span>中文标题</span>Guillermo Rauch：这是一个非常棒的改进。试试 𝚗𝚙𝚡 𝚜𝚊𝚗𝚍𝚋𝚘𝚡@𝚕𝚊𝚝𝚎𝚜𝚝 𝚜𝚑——它令人惊叹。感觉很快...</p>
-<p class="source-line">Follow Builders · X 动态 · Guillermo Rauch · 8月13日 00:30 UTC · 喜欢 185 · 转发 7 · 回复 17</p>
-<p class="archive-item-content">Guillermo Rauch announces significant performance and customization improvements to the Sandbox development environment, claiming it feels faster than a local machine.</p>
-<p class="archive-item-translation"><span>中文摘要</span>Guillermo Rauch 宣布了 Sandbox 开发环境在性能和可定制性方面的显著改进，声称其感觉比本地机器更快。</p>
+<p class="archive-item-translation archive-title-translation"><span>中文标题</span>Thibault Sottiaux：让 ChatGPT 吐槽你一天后的电脑使用情况</p>
+<p class="source-line">Follow Builders · X 动态 · Thibault Sottiaux · 8月14日 05:21 UTC · 喜欢 1280 · 转发 59 · 回复 221</p>
+<p class="archive-item-content">A user describes a humorous and insightful method of using a ChatGPT plugin to analyze and critique one&#x27;s daily computer usage patterns.</p>
+<p class="archive-item-translation"><span>中文摘要</span>用户描述了一种使用 ChatGPT 插件来分析和幽默点评个人每日电脑使用模式的方法。</p>
+</article>
+<article class="archive-item">
+<div class="archive-item-heading">
+<h3><a href="https://x.com/swyx/status/2088120493224362487">Swyx: top singaporeans agree https://t.co/2WBi1hPotT</a></h3>
+<span class="score-badge" data-tier="low" aria-label="1.0 out of 10">1.0</span>
+</div>
+<p class="archive-item-translation archive-title-translation"><span>中文标题</span>Swyx：顶尖新加坡人同意</p>
+<p class="source-line">Follow Builders · X 动态 · Swyx · 8月14日 04:28 UTC · 喜欢 3 · 转发 0 · 回复 0</p>
+<p class="archive-item-content">A tweet with a vague title linking to unspecified content about Singaporeans agreeing on something.</p>
+<p class="archive-item-translation"><span>中文摘要</span>一条标题模糊的推文，链接到关于新加坡人对某事达成共识的未指明内容。</p>
+</article>
+<article class="archive-item">
+<div class="archive-item-heading">
+<h3><a href="https://x.com/amasad/status/2088112901852971056">Amjad Masad: It’s certainly true at Replit. https://t.co/tYRRVJYUf6</a></h3>
+<span class="score-badge" data-tier="low" aria-label="1.0 out of 10">1.0</span>
+</div>
+<p class="archive-item-translation archive-title-translation"><span>中文标题</span>Amjad Masad：这在 Replit 上当然是正确的。</p>
+<p class="source-line">Follow Builders · X 动态 · Amjad Masad · 8月14日 03:58 UTC · 喜欢 305 · 转发 4 · 回复 9</p>
+<p class="archive-item-content">Amjad Masad states that an unspecified claim is true at Replit, linking to external content.</p>
+<p class="archive-item-translation"><span>中文摘要</span>Amjad Masad 表示一个未具体说明的说法在 Replit 上是正确的，并附有外部链接。</p>
+</article>
+<article class="archive-item">
+<div class="archive-item-heading">
+<h3><a href="https://x.com/amasad/status/2088110851681386864">Amjad Masad: By next year, using a computer will be optional. Work will radically change.</a></h3>
+<span class="score-badge" data-tier="mid" aria-label="5.0 out of 10">5.0</span>
+</div>
+<p class="archive-item-translation archive-title-translation"><span>中文标题</span>Amjad Masad：到明年，使用计算机将成为可选项。工作将发生根本性改变。</p>
+<p class="source-line">Follow Builders · X 动态 · Amjad Masad · 8月14日 03:49 UTC · 喜欢 717 · 转发 41 · 回复 153</p>
+<p class="archive-item-content">Amjad Masad predicts that by next year, using a computer will become optional and work will undergo radical change, likely due to advancements in AI.</p>
+<p class="archive-item-translation"><span>中文摘要</span>Amjad Masad 预测，由于人工智能的进步，到明年使用计算机将变为可选项，工作将发生根本性变革。</p>
+</article>
+<article class="archive-item">
+<div class="archive-item-heading">
+<h3><a href="https://x.com/petergyang/status/2088108304274960667">Peter Yang: What do people include in their product specs these days to make them friendly and concise fo...</a></h3>
+<span class="score-badge" data-tier="mid" aria-label="5.0 out of 10">5.0</span>
+</div>
+<p class="archive-item-translation archive-title-translation"><span>中文标题</span>Peter Yang：如今人们在产品规格说明中会加入什么内容，使其对人和 AI 代理都友好且简洁？</p>
+<p class="source-line">Follow Builders · X 动态 · Peter Yang · 8月14日 03:39 UTC · 喜欢 7 · 转发 1 · 回复 6</p>
+<p class="archive-item-content">A question about what to include in modern product specifications to make them friendly and concise for both humans and AI agents.</p>
+<p class="archive-item-translation"><span>中文摘要</span>一个关于现代产品规格说明应包含哪些内容，才能使其对人和 AI 代理都友好且简洁的提问。</p>
+</article>
+<article class="archive-item">
+<div class="archive-item-heading">
+<h3><a href="https://x.com/levie/status/2088105350201270529">Aaron Levie: The elimination of engineers was one of the wilder hypotheses out there. Just like absurdly w...</a></h3>
+<span class="score-badge" data-tier="mid" aria-label="5.0 out of 10">5.0</span>
+</div>
+<p class="archive-item-translation archive-title-translation"><span>中文标题</span>Aaron Levie：淘汰工程师是最疯狂的假设之一，就像荒谬的错误一样。</p>
+<p class="source-line">Follow Builders · X 动态 · Aaron Levie · 8月14日 03:28 UTC · 喜欢 187 · 转发 20 · 回复 27</p>
+<p class="archive-item-content">AI is a power tool that increases the value and demand for engineers by enabling them to tackle more and larger projects across various domains.</p>
+<p class="archive-item-translation"><span>中文摘要</span>AI 是一种强力工具，它通过使工程师能够处理更多、更大型的项目，从而提升了他们的价值和需求。</p>
+</article>
+<article class="archive-item">
+<div class="archive-item-heading">
+<h3><a href="https://x.com/thsottiaux/status/2088103609477238858">Thibault Sottiaux: Work with Google docs, sheets and slides right inside ChatGPT. This has changed how I write d...</a></h3>
+<span class="score-badge" data-tier="mid" aria-label="5.0 out of 10">5.0</span>
+</div>
+<p class="archive-item-translation archive-title-translation"><span>中文标题</span>Thibault Sottiaux：在 ChatGPT 中直接使用 Google 文档、表格和幻灯片</p>
+<p class="source-line">Follow Builders · X 动态 · Thibault Sottiaux · 8月14日 03:21 UTC · 喜欢 1560 · 转发 84 · 回复 216</p>
+<p class="archive-item-content">A user shares how integrating Google Docs, Sheets, and Slides directly into ChatGPT has streamlined their workflow for writing, brainstorming, and editing.</p>
+<p class="archive-item-translation"><span>中文摘要</span>一位用户分享了将 Google 文档、表格和幻灯片直接集成到 ChatGPT 中，如何简化了其写作、头脑风暴和编辑的工作流程。</p>
+</article>
+<article class="archive-item">
+<div class="archive-item-heading">
+<h3><a href="https://x.com/sama/status/2088101491802243121">Sam Altman: /ultrafast https://t.co/UxnKkABuKQ</a></h3>
+<span class="score-badge" data-tier="mid" aria-label="6.0 out of 10">6.0</span>
+</div>
+<p class="archive-item-translation archive-title-translation"><span>中文标题</span>Sam Altman：/ultrafast</p>
+<p class="source-line">Follow Builders · X 动态 · Sam Altman · 8月14日 03:12 UTC · 喜欢 1638 · 转发 68 · 回复 205</p>
+<p class="archive-item-content">Sam Altman posts a cryptic tweet titled &#x27;/ultrafast&#x27; with a link, hinting at a potential new AI development.</p>
+<p class="archive-item-translation"><span>中文摘要</span>Sam Altman 发布了一条标题为“/ultrafast”并附有链接的神秘推文，暗示可能的新 AI 进展。</p>
+</article>
+<article class="archive-item">
+<div class="archive-item-heading">
+<h3><a href="https://x.com/zarazhangrui/status/2088087765267386564">Zara Zhang: Ironic that many people thought AI coding would make engineers less valuable when in reality...</a></h3>
+<span class="score-badge" data-tier="low" aria-label="4.0 out of 10">4.0</span>
+</div>
+<p class="archive-item-translation archive-title-translation"><span>中文标题</span>Zara Zhang：讽刺的是，许多人曾认为 AI 编程会降低工程师的价值，而现实中...</p>
+<p class="source-line">Follow Builders · X 动态 · Zara Zhang · 8月14日 02:18 UTC · 喜欢 106 · 转发 4 · 回复 29</p>
+<p class="archive-item-content">The author observes that despite fears AI coding would devalue engineers, many high-demand roles still contain the word &#x27;engineer&#x27;.</p>
+<p class="archive-item-translation"><span>中文摘要</span>作者观察到，尽管有人担心 AI 编程会降低工程师的价值，但许多高需求的职位仍然包含“工程师”一词。</p>
+</article>
+<article class="archive-item">
+<div class="archive-item-heading">
+<h3><a href="https://x.com/realmadhuguru/status/2088074515188519182">Madhu Guru: AI industry: this is an era of unlimited creativity, thanks to AI. Also AI industry: we will...</a></h3>
+<span class="score-badge" data-tier="low" aria-label="4.0 out of 10">4.0</span>
+</div>
+<p class="archive-item-translation archive-title-translation"><span>中文标题</span>Madhu Guru: AI 行业：这是一个无限创意的时代，感谢 AI。同样也是 AI 行业：我们都将把产品命名为&#x27;Studio&#x27;。</p>
+<p class="source-line">Follow Builders · X 动态 · Madhu Guru · 8月14日 01:25 UTC · 喜欢 12 · 转发 0 · 回复 2</p>
+<p class="archive-item-content">A humorous observation that many AI products are using the word &#x27;Studio&#x27; in their names.</p>
+<p class="archive-item-translation"><span>中文摘要</span>一个幽默的观察，指出许多 AI 产品都在其名称中使用&#x27;Studio&#x27;这个词。</p>
+</article>
+<article class="archive-item">
+<div class="archive-item-heading">
+<h3><a href="https://x.com/swyx/status/2088074149260673441">Swyx: matt&#x27;s latest: https://t.co/Dnukubm9Yk thariq&#x27;s latest: https://t.co/BChJxtezPp bonus dont mi...</a></h3>
+<span class="score-badge" data-tier="low" aria-label="3.0 out of 10">3.0</span>
+</div>
+<p class="archive-item-translation archive-title-translation"><span>中文标题</span>Swyx: matt 的最新动态: https://t.co/Dnukubm9Yk thariq 的最新动态: https://t.co/BChJxtezPp 额外不要错过...</p>
+<p class="source-line">Follow Builders · X 动态 · Swyx · 8月14日 01:24 UTC · 喜欢 10 · 转发 0 · 回复 1</p>
+<p class="archive-item-content">A tweet sharing links to three other creators&#x27; content, described as contributions to a discussion on frontier skills.</p>
+<p class="archive-item-translation"><span>中文摘要</span>一条推文分享了三位其他创作者关于前沿技能讨论的内容链接。</p>
+</article>
+<article class="archive-item">
+<div class="archive-item-heading">
+<h3><a href="https://x.com/swyx/status/2088073777779515615">Swyx: human i/o is costly, so after listening to @mattpocockuk and @trq212 i made an /align-me modi...</a></h3>
+<span class="score-badge" data-tier="good" aria-label="7.0 out of 10">7.0</span>
+</div>
+<p class="archive-item-translation archive-title-translation"><span>中文标题</span>Swyx：人机交互成本高昂，因此在听取了 @mattpocockuk 和 @trq212 的建议后，我制作了一个 /align-me 修改版...</p>
+<p class="source-line">Follow Builders · X 动态 · Swyx · 8月14日 01:22 UTC · 喜欢 100 · 转发 0 · 回复 25</p>
+<p class="archive-item-content">The author created an &#x27;/align-me&#x27; modification for AI tools that processes questions in batches instead of round-by-round, significantly speeding up design exploration workflows.</p>
+<p class="archive-item-translation"><span>中文摘要</span>作者为 AI 工具创建了一个&#x27;/align-me&#x27;修改版，支持批量处理问题而非逐轮交互，从而显著加快了设计探索工作流。</p>
+</article>
+<article class="archive-item">
+<div class="archive-item-heading">
+<h3><a href="https://x.com/garrytan/status/2088066634074443901">Garry Tan: So great to host who we hope is our next Governor of California, @XavierBecerra for a @garrys...</a></h3>
+<span class="score-badge" data-tier="low" aria-label="0.0 out of 10">0.0</span>
+</div>
+<p class="archive-item-translation archive-title-translation"><span>中文标题</span>Garry Tan: 非常荣幸地接待我们希望成为加州下一任州长的@XavierBecerra，参加@garryslist 公民联盟聚会。</p>
+<p class="source-line">Follow Builders · X 动态 · Garry Tan · 8月14日 00:54 UTC · 喜欢 129 · 转发 6 · 回复 43</p>
+<p class="archive-item-content">Garry Tan hosts a political gathering for a potential California gubernatorial candidate, discussing making the state business-friendly and affordable.</p>
+<p class="archive-item-translation"><span>中文摘要</span>Garry Tan 为一位潜在的加州州长候选人举办政治聚会，讨论如何使加州对企业友好且宜居。</p>
+</article>
+<article class="archive-item">
+<div class="archive-item-heading">
+<h3><a href="https://x.com/adityaag/status/2088058783767658541">Aditya Agarwal: It would be amazing to host @JeffDean at @spc for a fireside chat. How do we make that happen?</a></h3>
+<span class="score-badge" data-tier="low" aria-label="1.0 out of 10">1.0</span>
+</div>
+<p class="archive-item-translation archive-title-translation"><span>中文标题</span>Aditya Agarwal：如果能邀请@JeffDean 到@spc 进行炉边谈话就太棒了。我们如何实现？</p>
+<p class="source-line">Follow Builders · X 动态 · Aditya Agarwal · 8月14日 00:23 UTC · 喜欢 91 · 转发 0 · 回复 8</p>
+<p class="archive-item-content">A user expresses a desire to host Jeff Dean for a fireside chat at SPC and asks for suggestions on how to arrange it.</p>
+<p class="archive-item-translation"><span>中文摘要</span>一位用户表达了希望在 SPC 邀请 Jeff Dean 进行炉边谈话的愿望，并征求实现此事的建议。</p>
 </article>
 </div>
 </section>
