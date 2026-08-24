@@ -2,15 +2,18 @@ name: Daily Horizon Summary
 
 on:
   schedule:
-    # 23:30 UTC = 07:30 Asia/Shanghai. The buffer absorbs normal cron delay
-    # so the briefing is usually ready around 08:00 Beijing time.
-    - cron: '30 23 * * *'
+    # 22:00 UTC = 06:00 Asia/Shanghai (Beijing time, UTC+8 year-round).
+    # GitHub Actions may start scheduled workflows a few minutes late.
+    - cron: '0 22 * * *'
   workflow_dispatch:
     inputs:
       hours:
         description: "Fetch window in hours"
         required: false
         default: "24"
+
+env:
+  TZ: Asia/Shanghai
 
 concurrency:
   group: horizon-daily-pages

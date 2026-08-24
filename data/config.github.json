@@ -1,5 +1,6 @@
 {
   "version": "1.0",
+  "report_timezone": "Asia/Shanghai",
   "profile": {
     "interests": [
       "AI agents",
@@ -35,7 +36,7 @@
   },
   "ai": {
     "provider": "openai",
-    "model": "deepseek-ai/DeepSeek-V3.2",
+    "model": "deepseek-ai/DeepSeek-V4-Flash",
     "base_url": "https://api.siliconflow.cn/v1",
     "api_key_env": "SILICONFLOW_API_KEY",
     "temperature": 0.2,

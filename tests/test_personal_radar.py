@@ -21,6 +21,7 @@ from src.storage.manager import StorageManager
 def _config() -> Config:
     return Config.model_validate(
         {
+            "report_timezone": "Asia/Shanghai",
             "profile": {
                 "interests": ["AI agents", "Codex"],
                 "negative_topics": ["体育"],
@@ -28,7 +29,7 @@ def _config() -> Config:
             },
             "ai": {
                 "provider": "openai",
-                "model": "deepseek-ai/DeepSeek-V3.2",
+                "model": "deepseek-ai/DeepSeek-V4-Flash",
                 "base_url": "https://api.siliconflow.cn/v1",
                 "api_key_env": "SILICONFLOW_API_KEY",
                 "languages": ["zh"],
@@ -76,6 +77,14 @@ def test_profile_is_injected_into_analysis_prompt():
     assert "AI agents" in client.user_prompt
     assert "体育" in client.user_prompt
     assert item.metadata["personal_ai_score"] == 8.0
+
+
+def test_report_date_uses_configured_timezone(tmp_path):
+    orchestrator = HorizonOrchestrator(_config(), StorageManager(str(tmp_path)))
+
+    utc_previous_day = datetime(2026, 8, 23, 22, 0, tzinfo=timezone.utc)
+
+    assert orchestrator._report_date(utc_previous_day) == "2026-08-24"
 
 
 def test_aihot_and_multi_source_score_are_combined(tmp_path):
