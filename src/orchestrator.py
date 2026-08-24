@@ -6,6 +6,7 @@ from dataclasses import dataclass, field
 from datetime import datetime, timedelta, timezone
 from typing import List, Dict, Optional
 from urllib.parse import parse_qsl, urlencode, urlparse
+from zoneinfo import ZoneInfo
 import httpx
 from rich.console import Console
 
@@ -64,6 +65,7 @@ class HorizonOrchestrator:
             storage: Storage manager
         """
         self.config = config
+        self.report_timezone = ZoneInfo(config.report_timezone)
         self.storage = storage
         self.delivery_enabled = delivery_enabled
         self.console = Console()
@@ -190,7 +192,7 @@ class HorizonOrchestrator:
             SourceVerifier.finalize_corroboration(important_items)
 
             # 8. Generate and save daily summaries for each configured language
-            today = datetime.now(timezone.utc).strftime("%Y-%m-%d")
+            today = self._report_date()
             for lang in self.config.ai.languages:
                 summarizer = DailySummarizer()
                 summary = await summarizer.generate_summary(
@@ -296,11 +298,18 @@ class HorizonOrchestrator:
             # Send webhook failure notification if configured
             if self.webhook_notifier:
                 await self.webhook_notifier.send_failure(
-                    date=datetime.now(timezone.utc).strftime("%Y-%m-%d"),
+                    date=self._report_date(),
                     error_message=str(e),
                 )
 
             raise
+
+    def _report_date(self, moment: datetime | None = None) -> str:
+        """Return the calendar date used for reports in the configured timezone."""
+        current = moment or datetime.now(timezone.utc)
+        if current.tzinfo is None:
+            current = current.replace(tzinfo=timezone.utc)
+        return current.astimezone(self.report_timezone).strftime("%Y-%m-%d")
 
     def _determine_time_window(self, force_hours: int = None) -> datetime:
         if force_hours:

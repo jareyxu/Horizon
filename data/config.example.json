@@ -1,5 +1,6 @@
 {
   "version": "1.0",
+  "report_timezone": "UTC",
   "profile": {
     "interests": ["AI agents", "developer tools"],
     "negative_topics": ["off-topic entertainment"],

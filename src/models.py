@@ -3,6 +3,7 @@
 from datetime import datetime, timezone
 from enum import Enum
 from typing import Optional, List, Dict, Any, Union
+from zoneinfo import ZoneInfo, ZoneInfoNotFoundError
 from pydantic import BaseModel, HttpUrl, Field, field_validator
 
 
@@ -549,6 +550,7 @@ class Config(BaseModel):
     """Main configuration model."""
 
     version: str = "1.0"
+    report_timezone: str = "UTC"
     profile: ProfileConfig = Field(default_factory=ProfileConfig)
     verification: VerificationConfig = Field(default_factory=VerificationConfig)
     ai: AIConfig
@@ -556,3 +558,12 @@ class Config(BaseModel):
     filtering: FilteringConfig
     email: Optional[EmailConfig] = None
     webhook: Optional[WebhookConfig] = None
+
+    @field_validator("report_timezone")
+    @classmethod
+    def validate_report_timezone(cls, value: str) -> str:
+        try:
+            ZoneInfo(value)
+        except ZoneInfoNotFoundError as exc:
+            raise ValueError(f"Unknown report timezone: {value}") from exc
+        return value

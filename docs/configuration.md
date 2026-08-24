@@ -7,6 +7,11 @@ title: Configuration Guide
 
 Horizon is configured through two files: a `.env` file for API keys and a `data/config.json` file for sources, AI provider, and filtering options.
 
+Set the top-level `report_timezone` to the IANA timezone used by the daily
+orchestrator for report dates, file names, and delivery labels. It defaults to
+`UTC`; the Chinese GitHub preset uses `Asia/Shanghai` so a morning run is
+published under the correct Beijing date.
+
 ## AI Providers
 
 Configure which AI model scores and summarizes your content.
@@ -44,7 +49,7 @@ Common API key variable names:
 {
   "ai": {
     "provider": "openai",
-    "model": "deepseek-ai/DeepSeek-V3.2",
+    "model": "deepseek-ai/DeepSeek-V4-Flash",
     "base_url": "https://api.siliconflow.cn/v1",
     "api_key_env": "SILICONFLOW_API_KEY",
     "languages": ["zh"]
