@@ -1,5 +1,5 @@
 theme: jekyll-theme-cayman
-title: Jarey's AI Radar
+title: AI 资讯雷达
 description: 面向 AI 建设者、工程实践与产品趋势的中文个人情报雷达
 baseurl: "/Horizon" # the subpath of your site, e.g. /blog
 url: "https://jareyxu.github.io" # the base hostname & protocol for your site, e.g. http://example.com

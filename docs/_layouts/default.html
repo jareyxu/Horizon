@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    {% seo %}
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="{{ '/assets/css/style.css?v=' | append: site.github.build_revision | relative_url }}">
+    {% include head-custom.html %}
+  </head>
+  <body class="{{ page.body_class | default: 'content-page' }}">
+    <a class="skip-link" href="#main-content">跳到正文</a>
+
+    <header class="site-header" role="banner">
+      <div class="site-header-inner">
+        {% if page.url == '/' %}
+          <h1 class="site-title"><a href="{{ '/' | relative_url }}">AI 资讯雷达</a></h1>
+        {% else %}
+          <a class="site-title" href="{{ '/' | relative_url }}">AI 资讯雷达</a>
+        {% endif %}
+        <p class="site-tagline">{{ site.description }}</p>
+      </div>
+    </header>
+
+    <main id="main-content" class="main-content" role="main">
+      {{ content }}
+    </main>
+
+    <footer class="site-footer" role="contentinfo">
+      <div class="site-footer-inner">
+        <span>每天北京时间 06:00 更新</span>
+        <a href="{{ '/feed-zh.xml' | relative_url }}">订阅中文 RSS</a>
+      </div>
+    </footer>
+  </body>
+</html>
