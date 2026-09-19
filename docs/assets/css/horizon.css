@@ -383,6 +383,49 @@ a.site-brand {
   overflow: visible;
 }
 
+@media (prefers-color-scheme: dark) {
+  .radar-hero::before {
+    background:
+      radial-gradient(circle at 66% 45%, rgba(47, 139, 255, 0.24), transparent 31%),
+      radial-gradient(circle at 88% 12%, rgba(75, 111, 176, 0.16), transparent 36%),
+      linear-gradient(116deg, transparent 8%, rgba(12, 35, 68, 0.46) 58%, rgba(14, 39, 73, 0.78));
+  }
+
+  #radar-globe stop:nth-child(1) { stop-color: #143f74; }
+  #radar-globe stop:nth-child(2) { stop-color: #1767bd; }
+  #radar-globe stop:nth-child(3) { stop-color: #1684f8; }
+
+  #radar-card stop:nth-child(1) {
+    stop-color: #173a67;
+    stop-opacity: 0.94;
+  }
+
+  #radar-card stop:nth-child(2) {
+    stop-color: #0b203e;
+    stop-opacity: 0.82;
+  }
+
+  .radar-globe-object circle:first-child { opacity: 0.92; }
+  .radar-globe-object ellipse,
+  .radar-globe-object path { stroke: #d9ebff; }
+
+  .radar-glass-card rect {
+    stroke: rgba(148, 201, 255, 0.66);
+  }
+
+  .radar-glass-card text:nth-of-type(1) { fill: #70b6ff; }
+  .radar-glass-card text:nth-of-type(2) { fill: #c3dcf7; }
+  .radar-glass-card path { stroke: #65aaff; }
+
+  .radar-labels rect {
+    fill: #102849;
+    fill-opacity: 0.96;
+    stroke: rgba(125, 185, 255, 0.34);
+  }
+
+  .radar-labels text { fill: #c9e2ff; }
+}
+
 /* Dashboard */
 .digest-dashboard {
   position: relative;
@@ -397,7 +440,6 @@ a.site-brand {
 .digest-ranking-card,
 .overview-card,
 .trend-card,
-.radar-quote,
 .rss-card,
 .latest-digest-content,
 .digest-archive {
@@ -546,7 +588,6 @@ a.site-brand {
 
 .overview-card,
 .trend-card,
-.radar-quote,
 .rss-card {
   border-radius: 18px;
 }
@@ -673,43 +714,6 @@ a.site-brand {
   border-radius: inherit;
   background: linear-gradient(90deg, #73b7ff, #0b6ff4);
   transition: width 360ms ease-out;
-}
-
-.radar-quote {
-  position: relative;
-  margin: 0;
-  padding: 24px 24px 24px 68px;
-  overflow: hidden;
-}
-
-.radar-quote::after {
-  position: absolute;
-  right: -32px;
-  bottom: -54px;
-  width: 150px;
-  height: 150px;
-  border-radius: 50%;
-  background: radial-gradient(circle, rgba(53, 137, 255, 0.16), transparent 66%);
-  content: "";
-}
-
-.radar-quote svg {
-  position: absolute;
-  top: 26px;
-  left: 24px;
-  width: 28px;
-  height: 22px;
-  fill: #bad9ff;
-}
-
-.radar-quote p {
-  position: relative;
-  z-index: 1;
-  margin: 0;
-  color: var(--hz-text);
-  font-size: 0.92rem;
-  font-weight: 560;
-  line-height: 1.65;
 }
 
 .rss-card {

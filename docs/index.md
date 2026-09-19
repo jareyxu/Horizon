@@ -61,7 +61,7 @@ body_class: home-page
           <feDropShadow dx="0" dy="14" stdDeviation="18" flood-color="#1268db" flood-opacity=".18"/>
         </filter>
       </defs>
-      <g transform="translate(390 145)" filter="url(#radar-shadow)">
+      <g class="radar-globe-object" transform="translate(390 145)" filter="url(#radar-shadow)">
         <circle r="102" fill="url(#radar-globe)" opacity=".82"/>
         <ellipse rx="102" ry="38" fill="none" stroke="#fff" stroke-opacity=".72"/>
         <ellipse rx="47" ry="102" fill="none" stroke="#fff" stroke-opacity=".5"/>
@@ -141,11 +141,6 @@ body_class: home-page
           {% endfor %}
         </ol>
       </section>
-
-      <blockquote class="radar-quote">
-        <svg aria-hidden="true" viewBox="0 0 32 24"><path d="M0 24V13C0 4 5 0 13 0v6c-4 0-6 2-6 6h6v12H0Zm19 0V13c0-9 5-13 13-13v6c-4 0-6 2-6 6h6v12H19Z"/></svg>
-        <p>在信息的洪流中，为你留下真正值得关注的信号。</p>
-      </blockquote>
 
       <a class="rss-card" href="{{ '/feed-zh.xml' | relative_url }}">
         <span class="rss-card-icon" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 11.5a7.5 7.5 0 0 1 7.5 7.5M5 5a14 14 0 0 1 14 14M6 19a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"/></svg></span>
