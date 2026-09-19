@@ -34,10 +34,55 @@
       }
 
       // Source line: pattern like "source · site · date"
-      if (/^(rss|reddit|github|hackernews|hn|telegram|twitter|follow builders)\s*·/i.test(text)) {
+      if (/^(rss|reddit|github|hackernews|hn|telegram|twitter|follow builders|aihot|openbb|ossinsight|gdelt|google news|google_news)\s*·/i.test(text)) {
         p.classList.add('source-line');
         return;
       }
+    });
+  }
+
+  /** Fill dashboard metrics and normalize the recent-digest trend. */
+  function setupDashboard() {
+    var dashboard = document.querySelector('[data-dashboard]');
+    if (!dashboard) return;
+
+    var scoreBadges = Array.prototype.slice.call(
+      dashboard.querySelectorAll('[data-dashboard-ranking] .score-badge')
+    );
+    var scores = scoreBadges
+      .map(function (badge) {
+        return parseFloat(badge.textContent);
+      })
+      .filter(function (score) {
+        return Number.isFinite(score);
+      });
+
+    var highest = dashboard.querySelector('[data-dashboard-highest]');
+    var average = dashboard.querySelector('[data-dashboard-average]');
+    if (scores.length > 0) {
+      var total = scores.reduce(function (sum, score) {
+        return sum + score;
+      }, 0);
+      highest.textContent = Math.max.apply(Math, scores).toFixed(1);
+      average.textContent = (total / scores.length).toFixed(1);
+    } else {
+      highest.textContent = '—';
+      average.textContent = '—';
+    }
+
+    var trendItems = Array.prototype.slice.call(
+      dashboard.querySelectorAll('[data-digest-trend] li')
+    );
+    var counts = trendItems.map(function (item) {
+      return parseInt(item.getAttribute('data-count'), 10) || 0;
+    });
+    var maxCount = Math.max.apply(Math, counts.concat([1]));
+
+    trendItems.forEach(function (item, index) {
+      var bar = item.querySelector('.trend-bar');
+      if (!bar) return;
+      var width = counts[index] === 0 ? 0 : Math.max(8, (counts[index] / maxCount) * 100);
+      bar.style.setProperty('--trend-width', width + '%');
     });
   }
 
@@ -92,6 +137,7 @@
   document.addEventListener('DOMContentLoaded', function () {
     processScoreBadges();
     markSemanticElements();
+    setupDashboard();
     setupArchiveTabs();
   });
 })();
