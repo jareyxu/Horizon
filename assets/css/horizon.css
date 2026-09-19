@@ -1148,22 +1148,12 @@ a.site-brand {
     grid-template-columns: 1fr;
   }
 
-  .radar-hero-copy { padding: 42px 0 16px; }
-  .radar-visual { height: 190px; opacity: 0.88; }
-  .radar-visual svg { min-height: 190px; }
+  .radar-hero-copy { padding: 28px 0 24px; }
+  .radar-hero h2 { font-size: clamp(3rem, 13vw, 4.4rem); }
+  .hero-subtitle,
+  .hero-date,
+  .radar-visual { display: none; }
   .radar-hero::before { left: 15%; }
-
-  .hero-date {
-    align-items: flex-start;
-    flex-wrap: wrap;
-  }
-
-  .hero-date-note {
-    width: 100%;
-    margin: 0 0 0 33px;
-    padding: 0;
-    border: 0;
-  }
 
   .digest-dashboard { margin-bottom: 56px; }
   .dashboard-aside { grid-template-columns: 1fr; }
@@ -1206,10 +1196,8 @@ a.site-brand {
   .site-nav { justify-content: space-between; gap: 8px; }
   .site-nav a { font-size: 0.79rem; }
 
-  .radar-hero-copy { padding-top: 34px; }
-  .radar-hero h2 { font-size: clamp(3.25rem, 17vw, 4.3rem); }
-  .hero-subtitle { font-size: 1rem; }
-  .radar-visual { margin: 0 -46px; }
+  .radar-hero-copy { padding-top: 24px; padding-bottom: 20px; }
+  .radar-hero h2 { font-size: clamp(2.85rem, 15vw, 3.8rem); }
 
   .digest-summary-icon { width: 42px; height: 42px; }
   .digest-summary-text p { font-size: 0.92rem; }
