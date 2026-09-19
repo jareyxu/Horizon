@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     {% seo %}
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="{{ '/assets/css/style.css?v=' | append: site.github.build_revision | relative_url }}">
     {% include head-custom.html %}
   </head>
@@ -13,12 +12,30 @@
 
     <header class="site-header" role="banner">
       <div class="site-header-inner">
+        {% capture brand %}
+          <svg class="site-logo" aria-hidden="true" viewBox="0 0 42 42">
+            <path d="M20.8 3 3.5 34.5h10.2L21 20.8l7.2 13.7h10.3L20.8 3Z"/>
+            <path class="site-logo-cut" d="m21 20.8 5.2-9.7 4.5 8.2-4.3 8.1L21 20.8Z"/>
+          </svg>
+          <span>AI 资讯雷达</span>
+        {% endcapture %}
         {% if page.url == '/' %}
-          <h1 class="site-title"><a href="{{ '/' | relative_url }}">AI 资讯雷达</a></h1>
+          <h1 class="site-brand"><a href="{{ '/' | relative_url }}">{{ brand }}</a></h1>
         {% else %}
-          <a class="site-title" href="{{ '/' | relative_url }}">AI 资讯雷达</a>
+          <a class="site-brand" href="{{ '/' | relative_url }}">{{ brand }}</a>
         {% endif %}
-        <p class="site-tagline">{{ site.description }}</p>
+
+        <nav class="site-nav" aria-label="主导航">
+          <a href="{{ '/' | relative_url }}"{% if page.url == '/' %} aria-current="page"{% endif %}>首页</a>
+          <a href="{{ '/archive/' | relative_url }}"{% if page.url == '/archive/' %} aria-current="page"{% endif %}>历史日报</a>
+          <a href="{{ '/scrapers' | relative_url }}"{% if page.url contains '/scrapers' %} aria-current="page"{% endif %}>信息源</a>
+          <a href="{{ '/configuration' | relative_url }}"{% if page.url contains '/configuration' %} aria-current="page"{% endif %}>配置指南</a>
+        </nav>
+
+        <a class="subscribe-button" href="{{ '/feed-zh.xml' | relative_url }}" aria-label="订阅中文 RSS">
+          <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M5 11.5a7.5 7.5 0 0 1 7.5 7.5M5 5a14 14 0 0 1 14 14M6 19a1 1 0 1 1-2 0 1 1 0 0 1 2 0Z"/></svg>
+          <span>订阅更新</span>
+        </a>
       </div>
     </header>
 
