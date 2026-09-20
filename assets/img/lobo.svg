@@ -1,0 +1,63 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 128" width="128" height="128">
+  <defs>
+    <!-- 左侧笔画 -->
+    <linearGradient id="leftGrad" x1="0.7" y1="0" x2="0.15" y2="1">
+      <stop offset="0%" stop-color="#7CFFF3"></stop>
+      <stop offset="38%" stop-color="#27D8F7"></stop>
+      <stop offset="72%" stop-color="#0A84FF"></stop>
+      <stop offset="100%" stop-color="#1552FF"></stop>
+    </linearGradient>
+
+    <!-- 右侧笔画 -->
+    <linearGradient id="rightGrad" x1="0.25" y1="0" x2="0.75" y2="1">
+      <stop offset="0%" stop-color="#8AFFF4"></stop>
+      <stop offset="42%" stop-color="#42E8EF"></stop>
+      <stop offset="75%" stop-color="#16B4FA"></stop>
+      <stop offset="100%" stop-color="#0A7DFF"></stop>
+    </linearGradient>
+
+    <!-- 中间弧形横笔 -->
+    <linearGradient id="barGrad" x1="0" y1="0.8" x2="1" y2="0.2">
+      <stop offset="0%" stop-color="#1A63FF"></stop>
+      <stop offset="42%" stop-color="#17B8FA"></stop>
+      <stop offset="100%" stop-color="#73FFF1"></stop>
+    </linearGradient>
+  </defs>
+
+  <!-- A 左侧 -->
+  <path d="
+      M 8 112
+      L 63.8 10
+      L 76 32.5
+      L 49 82
+      L 34 112
+      Z
+    " fill="url(#leftGrad)"></path>
+
+  <!-- A 右侧 -->
+  <path d="
+      M 63.8 10
+      L 120 112
+      L 96 112
+      L 64 54
+      L 56.3 68
+      L 49 82
+      L 76 32.5
+      Z
+    " fill="url(#rightGrad)"></path>
+
+  <!-- 弧形横笔 -->
+  <path d="
+      M 8 112
+      C 23 87,
+        43 74,
+        64 72
+      C 74 71,
+        82 72,
+        91 75
+      C 72 77,
+        53 88,
+        39 112
+      Z
+    " fill="url(#barGrad)"></path>
+</svg>
