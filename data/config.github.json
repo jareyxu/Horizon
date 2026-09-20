@@ -108,6 +108,54 @@
         "url": "https://simonwillison.net/atom/everything/",
         "enabled": true,
         "category": "ai-engineering"
+      },
+      {
+        "name": "OpenAI News",
+        "url": "https://openai.com/news/rss.xml",
+        "enabled": true,
+        "category": "official"
+      },
+      {
+        "name": "Google DeepMind",
+        "url": "https://deepmind.google/blog/rss.xml",
+        "enabled": true,
+        "category": "official"
+      },
+      {
+        "name": "Google AI",
+        "url": "https://blog.google/technology/ai/rss/",
+        "enabled": true,
+        "category": "official"
+      },
+      {
+        "name": "Hugging Face",
+        "url": "https://huggingface.co/blog/feed.xml",
+        "enabled": true,
+        "category": "opensource"
+      },
+      {
+        "name": "arXiv cs.AI",
+        "url": "https://rss.arxiv.org/rss/cs.AI",
+        "enabled": true,
+        "category": "research"
+      },
+      {
+        "name": "arXiv cs.LG",
+        "url": "https://rss.arxiv.org/rss/cs.LG",
+        "enabled": true,
+        "category": "research"
+      },
+      {
+        "name": "Hacker News AI",
+        "url": "https://hnrss.org/newest?q=AI",
+        "enabled": true,
+        "category": "tech-community"
+      },
+      {
+        "name": "Microsoft AI Blog",
+        "url": "https://blogs.microsoft.com/ai/feed/",
+        "enabled": true,
+        "category": "official"
       }
     ],
     "reddit": {
