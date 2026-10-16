@@ -40,7 +40,7 @@ body_class: home-page
         <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M7 3v3m10-3v3M4.5 9.5h15M6 5h12a2 2 0 0 1 2 2v12H4V7a2 2 0 0 1 2-2Z"/></svg>
         <time datetime="{{ latest_post.date | date: '%Y-%m-%d' }}">{{ latest_post.date | date: "%Y 年 %m 月 %d 日" }}</time>
         <span>{{ weekday_zh }}</span>
-        <span class="hero-date-note">每天早上 06:00 更新</span>
+        <span class="hero-date-note">每天早上 07:00 更新</span>
       </div>
     {% endif %}
   </div>
