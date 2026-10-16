@@ -1,0 +1,11 @@
+[Unit]
+Description=Run Horizon daily at 07:00 Beijing time
+
+[Timer]
+OnCalendar=*-*-* 07:00:00 Asia/Shanghai
+Persistent=true
+AccuracySec=1s
+Unit=horizon.service
+
+[Install]
+WantedBy=timers.target
