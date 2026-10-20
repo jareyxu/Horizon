@@ -111,6 +111,8 @@ class HorizonOrchestrator:
             # 2. Fetch content from all sources
             all_items = await self.fetch_all_sources(since)
             raw_items = [item.model_copy(deep=True) for item in all_items]
+            if raw_items and hasattr(self.storage, "save_candidate_archive"):
+                self.storage.save_candidate_archive(self._report_date(), raw_items)
             self.console.print(f"📥 Fetched {len(all_items)} items from all sources\n")
 
             tracked_x_items = [
@@ -142,6 +144,8 @@ class HorizonOrchestrator:
             # 4. Analyze with AI
             analyzed_items = await self._analyze_content(merged_items)
             self._apply_source_scoring(analyzed_items)
+            if hasattr(self.storage, "save_candidate_archive"):
+                self.storage.save_candidate_archive(self._report_date(), self.build_candidate_archive(raw_items, analyzed_items))
             self.console.print(f"🤖 Analyzed {len(analyzed_items)} items with AI\n")
 
             # 5. Filter by score threshold
