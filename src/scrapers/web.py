@@ -208,6 +208,7 @@ class WebScraper(BaseScraper):
         if previous is None:
             logger.info("Web %s: first baseline stored; no launch date inferred", source.name)
             return []
+        content = "这是官网内容变化线索，观察时间不是产品发布日期；尚未核实是否为新功能，不应直接称为今日发布。\n" + content
         item = self._item(source, f"{source.name}：页面内容变化（待核实）", str(source.url), content, datetime.now(timezone.utc), observed_change=True, requires_verification=True)
         item.id += ":" + digest[:12]
         return [item]
