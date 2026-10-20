@@ -42,6 +42,7 @@
     "max_tokens": 4096,
     "throttle_sec": 0,
     "analysis_concurrency": 1,
+    "analysis_input": "title",
     "enrichment_concurrency": 1
   },
   "email": {
@@ -333,6 +334,15 @@
     "web": [
       {
         "enabled": true,
+        "name": "AIbase AI 日报",
+        "url": "https://news.aibase.cn/daily/",
+        "link_selector": "a[href^=\"/daily/\"]",
+        "title_include_keywords": ["AI日报", "AI 日报"],
+        "category": "daily-roundup",
+        "max_items": 3
+      },
+      {
+        "enabled": true,
         "name": "AIBase 中文",
         "url": "https://www.aibase.cn/",
         "link_selector": "a[href^=\"https://news.aibase.cn/news/\"]",
@@ -395,6 +405,8 @@
     ]
   },
   "filtering": {
+    "always_include_aibase_daily": true,
+    "always_include_model_releases": true,
     "ai_score_threshold": 6,
     "minimum_items": 0,
     "time_window_hours": 24,

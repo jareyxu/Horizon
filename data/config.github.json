@@ -46,6 +46,7 @@
       "zh"
     ],
     "analysis_concurrency": 4,
+    "analysis_input": "title",
     "enrichment_concurrency": 2
   },
   "sources": {
@@ -68,6 +69,7 @@
     },
     "follow_builders": {
       "enabled": true,
+      "excluded_x_handles": ["dotey", "op7418"],
       "x_feed": "https://raw.githubusercontent.com/zarazhangrui/follow-builders/main/feed-x.json",
       "podcast_feed": "https://raw.githubusercontent.com/zarazhangrui/follow-builders/main/feed-podcasts.json",
       "blog_feed": "https://raw.githubusercontent.com/zarazhangrui/follow-builders/main/feed-blogs.json",
@@ -240,7 +242,7 @@
       "channels": []
     },
     "twitter": {
-      "enabled": true,
+      "enabled": false,
       "mode": "rapidapi",
       "users": [],
       "fetch_limit": 10,
@@ -255,14 +257,14 @@
         {
           "username": "dotey",
           "rest_id": "3178231",
-          "enabled": true,
+          "enabled": false,
           "category": "builders",
           "fetch_every_days": 1
         },
         {
           "username": "op7418",
           "rest_id": "1669276256",
-          "enabled": true,
+          "enabled": false,
           "category": "builders",
           "fetch_every_days": 1
         }
@@ -287,6 +289,15 @@
       "category": "oss-trending"
     },
     "web": [
+      {
+        "enabled": true,
+        "name": "AIbase AI 日报",
+        "url": "https://news.aibase.cn/daily/",
+        "link_selector": "a[href^=\"/daily/\"]",
+        "title_include_keywords": ["AI日报", "AI 日报"],
+        "category": "daily-roundup",
+        "max_items": 3
+      },
       {
         "enabled": true,
         "name": "AIBase 中文",
@@ -351,6 +362,8 @@
     ]
   },
   "filtering": {
+    "always_include_aibase_daily": true,
+    "always_include_model_releases": true,
     "ai_score_threshold": 7,
     "minimum_items": 0,
     "time_window_hours": 24,

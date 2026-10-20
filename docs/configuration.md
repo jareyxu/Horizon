@@ -16,6 +16,27 @@ published under the correct Beijing date.
 
 Configure which AI model scores and summarizes your content.
 
+The Chinese preset uses `ai.analysis_input: "title"`: the initial scoring call
+receives the title and source identity, not article text, comments or engagement.
+Unselected items retain their fetched text for manual reading; their Chinese
+summary only paraphrases the title. Selected items still go through source
+verification and body-based enrichment. Use `"excerpt"` to restore excerpt scoring.
+This saves scoring input tokens, not all AI costs, and can miss stories with
+uninformative titles. Long podcast condensation is skipped before title screening.
+
+`filtering.always_include_aibase_daily` includes collected AIbase daily roundups
+regardless of score. A dedicated public daily collector keeps the original
+publication date and the normal time window; missing or stale issues are not
+fabricated. `always_include_model_releases` includes explicit new AI model/version
+release announcements identified in screening, excluding rumors and benchmarks.
+These editorial exceptions retain their actual scores, undergo topic deduplication
+(roundups remain separate), and survive category/global caps. The final count may
+exceed `max_items` if the mandatory items alone exceed that limit.
+
+The Chinese preset disables the dedicated X collector for `dotey` and `op7418`.
+`sources.follow_builders.excluded_x_handles` also excludes those handles from
+the shared Follow Builders X feed; other Follow Builders sources remain enabled.
+
 `api_key_env` is always an environment variable name, not the API key value.
 Store secrets in `.env` or your shell environment, then point `api_key_env` at
 that variable:

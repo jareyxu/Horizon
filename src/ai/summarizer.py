@@ -583,6 +583,9 @@ class DailySummarizer:
         ]
 
         verification_status = str(meta.get("verification_status") or "")
+        if meta.get("mandatory_inclusion"):
+            label = "入选规则" if language == "zh" else "Inclusion rule"
+            lines.extend(["", f"**{label}**: {escape(str(meta['mandatory_inclusion']))}"])
         if verification_status:
             verification_text = labels["verification_states"].get(
                 verification_status,

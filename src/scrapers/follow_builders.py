@@ -82,6 +82,8 @@ class FollowBuildersScraper(BaseScraper):
         for builder in builders:
             name = str(builder.get("name") or builder.get("handle") or "Unknown")
             handle = str(builder.get("handle") or "")
+            if handle.lower().lstrip("@") in {h.lower().lstrip("@") for h in self.config.excluded_x_handles}:
+                continue
             tweets = builder.get("tweets", [])
             if not isinstance(tweets, list):
                 continue
