@@ -31,6 +31,7 @@ LABELS = {
         "verification": "Verification",
         "tracked_x_archive": "Other tracked X posts",
         "follow_builders_archive": "Other Follow Builders stories",
+        "all_archive": "All unselected items",
         "archive_heading": "More tracked content",
         "archive_tabs_label": "More tracked content sources",
         "archive_intro": (
@@ -73,9 +74,10 @@ LABELS = {
         "verification": "核验",
         "tracked_x_archive": "其他追踪推文",
         "follow_builders_archive": "其他 Follow Builders 资讯",
-        "archive_heading": "更多追踪内容",
+        "all_archive": "全部未入选",
+        "archive_heading": "更多资讯，供你自行挑选",
         "archive_tabs_label": "更多追踪内容来源",
-        "archive_intro": "以下内容已于今日成功抓取，但未进入上方主列表。",
+        "archive_intro": "以下内容已成功抓取，因评分、数量限制或同题合并未进入精选。AI 判断仅供参考，你可以继续阅读并自行挑选；各来源切换是全部列表的子集。",
         "archive_empty": "今天该来源没有其他未入选内容。",
         "archive_content_empty": "请打开原文链接查看完整内容。",
         "archive_variant_x": "X 动态",
@@ -108,8 +110,8 @@ LABELS = {
 class DailySummarizer:
     """Generates daily Markdown summaries from pre-analyzed content items."""
 
-    def __init__(self):
-        pass
+    def __init__(self, editorial_mode="technical"):
+        self.editorial_mode = editorial_mode
 
     async def generate_summary(
         self,
@@ -134,6 +136,8 @@ class DailySummarizer:
         labels = LABELS.get(language, LABELS["en"])
 
         if not items:
+            if self.editorial_mode == "creator":
+                return f"# {labels['header']} - {date}\n\n> {labels['selected_items'].format(total=total_fetched, selected=0)}\n\n" + ("今天没有足够合适的精选选题，可在下方全部资讯中自行挑选。\n" if language == "zh" else "No topics met the editorial threshold; browse the full pool below.\n")
             return self._generate_empty_summary(date, total_fetched, labels)
 
         header = (
@@ -166,9 +170,14 @@ class DailySummarizer:
         follow_builders_items: List[ContentItem],
         selected_ids: set[str],
         language: str = "en",
+        all_items: List[ContentItem] | None = None,
     ) -> str:
         """Render Pages-only tab panels for non-selected tracked content."""
         labels = LABELS.get(language, LABELS["en"])
+        all_archive = self._archive_items(all_items or [], selected_ids, lambda item: True)
+        if all_items is not None:
+            tracked_x_items = all_items
+            follow_builders_items = all_items
         tracked_x = self._archive_items(
             tracked_x_items,
             selected_ids,
@@ -179,7 +188,7 @@ class DailySummarizer:
             selected_ids,
             lambda item: item.source_type.value == "follow_builders",
         )
-        if not tracked_x and not follow_builders:
+        if not all_archive and not tracked_x and not follow_builders:
             return ""
 
         parts = [
@@ -191,11 +200,12 @@ class DailySummarizer:
                 '<div class="archive-tablist" role="tablist" '
                 f'aria-label="{escape(labels["archive_tabs_label"], quote=True)}" hidden>\n'
             ),
+            self._archive_tab_button("all", labels["all_archive"], len(all_archive), selected=True) if all_items is not None else "",
             self._archive_tab_button(
                 "tracked-x",
                 labels["tracked_x_archive"],
                 len(tracked_x),
-                selected=True,
+                selected=all_items is None,
             ),
             self._archive_tab_button(
                 "follow-builders",
@@ -204,6 +214,7 @@ class DailySummarizer:
                 selected=False,
             ),
             "</div>\n",
+            self._archive_panel("all", labels["all_archive"], all_archive, labels, language, archive_kind="all") if all_items is not None else "",
             self._archive_panel(
                 "tracked-x",
                 labels["tracked_x_archive"],
@@ -297,6 +308,8 @@ class DailySummarizer:
         *,
         archive_kind: str,
     ) -> str:
+        if archive_kind == "all":
+            return self._format_candidate_html(item, labels, language)
         title = str(item.metadata.get(f"title_{language}") or item.title)
         title_translation = ""
         content_translation = ""
@@ -355,6 +368,37 @@ class DailySummarizer:
             f'<p class="archive-item-content">{safe_content}</p>\n'
             f"{content_translation_html}"
             "</article>\n"
+        )
+
+    def _format_candidate_html(self, item, labels, language):
+        from bs4 import BeautifulSoup
+
+        title = str(item.metadata.get(f"title_{language}") or item.title)
+        summary = str(item.metadata.get(f"summary_{language}") or item.ai_summary or "")
+        original = BeautifulSoup(item.content or "", "html.parser").get_text("\n", strip=True)
+        if not summary:
+            summary = original[:500] or labels["archive_content_empty"]
+        source = item.metadata.get("feed_name") or item.metadata.get("rapidapi_account_username") or item.author or item.source_type.value
+        date = item.published_at.astimezone(timezone.utc).strftime("%m-%d %H:%M UTC")
+        score = str(item.ai_score) if item.ai_score is not None else ("未评分" if language == "zh" else "Unscored")
+        reason = str(item.ai_reason or ("暂无 AI 评分理由" if language == "zh" else "No AI assessment"))
+        note = ""
+        if item.metadata.get("archive_analysis_inherited"):
+            note = " · 同链接合并评分" if language == "zh" else " · Shared analysis for the same link"
+        original_title = ""
+        if title != item.title:
+            original_title = f'<p class="archive-original-title">{escape(item.title)}</p>'
+        raw_label = "展开原始摘录" if language == "zh" else "Read fetched text"
+        reason_label = "AI 判断" if language == "zh" else "AI assessment"
+        return (
+            '<article class="archive-item candidate-item">\n'
+            f'<div class="archive-item-heading"><h3><a href="{escape(str(item.url), quote=True)}">{escape(title)}</a></h3>'
+            f'<span class="score-badge" data-tier="{self._score_tier(item.ai_score)}">{escape(score)}</span></div>\n'
+            f'{original_title}<p class="source-line">{escape(str(source))} · {escape(date + note)}</p>\n'
+            f'<p class="archive-item-content">{escape(summary)}</p>\n'
+            f'<p class="archive-assessment">{reason_label}：{escape(reason)}</p>\n'
+            + (f'<details class="archive-original"><summary>{raw_label}</summary><p>{escape(original).replace(chr(10), "<br>")}</p></details>\n' if original else "")
+            + '</article>\n'
         )
 
     def _format_archive_source(
@@ -545,6 +589,19 @@ class DailySummarizer:
                 verification_status,
             )
             lines.extend(["", f"**{labels['verification']}**: {verification_text}"])
+
+        if meta.get("editorial_mode") == "creator":
+            card_labels = {
+                "audience": "适合谁" if language == "zh" else "Audience",
+                "content_angle": "选题角度（建议）" if language == "zh" else "Suggested angle",
+                "visual_plan": "可以怎么拍（建议）" if language == "zh" else "Suggested demonstration",
+                "availability": "使用门槛" if language == "zh" else "Access and cost",
+                "verification_needed": "发布前核实" if language == "zh" else "Check before publishing",
+            }
+            for key, label in card_labels.items():
+                value = meta.get(f"{key}_{language}")
+                if value:
+                    lines.extend(["", f"**{label}**: {escape(str(value))}"])
 
         if background:
             lines.append("")

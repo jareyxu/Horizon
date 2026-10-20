@@ -2,16 +2,29 @@
   "version": "1.0",
   "report_timezone": "UTC",
   "profile": {
+    "editorial_mode": "creator",
     "interests": [
-      "AI agents",
-      "developer tools"
+      "面向普通人的 AI 新功能与工具",
+      "办公、学习和生活中的实用 AI 用法",
+      "AI 生图、视频、声音与创作玩法",
+      "有趣且可核实的 AI 新闻",
+      "AI 对个人工作和生活的影响",
+      "适合抖音、小红书、视频号的选题"
     ],
     "negative_topics": [
-      "off-topic entertainment"
+      "纯工程架构、推理部署和底层优化",
+      "只有跑分或参数的论文和模型发布",
+      "开发库、Kubernetes 和 GitHub 常规版本更新",
+      "无事实依据的夸大营销与收益承诺",
+      "纯融资新闻",
+      "与 AI 无关的娱乐八卦"
     ],
     "preferred_content": [
-      "technical implementation",
-      "product releases"
+      "能亲自演示的教程与效果对比",
+      "普通人可以实际使用的新功能",
+      "有画面感和新奇感的真实案例",
+      "有事实依据的趋势解读和个人观点",
+      "包含价格、地区开放与使用限制的信息"
     ]
   },
   "verification": {
@@ -385,13 +398,42 @@
     "ai_score_threshold": 6,
     "minimum_items": 0,
     "time_window_hours": 24,
-    "max_items": null,
-    "category_groups": {},
+    "max_items": 8,
+    "category_groups": {
+      "practical": {
+        "name": "实用工具与玩法",
+        "limit": 4,
+        "categories": [
+          "creator-practical"
+        ]
+      },
+      "fun": {
+        "name": "有趣案例与视觉创意",
+        "limit": 3,
+        "categories": [
+          "creator-fun"
+        ]
+      },
+      "trend": {
+        "name": "重要趋势与新闻",
+        "limit": 3,
+        "categories": [
+          "creator-trend"
+        ]
+      },
+      "opinion": {
+        "name": "观点与讨论",
+        "limit": 2,
+        "categories": [
+          "creator-opinion"
+        ]
+      }
+    },
     "default_group": "other",
-    "default_group_limit": null,
-    "aihot_score_weight": 0.25,
-    "multi_source_bonus_2_3": 0.3,
-    "multi_source_bonus_4_plus": 0.6
+    "default_group_limit": 1,
+    "aihot_score_weight": 0,
+    "multi_source_bonus_2_3": 0,
+    "multi_source_bonus_4_plus": 0
   },
   "webhook": {
     "enabled": false,

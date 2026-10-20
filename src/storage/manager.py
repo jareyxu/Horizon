@@ -117,6 +117,16 @@ class StorageManager:
 
         return filepath
 
+    def save_candidate_archive(self, date: str, items) -> Path:
+        """Persist the complete fetched pool so later review needs no recrawl."""
+        directory = self.data_dir / "candidates"
+        directory.mkdir(parents=True, exist_ok=True)
+        target = directory / f"horizon-{date}.json"
+        temporary = target.with_suffix(".tmp")
+        temporary.write_text(json.dumps([item.model_dump(mode="json") for item in items], ensure_ascii=False, indent=2), encoding="utf-8")
+        temporary.replace(target)
+        return target
+
     def load_subscribers(self) -> list:
         """Loads the list of email subscribers."""
         subscribers_path = self.data_dir / "subscribers.json"

@@ -12,7 +12,7 @@ from rich.progress import (
 )
 
 from .client import AIClient
-from .prompts import CONTENT_ANALYSIS_SYSTEM, CONTENT_ANALYSIS_USER
+from .prompts import CONTENT_ANALYSIS_SYSTEM, CONTENT_ANALYSIS_USER, CREATOR_ANALYSIS_SYSTEM, CREATOR_ANALYSIS_EXTRA
 from .utils import parse_json_response
 from ..models import ContentItem, ProfileConfig
 
@@ -146,7 +146,8 @@ class ContentAnalyzer:
 
         translation_requirements = ""
         translation_fields = ""
-        if item.source_type.value == "follow_builders":
+        creator_mode = self.profile.editorial_mode == "creator"
+        if item.source_type.value == "follow_builders" or creator_mode:
             translation_requirements = (
                 "- title_zh: A faithful Simplified Chinese translation of the title\n"
                 "- summary_zh: A faithful one-sentence Simplified Chinese translation "
@@ -170,9 +171,11 @@ class ContentAnalyzer:
         )
 
         # Get AI completion
+        if creator_mode:
+            user_prompt = user_prompt.replace("Importance score", "Creator topic suitability score")
         response = await self.client.complete(
-            system=CONTENT_ANALYSIS_SYSTEM,
-            user=user_prompt,
+            system=CREATOR_ANALYSIS_SYSTEM if creator_mode else CONTENT_ANALYSIS_SYSTEM,
+            user=user_prompt + (CREATOR_ANALYSIS_EXTRA if creator_mode else ""),
         )
 
         # Parse JSON response with robust fallback
@@ -189,11 +192,26 @@ class ContentAnalyzer:
 
         # Update item with analysis results
         item.ai_score = float(result.get("score", 0))
+        if creator_mode:
+            creator = result.get("creator")
+            creator = creator if isinstance(creator, dict) else {}
+            weights = {"audience": .30, "utility": .20, "novelty": .15, "visual": .10, "viewpoint": .15, "timeliness": .10}
+            dimensions = creator.get("dimensions")
+            if isinstance(dimensions, dict) and all(isinstance(dimensions.get(k), (int, float)) for k in weights):
+                item.ai_score = sum(min(10, max(0, dimensions[k])) * w for k, w in weights.items())
+            kind = creator.get("kind", "other")
+            eligible = kind in {"practical", "fun", "trend", "opinion"}
+            item.ai_score = round(min(10 if eligible else 5.5, max(0, item.ai_score)), 2)
+            item.metadata["creator"] = creator
+            item.metadata["editorial_mode"] = "creator"
+            item.metadata["creator_eligible"] = eligible
+            item.metadata["original_category"] = item.metadata.get("category")
+            item.metadata["category"] = f"creator-{kind}" if eligible else "creator-technical"
         item.metadata["personal_ai_score"] = item.ai_score
         item.ai_reason = result.get("reason", "")
         item.ai_summary = result.get("summary", item.title)
         item.ai_tags = result.get("tags", [])
-        if item.source_type.value == "follow_builders":
+        if item.source_type.value == "follow_builders" or creator_mode:
             if result.get("title_zh"):
                 item.metadata["title_zh"] = str(result["title_zh"]).strip()
             if result.get("summary_zh"):

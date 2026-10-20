@@ -34,7 +34,7 @@ body_class: home-page
   <div class="radar-hero-copy">
     <p class="eyebrow">DAILY BRIEF</p>
     <h2 id="daily-digest-title">每日<span>速递</span></h2>
-    <p class="hero-subtitle">聚焦全球 AI 动态，洞察值得关注的技术、产品与行业进展。</p>
+    <p class="hero-subtitle">发现 AI 新鲜事、实用玩法与值得表达的观点。</p>
     {% if latest_post %}
       <div class="hero-date">
         <svg aria-hidden="true" viewBox="0 0 24 24"><path d="M7 3v3m10-3v3M4.5 9.5h15M6 5h12a2 2 0 0 1 2 2v12H4V7a2 2 0 0 1 2-2Z"/></svg>
