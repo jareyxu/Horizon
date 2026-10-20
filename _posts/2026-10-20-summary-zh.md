@@ -9,255 +9,76 @@ lang: zh
 
 ---
 
-1. [fal 与 Black Forest Labs 发布视频模型 FLUX 3 Max](#item-1) ⭐️ 4.65/10
-2. [AI 日报：腾讯开放元宝搜索，MiniMax 与蚂蚁百灵更新模型](#item-2) ⭐️ 4.05/10
-3. [DeepSeek V4.1 Flash 1017 更新，第三方指数得分 45](#item-3) ⭐️ 3.5/10
-4. [MiniMax 发布 M3.1 Flash 模型，公开细节仍有限](#item-4) ⭐️ 3.35/10
-5. [Inception 扩散模型 Mercury 3 上线 OpenRouter](#item-5) ⭐️ 2.6/10
-6. [Apate.ai 用 35 万个 AI 拖住骗子，国内有人用 AI 视频反制](#item-6) ⭐️ 8.0/10
-7. [Gemini Notebook 为幻灯片和视频概览加入审阅与调整步骤](#item-7) ⭐️ 7.1/10
+1. [Apate.ai 用 35 万个 AI 拖住骗子，国内有人用 AI 视频反制](#item-1) ⭐️ 8.0/10
+2. [Gemini Notebook 为幻灯片和视频概览加入审阅与调整步骤](#item-2) ⭐️ 7.1/10
+3. [fal 与 Black Forest Labs 发布视频模型 FLUX 3 Max](#item-3) ⭐️ 4.65/10
+4. [AI 日报：腾讯开放元宝搜索，MiniMax 与蚂蚁百灵更新模型](#item-4) ⭐️ 4.05/10
+5. [DeepSeek V4.1 Flash 1017 更新，第三方指数得分 45](#item-5) ⭐️ 3.5/10
+6. [MiniMax 发布 M3.1 Flash 模型，公开细节仍有限](#item-6) ⭐️ 3.35/10
+7. [Inception 扩散模型 Mercury 3 上线 OpenRouter](#item-7) ⭐️ 2.6/10
 
 ---
 
 <a id="item-1"></a>
-## [fal 与 Black Forest Labs 发布视频模型 FLUX 3 Max](https://x.com/fal/status/2112251022047412492) ⭐️ 4.65/10
-
-fal 与 Black Forest Labs 宣布推出后训练视频模型 FLUX 3 Max，可通过 fal 平台使用。公告给出文本生成视频、图片生成视频和关键帧相关链接，但产品页据报在发布时只列出两个接口。 对已经在使用 fal API 或按量付费工具的创作者来说，这多了一个高质量图生视频选项，而且有三周折扣。它看起来不是免费的普通消费者应用，普通用户可能需要账号、额度和一定技术配置。 fal 声称 FLUX 3 Max 在 fal 称为初步结果的 Artificial Analysis 图生视频质量排名中并列第一，并称能在约 12 秒内生成 10 秒 720/768p 视频。公司称未来三周至 11 月 7 日降价 75%，但实际价格、地区可用性和商用条款仍需核实。
-
-aihot · X：fal (@fal) · 10月19日 18:34 · [中文阅读](https://aihot.news/items/qldoluc73m0j8mo7u0ttf95km)
-
-**入选规则**: 新模型发布固定入选（去重后）
-
-**核验**: 多源印证
-
-**适合谁**: AI 视频创作者、使用 fal API 的开发者，以及关注 FLUX 图像/视频模型系列的人。它最相关的用户是能使用 fal 付费平台的人，而不是寻找免费应用的普通社交媒体观众。
-
-**选题角度（建议）**: 建议角度：把它解读为 fal 通过后训练把 FLUX 品牌延伸到视频的“平台优先”发布，而不是消费级产品发布。可讨论的切入点是，临时折扣是否会改变 API 创作者的成本与质量权衡。
-
-**可以怎么拍（建议）**: 建议视觉方案：展示 fal 的模型/产品页及其列出的接口，如果创作者有权限，可演示文本生成视频或图片生成视频流程。除非创作者亲自测试，否则不要把示例说成自己实测。
-
-**使用门槛**: 据报道 FLUX 3 Max 已在 fal 推理平台上线，并在 11 月 7 日前降价 75%。具体价格、支持地区、支付方式，以及关键帧生成视频是否在发布时已上线，仍需核实。
-
-**发布前核实**: 发布前需核实 fal 的当前价格和折扣截止时间、实际已上线哪些接口、你的受众所在地区和支付是否可用、评测是初步还是最终结果，以及商用和许可条款。还需确认是否存在免费试用或面向普通消费者的应用。
-
-**背景**: FLUX 是 Black Forest Labs 旗下较知名的图像模型系列。fal 是一个常被开发者通过 API 使用的生成式媒体平台。
-
-<details><summary>参考链接</summary>
-<ul>
-<li><a href="https://fal.ai/flux-3-max">FLUX 3 Max: Text and Image to Video, Post-Trained by fal | fal</a></li>
-<li><a href="https://www.prnewswire.com/news-releases/fal-launches-flux-3-max-delivering-1-tier-image-to-video-quality-at-industry-leading-speeds-302913033.html">fal Launches FLUX 3 Max, Delivering #1-Tier Image-to-Video ...</a></li>
-<li><a href="https://www.unite.ai/fal-debuts-flux-3-max-video-model-post-trained-with-black-forest-labs/">Fal Debuts FLUX 3 Max Video Model Post-Trained With Black ...</a></li>
-
-</ul>
-</details>
-
-**社区讨论**: 有一条回复要求 fal 说明是否会兑现开源 H3 Max 的承诺，并指出已数周没有提及此事。fal 的推文串还称 FLUX 3 Max 与 H3 Max 一同处于视频生成前沿，并声称输出更快、质量更高。
-
-**标签**: `#AI视频生成`, `#FLUX`, `#模型发布`, `#Black Forest Labs`, `#创作工具`
-
----
-
-<a id="item-2"></a>
-## [AI 日报：腾讯开放元宝搜索，MiniMax 与蚂蚁百灵更新模型](https://news.aibase.cn/news/31757) ⭐️ 4.05/10
-
-AIBase 的一篇日报汇总了三条动态：腾讯通过 Skill、MCP 和 API 向开发者开放元宝搜索；MiniMax 推出 M3.1Flash 模型；蚂蚁百灵开源了包含五款模型的 Ming 3.0 语音系列。这些内容均来自该资讯站点的汇总报道，其中 MiniMax 的速度与成本数字是官方自己给出的说法。 对普通读者来说，最具体的一条是元宝搜索据称提供的每月免费调用额度，但它主要影响的是在做 AI 智能体或搜索功能的开发者，而不是一般消费者。Ming 3.0 语音系列对做配音、音频转写和总结的人更有参考价值，M3.1Flash 则面向使用智能体和编程任务的开发者。 该日报称元宝搜索拥有千亿级索引、接入 157 个信源、检索平均耗时约 8 毫秒，并提供每月 2000 次免费调用；MiniMax 称 M3.1Flash 推理速度接近此前版本的 3 倍、综合成本降低约 70%，并已接入 MiniMax API、MPlan 和 MiniMax Code。Ming 3.0 系列的价格、开放地区与开源许可条款在文中没有说明，需要到官方页面核实。
-
-web · AIBase 中文 · 10月20日 09:09
-
-**入选规则**: AIbase AI 日报固定入选
-
-**核验**: 多源印证
-
-**适合谁**: 想为 AI 智能体接入搜索或检索来源的开发者、使用语音合成与音频转写工具的创作者，以及关注国内模型新动态的读者。普通手机用户短期内可能感受不到明显变化。
-
-**选题角度（建议）**: 建议角度：把它当成三条发布消息的合集，明确区分厂家的说法和可以独立核实的事实。面向普通观众时，可以突出唯一带有具体数字的一条——元宝搜索据称的每月免费调用额度，另外两条则作为偏开发者方向的更新来处理。
-
-**可以怎么拍（建议）**: 创作者可以在屏幕上展示这篇日报页面，逐条圈出各个说法，再打开腾讯、MiniMax 和蚂蚁百灵的官方页面，核对是否有同样表述。如果找不到对应官方页面，就把这个缺口直接呈现在画面上，而不是把这些工具当作已经试用过一样演示。
-
-**使用门槛**: 开放情况尚不明确：除元宝搜索据称的每月免费额度外，文中没有给出地区限制或价格。MiniMax 表示 M3.1Flash 已接入其 API 和相关产品，但免费额度和定价需要核实，Ming 3.0 也没有提供下载地址或许可条款。
-
-**发布前核实**: 发布前需要核实：腾讯官方开发者文档中关于元宝搜索的额度、申请条件与地区；找到 Ming 3.0 的开源仓库并查看其许可协议；查看 MiniMax 的定价与可用性页面；并确认这篇日报标注的发布时间，以及这些消息是否确实如文中所述发生。
-
-**背景**: AIBase 会发布每日 AI 资讯汇总，把若干条互不相关的消息放在同一页面。同一页还列出了 ChatGPT 浏览器扩展升级、奇瑞 CheryMind 大模型、Gartner 对 AI 基建投资的预警以及 OpenAI 融资报道等其他条目。
-
-<details><summary>参考链接</summary>
-<ul>
-<li><a href="https://www.aitntnews.com/">AITNT-让一部分人先用 AI 实现商业化</a></li>
-
-</ul>
-</details>
-
-**标签**: `#AI日报`, `#腾讯元宝`, `#MiniMax`, `#蚂蚁百灵`, `#语音模型`
-
----
-
-<a id="item-3"></a>
-## [DeepSeek V4.1 Flash 1017 更新，第三方指数得分 45](https://x.com/ArtificialAnlys/status/2112218661432000694) ⭐️ 3.5/10
-
-Artificial Analysis 称 DeepSeek 发布了 DeepSeek V4.1 Flash 1017，是其旗舰模型 DeepSeek V4.1 Flash 的一次更新。该帖称新版本在 Artificial Analysis 智能指数上得分 45，比上一版高 6 分，与另一款开源权重模型并列第二。 对使用模型 API 做开发的团队来说，这是一次价格不变的版本更新，官方转述的评测显示其在代理类任务、知识和推理上有提升，会影响“用哪款便宜模型”的选择。对普通观众而言，目前没有确认上线的新应用、新功能或面向个人的价格可体验。 原帖列出 1M token 上下文窗口、MIT 许可，以及 API 价格为高峰时段每百万输入 token 0.30 美元、每百万输出 token 1.20 美元，非高峰价格为一半。帖中还称该模型通过 DeepSeek 自家 API 和 Fireworks、Baseten、DeepInfra、Wafer、Cloudflare 等第三方服务提供；面向普通消费者的入口和中国区可用情况在这些材料中并未确认。
-
-aihot · X：Artificial Analysis (@ArtificialAnlys) · 10月19日 16:25 · [中文阅读](https://aihot.news/items/wrlpmwb2tsk1moehp5kpsvovb)
-
-**入选规则**: 新模型发布固定入选（去重后）
-
-**核验**: 多源印证
-
-**适合谁**: 主要是开发者、对 API 成本敏感的团队，以及关注开源权重模型排名的人；对普通短视频观众来说相关性偏间接。最可能在意的是已经在用 DeepSeek API、或在为产品比较便宜模型的人。
-
-**选题角度（建议）**: 建议角度：把它讲成“价格不变的能力小升级”，同时提醒“开源模型并列第二”只是某家第三方评测机构的指数结果，并非普遍排名。不要把它解读成改变普通人日常生活的事件，因为目前没有确认的消费端上线。
-
-**可以怎么拍（建议）**: 创作者可以展示 Artificial Analysis 的模型页面和能力—成本对比图，再展示 DeepSeek API 的价格页或文档页，并指出模型选择列表里是否真的能选到 1017 版本。这只是建议拍摄方案，不代表已经做过实测。
-
-**使用门槛**: 据称可通过 DeepSeek 自家 API 及多家点名的第三方服务获取，价格以美元标示。消费者应用入口、地区覆盖范围以及是否有人民币计价目前都不明确，在告诉观众“可以用”之前需要核实。
-
-**发布前核实**: 发布前需要核实：DeepSeek 官方是否就 1017 更新发布过说明（现有 DeepSeek 页面讲的是 V4.1 Flash，而非这个快照版本）、DeepSeek 文档中的确切模型名与当前价格，以及它是否出现在任何中国消费端应用里。还要弄清为什么 Artificial Analysis 页面写 V4.1 Flash（Max）为 39.5，而帖子给出 45，避免把分数归错版本。
-
-**背景**: 按 DeepSeek 官方新闻页的说法，早先的 V4.1 Flash 已经上线 DeepSeek API，模型名为 deepseek-flash。OpenRouter 则将 Flash 1017 描述为 V4.1 Flash 的 10 月 17 日快照版本。
-
-<details><summary>参考链接</summary>
-<ul>
-<li><a href="https://artificialanalysis.ai/models/deepseek-v4-1-flash-1017">DeepSeek V 4 . 1 Flash 1017 (max) - Intelligence... | Artificial Analysis</a></li>
-<li><a href="https://openrouter.ai/deepseek/deepseek-v4.1-flash-1017">DeepSeek V 4 . 1 Flash 1017 - API Pricing & Benchmarks | OpenRouter</a></li>
-<li><a href="https://www.deepseek.com/en/news/deepseek-v4-1-flash/">Introducing DeepSeek - V 4 . 1 - Flash : smarter, faster, more efficient.</a></li>
-
-</ul>
-</details>
-
-**标签**: `#DeepSeek`, `#模型发布`, `#开源模型`, `#跑分/基准`, `#AI新闻`
-
----
-
-<a id="item-4"></a>
-## [MiniMax 发布 M3.1 Flash 模型，公开细节仍有限](https://www.minimax.io/blog/minimax-m31f) ⭐️ 3.35/10
-
-MiniMax 在其官方博客发布了一篇标题为 MiniMax M3.1 Flash 的文章，宣布了一个同名模型。本次分析拿不到文章正文，因此目前只能确认这是一条标题层面的发布信息，具体内容未知。 对普通观众来说，这件事暂时没有直接影响，因为还没有确认的普通用户功能、演示、价格或地区开放信息可以亲自体验。它主要对按成本和编程、智能体表现来选模型的开发者和团队有参考价值，而且对他们来说关键信息也还需要核实。 第三方模型列表页面把 MiniMax M3.1 Flash 描述为多模态模型，称其在智能体任务、编程和网络安全方面比 M3 有提升，部分页面还列出了免费版本，但这些都属于第三方描述，不是官方确认的细节。评论中流传的价格数字，如每百万输入 token 0.15 美元、每百万输出 token 0.60 美元，在发布前需要对照官方公告核实。
-
-hackernews · jtg · 10月19日 16:39 · [社区讨论](https://news.ycombinator.com/item?id=50154540)
-
-**入选规则**: 新模型发布固定入选（去重后）
-
-**核验**: 多源印证
-
-**适合谁**: 最相关的受众是开发者、独立开发者和关注 AI 工具的人，他们会按价格以及编程、智能体表现来比较模型。普通短视频观众除非看到具体可演示的用途，否则大概率不会关心。
-
-**选题角度（建议）**: 建议角度：把它放进“便宜编程模型快速迭代”的竞争脉络里，向观众解释为什么这类发布信息越来越雷同，而不是把它当成已被证实的突破。这只是编辑的解读角度，并非对该模型质量的已确认结论。
-
-**可以怎么拍（建议）**: 创作者可以展示官方博客页面，再展示提到免费版本的第三方列表页面，并明确标注哪些是官方信息、哪些不是。若要现场试用，需要账号和可用的模型接口，而本卡片并未进行过这样的测试。
-
-**使用门槛**: 第三方列表显示 OpenRouter 上有 MiniMax M3.1 Flash 的免费版本，Command Code 上也有免费条目，但地区限制、速率限制、免费期能持续多久以及中国大陆是否可用都尚未确认。
-
-**发布前核实**: 发布前需要查看官方博客正文，核实真实价格、模型能力、使用限制和地区开放情况，确认免费版本是否真实且是否为限时活动，并确认各项跑分对比是如何做的。同时要核实免费条目是否真的对观众所在地区的用户开放。
-
-**背景**: MiniMax 是一家已经推出 M3 系列模型的 AI 公司。这次发布的看起来是新的 Flash 版本，但它是否替代旧型号、还是与旧型号并存，本文无法确认。
-
-<details><summary>参考链接</summary>
-<ul>
-<li><a href="https://openrouter.ai/minimax/minimax-m3.1-flash:free">MiniMax M 3 . 1 Flash (free) - API Pricing & Benchmarks | OpenRouter</a></li>
-<li><a href="https://benchlm.ai/models/minimax-m3-1-flash-preview">MiniMax M 3 . 1 Flash Preview Model Specs & Sources | BenchLM.ai</a></li>
-<li><a href="https://commandcode.ai/models/minimax-m3-1-flash-free">MiniMax M 3 . 1 Flash — pricing & benchmarks - Command Code</a></li>
-
-</ul>
-</details>
-
-**社区讨论**: 评论者普遍对模型发布持怀疑态度：有人表示该模型看起来是“跑分优化”，实际使用中并不突出，并称某编程工具里以代号提供的“隐身模型”很可能就是这次发布，但这只是该评论者的说法。也有人认为更便宜的高性能模型性价比很高，并追问有谁在独立验证厂商的对比数据。
-
-**标签**: `#模型发布`, `#MiniMax`, `#AI 模型`, `#技术发布`, `#待核实`
-
----
-
-<a id="item-5"></a>
-## [Inception 扩散模型 Mercury 3 上线 OpenRouter](https://x.com/OpenRouter/status/2112225779782398131) ⭐️ 2.6/10
-
-OpenRouter 宣布 Inception 的新扩散模型 Mercury 3 已在其平台上线。公告称上线期打五折，输入 $0.10/百万 token、输出 $0.35/百万 token。 这条消息主要对已经在用 OpenRouter API 的开发者有意义，他们可以不换平台就试用一个更便宜、速度更快的选项。普通手机用户基本感受不到变化，因为公告没有提到面向大众的应用或免费公开聊天入口。 OpenRouter 称上线期五折，输入 $0.10/百万 token、输出 $0.35/百万 token，但折扣持续多久没有说明，需要自行核实。每秒 1,000+ token、100 万上下文以及在 IFBench、GPQA Diamond、SWE-Bench Atlas 上超过 GPT-6 Luna 和 Haiku 5.5，都是 Inception 自己报告的说法，并非独立验证的结果。
-
-aihot · X：OpenRouter (@OpenRouter) · 10月19日 16:54 · [中文阅读](https://aihot.news/items/hnasqdie0vmly79xyg2ehqcgb)
-
-**入选规则**: 新模型发布固定入选（去重后）
-
-**核验**: 多源印证
-
-**适合谁**: 通过 OpenRouter 或类似 API 网关调用模型的开发者和小团队，以及关注扩散式语言模型的 AI 爱好者。普通抖音、小红书观众除非自己在用 AI API，否则关联度不高。
-
-**选题角度（建议）**: 建议的切入角度：把它当作一个 API 层面的价格与速度选项，而不是划时代的产品，并追问“便宜又快”是否足以应付真实任务。基准对比应说明是厂商自报，尚待第三方测试。
-
-**可以怎么拍（建议）**: 创作者可以在屏幕上打开 OpenRouter 的模型页面，展示当前标价、上下文长度和提供方状态，再用简单表格与一两个熟悉的模型对比。如果自己有 API key，可以录一段简短的响应速度测试，并明确说明这只是个人单次测试，不是基准评测。
-
-**使用门槛**: 按公告说法，访问方式是 OpenRouter 的 API，属于付费模型并有上线折扣；是否有免费额度、面向大众的应用以及地区可用范围都没有说明，目前未知。具体国家的价格、支付方式和可用性需要核实。
-
-**发布前核实**: 发布前请核实 OpenRouter 模型页面的当前价格、上下文上限、速率限制以及五折活动何时结束。同时确认基准对比和每秒 1,000+ token 的数字是否有第三方测试，并核实地区可用范围和付费方式。
-
-**背景**: Mercury 是 Inception 的扩散式语言模型系列，Mercury 3 是 Mercury 2.5 的后续版本。扩散模型生成文字的方式与常见的逐字生成不同，这也是其速度说法的主要来源。
-
-<details><summary>参考链接</summary>
-<ul>
-<li><a href="https://openrouter.ai/">OpenRouter</a></li>
-<li><a href="https://routerai.ru/models/inception/mercury-3">Mercury 3 — API в России, цены в рублях | RouterAI</a></li>
-
-</ul>
-</details>
-
-**社区讨论**: Inception 的 Stefano Ermon 发帖称 Mercury 3 是该实验室最强的模型，也是“迄今发布的最聪明的扩散语言模型”，并重复了每秒 1,000+ token 和基准测试的说法。有一条回复只写了“1,000 tok/s?”并配怀疑表情，获得 23 个赞，说明部分读者对速度数字存疑。该帖整体互动量一般，约 38 条回复、702 个赞。
-
-**标签**: `#AI模型发布`, `#OpenRouter`, `#扩散模型`, `#开发者工具`, `#技术资讯`
-
----
-
-<a id="item-6"></a>
 ## [Apate.ai 用 35 万个 AI 拖住骗子，国内有人用 AI 视频反制](https://mp.weixin.qq.com/s?__biz=MzIyMzA5NjEyMA%3D%3D&mid=2647687365&idx=1&sn=4102098fb8725531aa2f783fa2f20f20) ⭐️ 8.0/10
 
 一篇文章介绍了澳大利亚公司 Apate.ai：据报道它用约 35 万个 AI 扮演“容易上当的人”，把骗子留在对话里消耗时间。文章还提到国内一些年轻人用 AI 生成视频去反制“AI 卖惨”账号，但这一部分细节很少。 几乎每个人都接到过诈骗电话、也刷到过卖惨式内容，所以这算是 AI 被用来“防守”而不是骗人的少见例子。它也提示了一种模式：干活的是运营商和银行，而不是普通用户自己。 文章称这些 AI 已与骗子聊天 250 万次、累计耗掉骗子约 17 年时间，澳大利亚运营商 TPG 把近 59 万通可疑来电转给了它们，澳洲联邦银行公开报告诈骗损失降低 76%。文章还说公司今年 8 月拿到 815 万美元种子轮融资，但没有写明年份、价格、报名方式和开放地区，这些都需要核实。
 
 aihot · 公众号：数字生命卡兹克 · 10月20日 00:26 · [中文阅读](https://aihot.news/items/awmaqqunma83599eii4g3akgw)
 
-**核验**: 已核对原文
-
-**适合谁**: 经常接到疑似诈骗电话的人，以及对“AI如何用于反诈、如何对抗卖惨账号”好奇的观众。
-
-**选题角度（建议）**: 建议角度：AI正在从“一个人用的工具”变成“大量机器人互相消耗时间”，最先受益的可能是运营商和银行。这是编辑观点，不是已被证明的结论。
-
-**可以怎么拍（建议）**: 创作者可以把文章里的关键数字做成字幕展示，演示如何识别并举报疑似诈骗来电或卖惨账号，并走一遍平台的举报流程。这些动作尚未实际测试，只是拍摄设想。
-
-**使用门槛**: 未知。材料中没有说明Apate.ai是否向个人用户开放、是否在澳大利亚以外可用，两个案例也都没有价格、App或地区信息。
-
-**发布前核实**: 发布前应核对：Apate.ai官网及其融资公告、TPG的相关说明、澳洲联邦银行的诈骗损失报告，并确认融资的时间与金额。关于国内用AI视频反制的案例，需要找到原始帖子和平台规则，而不要只转述摘要。
-
-**背景**: 诈骗电话和博同情的募捐式内容都是老问题，现在 AI 工具在攻防两边都被用上了。文中描述的 Apate.ai 是跟运营商、银行合作的类型，并不是普通人自己下载的 App。
-
-**标签**: `#AI反诈`, `#AI视频`, `#社会趋势`, `#网络安全`, `#普通人应用`
-
 ---
 
-<a id="item-7"></a>
+<a id="item-2"></a>
 ## [Gemini Notebook 为幻灯片和视频概览加入审阅与调整步骤](https://blog.google/innovation-and-ai/products/gemini-notebook/co-create-slides-videos/) ⭐️ 7.1/10
 
 Google 表示 Gemini Notebook 正在推出“共同创作”功能，让用户在幻灯片或视频真正生成之前，先查看并调整内容主题、视觉风格和输出格式。新的 Review 开关会在创作面板中显示大纲或制作说明，方便先提修改意见。 学生、老师以及需要做汇报的人，常常因为结构不对而反复重新生成整套幻灯片，很浪费时间。如果这些控制项用起来足够简单，在生成前先调整大纲就可能省掉这一轮返工。 官方公告称该更新将在接下来一周内面向全球所有 Gemini Notebook 用户推出，但没有说明价格、免费版限制或各地区具体上线时间。有第三方文章指出，Google 的公告与帮助文档在开放范围上的说法并不一致，因此这些细节仍需核实。
 
-web · Future Tools · 10月19日 17:20 · 2 个来源
+web · Future Tools · 10月19日 17:20
 
-**核验**: 多源印证
+---
 
-**适合谁**: 已经在用 Gemini Notebook 或 NotebookLM 把资料变成幻灯片或短视频的学生、老师、培训人员和职场人士。也适合正在比较各种 AI 演示工具、还没决定用哪款的人。
+<a id="item-3"></a>
+## [fal 与 Black Forest Labs 发布视频模型 FLUX 3 Max](https://x.com/fal/status/2112251022047412492) ⭐️ 4.65/10
 
-**选题角度（建议）**: 建议角度：把它当作工作流程的变化，而不是模型升级——重点是多出来的审阅步骤，而不是生成质量变强。用“旧的一次性生成”和“新的可调整流程”做前后对比，最容易讲清楚。
+fal 与 Black Forest Labs 宣布推出后训练视频模型 FLUX 3 Max，可通过 fal 平台使用。公告给出文本生成视频、图片生成视频和关键帧相关链接，但产品页据报在发布时只列出两个接口。 对已经在使用 fal API 或按量付费工具的创作者来说，这多了一个高质量图生视频选项，而且有三周折扣。它看起来不是免费的普通消费者应用，普通用户可能需要账号、额度和一定技术配置。 fal 声称 FLUX 3 Max 在 fal 称为初步结果的 Artificial Analysis 图生视频质量排名中并列第一，并称能在约 12 秒内生成 10 秒 720/768p 视频。公司称未来三周至 11 月 7 日降价 75%，但实际价格、地区可用性和商用条款仍需核实。
 
-**可以怎么拍（建议）**: 创作者可以录屏或演示创作面板的操作流程：导入资料、打开 Review 开关、修改大纲、再生成成品。用同一份资料分别走旧流程和新流程，差别会更直观，但前提是测试账号确实能用上这个功能。
+aihot · X：fal (@fal) · 10月19日 18:34 · [中文阅读](https://aihot.news/items/qldoluc73m0j8mo7u0ttf95km)
 
-**使用门槛**: 官方称将在接下来一周内面向全球所有 Gemini Notebook 用户推出；是否包含免费版、各地区的具体时间，都没有确认，需要在应用内自行查看。
+---
 
-**发布前核实**: 发布前请确认：你的账号和所在地区是否真的出现了 Review 开关；幻灯片与视频概览是否同步上线；该功能是否需要付费订阅。在没有确认之前，不要写具体价格或确定的上线日期。
+<a id="item-4"></a>
+## [AI 日报：腾讯开放元宝搜索，MiniMax 与蚂蚁百灵更新模型](https://news.aibase.cn/news/31757) ⭐️ 4.05/10
 
-**背景**: Gemini Notebook 是 Google 基于用户资料来源的笔记工具，与更早的 NotebookLM 属于同一产品线。此前的流程更接近“输入提示词后直接出成品”，中间没有审阅环节。
+AIBase 的一篇日报汇总了三条动态：腾讯通过 Skill、MCP 和 API 向开发者开放元宝搜索；MiniMax 推出 M3.1Flash 模型；蚂蚁百灵开源了包含五款模型的 Ming 3.0 语音系列。这些内容均来自该资讯站点的汇总报道，其中 MiniMax 的速度与成本数字是官方自己给出的说法。 对普通读者来说，最具体的一条是元宝搜索据称提供的每月免费调用额度，但它主要影响的是在做 AI 智能体或搜索功能的开发者，而不是一般消费者。Ming 3.0 语音系列对做配音、音频转写和总结的人更有参考价值，M3.1Flash 则面向使用智能体和编程任务的开发者。 该日报称元宝搜索拥有千亿级索引、接入 157 个信源、检索平均耗时约 8 毫秒，并提供每月 2000 次免费调用；MiniMax 称 M3.1Flash 推理速度接近此前版本的 3 倍、综合成本降低约 70%，并已接入 MiniMax API、MPlan 和 MiniMax Code。Ming 3.0 系列的价格、开放地区与开源许可条款在文中没有说明，需要到官方页面核实。
 
-<details><summary>参考链接</summary>
-<ul>
-<li><a href="https://blog.google/innovation-and-ai/products/gemini-notebook/co-create-slides-videos/">How to shape your slides and videos with Gemini Notebook</a></li>
-<li><a href="https://www.androidauthority.com/gemini-notebook-co-creation-video-and-slides-3725277/">Gemini Notebook adds new tools to fine-tune slides and videos ...</a></li>
-<li><a href="https://scalevise.com/resources/gemini-notebook-co-create-slide-decks-video-overviews/">Gemini Notebook Co-Creates Slides and Videos</a></li>
+web · AIBase 中文 · 10月20日 09:09
 
-</ul>
-</details>
+---
 
-**标签**: `#Gemini Notebook`, `#AI 幻灯片`, `#AI 视频概览`, `#办公效率`, `#Google AI`
+<a id="item-5"></a>
+## [DeepSeek V4.1 Flash 1017 更新，第三方指数得分 45](https://x.com/ArtificialAnlys/status/2112218661432000694) ⭐️ 3.5/10
+
+Artificial Analysis 称 DeepSeek 发布了 DeepSeek V4.1 Flash 1017，是其旗舰模型 DeepSeek V4.1 Flash 的一次更新。该帖称新版本在 Artificial Analysis 智能指数上得分 45，比上一版高 6 分，与另一款开源权重模型并列第二。 对使用模型 API 做开发的团队来说，这是一次价格不变的版本更新，官方转述的评测显示其在代理类任务、知识和推理上有提升，会影响“用哪款便宜模型”的选择。对普通观众而言，目前没有确认上线的新应用、新功能或面向个人的价格可体验。 原帖列出 1M token 上下文窗口、MIT 许可，以及 API 价格为高峰时段每百万输入 token 0.30 美元、每百万输出 token 1.20 美元，非高峰价格为一半。帖中还称该模型通过 DeepSeek 自家 API 和 Fireworks、Baseten、DeepInfra、Wafer、Cloudflare 等第三方服务提供；面向普通消费者的入口和中国区可用情况在这些材料中并未确认。
+
+aihot · X：Artificial Analysis (@ArtificialAnlys) · 10月19日 16:25 · [中文阅读](https://aihot.news/items/wrlpmwb2tsk1moehp5kpsvovb)
+
+---
+
+<a id="item-6"></a>
+## [MiniMax 发布 M3.1 Flash 模型，公开细节仍有限](https://www.minimax.io/blog/minimax-m31f) ⭐️ 3.35/10
+
+MiniMax 在其官方博客发布了一篇标题为 MiniMax M3.1 Flash 的文章，宣布了一个同名模型。本次分析拿不到文章正文，因此目前只能确认这是一条标题层面的发布信息，具体内容未知。 对普通观众来说，这件事暂时没有直接影响，因为还没有确认的普通用户功能、演示、价格或地区开放信息可以亲自体验。它主要对按成本和编程、智能体表现来选模型的开发者和团队有参考价值，而且对他们来说关键信息也还需要核实。 第三方模型列表页面把 MiniMax M3.1 Flash 描述为多模态模型，称其在智能体任务、编程和网络安全方面比 M3 有提升，部分页面还列出了免费版本，但这些都属于第三方描述，不是官方确认的细节。评论中流传的价格数字，如每百万输入 token 0.15 美元、每百万输出 token 0.60 美元，在发布前需要对照官方公告核实。
+
+hackernews · jtg · 10月19日 16:39 · [社区讨论](https://news.ycombinator.com/item?id=50154540)
+
+---
+
+<a id="item-7"></a>
+## [Inception 扩散模型 Mercury 3 上线 OpenRouter](https://x.com/OpenRouter/status/2112225779782398131) ⭐️ 2.6/10
+
+OpenRouter 宣布 Inception 的新扩散模型 Mercury 3 已在其平台上线。公告称上线期打五折，输入 $0.10/百万 token、输出 $0.35/百万 token。 这条消息主要对已经在用 OpenRouter API 的开发者有意义，他们可以不换平台就试用一个更便宜、速度更快的选项。普通手机用户基本感受不到变化，因为公告没有提到面向大众的应用或免费公开聊天入口。 OpenRouter 称上线期五折，输入 $0.10/百万 token、输出 $0.35/百万 token，但折扣持续多久没有说明，需要自行核实。每秒 1,000+ token、100 万上下文以及在 IFBench、GPQA Diamond、SWE-Bench Atlas 上超过 GPT-6 Luna 和 Haiku 5.5，都是 Inception 自己报告的说法，并非独立验证的结果。
+
+aihot · X：OpenRouter (@OpenRouter) · 10月19日 16:54 · [中文阅读](https://aihot.news/items/hnasqdie0vmly79xyg2ehqcgb)
 
 ---
 
@@ -267,7 +88,6 @@ web · Future Tools · 10月19日 17:20 · 2 个来源
 <p class="archive-intro">以下内容已成功抓取，因评分、数量限制或同题合并未进入精选。AI 判断仅供参考，你可以继续阅读并自行挑选；各来源切换是全部列表的子集。</p>
 <div class="archive-tablist" role="tablist" aria-label="更多追踪内容来源" hidden>
 <button type="button" role="tab" id="archive-tab-all" aria-controls="archive-panel-all" aria-selected="true" tabindex="0" data-archive-tab="all" data-count="66"><span>全部未入选</span><span class="archive-tab-count">66</span></button>
-<button type="button" role="tab" id="archive-tab-tracked-x" aria-controls="archive-panel-tracked-x" aria-selected="false" tabindex="-1" data-archive-tab="tracked-x" data-count="0"><span>其他追踪推文</span><span class="archive-tab-count">0</span></button>
 <button type="button" role="tab" id="archive-tab-follow-builders" aria-controls="archive-panel-follow-builders" aria-selected="false" tabindex="-1" data-archive-tab="follow-builders" data-count="21"><span>其他 Follow Builders 资讯</span><span class="archive-tab-count">21</span></button>
 </div>
 <div class="archive-panel" role="tabpanel" id="archive-panel-all" aria-labelledby="archive-tab-all" data-archive-panel="all">
@@ -734,10 +554,6 @@ web · Future Tools · 10月19日 17:20 · 2 个来源
 <p class="archive-assessment">AI 判断：标题初筛（未依据正文）：仅凭标题判断，这是 n8n 在 NVIDIA DGX Spark 上离线运行 AI 工作流的技术教程，面向开发者与自建服务人群，而非普通办公、学习或生活用户。属于用户明确降权的工程部署类内容；标题未提供普通人可直接复现的步骤、价格、效果对比或使用限制，因此评分较低。无评论信息可参考。</p>
 <details class="archive-original"><summary>展开原始摘录</summary><p>n8n 博客发布教程，讲解如何在一台 NVIDIA DGX Spark（128GB 统一内存）上部署七个本地模型，通过 LiteLLM 单一 OpenAI 兼容端点驱动 n8n 工作流，全程不调用云 API。</p></details>
 </article>
-</div>
-<div class="archive-panel" role="tabpanel" id="archive-panel-tracked-x" aria-labelledby="archive-tab-tracked-x" data-archive-panel="tracked-x">
-<h3 class="archive-panel-title">其他追踪推文</h3>
-<p class="archive-empty">今天该来源没有其他未入选内容。</p>
 </div>
 <div class="archive-panel" role="tabpanel" id="archive-panel-follow-builders" aria-labelledby="archive-tab-follow-builders" data-archive-panel="follow-builders">
 <h3 class="archive-panel-title">其他 Follow Builders 资讯</h3>
