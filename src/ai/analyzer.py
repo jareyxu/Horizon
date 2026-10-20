@@ -85,16 +85,20 @@ class ContentAnalyzer:
         Args:
             item: Content item to analyze (modified in-place)
         """
+        creator_mode = self.profile.editorial_mode == "creator"
         # Prepare content section
         content_section = ""
         if item.content:
             # Split off comments if present
             content_text = item.content
+            if creator_mode:
+                from bs4 import BeautifulSoup
+                content_text = BeautifulSoup(content_text, "html.parser").get_text(" ", strip=True)
             if "--- Top Comments ---" in content_text:
                 main, comments_part = content_text.split("--- Top Comments ---", 1)
-                content_section = f"Content: {main.strip()[:800]}"
+                content_section = f"Content: {main.strip()[:1800 if creator_mode else 800]}"
             else:
-                content_section = f"Content: {content_text[:1000]}"
+                content_section = f"Content: {content_text[:2400 if creator_mode else 1000]}"
 
         # Prepare discussion section (comments, engagement)
         discussion_parts = []

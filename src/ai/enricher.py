@@ -150,12 +150,17 @@ class ContentEnricher:
         content_text = ""
         comments_text = ""
         if item.content:
-            if "--- Top Comments ---" in item.content:
-                main, comments_part = item.content.split("--- Top Comments ---", 1)
+            if self.creator_mode:
+                from bs4 import BeautifulSoup
+                clean_content = BeautifulSoup(item.content, "html.parser").get_text(" ", strip=True)
+            else:
+                clean_content = item.content
+            if "--- Top Comments ---" in clean_content:
+                main, comments_part = clean_content.split("--- Top Comments ---", 1)
                 content_text = main.strip()[:4000]
                 comments_text = comments_part.strip()[:2000]
             else:
-                content_text = item.content[:4000]
+                content_text = clean_content[:4000]
 
         # Step 1: AI identifies concepts to explain
         queries = [f"{item.title} official announcement availability"] if self.creator_mode else await self._extract_concepts(item, content_text)
