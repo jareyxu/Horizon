@@ -35,7 +35,7 @@ from .ai.client import create_ai_client
 from .ai.analyzer import ContentAnalyzer
 from .ai.summarizer import DailySummarizer
 from .ai.enricher import ContentEnricher
-from .ai.tokens import get_usage_snapshot
+from .ai.tokens import get_usage_snapshot, reset_usage, usage_stage
 from .ai.longform import LongFormProcessor
 
 
@@ -88,6 +88,7 @@ class HorizonOrchestrator:
         Args:
             force_hours: Optional override for time window in hours
         """
+        reset_usage()
         self.console.print(
             "[bold cyan]🌅 Horizon - Starting aggregation...[/bold cyan]\n"
         )
@@ -140,10 +141,12 @@ class HorizonOrchestrator:
                 )
 
             # 3.5 Condense long podcast transcripts across the whole document.
-            await self._prepare_longform_items(merged_items)
+            with usage_stage("longform_preprocessing"):
+                await self._prepare_longform_items(merged_items)
 
             # 4. Analyze with AI
-            analyzed_items = await self._analyze_content(merged_items)
+            with usage_stage("title_scoring" if self.config.ai.analysis_input == "title" else "excerpt_scoring"):
+                analyzed_items = await self._analyze_content(merged_items)
             self._apply_source_scoring(analyzed_items)
             if hasattr(self.storage, "save_candidate_archive"):
                 self.storage.save_candidate_archive(self._report_date(), self.build_candidate_archive(raw_items, analyzed_items))
@@ -174,7 +177,8 @@ class HorizonOrchestrator:
                 )
 
             # 5.5 Semantic deduplication: drop items covering the same topic
-            deduped_items = await self.merge_topic_duplicates(important_items)
+            with usage_stage("topic_deduplication"):
+                deduped_items = await self.merge_topic_duplicates(important_items)
             if len(deduped_items) < len(important_items):
                 self.console.print(
                     f"🧹 Removed {len(important_items) - len(deduped_items)} topic duplicates "
@@ -183,11 +187,12 @@ class HorizonOrchestrator:
             important_items = deduped_items
 
             # 5.6 Optional second-stage Twitter reply expansion + targeted re-analysis
-            await self._expand_twitter_discussion(important_items)
+            with usage_stage("twitter_reply_analysis"):
+                await self._expand_twitter_discussion(important_items)
 
             # 5.7 Apply per-category and global digest limits before enrichment
             balanced_result = self.apply_balanced_digest(important_items)
-            important_items = balanced_result.items
+            important_items = sorted(balanced_result.items, key=lambda item: item.ai_score if item.ai_score is not None else -1, reverse=True)
 
             # Show per-sub-source selection breakdown
             selected_counts: Dict[str, int] = defaultdict(int)
@@ -202,7 +207,8 @@ class HorizonOrchestrator:
             await self._verify_important_items(important_items)
 
             # 7. Search related stories + enrich with background knowledge (2nd AI pass)
-            await self._enrich_important_items(important_items)
+            with usage_stage("selected_summary"):
+                await self._enrich_important_items(important_items)
             SourceVerifier.finalize_corroboration(important_items)
 
             archive_items = self.build_candidate_archive(raw_items, analyzed_items)
@@ -297,6 +303,16 @@ class HorizonOrchestrator:
                 "[bold green]✅ Horizon completed successfully![/bold green]"
             )
             usage = get_usage_snapshot()
+            if hasattr(self.storage, "save_token_usage"):
+                self.storage.save_token_usage(today, {
+                    **usage.to_dict(),
+                    "run_status": "success",
+                    "model": self.config.ai.model,
+                    "analysis_input": self.config.ai.analysis_input,
+                    "fetched_items": len(all_items),
+                    "analyzed_items": len(analyzed_items),
+                    "selected_items": len(important_items),
+                })
             if usage.total_tokens > 0:
                 self.console.print(
                     f"\n🧮 Token usage this run: "
@@ -310,9 +326,25 @@ class HorizonOrchestrator:
                         f"   • {provider}: {u.total} tokens "
                         f"(in: {u.input_tokens}, out: {u.output_tokens})"
                     )
+                for stage, u in sorted(usage.per_stage.items()):
+                    self.console.print(
+                        f"   • stage/{stage}: {u.total} tokens "
+                        f"(in: {u.input_tokens}, out: {u.output_tokens}, "
+                        f"reported calls: {u.reported_calls}, reported reasoning: {u.reasoning_tokens} "
+                        f"in {u.reasoning_reported_calls} calls)"
+                    )
 
         except Exception as e:
             self.console.print(f"[bold red]❌ Error: {e}[/bold red]")
+            if hasattr(self.storage, "save_token_usage"):
+                try:
+                    self.storage.save_token_usage(self._report_date(), {
+                        **get_usage_snapshot().to_dict(), "run_status": "failed",
+                        "model": self.config.ai.model,
+                        "analysis_input": self.config.ai.analysis_input,
+                    })
+                except OSError:
+                    self.console.print("[yellow]Could not persist partial token usage[/yellow]")
 
             # Send webhook failure notification if configured
             if self.webhook_notifier:

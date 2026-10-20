@@ -94,7 +94,7 @@ Return the requested JSON, including creator metadata and honest Simplified Chin
 
 CREATOR_ANALYSIS_EXTRA = """
 Also include a creator object in the JSON:
-"creator": {"kind": "practical|fun|trend|opinion|technical|other", "audience": "具体适合的普通人群，用中文", "angle": "基于事实的自媒体选题角度，用中文", "dimensions": {"audience": 0, "utility": 0, "novelty": 0, "visual": 0, "viewpoint": 0, "timeliness": 0}}
+"creator": {"kind": "practical|fun|trend|opinion|technical|other", "dimensions": {"audience": 0, "utility": 0, "novelty": 0, "visual": 0, "viewpoint": 0, "timeliness": 0}}
 Use actual numeric 0-10 ratings instead of the example zeros. The reason and summary must be in Simplified Chinese. Do not claim to have tested a product.
 """
 

@@ -72,14 +72,49 @@ def test_archive_retains_raw_merged_rows_and_every_source(tmp_path):
     assert soup.select_one('[data-archive-tab="all"]')["aria-selected"] == "true"
 
 
-def test_creator_cards_and_empty_summary_have_usable_counts():
+def test_creator_compact_summary_removes_all_expanded_fields():
     summarizer = DailySummarizer(editorial_mode="creator")
     empty = asyncio.run(summarizer.generate_summary([], "2026-10-20", 84, "zh"))
     assert "从 84 条内容中筛选出 0 条" in empty
-    news = item("story", metadata={"editorial_mode": "creator", "audience_zh": "上班族", "content_angle_zh": "一个观点", "visual_plan_zh": "实测对比", "availability_zh": "价格待核实", "verification_needed_zh": "核实地区"})
+    news = item("story", ai_summary="保留的新闻摘要", ai_tags=["标签内容"], metadata={"editorial_mode": "creator", "audience_zh": "上班族", "content_angle_zh": "一个观点", "visual_plan_zh": "实测对比", "availability_zh": "价格待核实", "verification_needed_zh": "核实地区", "verification_status": "multi_source", "mandatory_inclusion": "固定入选", "background_zh": "背景内容", "sources": [{"title": "参考", "url": "https://example.com/ref"}]})
     rendered = asyncio.run(summarizer.generate_summary([news], "2026-10-20", 84, "zh"))
-    assert "适合谁" in rendered and "可以怎么拍" in rendered
-    assert "发布前核实" in rendered
+    assert "保留的新闻摘要" in rendered
+    for label in ["适合谁", "选题角度", "可以怎么拍", "使用门槛", "发布前核实", "入选规则", "核验", "参考链接", "背景内容", "标签内容"]:
+        assert label not in rendered
+
+
+def test_creator_brief_sorts_mandatory_items_by_actual_score():
+    low = item("low", ai_score=3, metadata={"mandatory_inclusion": "固定入选"})
+    high = item("high", ai_score=9)
+    rendered = asyncio.run(DailySummarizer(editorial_mode="creator").generate_summary([low, high], "2026-10-20", 2, "zh"))
+    assert rendered.index("[high](#item-1)") < rendered.index("[low](#item-2)")
+
+
+def test_full_archive_has_no_obsolete_tracked_x_tab():
+    news = item("other")
+    html = DailySummarizer().generate_pages_archive_tabs([], [], set(), "zh", all_items=[news])
+    assert 'data-archive-tab="all"' in html
+    assert 'data-archive-tab="follow-builders"' in html
+    assert 'data-archive-tab="tracked-x"' not in html
+    assert 'id="archive-panel-tracked-x"' not in html
+
+
+def test_creator_enrichment_only_requests_chinese_news_brief():
+    from src.ai.enricher import ContentEnricher
+    class Client:
+        async def complete(self, **kwargs):
+            assert "只输出 JSON" in kwargs["system"]
+            assert "whats_new_en" not in kwargs["user"]
+            assert "visual_plan" not in kwargs["user"]
+            return json.dumps({"title_zh": "标题", "summary_zh": "简短新闻正文"})
+    enricher = ContentEnricher(Client(), ProfileConfig(editorial_mode="creator"))
+    async def no_search(*args, **kwargs):
+        raise AssertionError("Compact briefs must not search for background")
+    enricher._web_search = no_search
+    news = item("brief")
+    asyncio.run(enricher._enrich_item(news))
+    assert news.metadata["detailed_summary_zh"] == "简短新闻正文"
+    assert "detailed_summary_en" not in news.metadata
 
 
 def test_title_screening_never_sends_body_or_comments():

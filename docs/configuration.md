@@ -24,6 +24,19 @@ verification and body-based enrichment. Use `"excerpt"` to restore excerpt scori
 This saves scoring input tokens, not all AI costs, and can miss stories with
 uninformative titles. Long podcast condensation is skipped before title screening.
 
+Creator reports now request only a Chinese title and short body-based news brief
+for selected items, without bilingual background, audience/filming advice or tags.
+Source verification and mandatory selection rules remain active internally. The
+final report is sorted by actual score, including mandatory items. The Pages full
+archive contains only the All and Follow Builders tabs (the legacy tracked-X
+rendering API is retained for integrations).
+
+Per-run token records are saved under `data/usage/` with unique UTC timestamps.
+They include provider-reported input/output tokens, stage attribution and reported
+call counts. Reasoning tokens, when returned, are a subset of output, not an extra
+chargeable token count to add to totals. Missing reasoning detail means unknown,
+not zero. These records do not include prompts or credentials.
+
 `filtering.always_include_aibase_daily` includes collected AIbase daily roundups
 regardless of score. A dedicated public daily collector keeps the original
 publication date and the normal time window; missing or stale issues are not

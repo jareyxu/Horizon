@@ -308,6 +308,7 @@ class OpenAIClient(AIClient):
                 self.provider,
                 input_tokens=getattr(usage, "prompt_tokens", 0),
                 output_tokens=getattr(usage, "completion_tokens", 0),
+                reasoning_tokens=getattr(getattr(usage, "completion_tokens_details", None), "reasoning_tokens", None),
             )
         return response.choices[0].message.content
 
@@ -443,6 +444,7 @@ class AzureOpenAIClient(AIClient):
                 "openai",
                 input_tokens=getattr(usage, "prompt_tokens", 0),
                 output_tokens=getattr(usage, "completion_tokens", 0),
+                reasoning_tokens=getattr(getattr(usage, "completion_tokens_details", None), "reasoning_tokens", None),
             )
         return response.choices[0].message.content
 

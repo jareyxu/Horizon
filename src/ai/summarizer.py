@@ -135,6 +135,8 @@ class DailySummarizer:
         """
         labels = LABELS.get(language, LABELS["en"])
 
+        items = sorted(items, key=lambda item: item.ai_score if item.ai_score is not None else -1, reverse=True)
+
         if not items:
             if self.editorial_mode == "creator":
                 return f"# {labels['header']} - {date}\n\n> {labels['selected_items'].format(total=total_fetched, selected=0)}\n\n" + ("今天没有足够合适的精选选题，可在下方全部资讯中自行挑选。\n" if language == "zh" else "No topics met the editorial threshold; browse the full pool below.\n")
@@ -206,7 +208,7 @@ class DailySummarizer:
                 labels["tracked_x_archive"],
                 len(tracked_x),
                 selected=all_items is None,
-            ),
+            ) if all_items is None else "",
             self._archive_tab_button(
                 "follow-builders",
                 labels["follow_builders_archive"],
@@ -222,7 +224,7 @@ class DailySummarizer:
                 labels,
                 language,
                 archive_kind="twitter135",
-            ),
+            ) if all_items is None else "",
             self._archive_panel(
                 "follow-builders",
                 labels["follow_builders_archive"],
@@ -581,6 +583,9 @@ class DailySummarizer:
             "",
             source_line,
         ]
+
+        if self.editorial_mode == "creator":
+            return "\n".join(lines) + "\n\n---\n\n"
 
         verification_status = str(meta.get("verification_status") or "")
         if meta.get("mandatory_inclusion"):
