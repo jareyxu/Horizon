@@ -5,214 +5,264 @@ date: 2026-10-20
 lang: zh
 ---
 
-> 从 62 条内容中筛选出 8 条重要资讯。
+> 从 84 条内容中筛选出 10 条重要资讯。
 
 ---
 
-1. [Ask HN：工程师热议如何交付自己看不懂的 AI 生成代码](#item-1) ⭐️ 8.0/10
-2. [Numan 用 LangGraph 与 LangSmith 打造评测优先的 AI 健康教练 Nu](#item-2) ⭐️ 7.53/10
-3. [美国国土安全部下令联邦文职机构移除 DeepSeek 及其衍生产品](#item-3) ⭐️ 7.38/10
-4. [黑客用 AI 智能体入侵 100 多家网站，涉及 John Deere、SharkNinja](#item-4) ⭐️ 7.17/10
-5. [Wine 成功移植到 OpenBSD，需绕过 %gs 与 SIGUSR1 限制](#item-5) ⭐️ 7.0/10
-6. [Mac.apk 让 Android 应用在 Apple Silicon Mac 上原生运行](#item-6) ⭐️ 7.0/10
-7. [报道称 Anthropic 正筹备能揣摩未言明意图的新模型](#item-7) ⭐️ 7.0/10
-8. [@dotey 解读网易 LobsterAI 9 月《中国办公 Agent 用户行为报告》](#item-8) ⭐️ 7.0/10
+1. [DeepSeek 开源生产级推理引擎 DeepInfer，新增华为昇腾支持](#item-1) ⭐️ 9.6/10
+2. [ProjectDiscovery 揭示：去审查模型可隐藏恶意触发行为](#item-2) ⭐️ 8.0/10
+3. [Simon Willison 转发《编程的讣告》：编码智能体抹去了编程的解题乐趣](#item-3) ⭐️ 8.0/10
+4. [Meta 详解瘦编排器模式：让路由层少干活以提升 AI 智能体可靠性](#item-4) ⭐️ 7.75/10
+5. [面壁智能 LES 调度让 35B MoE 在手机端侧实时运行](#item-5) ⭐️ 7.7/10
+6. [美国国土安全部下令联邦文职机构移除 DeepSeek 及基于其开发的产品](#item-6) ⭐️ 7.67/10
+7. [llm-d 1.0 发布：Kubernetes 原生分布式推理服务进入生产就绪阶段](#item-7) ⭐️ 7.5/10
+8. [黑客用 AI 智能体入侵 John Deere 等 100 多个网站](#item-8) ⭐️ 7.17/10
+9. [Guillermo Rauch 开源基于 libfx 的高速 HTML 产物构建器，让 AI 智能体具备持久性](#item-9) ⭐️ 7.0/10
+10. [Aaron Levie：模型越强，应用层差异化机会反而越大](#item-10) ⭐️ 7.0/10
 
 ---
 
 <a id="item-1"></a>
-## [Ask HN：工程师热议如何交付自己看不懂的 AI 生成代码](https://news.ycombinator.com/item?id=50151036) ⭐️ 8.0/10
+## [DeepSeek 开源生产级推理引擎 DeepInfer，新增华为昇腾支持](https://github.com/deepseek-ai/DeepInfer) ⭐️ 9.6/10
 
-Hacker News 上一条 Ask HN 帖子引来约 321 条评论，起因是有人引用了一位 Meta 工程师在 LinkedIn 上的发言：如今写代码“感觉像一个黑盒”，因为 AI 辅助交付的新标准推进太快，逐行审查根本不现实。评论者随后给出了具体做法，主张由人掌握设计与抽象的所有权，只把实现工作交给 LLM。 这是一线工程师围绕 AI 辅助软件工程中一个真实新问题的辩论：如果“交付自己看不懂的代码”成为常态，调试、故障响应、新人交接和长期维护都会变得更困难；但如果坚持逐行审查，又会抵消编程代理带来的生产力收益。团队如何化解这一矛盾，将直接影响代码评审文化、代码所有权模式以及资深工程师判断力的价值。 评论者给出的是具体的心智模型而非泛泛之谈：bitwizeshift 表示自己完全不让 LLM 参与设计，而是先在 UML 层面确定抽象与角色的完整层级，再让 LLM 只填充实现空隙，这样他依然清楚代码如何运作；jedberg 则用“Principal Engineer 类比”来解释——如今人人都负责设计，AI 扮演按细节实现的初级工程师；tptacek 则把精力投入代码理解工具，用 tree-sitter 和 SCIP 做了一套原生 SwiftUI 只读前端来替代 GitHub 的 PR 查看器。
+DeepSeek 以 Apache-2.0 许可开源了其支撑大规模生产服务的高性能推理框架 DeepInfer。该版本聚焦 DeepSeek V4.1 Flash 的离线推理，并同时支持 NVIDIA SM100 GPU 与华为昇腾 950 NPU。 生产级推理引擎很少被开源，此举降低了高效、低成本部署大模型的门槛。对昇腾 950 的支持更具战略意义，它为各实验室提供了摆脱以 CUDA 为核心的 NVIDIA 生态的替代方案，可能削弱其在 AI 加速器市场的主导地位。 本次开源的范围限于离线推理，而非完整的在线服务栈，因此动态批处理、在线调度等功能可能并未包含。DeepSeek 自报的数据——单集群日吞吐 155 万亿 tokens、低谷时段每卡每小时约 38 美元收入——描述的是其内部生产服务，并非对开源代码性能的保证。
 
-hackernews · rzk · 10月19日 11:24
+hackernews · ggcr · 10月20日 09:08 · [社区讨论](https://news.ycombinator.com/item?id=50163277) · 6 个来源
 
 **核验**: 多源印证
 
-**背景**: 编程代理和基于 LLM 的助手如今能凭简短提示生成大量可运行代码，当人几乎不检查输出时，这种做法常被称作“vibe coding”。传统软件工程假定作者理解自己交付的系统，而代码评审的作用是发现缺陷并在团队内传播知识。评论者提到的工具包括 tree-sitter——一个为源代码构建语法树的解析库，以及 SCIP——一种用于交叉引用与代码导航的代码索引标准，它们可以作为加速理解代码的构件。这条讨论的核心问题是：当实现越来越多地由模型完成时，人该如何保持对代码库的理解。
+**背景**: 推理引擎是实际运行已训练模型并响应请求的软件层，其效率决定了单块 GPU 每秒能生成多少 token，从而决定服务的运营成本。DeepSeek 是一家以发布开放权重模型著称的中国 AI 实验室；NVIDIA 的 SM100 是其 Blackwell 代数据中心 GPU 的架构，华为昇腾 NPU 则是中国主要的国产 AI 加速器产品线，因此同一引擎支持多家厂商的芯片格外引人关注。
 
 <details><summary>参考链接</summary>
 <ul>
-<li><a href="https://www.apideck.com/blog/ai-agents-explained-everything-you-need-to-know-in-2025">AI Agents Explained : Everything You Need to Know in 2026</a></li>
-<li><a href="https://codeaholicguy.com/2026/01/31/ai-coding-agents-explained-rules-commands-skills-mcp-hooks/">AI Coding Agents : Skills vs Commands vs Plugins vs Hooks Explained</a></li>
-<li><a href="https://medium.com/codetodeploy/agentic-systems-without-the-hype-when-multi-step-llm-workflows-actually-improve-software-e1492ebdfacf">Agentic Systems Without the Hype: When Multi-Step LLM Workflows ...</a></li>
+<li><a href="https://github.com/deepseek-ai/DeepInfer">GitHub - deepseek-ai/DeepInfer: DeepInfer: High-performance ...</a></li>
+<li><a href="https://pasqualepillitteri.it/en/news/25886/deepseek-deepinfer-inference-engine-open-source">DeepSeek releases DeepInfer, the engine it uses to serve its ...</a></li>
+<li><a href="https://cryptobriefing.com/deepseek-open-sources-deepinfer-inference-framework/">DeepSeek open-sources DeepInfer, the inference engine behind ...</a></li>
 
 </ul>
 </details>
 
-**社区讨论**: 整体氛围是积极参与但远未形成共识，有评论者还称赞这类帖子“答案五花八门”。一个反复出现的共识是：人应当掌握设计与抽象层，LLM 只负责实现，具体体现为“人做设计、LLM 做实现”的工作流和 Principal Engineer 类比。也有尖锐质疑：joaquieneCnix 直接挑战前提，反问 Meta 工程师如果连自己没写的代码都没时间检查，那他们到底还额外交付了多少代码，并指出可能出现数万行没有注释的代码的风险；也有人像 tptacek 那样，把这个难题转化为构建更好的代码理解工具的动力。
+**社区讨论**: Hacker News 上的评论普遍将其视为一次重大战略事件：有人称其对美国前沿实验室的万亿美元估值而言是一枚“核弹”，也有人认为对昇腾的支持可能打破 NVIDIA 在 AI 硬件上的“锁喉”地位。也有评论提示了前提条件：推理只占全部 AI 负载的一部分，若能在华为芯片上开源训练则会更具影响力。
 
-**标签**: `#AI coding agents`, `#software engineering`, `#code review`, `#developer productivity`, `#LLM workflows`
+**标签**: `#open-source AI`, `#inference engine`, `#LLM infrastructure`, `#DeepSeek`, `#AI hardware`
 
 ---
 
 <a id="item-2"></a>
-## [Numan 用 LangGraph 与 LangSmith 打造评测优先的 AI 健康教练 Nu](https://www.langchain.com/blog/how-numan-built-an-eval-first-ai-health-coach-with-langgraph-and-langsmith) ⭐️ 7.53/10
+## [ProjectDiscovery 揭示：去审查模型可隐藏恶意触发行为](https://projectdiscovery.io/research/how-abliterated-models-can-get-you-pwned) ⭐️ 8.0/10
 
-英国数字健康公司 Numan 发布复盘文章，介绍其 AI 健康教练 Nu 如何基于 LangGraph 和 LangSmith 构建“评测优先”的框架：放弃单轮静态测试样例和预先写死的多轮脚本对话，改为按类别打分的主题数据集、由更廉价模型扮演患者的模拟对话层，以及能够自动阻断发布的安全回归门禁。该团队的核心结论是：真正稀缺的资产不是提示词，而是评测标准本身。 这一案例研究提出：在 AI 智能体开发中，真正难以复制、构成护城河的资产是评测标准而非提示词，这重新定义了团队应当投入工程资源的方向。它对医疗、金融、法律等强监管领域的开发者尤其有参考价值——这些场景中的智能体既要守住严格边界，又要维持自然的多轮对话体验。 文章记录了两个促成重构的具体失败模式：一是基于静态样例的单轮评测用整个数据集的单一平均分掩盖了局部失败（有时还会把正确的教练行为误判为失败，因为评分规则要求在仅两轮对话内同时体现共情、探索和建议）；二是脚本化的多轮对话会忽略智能体实际说了什么，一旦 Nu 给出脚本未预期的回复，后续每一轮都在回应一场从未发生过的对话。另有一些行为仍可从单条回复中判定，例如主管模型是否路由到了正确的专科子智能体、用药问题是否得到安全回答、安全护栏是否被正确触发，这些由覆盖教练质量、安全、用药提问、路由和摘要的主题数据集来评测。
+ProjectDiscovery 发布了一篇安全研究文章，演示了经过 abliteration（剥离安全对齐）处理的开源权重模型可以隐藏基于触发词（trigger）的恶意行为——模型平时表现正常，只有在输入命中特定模式时才会被激活。该文章在 Hacker News 上获得 163 分和 94 条评论，引发了对模型来源溯源、信任与可解释性的广泛讨论。 它把“从社区下载去审查权重”这一流行做法变成了供应链风险问题：用户很难分辨一个模型只是被去掉了拒绝回答，还是被故意植入了后门。这影响到所有从 Hugging Face 等模型仓库拉取模型的人，也推动整个生态转向模型来源溯源、审计以及对不可信产物的沙箱化隔离。 Abliteration 的原理是在激活空间中定位并正交化掉模型的“拒绝回答”方向，因此生成的权重在统计上与正常模型无异、也能通过常规基准测试，而被移除的安全行为则可能被攻击者指定的触发词所取代。由于权重本身不透明、且触发词只在罕见的特定输入下才生效，检测通常只能依赖在实际使用中触发该行为，或借助可解释性与后门扫描工具来完成。
 
-aihot · LangChain：Blog（RSS） · 10月19日 15:00 · [中文阅读](https://aihot.news/items/nk19eo4eud45d47tmwxm684iu)
+hackernews · chatmasta · 10月19日 23:08 · [社区讨论](https://news.ycombinator.com/item?id=50159245)
 
 **核验**: 多源印证
 
-**背景**: Numan 是一家英国数字健康公司，其患者通过应用管理体重、激素和性健康等长期病症，Nu 则是嵌入在该日常使用应用中的 AI 健康教练。LangGraph 是 LangChain 团队推出的开源低层编排框架，用于以图的方式构建有状态、多角色的智能体；LangSmith 则是 LangChain 的框架无关平台，用于大模型应用的追踪、调试、测试、评测与监控；Nu 本身就是一个 LangGraph 图，由主管模型编排并向各领域专科子智能体分发任务。由于 Numan 处于高度监管的医疗领域，该智能体必须提供高质量的健康教练服务，同时不得越界进行诊断、开处方或做出临床决策。
+**背景**: Abliteration 是一种被广泛使用且成本很低的微调技巧，无需重新训练即可从开源权重模型中剥离拒绝回答的行为，从而产生在模型仓库中被自由分享的“无审查”变体。与此同时，后门攻击与数据投毒研究早已表明，语言模型可以被训练成仅在出现秘密触发短语时才输出恶意内容，而这类攻击极难仅凭权重本身发现。模型来源溯源（provenance）与“AI 物料清单”（AI-BOM）因此成为治理层面的答案，目标是记录模型来自何处、如何被训练或修改、以及经过了哪些测试。
 
 <details><summary>参考链接</summary>
 <ul>
-<li><a href="https://grokipedia.com/page/LangGraph">LangGraph</a></li>
-<li><a href="https://grokipedia.com/page/LangSmith">LangSmith</a></li>
-<li><a href="https://www.langchain.com/langsmith-platform">LangSmith: AI Agent & LLM Observability and Evals Platform</a></li>
+<li><a href="https://huggingface.co/blog/mlabonne/abliteration">Uncensor any LLM with abliteration</a></li>
+<li><a href="https://www.cyber8200.com/en/blog/detecting-backdoor-attacks-language-models">Detecting Backdoor Attacks in Language Models</a></li>
+<li><a href="https://www.linkedin.com/pulse/ai-bills-materials-ai-boms-model-provenance-supply-chains-miller-f7rkc">AI Bills of Materials ( AI -BOMs) and Model Provenance : Contracting...</a></li>
 
 </ul>
 </details>
 
-**标签**: `#AI agents`, `#LLM evals`, `#LangGraph`, `#LangSmith`, `#AI product design`
+**社区讨论**: 评论者普遍认可这项研究的价值，但对它的叙事框架存在分歧：hypfer 认为真正的问题在于“不可信产物”（untrusted artifact）而非 abliteration 本身，因为即便是某实验室的“干净”模型也可能隐藏这类行为；slopnt 则指出，由于权重不透明，任何来源的第一方模型都可能内置触发词，因此更好的基准测试、训练透明度与可解释性至关重要。throwaway13337 对举证标准提出质疑，认为开源权重模型本质上比托管 API 更可审查，一旦发现恶意意图用户就能复现出来；SillyUsername 则给出了务实建议：把 AI 当作一名恶意员工来对待，限制其文件系统与网络访问权限。
+
+**标签**: `#AI security`, `#LLM safety`, `#model provenance`, `#open-weight models`, `#supply chain security`
 
 ---
 
 <a id="item-3"></a>
-## [美国国土安全部下令联邦文职机构移除 DeepSeek 及其衍生产品](https://madrobot.blog/2026/10/19/us-bans-deepseek-federal-agencies-dhs-order-remove-third-party/) ⭐️ 7.38/10
+## [Simon Willison 转发《编程的讣告》：编码智能体抹去了编程的解题乐趣](https://simonwillison.net/2026/Oct/19/my-obituary-for-programming/) ⭐️ 8.0/10
 
-美国国土安全部发布 2026-01 号命令，由国土安全部长 Markwayne Mullin 签署、日期为 2026 年 7 月 24 日，要求所有联邦行政分支文职机构立即停止采购杭州深度求索人工智能公司及其关联方的产品，并立即从机构 IT 系统中移除 DeepSeek 产品以及“使用 DeepSeek 实现所开发的第三方产品与服务”。该通知依据 2018 年《联邦采购供应链安全法》提交，案卷号为 DHS-2026-0628，在被隐匿数月后于 2026 年 10 月 20 日（星期二）刊登于《联邦公报》。 由于 DeepSeek 以开放权重形式发布模型，这些模型可能被嵌入第三方工具与服务之中，因此该命令迫使各机构——以及向政府供货的厂商——去审计整条模型供应链，而不是简单地删除某个应用。它为将开放权重 AI 模型视为受监管的供应链组件树立了重要先例，并将对企业采用、采购规则以及任何悄悄内置 DeepSeek 模型的开发者工具产生连锁影响。 该命令并未列举具体涉及哪些产品，也没有说明各机构应如何处理运行在美国公司服务器上的 DeepSeek 模型，因而留下相当大的合规模糊空间。它适用于文职机构，但不包括其国家安全系统和安全隔离信息系统的部分，那些归五角大楼和国家情报总监管辖；此外，命令发布仅数天前，DeepSeek 刚更新了其低价 Flash 模型，该公司称其在部分编程任务上超过了 Claude Opus 5。
+2026 年 10 月 19 日，Simon Willison 在其博客上发布了一篇链接文章，重点推荐 Jeremy Scheff 发表于 dumbmatter.com 的随笔《编程的讣告》（My obituary for programming）。该文认为，AI 编码智能体正在夺走那种曾让编程成为理想职业的“解谜”式满足感。Willison 引用了 Scheff 的核心段落：程序员过去是拿薪水去解那些普通人搞不定的烧脑逻辑谜题，而这一格局如今正在改变。 这一论述捕捉到了开发者工作方式的真实范式转变：当基于 LLM 的编码智能体接手了那些原本带来智力挑战的实现任务后，一些工程师会觉得这份工作的内在回报下降了，从而可能影响职业选择、人员留存以及整个行业对自身价值的定义。它也在开发者群体中划出了一条清晰分界线——一类人更看重把可运行的系统做出来，另一类人则更看重亲自攻克沿途的难题。 Willison 并没有一味哀叹，而是补充了一个重要的细分视角：对于那些热衷于构建可运行系统、并不太在意途中具体解决了什么问题的程序员来说，LLM 是“源源不断的礼物”；而对于那些乐趣主要来自亲手解题的人来说，这种失去是非常真实的。这篇文章属于行业评论而非技术分析，没有提供实现细节、基准测试或具体工具信息，其标签包括 programming、careers、ai、generative-ai、llms、coding-agents 和 deep-blue。
 
-aihot · Hacker News：AI 热帖 · 10月19日 15:05 · [中文阅读](https://aihot.news/items/p04w1xjk7v6fmlskpf5vsnuka)
+rss · Simon Willison · 10月19日 23:58
 
 **核验**: 多源印证
 
-**背景**: DeepSeek 是一家中国 AI 实验室，以发布开放权重大语言模型而闻名，尤其是 2025 年 1 月推出的 DeepSeek-R1，它成为下载量极高的应用，并以远低的成本展现出可与美国领先模型竞争的能力。2018 年《联邦采购供应链安全法》设立了联邦采购安全委员会，并授权美国政府将存在风险的 IT、电信及其他产品排除在联邦采购之外，并下令将其移除。与传统的封禁应用不同，开放权重模型可以被下载并在其他软件中再分发，这正是该命令第二款将适用范围延伸至基于 DeepSeek 实现所构建的第三方产品的原因。
+**背景**: AI 编码智能体是建立在大型语言模型（LLM）之上的工具，能够辅助甚至自主完成编写源代码、调试、测试和文档等软件开发任务；它们不再只是简单的代码补全，而是能够规划并执行对代码库的多步骤修改。这项技术正从“建议式辅助”迅速演进为可以承担相当一部分实现工作的智能体，这也正是 Scheff 这篇文章引发共鸣的原因。Simon Willison 是拥有大量追随者的开发者与博主（Django Web 框架的共同创建者之一），以近乎实时地追踪 LLM 与 AI 工具进展而闻名，因此他对该文的转发让文章获得了更广泛的读者。
 
 <details><summary>参考链接</summary>
 <ul>
-<li><a href="https://en.wikipedia.org/wiki/DeepSeek_(AI)">DeepSeek (AI) - Wikipedia</a></li>
-<li><a href="https://www.congress.gov/115/bills/s3085/BILLS-115s3085es.pdf">AN ACT</a></li>
-<li><a href="https://www.cbo.gov/publication/54844">S. 3085, Federal Acquisition Supply Chain Security Act of 2018</a></li>
+<li><a href="https://en.wikipedia.org/wiki/AI_coding_agent">AI coding agent</a></li>
 
 </ul>
 </details>
 
-**标签**: `#AI regulation`, `#DeepSeek`, `#tech policy`, `#open-source AI`, `#supply chain security`
+**标签**: `#AI coding agents`, `#software engineering career`, `#LLM impact`, `#developer experience`, `#industry commentary`
 
 ---
 
 <a id="item-4"></a>
-## [黑客用 AI 智能体入侵 100 多家网站，涉及 John Deere、SharkNinja](https://www.theverge.com/ai-artificial-intelligence/1013643/ai-agents-hack-john-deere-shark-ninja-cummins) ⭐️ 7.17/10
+## [Meta 详解瘦编排器模式：让路由层少干活以提升 AI 智能体可靠性](https://engineering.fb.com/2026/10/19/ml-applications/thin-orchestrator-ai-agent-architecture/) ⭐️ 7.75/10
 
-AI 安全公司 Norforge 发现，一名黑客通过开源平台 Cairn 编排了一批基本自主行动的 AI 智能体，入侵了 100 多个网站，据 Reuters 报道受害者包括 John Deere、SharkNinja 和 Cummins。Norforge 共识别出 20 多个它认为“疑似恶意”的公开 Cairn 实例，并称那名最活跃的攻击者每次成功入侵大约耗时 23 小时。 这是最早被记录的典型案例之一：开源 AI 智能体平台被改造成可大规模实施真实入侵的工具，人类介入极少，说明 agentic AI 同时降低了攻击者的技术门槛和人力成本。这也意味着防守方今后不仅要盯住被攻击的站点，还必须关注这些智能体编排平台本身的使用情况。 攻击者仅用不到 100 个汉字就写明了其“偏好的入侵战术”，指挥这些智能体所需的提示词之少令人瞩目；Cairn 的运作方式是让用户设定起点与最终目标，智能体在前行过程中自行记录进展。涉事公司均淡化了影响：John Deere 表示没有迹象显示敏感信息被访问，SharkNinja 称遭入侵的是一个独立的产品支持站点且威胁已被控制，Cummins 则表示正在调查其第三方供应商所运营网站受到的攻击。
+Meta 工程团队发布博客，详解其数据管道智能体所采用的“瘦编排器”（thin orchestrator）模式：一个约 1300 行的编排器负责将 20 多个工作流分派给 14 个上下文隔离的专项子智能体，自身不做任何领域推理。文章还说明了团队为何放弃最初那种“什么都懂”的单一智能体——它在演示中表现良好，但在生产环境中开始出现幻觉。 这一模式与“把所有领域知识都塞进单个智能体”的常见直觉相反，为生产团队提供了一个具体的架构替代方案，尤其在多智能体系统从演示走向真实部署的当下很有参考价值。对于要在复杂的多代码库、多数据管道之上构建智能体的工程组织来说，这一经验尤为重要，因为一旦领域判断出错就会带来实际后果。 Meta 将编排器描述为确定性的：它只做意图分类、收集必填字段、执行可靠性检查并分派任务，从不推理代码、不生成配置、也不触碰代码库。文章引用了西奈山 Windreich 人工智能与人类健康系的一篇预印本，该研究发现编排式多智能体系统在 80 个任务的批次上仍保持 65.3% 的准确率，而单智能体则跌至 16.6%，同时 token 消耗最多降低 65 倍；文章还提到另一种单智能体方案需要为每个任务手工编写提示词才能达到 70%-80% 的成功率，缺少这种人工干预时会降到 10%-20%。
+
+aihot · Meta Engineering Blog（RSS） · 10月19日 15:30 · [中文阅读](https://aihot.news/items/qh6pvehounuylklti7i0zl124)
+
+**核验**: 多源印证
+
+**背景**: Meta 的数据管道采用“配置即代码”（config-as-code）的方式：Python 配置驱动 C++ 代码生成，生成的代码再供给数据处理服务，最终填充分析系统；因此接入单个数据列需要在三个代码仓库、三种编程语言和最多六个管道阶段之间协同修改。上下文隔离意味着每个子智能体运行在各自独立的上下文窗口中，只看到问题的一部分，从而避免某个子系统的字段命名习惯或代码生成模式“串味”到另一个子系统。而编排器模式则是把路由与控制层和真正执行领域工作的智能体分开，这种结构正被越来越多地推荐用于需要可控延迟和可调试请求流的生产级智能体系统。
+
+<details><summary>参考链接</summary>
+<ul>
+<li><a href="https://engineering.fb.com/2026/10/19/ml-applications/thin-orchestrator-ai-agent-architecture/">The Thin Orchestrator: How We Made Our AI Agents More ...</a></li>
+<li><a href="https://learn.microsoft.com/en-us/azure/architecture/ai-ml/guide/ai-agent-design-patterns">AI Agent Orchestration Patterns - Azure Architecture Center</a></li>
+<li><a href="https://deepwiki.com/humanlayer/advanced-context-engineering-for-coding-agents/4.3-sub-agents-and-context-isolation">Sub-Agents and Context Isolation | humanlayer/advanced ...</a></li>
+
+</ul>
+</details>
+
+**标签**: `#AI Agents`, `#Agent Architecture`, `#Orchestration`, `#LLM Applications`, `#Engineering Blog`
+
+---
+
+<a id="item-5"></a>
+## [面壁智能 LES 调度让 35B MoE 在手机端侧实时运行](https://mp.weixin.qq.com/s?__biz=Mzg3Mzg2MTg2NQ%3D%3D&mid=2247499532&idx=1&sn=db2949b48bf8909d80def369b51a81ea) ⭐️ 7.7/10
+
+面壁智能 MiniCPM-V 团队发布技术解读，介绍支撑 MiniCPM-V 4.7 端侧运行的前瞻专家调度（LES）技术，并称其首次实现了 35B-A3B 规模 MoE 模型在手机端侧的实时无损运行。团队给出的实测数据显示，在 iPhone 18 Pro Max 上解码速度超过 20 token/s。 35B 级别的稀疏 MoE 模型过去基本只能跑在服务器或大内存 PC 上，因为每个 token 都要从内存中读取专家权重，内存带宽才是瓶颈。如果真能在手机上无损实时运行，端侧助手的可用上限会明显抬高，既能保证数据不出本地，也能省掉网络延迟和推理成本。这也意味着边缘推理的竞争焦点正从算力转向专家路由与内存调度。 在 35B-A3B 这一命名中，35B 指总参数量，A3B 表示每个 token 实际只激活约 3B 参数，因此单 token 的计算量并不大，真正的瓶颈在于能否及时预取并缓存到正确的专家权重。不过所提供的原文摘录中正文无法获取（返回的是环境验证页面），因此显存/内存占用、量化方案、专家缓存容量、LES 预测命中率以及与服务器版本的效果对比等细节都无法从来源核实，且文中提到的 iPhone 18 Pro Max 也并非已上市机型。
+
+aihot · 公众号：面壁智能（MiniCPM） · 10月20日 06:22 · [中文阅读](https://aihot.news/items/m2ylwtzb8x49c32spfl1wplqz)
+
+**核验**: 多源印证
+
+**背景**: 混合专家（MoE）是一种把大模型拆成许多专门化“专家”子网络的架构，路由机制让每个 token 只经过其中少数几个专家，因此总参数量可以做得很大，而单 token 的计算量保持很小。MiniCPM-V 是 OpenBMB／面壁智能推出的多模态模型系列，其较早的 4.5 版本是一个基于 Qwen3-8B 加 SigLIP2-400M 视觉编码器的 8B 模型，因此换用 35B-A3B 的 MoE 主干意味着模型容量的大幅提升。端侧推理指的是模型完全在手机上运行而不依赖服务器，此时真正的约束是统一内存带宽、散热和电量，而不是峰值算力。
+
+<details><summary>参考链接</summary>
+<ul>
+<li><a href="https://zhuanlan.zhihu.com/p/2029254385411137922">深度解析 Qwen3.6 Flash（Qwen3.6-35B-A3B）：3B激活参数的智能体编程...</a></li>
+<li><a href="https://blog.csdn.net/weixin_32296621/article/details/162136293">Qwen3.6-35B-A3B：MoE架构大模型的工程落地指南-CSDN博客</a></li>
+<li><a href="https://blog.csdn.net/kakaZhui/article/details/150965748">MiniCPM - V 4 .5 vs MiniCPM - V 2.6 深度对比分析-CSDN博客</a></li>
+
+</ul>
+</details>
+
+**标签**: `#on-device AI`, `#MoE`, `#edge inference`, `#model optimization`, `#MiniCPM`
+
+---
+
+<a id="item-6"></a>
+## [美国国土安全部下令联邦文职机构移除 DeepSeek 及基于其开发的产品](https://madrobot.blog/2026/10/19/us-bans-deepseek-federal-agencies-dhs-order-remove-third-party/) ⭐️ 7.67/10
+
+美国国土安全部依据 2018 年《联邦采购供应链安全法》发布 2026-01 号命令，要求所有联邦文职机构立即停止采购 DeepSeek 及其关联公司的产品，并从其 IT 系统中移除相关产品。该命令明确将范围扩大到使用 DeepSeek 实现所开发的第三方产品与服务，而不只是 DeepSeek 自家的应用与模型。 该命令把限制从模型层面扩展到下游产品，实质上是把一项供应链规则施加到把 DeepSeek 模型嵌入自身软件的供应商、集成商和开发者身上。这也表明美国政府采购正在成为开放权重 AI 落地的把关者——任何涉及联邦文职机构 IT 的工具，今后可能都需要证明自己不含源自 DeepSeek 的组件。 最具争议的技术点是适用范围：目前尚不清楚禁令是只覆盖直接调用 DeepSeek 模型的工具，还是也延伸到任何包含借助 DeepSeek 编写过的代码或库的软件；考虑到 DeepSeek 开放权重模型的流行程度，后一种解释影响面会非常大。该命令由国土安全部依据 FASCSA 授权发布，原文以 2026-21447 号文件刊登在《联邦公报》上。
+
+aihot · Hacker News：AI 热帖 · 10月19日 15:05 · [中文阅读](https://aihot.news/items/p04w1xjk7v6fmlskpf5vsnuka) · 2 个来源
+
+**核验**: 多源印证
+
+**背景**: DeepSeek 是一家中国 AI 实验室，其开放权重的大语言模型（尤其是 2025 年 1 月发布的 R1）以低成本下的强推理能力被广泛采用，而开放权重意味着机构可以自行托管这些模型。2018 年 12 月签署的《联邦采购供应链安全法》（FASCSA）赋予美国各机构权力，禁止采购或使用对国家安全或供应链完整性构成风险的产品、软件或服务。此次命令是较为引人注目的 FASCSA 执法行动之一，此前已有类似举措，例如澳大利亚在 2025 年 2 月禁止政府设备使用 DeepSeek。
+
+<details><summary>参考链接</summary>
+<ul>
+<li><a href="https://en.wikipedia.org/wiki/DeepSeek_(AI)">DeepSeek (AI) - Wikipedia</a></li>
+<li><a href="https://www.patreon.com/dtns/posts/what-it-takes-to-152424835">What It Takes to Declare a Company a Supply Chain Risk - DTNS...</a></li>
+<li><a href="https://www.contragenix.com/newsletter/fascsa-enforcement-begins-what-the-acronis-order-means-for-federal-contractors/">FASCSA Enforcement Begins: What the Acronis Order... - Contragenix</a></li>
+
+</ul>
+</details>
+
+**社区讨论**: 评论者普遍持怀疑态度：多人质疑禁止一个可自行托管的开放权重模型究竟是真正的安全措施，还是披着国家安全外衣的「监管俘获」，也有人指出澳大利亚此前的禁令似乎缺乏明确的技术依据。最实际的分歧在于定义——「使用 DeepSeek 实现所开发的第三方产品与服务」是否会被宽泛解读为涵盖任何含借助 DeepSeek 编写的代码的软件，鉴于这些模型如此流行，这种审查会很难操作。还有人指出该命令将迫使非美国的下游公司一并遵从，称之为保护主义；也有人调侃从禁令到 DeepSeek 通过美国合资公司变成默认获批模型只有几步之遥。
+
+**标签**: `#AI regulation`, `#DeepSeek`, `#supply chain security`, `#government policy`, `#open-source AI`
+
+---
+
+<a id="item-7"></a>
+## [llm-d 1.0 发布：Kubernetes 原生分布式推理服务进入生产就绪阶段](https://research.ibm.com/blog/llmd-1-0-is-ready-for-production-inference-serving?utm_medium=rss&utm_source=rss) ⭐️ 7.5/10
+
+IBM、Red Hat 与 Google 在 PyTorch Conference North America 上联合宣布 llm-d 1.0，这是该开源、Kubernetes 原生分布式推理服务框架的首个生产就绪版本。该版本将 llm-d 定位为一个支持任意模型、任意加速器与任意云环境的推理栈。 一个生产就绪且厂商中立的推理栈意义重大，因为目前企业在规模化服务大语言模型时普遍面临方案碎片化、成本高昂的问题，而 llm-d 提供了一条由三大云与基础设施厂商背书的可移植路径。它同时进一步巩固了 Kubernetes 作为 AI 工作负载标准控制平面的地位，将影响平台工程师、MLOps 团队以及所有希望避免被单一加速器或云厂商锁定的组织。 llm-d 构建在 vLLM 推理引擎之上，并借助 Kubernetes Gateway API Inference Extension 实现智能路由，同时通过分离式服务（disaggregated serving）与 GPU 感知调度来提升吞吐并降低成本。该项目随后被捐赠给 CNCF，成为 Sandbox 项目；其公开目标是让大多数开源 LLM 与硬件加速器都能最快达到业界最先进（SOTA）性能。
+
+aihot · IBM Research：AI · 10月20日 12:00 · [中文阅读](https://aihot.news/items/b1pcaa7ceghor24vjgsjagqqd)
+
+**核验**: 多源印证
+
+**背景**: 在生产环境中服务大语言模型既昂贵又复杂：请求耗时长、显存占用高且对延迟敏感，因此单台 GPU 服务器往往难以胜任。分布式推理框架会把模型或工作负载拆分到多个加速器和节点上运行，而 Kubernetes 已成为编排这类资源的通用方式。llm-d 是由 Red Hat、Google、IBM、NVIDIA 和 CoreWeave 等共同推动的开源项目，目标是把这种大规模推理服务变成一条经过充分测试、可复制的“明朗路径”，而不是一次性的定制工程。
+
+<details><summary>参考链接</summary>
+<ul>
+<li><a href="https://www.redhat.com/en/topics/ai/what-is-llm-d.md">redhat.com/en/topics/ai/what-is- llm - d .md</a></li>
+<li><a href="https://www.solo.io/blog/llm-d-distributed-inference-serving-on-kubernetes">llm-d: Distributed Inference Serving on Kubernetes</a></li>
+<li><a href="https://github.com/llm-d/llm-d/">GitHub - llm-d/llm-d: Achieve state of the art inference ...</a></li>
+
+</ul>
+</details>
+
+**标签**: `#Kubernetes`, `#LLM Inference`, `#Distributed Serving`, `#Open Source AI Infrastructure`, `#AI/ML Systems`
+
+---
+
+<a id="item-8"></a>
+## [黑客用 AI 智能体入侵 John Deere 等 100 多个网站](https://www.theverge.com/ai-artificial-intelligence/1013643/ai-agents-hack-john-deere-shark-ninja-cummins) ⭐️ 7.17/10
+
+AI 安全公司 Norforge 发现，一名黑客通过开源平台 Cairn 编排大量 AI 智能体，入侵了 100 多个网站；据 Reuters 报道，受害者包括 John Deere、SharkNinja 和 Cummins。Norforge 还发现另外 20 多个暴露在外的 Cairn 实例，判断其“很可能具有恶意”。 这是“攻击性 AI 智能体”在真实世界中落地的一个具体案例，说明单个攻击者如今几乎无需亲自操作，就能在多个国家发动大规模入侵活动。它意味着发动此类攻击所需的技术门槛和成本正在急剧下降，从而给防守方以及那些 AI 工具可能被挪作攻击用途的厂商带来了更大压力。 据 Reuters 报道，该攻击者仅用不到 100 个中文字符就描述了其“偏好使用的入侵战术”，单次成功入侵大约耗时 23 小时，目标企业分布在美国、加拿大、澳大利亚和日本。John Deere 表示“没有迹象显示敏感信息被访问”，SharkNinja 称受影响的只是一个独立的 product support 网站并已控制住威胁，Cummins 则表示正在调查其第三方供应商运营的一个网站遭到的攻击。
 
 aihot · The Verge：AI（RSS） · 10月19日 13:58 · [中文阅读](https://aihot.news/items/tdcasw4dwhyzne3hxo3dmizmz)
 
 **核验**: 多源印证
 
-**背景**: Cairn 是一个自称“通用问题求解引擎”的开源项目：用户提供起点和目标，它便会在未知的状态空间中搜索出一条可行路径，其开发者指出 AI 渗透测试正是已被验证的用途之一。所谓 agentic AI（智能体式 AI），是指把 AI 模型与自动化工作流、工具集成结合起来、能够自主完成多步任务的系统，如今攻防双方都在采用这种能力。由于 Cairn 实例可能对外公开并会自行记录执行进展，Norforge 这类安全研究团队正是通过阅读这些公开暴露的活动记录发现了这轮攻击。
+**背景**: Cairn 是一个开源 AI 平台，自称是“通用问题求解引擎”：用户设定起点和终点，AI 智能体便朝目标推进并记录自身进展。由于部分 Cairn 实例被公开暴露，Norforge 的研究人员得以观察这些智能体的活动并追踪整场攻击，这次入侵事件正是由此被发现。更广泛地说，“AI 编排的网络攻击”指的是用 AI 智能体自动完成过去需要人工执行的侦察、漏洞发现和利用等任务。
 
 <details><summary>参考链接</summary>
 <ul>
-<li><a href="https://github.com/oritera/Cairn">GitHub - oritera/Cairn: Cairn is a general-purpose AI state ...</a></li>
-<li><a href="https://www.cisco.com/site/m/ai-workforce-consortium/agent-cybersecurity-impact.html">AI Agents and the Impact on Cybersecurity - Cisco</a></li>
+<li><a href="https://norforge.com/blog/inside_cairn">Inside Cairn : Open Windows into massive AI -Driven Cyber... - NorForge</a></li>
+<li><a href="https://www.threatdown.com/blog/ai-orchestrated-cyberattacks/">AI-Orchestrated Cyberattacks: What They Are | ThreatDown</a></li>
+<li><a href="https://norforge.com/">NorForge - We build, not just advise</a></li>
 
 </ul>
 </details>
 
-**标签**: `#AI agents`, `#cybersecurity`, `#AI security`, `#hacking`, `#open-source AI`
+**标签**: `#AI security`, `#AI agents`, `#cybersecurity`, `#offensive AI`, `#LLM misuse`
 
 ---
 
-<a id="item-5"></a>
-## [Wine 成功移植到 OpenBSD，需绕过 %gs 与 SIGUSR1 限制](https://marc.info/?l=openbsd-ports&m=179236125692175) ⭐️ 7.0/10
+<a id="item-9"></a>
+## [Guillermo Rauch 开源基于 libfx 的高速 HTML 产物构建器，让 AI 智能体具备持久性](https://x.com/rauchg/status/2112247046082363821) ⭐️ 7.0/10
 
-Thomas Frohwein 于 2026 年 10 月 18 日在 openbsd-ports 邮件列表上提交了新的 emulators/wine 移植提案，把 Wine 这一 Windows 兼容层带到 OpenBSD 上。该移植需要一组仅适用于 OpenBSD 的补丁，尤其是 %gs 段寄存器桩代码和改用其他方式的 SIGUSR1 处理，作者在公告中对此做了详细说明。 让 Wine 这类深度依赖系统调用和 ABI 的复杂项目在安全加固的 BSD 上跑起来，是一项相当可观的系统编程成就，也为在 OpenBSD 上运行 Windows 应用和游戏打开了大门。这同时也是一次压力测试，暴露出 Wine 在多大程度上暗中依赖 Linux 专有行为，对上游项目而言是有价值的反馈。 OpenBSD 不允许用户态设置 %gs/gsbase，因此该移植改为模拟 %gs 前缀，而不是像 Linux 那样依赖寄存器被正确配置；SIGUSR1 仍可使用，但效率不如 Linux 上理想。作者为了简化开发，特意把所有 OpenBSD 专属改动都标记为仅限 OpenBSD，并因此对这些代码能否被上游合并持怀疑态度。
+Vercel 首席执行官 Guillermo Rauch 在 X 上宣布，团队已开源了一个“非常快”的 HTML 产物（artifact）构建器，它由他称为 libfx 的库驱动，能够让智能体具备持久性（durable）。他表示，为了让 v0 能够扛住服务器崩溃、不稳定的 LLM 调用以及函数执行时长限制，团队此前搭建底层基础设施“非常痛苦”，如今这套方案已经变得简单、免费并且开源。 持久性是 AI 智能体走向生产环境的最大实际障碍之一：一次服务崩溃或一次模型调用失败，就可能让长时间生成任务从头再来。Vercel 作为前端与 AI 生成应用最广泛使用的部署平台之一，其开源的基础组件有望降低其他团队构建智能体与代码生成工具的门槛。 这条公告本身很短，只附带了一个 t.co 短链接，因此仓库名称、开源许可证以及性能基准都未在帖子里说明；网络搜索结果也未能明确指向名为 libfx 的 Vercel 项目，所以具体技术细节暂无法核实。Rauch 还提到自己只用几分钟就做出了一个“浮动容器”演示，并强调产物“只是 HTML”，暗示这些产物是自包含、依赖极少的。
 
-hackernews · iamnothere · 10月19日 13:35 · [社区讨论](https://news.ycombinator.com/item?id=50152307)
+follow_builders · Guillermo Rauch · 10月19日 18:18
 
 **核验**: 多源印证
 
-**背景**: Wine（“Wine Is Not an Emulator”的缩写）是一个自由开源的兼容层，它通过把 Windows API 调用翻译成宿主系统的原生调用，让 Windows 应用程序能在类 Unix 系统上运行，而不是真的模拟 Windows，历来主要在 Linux、macOS 和 FreeBSD 上使用。OpenBSD 是一个以安全为核心的 BSD 系统，其 ports 与基础系统同步开发、同步发布，并对用户态能做什么设有严格限制。%gs 是 x86 的一个段寄存器，Windows 用它存放线程级数据结构；Linux 允许程序通过 arch_prctl 设置它，而 OpenBSD 不允许，这正是本次移植需要绕开的关键障碍。
+**背景**: 持久执行（durable execution）是一种让系统把长时间运行的工作流状态与进度持久化保存的机制，使其在崩溃、超时或某一步失败后能够继续执行而不是从头开始；Temporal、Inngest、Orkes Conductor 等平台的核心思想正源于此，如今它也越来越被视为 AI 系统的基础要求。Vercel 的 v0 是一个 AI 驱动的开发平台，可根据自然语言提示生成全栈 Web 应用与界面，这意味着其智能体必须反复调用具有随机性的 LLM，并在有时长限制的 serverless 函数中执行代码——这正是最需要抗崩溃与重试能力的场景。此处的 HTML 产物通常指可直接渲染或预览的自包含生成页面。
 
 <details><summary>参考链接</summary>
 <ul>
-<li><a href="https://blog.adafruit.com/2026/10/19/wine-ported-to-openbsd/">Wine ported to OpenBSD - Adafruit Industries</a></li>
-<li><a href="https://www.hotmolts.com/post/porting-wine-to-openbsd-made-wines-linux-only-assu-6bb14581-6b00-48ea-9e07-c81795fa88bf">Porting Wine to OpenBSD made Wine's Linux-only assumptions ...</a></li>
-<li><a href="https://en.wikipedia.org/wiki/Wine_(software)">Wine (software) - Wikipedia</a></li>
+<li><a href="https://temporal.io/">Durable Execution Solutions | Temporal</a></li>
+<li><a href="https://www.inngest.com/blog/principles-of-durable-execution">The Principles of Durable Execution Explained - Inngest Blog</a></li>
+<li><a href="https://v0.app/">v 0 by Vercel - Build Full-Stack Web Apps with AI</a></li>
 
 </ul>
 </details>
 
-**社区讨论**: 该帖讨论热度很高（约 472 分、156 条评论），总体情绪偏正面，但评论质量参差不齐，其中夹杂着一些与主题无关的游戏实况视频垃圾链接。有评论者贴出后续邮件列表消息，引用作者本人对上游合并前景的怀疑；也有人表示欢迎，认为 OpenBSD 正逐渐成为“抵御 slopcode 的避难所”。还有人打趣说作者姓氏 Frohwein 在德语里意为“快乐的酒”，并调侃这个移植错过了改名叫“Port”的机会。
-
-**标签**: `#OpenBSD`, `#Wine`, `#systems programming`, `#porting`, `#compatibility layer`
+**标签**: `#AI agents`, `#open source`, `#developer tools`, `#durable execution`, `#HTML artifacts`
 
 ---
 
-<a id="item-6"></a>
-## [Mac.apk 让 Android 应用在 Apple Silicon Mac 上原生运行](https://github.com/kksimp/Mac.apk) ⭐️ 7.0/10
+<a id="item-10"></a>
+## [Aaron Levie：模型越强，应用层差异化机会反而越大](https://x.com/levie/status/2112404676436222170) ⭐️ 7.0/10
 
-GitHub 用户 kksimp 发布的开源项目 Mac.apk，可以在 Apple Silicon Mac 上直接运行 Android 应用，既不需要模拟器，也不需要虚拟机，底层也没有 Linux 层。Android 应用会作为普通的 macOS 进程启动，通过 Mac 的 GPU 进行渲染，并在 CPU 上以原生速度执行。 多年来，在 Mac 上运行 Android 软件意味着必须接受笨重的模拟器、虚拟机或完整的 Linux 环境，这些都带来性能损耗和操作复杂度。如果一套轻量的兼容层就能完成这件事，说明基于 ARM64 的操作系统之间边界正变得越来越模糊，也可能为 Mac 用户——包括想使用 Android 独占应用的玩家——提供一条简单得多的途径。 关键技术前提是 Apple Silicon 与大多数 Android 手机同样采用 ARM64 架构，因此 CPU 指令可以直接执行，无需翻译转换。实际局限在于，许多流行的 Android 应用依赖 Google Play Services 及其他 Google 专有组件，而独立的兼容层并不提供这些内容，因此部分应用可能无法安装或会丧失关键功能。
+Box 首席执行官 Aaron Levie 在 X 上发文指出，与“苦涩的教训”所暗示的直觉相反，基础模型能力越强，应用层按领域实现差异化的机会不是缩小而是扩大。他认为，在模型能力有限的时代，开发者实际上只能做“套壳”，即通过自定义提示词或有限 RAG 把 token 返回给用户；而在智能体调用工具、任务持续数小时甚至数天、多个智能体围绕目标协同、领域专属数据与领域专属模型路由、以及需要真正推动企业工作流变革管理的世界里，这类系统的专业化程度很可能进一步提升。 这一观点直接挑战了流行的假设：即基础模型不断变强会让应用层商品化，使垂直 AI 创业公司沦为薄薄的“套壳”。如果 Levie 的判断成立，那么安全、生命科学、医疗、金融和制造等领域的行业 AI 公司仍能凭借工作流集成、专有数据和落地实施能力构筑持久护城河，而不再只依赖模型本身的质量。 Levie 明确承认这一论断并非普遍适用：应用产品越接近各大实验室自身的核心用例，就越难做出差异化；同时他并未给出任何实现细节、基准测试或数据来支撑该判断。他列举的具体护城河来源包括长时间运行的智能体任务、围绕同一目标协同的智能体集群、领域专属数据源、领域专属模型路由，以及对企业真实工作流的变革管理（而不是“直接在这个聊天框里打字”）。
 
-hackernews · flocked · 10月19日 16:45 · [社区讨论](https://news.ycombinator.com/item?id=50154624)
+follow_builders · Aaron Levie · 10月20日 04:44
 
 **核验**: 多源印证
 
-**背景**: Android 应用以 APK 包的形式分发，通常运行在手机内部的 Android 运行时和 Linux 内核之上。传统上，要让它们在桌面端运行，要么模拟一整台 Android 设备（由于需要翻译 CPU 架构而速度很慢），要么在虚拟机里跑一个完整的 Android 系统。Mac.apk 的做法是在 macOS 之上重新实现 Android 应用运行环境，思路与已经停止支持的 Android Runtime for Chrome 类似——后者曾让 Android 应用在 Chrome 浏览器中运行，直到 Google 终止支持。
+**背景**: “苦涩的教训”源自 Richard Sutton 在 2019 年提出的观察：综观 70 年 AI 研究史，能够随算力扩展的通用方法最终会胜过基于领域专门知识的方法，因为算力成本持续呈指数级下降。应用层指的是在基础模型之上构建产品、而非自行训练模型的公司。智能体工作流指 AI 智能体在多步骤任务中自行做出判断并调用工具的系统；模型路由则是在单一接口背后把每个请求分派给最合适或成本最低的大模型的做法。
 
 <details><summary>参考链接</summary>
 <ul>
-<li><a href="https://github.com/kksimp/Mac.apk">GitHub - kksimp/Mac.apk: Mac.apk: Run Android apps natively ...</a></li>
-<li><a href="https://elsolitario.org/en/2026/10/19/mac-apk-android-on-apple-silicon-without-emulator/">Mac.apk on Apple Silicon: How It Works Without an Emulator</a></li>
+<li><a href="https://en.wikipedia.org/wiki/Bitter_lesson">Bitter lesson</a></li>
+<li><a href="http://www.incompleteideas.net/IncIdeas/BitterLesson.html">The Bitter Lesson - incompleteideas.net</a></li>
+<li><a href="https://arxiv.org/abs/2502.08773">Universal Model Routing for Efficient LLM Inference How to use model router for Microsoft Foundry - Microsoft ... 5 Best Model Routing Tools in 2026 - DEV Community GitHub - Not-Diamond/awesome-ai-model-routing: A curated list ... GitHub - yenanjing/awesome-model-routing: A curated list of ... Model Router - Microsoft Foundry Labs</a></li>
 
 </ul>
 </details>
 
-**社区讨论**: Hacker News 的评论者对这个技术成就表示赞赏，但对其实际价值持怀疑态度，多人指出 Google Play Services 以及 Google 的封闭生态组件会限制哪些应用真正可用。有评论者将其与已经停止支持的 Android Runtime for Chrome 相提并论，也有人认为它对想与主机玩家一起玩《我的世界》基岩版的用户很有用；还有一条较长的讨论主线探讨 AI 辅助开发如何把过去需要企业级团队才能完成的工程，降低到“claude 帮我做一下”的程度，同时也有人抱怨 Claude 的文风已经变得令人厌烦地容易辨认。
-
-**标签**: `#Android`, `#macOS`, `#Apple Silicon`, `#Open Source Tools`, `#AI-assisted Development`
-
----
-
-<a id="item-7"></a>
-## [报道称 Anthropic 正筹备能揣摩未言明意图的新模型](https://x.com/dotey/status/2112257496954135030) ⭐️ 7.0/10
-
-科技媒体 The Information 于 10 月 19 日在其 AI Agenda 通讯中报道，Anthropic 正在筹备一款新模型，其推理能力和“直觉”强于目前对外提供的所有模型，消息来自一位使用过该模型的不具名人士，Anthropic 未公开回应。同一报道还提到，Google 正在开发 Gemini 4 Carbon，作为刚发布的 Gemini 4 Argon 的升级版；OpenAI 也在准备 Terra 系列新模型，可能几周内发布，能力更强且价格低于 GPT-6.1 Sol。 如果报道中的能力属实，这标志着模型从“回答明确指令”转向“推断背后真实目标”：普通用户可以更随意地写提示词，编程智能体也会主动扩大修改范围。结合 Google（Gemini 4 Carbon）和 OpenAI（Terra）的相关传闻，这说明前沿厂商的竞争焦点正从单纯的对话质量转向推理深度与智能体自主性。 报道举了两个例子：在修 bug 场景中，模型会顺藤摸瓜找出导致该 bug 的一整类问题，并询问是否一并修掉；在被问到怎么炒股时，它不会只给出“看看市盈率”这类通用建议，而是自行设计一套预测股价走势的算法——但报道并未说明这套算法到底预测得准不准。发布时间和命名都尚未确定：据原推 TestingCatalog 称新模型本月就会发布，但还不清楚它会归入 Anthropic 的 Fable 还是 Opus 系列。
-
-twitter · 宝玉 · 10月19日 19:00
-
-**核验**: 多源印证
-
-**背景**: The Information 是一家订阅制科技媒体，其 AI Agenda 通讯经常依据不具名信源报道尚未发布的前沿模型，因此这类消息通常被视为可信传闻而非确认事实。Anthropic 的 Claude 模型按系列命名（例如 Opus，以及较新的 Fable 系列——被描述为面向自主知识工作和编程、拥有超大上下文窗口的前沿模型），这正是外界猜测新模型会归入哪一系列的原因。这里的“直觉”指的是仅凭很少的输入就推断出用户没说出口的意图，这比传统的指令跟随更进一步，对编程智能体尤其重要。
-
-<details><summary>参考链接</summary>
-<ul>
-<li><a href="https://www.anthropic.com/claude/fable">Claude Fable \ Anthropic</a></li>
-<li><a href="https://the-decoder.com/googles-gemini-4-carbon-model-is-reportedly-matching-anthropics-opus-5-5-coding-performance/">Google's Gemini 4 "Carbon" model reportedly feels like ...</a></li>
-<li><a href="https://tokenharbor.ai/models/gpt-6.1-sol">GPT - 6 . 1 Sol API — $2.00/1M in · Token Harbor</a></li>
-
-</ul>
-</details>
-
-**标签**: `#Anthropic`, `#大模型`, `#AI模型发布`, `#行业动态`, `#AI开发者工具`
-
----
-
-<a id="item-8"></a>
-## [@dotey 解读网易 LobsterAI 9 月《中国办公 Agent 用户行为报告》](https://x.com/dotey/status/2112194237211029946) ⭐️ 7.0/10
-
-网易 LobsterAI 发布了第二期《中国办公 Agent 用户行为报告》，并从这一期起改为每月发布，9 月版还额外统计了十一假期期间的使用变化。最醒目的两个数字是：9 月用户每次交给 Agent 的任务平均消耗 20.2 万 Token，是 3 月 6.3 万的 3.2 倍；日均活跃用户环比增幅达到 83.1%，是 5 月以来涨得最快的一个月。 这份报告提供了少数基于真实数据、可观察中国办公用户如何使用 AI Agent 的窗口，而其中的成本分析说明：对大量调用 Agent 的用户来说，模型的缓存折扣价比起命中率高出一两个点更影响账单——最省和最贵的配置实际费用相差七倍以上。这对任何构建 Agent 产品或做成本预算的人都有直接参考价值，因为 Agent 每一步都要重复读取同样的上下文，缓存经济性在很大程度上决定了最终费用。 9 月各模型的缓存命中率大多在九成上下（DeepSeek V4.1 Flash 最高 97.3%，Qwen 3.7 Plus 垫底 76.7%），但实际费用占原价的比例却从 DeepSeek V4.1 Flash 的 4.6% 到 GLM 5.3 Flash 的 35.1% 不等，差距主要来自缓存价：DeepSeek 只收 2%、Kimi K3 收 10%、Qwen 3.8 收 12.5%、GLM 5.3 系列收 25%–28.8%。报告明确说明数据仅来自自家平台，只公布增幅而非日活绝对数，厂商 Token 份额也只给了环比变化（智谱 GLM 约 +166.7%、MiniMax 约 -66.7%、Kimi 约 -78.6%）而没有绝对份额，因此不能当作整个行业的基准。
-
-twitter · 宝玉 · 10月19日 14:48
-
-**核验**: 多源印证
-
-**背景**: LobsterAI 是网易（有道）推出的办公 Agent 产品，既可以在桌面端使用，也可以直接在微信、飞书这类聊天软件里给它派活，用户用自然语言交办任务，而不必操作传统应用界面。Token 是模型读写文字的计量单位，Agent 任务因为每一步都要反复读任务要求和自己前面的产出，所以消耗的 Token 远高于单轮对话。Prompt caching（提示缓存）是主流模型厂商提供的一项能力——Anthropic 于 2024 年 8 月为 Claude 率先推出——它把读过的内容缓存下来，再次读到时按折扣价收费，这正是缓存命中率和缓存价共同决定重度 Agent 用户真实成本的原因。
-
-<details><summary>参考链接</summary>
-<ul>
-<li><a href="https://grokipedia.com/page/LobsterAI">LobsterAI</a></li>
-<li><a href="https://grokipedia.com/page/Prompt_caching_Anthropic">Prompt caching (Anthropic)</a></li>
-<li><a href="https://www.deepseek.com/en/news/deepseek-v4-1-flash/">DeepSeek | Introducing DeepSeek-V4.1-Flash: smarter, faster ...</a></li>
-
-</ul>
-</details>
-
-**标签**: `#AI agents`, `#办公 Agent`, `#用户行为报告`, `#prompt caching`, `#AI 产品设计`
+**标签**: `#AI agents`, `#enterprise AI`, `#bitter lesson`, `#AI product strategy`, `#domain specialization`
 
 ---
 
@@ -222,16 +272,119 @@ twitter · 宝玉 · 10月19日 14:48
 <p class="archive-intro">以下内容已于今日成功抓取，但未进入上方主列表。</p>
 <div class="archive-tablist" role="tablist" aria-label="更多追踪内容来源" hidden>
 <button type="button" role="tab" id="archive-tab-tracked-x" aria-controls="archive-panel-tracked-x" aria-selected="true" tabindex="0" data-archive-tab="tracked-x" data-count="13"><span>其他追踪推文</span><span class="archive-tab-count">13</span></button>
-<button type="button" role="tab" id="archive-tab-follow-builders" aria-controls="archive-panel-follow-builders" aria-selected="false" tabindex="-1" data-archive-tab="follow-builders" data-count="12"><span>其他 Follow Builders 资讯</span><span class="archive-tab-count">12</span></button>
+<button type="button" role="tab" id="archive-tab-follow-builders" aria-controls="archive-panel-follow-builders" aria-selected="false" tabindex="-1" data-archive-tab="follow-builders" data-count="19"><span>其他 Follow Builders 资讯</span><span class="archive-tab-count">19</span></button>
 </div>
 <div class="archive-panel" role="tabpanel" id="archive-panel-tracked-x" aria-labelledby="archive-tab-tracked-x" data-archive-panel="tracked-x">
 <h3 class="archive-panel-title">其他追踪推文</h3>
 <article class="archive-item">
 <div class="archive-item-heading">
-<h3><a href="https://x.com/dotey/status/2112277659959087314">@dotey: ChatGPT Slides 能多人一起改幻灯片了，Pro、Business 和企业版可用 OpenAI 给 ChatGPT 的幻灯片功能 ChatGPT Slides 加了两项新能力：...</a></h3>
-<span class="score-badge" data-tier="low" aria-label="4.0 out of 10">4.0</span>
+<h3><a href="https://x.com/op7418/status/2112477307550183920">@op7418: Deepseek 已经开源了自己的内部推理框架 可以实现跟他们类似的高吞吐量和低延迟表现</a></h3>
+<span class="score-badge" data-tier="good" aria-label="7.0 out of 10">7.0</span>
 </div>
-<p class="source-line">Twitter/X · @dotey · 10月19日 20:20 UTC · 喜欢 10 · 转发 0 · 回复 12 · 浏览 3729</p>
+<p class="source-line">Twitter/X · @op7418 · 10月20日 09:33 UTC · 喜欢 33 · 转发 0 · 回复 12 · 浏览 8575</p>
+<p class="archive-item-content">Deepseek 已经开源了自己的内部推理框架<br>
+<br>
+可以实现跟他们类似的高吞吐量和低延迟表现</p>
+</article>
+<article class="archive-item">
+<div class="archive-item-heading">
+<h3><a href="https://x.com/deepseek_ai/status/2112476496283775135">@deepseek_ai: 🚀 Introducing DeepInfer, our in-house inference framework, now fully open source! Powering De...</a></h3>
+<span class="score-badge" data-tier="good" aria-label="8.0 out of 10">8.0</span>
+</div>
+<p class="source-line">Twitter/X · @op7418 · 10月20日 09:30 UTC · 喜欢 13627 · 转发 1556 · 回复 662 · 浏览 762710</p>
+<p class="archive-item-content">🚀 Introducing DeepInfer, our in-house inference framework, now fully open source!<br>
+<br>
+Powering DeepSeek-V4.1-Flash at scale with high throughput and low latency. We’re sharing our production stack to help the community lower compute costs, reduce energy use, and make AI more affordable.<br>
+<br>
+🔗 https://t.co/JGAik1kgk0<br>
+<br>
+1/4</p>
+</article>
+<article class="archive-item">
+<div class="archive-item-heading">
+<h3><a href="https://x.com/dotey/status/2112439331000328354">@dotey: https://t.co/BzYVEGcn4B</a></h3>
+<span class="score-badge" data-tier="low" aria-label="2.0 out of 10">2.0</span>
+</div>
+<p class="source-line">Twitter/X · @dotey · 10月20日 07:02 UTC · 喜欢 37 · 转发 2 · 回复 16 · 浏览 8560</p>
+<p class="archive-item-content">https://t.co/BzYVEGcn4B</p>
+</article>
+<article class="archive-item">
+<div class="archive-item-heading">
+<h3><a href="https://x.com/dotey/status/2112435012008361988">@dotey: 艹 已经重置了，都没预告一下</a></h3>
+<span class="score-badge" data-tier="low" aria-label="2.0 out of 10">2.0</span>
+</div>
+<p class="source-line">Twitter/X · @dotey · 10月20日 06:45 UTC · 喜欢 139 · 转发 3 · 回复 84 · 浏览 29480</p>
+<p class="archive-item-content">艹 已经重置了，都没预告一下</p>
+</article>
+<article class="archive-item">
+<div class="archive-item-heading">
+<h3><a href="https://x.com/thsottiaux/status/2112432076767289678">@thsottiaux: Day 15/ Nevermind, we&#x27;re still cooking... and reset. Enjoy.</a></h3>
+<span class="score-badge" data-tier="low" aria-label="? out of 10">?</span>
+</div>
+<p class="source-line">Twitter/X · @dotey · 10月20日 06:33 UTC · 喜欢 8987 · 转发 411 · 回复 2420 · 浏览 756862</p>
+<p class="archive-item-content">Day 15/ Nevermind, we&#x27;re still cooking... and reset. Enjoy.</p>
+</article>
+<article class="archive-item">
+<div class="archive-item-heading">
+<h3><a href="https://x.com/threeaus/status/2112394912029409410">@threeaus: https://t.co/5bJrWsNNmB</a></h3>
+<span class="score-badge" data-tier="low" aria-label="1.0 out of 10">1.0</span>
+</div>
+<p class="source-line">Twitter/X · @dotey · 10月20日 04:06 UTC · 喜欢 105 · 转发 16 · 回复 6 · 浏览 10314</p>
+<p class="archive-item-content">https://t.co/5bJrWsNNmB</p>
+</article>
+<article class="archive-item">
+<div class="archive-item-heading">
+<h3><a href="https://x.com/dotey/status/2112381247939072120">@dotey: 还是 RTX 5090 香😂</a></h3>
+<span class="score-badge" data-tier="low" aria-label="2.0 out of 10">2.0</span>
+</div>
+<p class="source-line">Twitter/X · @dotey · 10月20日 03:11 UTC · 喜欢 19 · 转发 0 · 回复 16 · 浏览 24965</p>
+<p class="archive-item-content">还是 RTX 5090 香😂</p>
+</article>
+<article class="archive-item">
+<div class="archive-item-heading">
+<h3><a href="https://x.com/op7418/status/2112374841039044992">@op7418: 上小宇宙最热榜了 https://t.co/c92X480pFg</a></h3>
+<span class="score-badge" data-tier="low" aria-label="1.0 out of 10">1.0</span>
+</div>
+<p class="source-line">Twitter/X · @op7418 · 10月20日 02:46 UTC · 喜欢 21 · 转发 1 · 回复 11 · 浏览 6032</p>
+<p class="archive-item-content">上小宇宙最热榜了 https://t.co/c92X480pFg</p>
+</article>
+<article class="archive-item">
+<div class="archive-item-heading">
+<h3><a href="https://x.com/dotey/status/2112368229251178648">@dotey: Notion Business 和 Enterprise 的 AI 不再不限量：每人每月 1,500 个 Standard 积分加 500 个 Select 积分，现有工作空间 11 月...</a></h3>
+<span class="score-badge" data-tier="mid" aria-label="6.0 out of 10">6.0</span>
+</div>
+<p class="source-line">Twitter/X · @dotey · 10月20日 02:20 UTC · 喜欢 35 · 转发 4 · 回复 81 · 浏览 15250</p>
+<p class="archive-item-content">Notion Business 和 Enterprise 的 AI 不再不限量：每人每月 1,500 个 Standard 积分加 500 个 Select 积分，现有工作空间 11 月 2 日切换<br>
+<br>
+Notion 的 Business 和 Enterprise 套餐，此前宣传 AI 不限量使用，现在改成按积分算：每位成员每月 1,500 个 Standard 积分和 500 个 Select 积分。10 月 19 日起新建的工作空间已经用上新规则，现有工作空间 11 月 2 日切换。官方说额度可能因套餐和采购协议不同，签了合同的企业以合同为准。<br>
+<br>
+两种积分的区别在于谁选模型。让 Notion 自动挑模型（Auto 模式）时扣 Standard 积分，日常的写作、翻译、问答、AI 公式都走这里。自己手动指定模型，或者运行给自己用的自定义智能体（Custom Agent），扣 Select 积分。<br>
+<br>
+官方给了估算：Auto 模式下，简单任务约 5 个积分，复杂任务约 25 个。手动选 Opus 5.5 做同样的事，要 50 到 150 个。所以 1,500 个 Standard 积分够做几百次日常任务；500 个 Select 积分如果全用顶级模型，简单任务十次左右，复杂任务三次多就见底。Notion 说绝大多数用户每月用不完。<br>
+<br>
+两种积分各算各的，不能合并，不能转给同事，也不能换成别的积分，每月重置，没用完的不结转。Select 用完、Standard 还有，可以把 Notion Agent 切回 Auto 继续用。<br>
+<br>
+用完会被扣钱吗？默认不会。积分耗尽后，相关 AI 功能暂停，等下个月重置。管理员可以在设置里打开一个开关，让成员用完后继续消耗工作空间另外购买的 Notion 积分，这个开关默认关闭。另外，个人的 Notion Agent 现在可以接入自己的 ChatGPT Plus、Pro 或 Go 账号，用 ChatGPT 的额度代替 Notion 积分。<br>
+<br>
+容易漏掉的是会议记录。AI Meeting Notes 从 12 月 1 日起开始扣 Standard 积分，官方估算一小时会议约 10 个。单算会议，一个月的额度够录 150 小时，但它和日常 AI 用的是同一笔额度。常开会又常用 AI 的团队，管理员最好在切换后先看看成员的实际用量，再决定要不要打开额外积分的开关。<br>
+<br>
+官方用量规则：https://t.co/s8bG4WJRPW<br>
+产品公告：https://t.co/zJfSFVS8Wz</p>
+</article>
+<article class="archive-item">
+<div class="archive-item-heading">
+<h3><a href="https://x.com/alexandr_wang/status/2112359342238580869">@alexandr_wang: wedding registries these days… https://t.co/Z9dseXEocT</a></h3>
+<span class="score-badge" data-tier="low" aria-label="1.0 out of 10">1.0</span>
+</div>
+<p class="source-line">Twitter/X · @dotey · 10月20日 01:44 UTC · 喜欢 1918 · 转发 62 · 回复 138 · 浏览 135646</p>
+<p class="archive-item-content">wedding registries these days… https://t.co/Z9dseXEocT</p>
+</article>
+<article class="archive-item">
+<div class="archive-item-heading">
+<h3><a href="https://x.com/dotey/status/2112277659959087314">@dotey: ChatGPT Slides 能多人一起改幻灯片了，Pro、Business 和企业版可用 OpenAI 给 ChatGPT 的幻灯片功能 ChatGPT Slides 加了两项新能力：...</a></h3>
+<span class="score-badge" data-tier="mid" aria-label="5.0 out of 10">5.0</span>
+</div>
+<p class="source-line">Twitter/X · @dotey · 10月19日 20:20 UTC · 喜欢 45 · 转发 1 · 回复 43 · 浏览 17420</p>
 <p class="archive-item-content">ChatGPT Slides 能多人一起改幻灯片了，Pro、Business 和企业版可用<br>
 <br>
 OpenAI 给 ChatGPT 的幻灯片功能 ChatGPT Slides 加了两项新能力：多人实时协作，以及直接在幻灯片上点着改。<br>
@@ -251,9 +404,9 @@ OpenAI 给 ChatGPT 的幻灯片功能 ChatGPT Slides 加了两项新能力：多
 <article class="archive-item">
 <div class="archive-item-heading">
 <h3><a href="https://x.com/yyyouweichen/status/2112265574931910880">@yyyouweichen: Proud to have led the AI behind our Claire, now on TIME&#x27;s Best Inventions of 2026. 🥳 我主导研发的 A...</a></h3>
-<span class="score-badge" data-tier="mid" aria-label="5.0 out of 10">5.0</span>
+<span class="score-badge" data-tier="low" aria-label="4.0 out of 10">4.0</span>
 </div>
-<p class="source-line">Twitter/X · @dotey · 10月19日 19:32 UTC · 喜欢 53 · 转发 5 · 回复 4 · 浏览 4563</p>
+<p class="source-line">Twitter/X · @dotey · 10月19日 19:32 UTC · 喜欢 336 · 转发 33 · 回复 37 · 浏览 26729</p>
 <p class="archive-item-content">Proud to have led the AI behind our Claire, now on TIME&#x27;s Best Inventions of 2026. 🥳<br>
 <br>
 我主导研发的 AI 影像设备 Claire™，入选了《时代周刊》TIME 2026 年度最佳发明🎉<br>
@@ -263,9 +416,9 @@ OpenAI 给 ChatGPT 的幻灯片功能 ChatGPT Slides 加了两项新能力：多
 <article class="archive-item">
 <div class="archive-item-heading">
 <h3><a href="https://x.com/ChatGPT/status/2112265233192657153">@ChatGPT: ChatGPT Slides has new ways to get your deck ready—and get everyone on the same page. • Work...</a></h3>
-<span class="score-badge" data-tier="low" aria-label="4.0 out of 10">4.0</span>
+<span class="score-badge" data-tier="mid" aria-label="5.0 out of 10">5.0</span>
 </div>
-<p class="source-line">Twitter/X · @dotey · 10月19日 19:30 UTC · 喜欢 1775 · 转发 111 · 回复 79 · 浏览 114003</p>
+<p class="source-line">Twitter/X · @dotey · 10月19日 19:30 UTC · 喜欢 2984 · 转发 197 · 回复 125 · 浏览 263098</p>
 <p class="archive-item-content">ChatGPT Slides has new ways to get your deck ready—and get everyone on the same page.<br>
 <br>
 • Work together in real time in ChatGPT: Share decks, edit together, and leave comments. Ask ChatGPT or your dot to turn feedback into updates.<br>
@@ -277,264 +430,198 @@ To get started, ask ChatGPT to &quot;create ChatGPT slides&quot; from a conversa
 Available on Pro, Business, and Enterprise plans.<br>
 https://t.co/2h9SfC7vzM</p>
 </article>
-<article class="archive-item">
-<div class="archive-item-heading">
-<h3><a href="https://x.com/testingcatalog/status/2112195306695647502">@testingcatalog: ANTHROPIC 🔥: According to The Information, Anthropic will release a new model this month, alo...</a></h3>
-<span class="score-badge" data-tier="mid" aria-label="6.0 out of 10">6.0</span>
-</div>
-<p class="source-line">Twitter/X · @dotey · 10月19日 14:52 UTC · 喜欢 1389 · 转发 70 · 回复 77 · 浏览 82008</p>
-<p class="archive-item-content">ANTHROPIC 🔥: According to The Information, Anthropic will release a new model this month, along with Gemini 4 Carbon and a new Terra model from OpenAI. <br>
-<br>
-&gt; &quot;The unreleased model is especially good at discerning a person’s underlying intentions and goals even if they don’t give the model much information.&quot;<br>
-<br>
-&gt; &quot;The Anthropic model is also better at thinking outside of the box rather than regurgitating common sense advice or solutions.&quot;<br>
-<br>
-&gt; &quot;It’s not clear which model family Anthropic will fall into, such as Fable or Opus.&quot;<br>
-<br>
-Thinking outside of the box is a huge limitation these days. If we get a model that can do it reliably, we&#x27;ll be properly transitioning into the &quot;Innovators&quot; stage. <br>
-<br>
-The line about &quot;discerning underlying intentions&quot; is a bit scary, though, given all the guardrails.</p>
-</article>
-<article class="archive-item">
-<div class="archive-item-heading">
-<h3><a href="https://x.com/op7418/status/2112155703309926729">@op7418: 抖音对于搬运的内容真是非常的纵容啊！ 尤其是搬运外网的，这哥们拿 Higgsfield 做的视频说是自己的，还编了一堆提示词出来 https://t.co/g7Jb1BhvaO</a></h3>
-<span class="score-badge" data-tier="low" aria-label="3.0 out of 10">3.0</span>
-</div>
-<p class="source-line">Twitter/X · @op7418 · 10月19日 12:15 UTC · 喜欢 27 · 转发 2 · 回复 37 · 浏览 13100</p>
-<p class="archive-item-content">抖音对于搬运的内容真是非常的纵容啊！<br>
-<br>
-尤其是搬运外网的，这哥们拿 Higgsfield 做的视频说是自己的，还编了一堆提示词出来 https://t.co/g7Jb1BhvaO</p>
-</article>
-<article class="archive-item">
-<div class="archive-item-heading">
-<h3><a href="https://x.com/op7418/status/2112125082562929018">@op7418: 思琦他们做的这个关于 Apple 开发者生态里 AI 方向的调研还挺有意思的。 其实 Apple 整个开发生态跟外部还是不太一样，比较独立，所以在 AI 的采用率和想法上，可能未必跟我们...</a></h3>
-<span class="score-badge" data-tier="low" aria-label="4.0 out of 10">4.0</span>
-</div>
-<p class="source-line">Twitter/X · @op7418 · 10月19日 10:13 UTC · 喜欢 9 · 转发 1 · 回复 13 · 浏览 5486</p>
-<p class="archive-item-content">思琦他们做的这个关于 Apple 开发者生态里 AI 方向的调研还挺有意思的。<br>
-<br>
-其实 Apple 整个开发生态跟外部还是不太一样，比较独立，所以在 AI 的采用率和想法上，可能未必跟我们有些不做 Apple 生态的人的体感接近。感兴趣可以看看 https://t.co/6gcRcuGjoT</p>
-</article>
-<article class="archive-item">
-<div class="archive-item-heading">
-<h3><a href="https://x.com/op7418/status/2112114363624800300">@op7418: 笑死 DHH 很懂了，来中国用 Tailscale 访问 Claude Code</a></h3>
-<span class="score-badge" data-tier="low" aria-label="3.0 out of 10">3.0</span>
-</div>
-<p class="source-line">Twitter/X · @op7418 · 10月19日 09:31 UTC · 喜欢 254 · 转发 11 · 回复 67 · 浏览 65524</p>
-<p class="archive-item-content">笑死 DHH 很懂了，来中国用 Tailscale 访问 Claude Code</p>
-</article>
-<article class="archive-item">
-<div class="archive-item-heading">
-<h3><a href="https://x.com/SwiftSIQI/status/2112039887742619833">@SwiftSIQI: 过去一个月，我们围绕 Xcode 和 Apple 生态做了一次 AI 方向的调研。今天，分析报告正式公开！🎉 本次发布的是基于 100 位 Apple 生态领域专家反馈的专家组报告，大众...</a></h3>
-<span class="score-badge" data-tier="mid" aria-label="5.0 out of 10">5.0</span>
-</div>
-<p class="source-line">Twitter/X · @op7418 · 10月19日 04:35 UTC · 喜欢 86 · 转发 22 · 回复 5 · 浏览 45758</p>
-<p class="archive-item-content">过去一个月，我们围绕 Xcode 和 Apple 生态做了一次 AI 方向的调研。今天，分析报告正式公开！🎉<br>
-<br>
-本次发布的是基于 100 位 Apple 生态领域专家反馈的专家组报告，大众组的数据仍在收集中。<br>
-<br>
-希望这份报告能为大家提供有价值的参考，也欢迎交流讨论！<br>
-<br>
-📊 完整报告：<br>
-https://t.co/XFFc400dRh</p>
-</article>
-<article class="archive-item">
-<div class="archive-item-heading">
-<h3><a href="https://x.com/op7418/status/2112022611228230108">@op7418: 我们在这一期《Next Token》播客里的一些核心认知： 橘子说的：只要 AI 把一个东西打到了 60 分，这个东西就变成了 0 分。所以一个东西越火，越容易变成 AI slop，然后...</a></h3>
-<span class="score-badge" data-tier="mid" aria-label="6.0 out of 10">6.0</span>
-</div>
-<p class="source-line">Twitter/X · @op7418 · 10月19日 03:26 UTC · 喜欢 47 · 转发 4 · 回复 36 · 浏览 7880</p>
-<p class="archive-item-content">我们在这一期《Next Token》播客里的一些核心认知：<br>
-<br>
-橘子说的：只要 AI 把一个东西打到了 60 分，这个东西就变成了 0 分。所以一个东西越火，越容易变成 AI slop，然后被大家抛弃<br>
-<br>
-所有的 skill prompt 软件，唯一价值其实就是流量价值。目前随着 AI 破解能力和复刻能力越来越强，开源作品换注意力、然后再做转化，是一个非常常见的方式<br>
-<br>
-多 Agent 拉群其实只有情绪价值，没办法带来能力上的提升<br>
-<br>
-我还分享了一下我是如何不开电脑做自媒体的，包括发图文、剪视频等等。<br>
-<br>
-这期昨天已经更新了，欢迎收听！<br>
-<br>
-早上一起床已经有 4000 多个播放，同时收听有几百个人在听。作为一个只更新了 6 期的播客，还是挺吊的</p>
-</article>
-<article class="archive-item">
-<div class="archive-item-heading">
-<h3><a href="https://x.com/LobsterAIYoudao/status/2111985683707645963">@LobsterAIYoudao: 第一期《中国办公 Agent 用户行为报告》发布后，引发了媒体和用户的关注与讨论。大家关心 Agent 产品的发展，也关心人们究竟把哪些工作交给了它。因此，从本期起，我们将按月发布报告，...</a></h3>
-<span class="score-badge" data-tier="mid" aria-label="6.0 out of 10">6.0</span>
-</div>
-<p class="source-line">Twitter/X · @dotey · 10月19日 01:00 UTC · 喜欢 45 · 转发 4 · 回复 9 · 浏览 24957</p>
-<p class="archive-item-content">第一期《中国办公 Agent 用户行为报告》发布后，引发了媒体和用户的关注与讨论。大家关心 Agent 产品的发展，也关心人们究竟把哪些工作交给了它。因此，从本期起，我们将按月发布报告，持续记录用户使用习惯的变化。本期聚焦 9 月，并额外补充十一假期的使用变化。<br>
-<br>
-9 月，用户单次任务规模继续增长；泛编程/IT 仍是办公 Agent 的主要用途，但是设计与内容创作正在升温。缓存策略的差异，为何能导致成本相差七倍多？哪些城市的用户深夜还在派活给 Agent？到了十一假期，使用高峰和任务需求又发生了什么变化？请锁定这期报告，我们看看 Agent 行业又有什么新变化！</p>
-</article>
-<article class="archive-item">
-<div class="archive-item-heading">
-<h3><a href="https://x.com/dotey/status/2111976005439275285">@dotey: 帮转：Manus 招实习生</a></h3>
-<span class="score-badge" data-tier="low" aria-label="2.0 out of 10">2.0</span>
-</div>
-<p class="source-line">Twitter/X · @dotey · 10月19日 00:21 UTC · 喜欢 38 · 转发 1 · 回复 14 · 浏览 22243</p>
-<p class="archive-item-content">帮转：Manus 招实习生</p>
-</article>
-<article class="archive-item">
-<div class="archive-item-heading">
-<h3><a href="https://x.com/dotey/status/2111974893676060990">@dotey: 真讽刺，这个视频里面讲两个 AI 一个审查代码一个更新审查后的代码，结果两个 AI 就这么搞了 50 多轮。 然后这条视频下面两个 AI 相互评论已经停不下来了 https://t.co...</a></h3>
-<span class="score-badge" data-tier="mid" aria-label="5.0 out of 10">5.0</span>
-</div>
-<p class="source-line">Twitter/X · @dotey · 10月19日 00:17 UTC · 喜欢 502 · 转发 13 · 回复 214 · 浏览 120118</p>
-<p class="archive-item-content">真讽刺，这个视频里面讲两个 AI 一个审查代码一个更新审查后的代码，结果两个 AI 就这么搞了 50 多轮。<br>
-<br>
-然后这条视频下面两个 AI 相互评论已经停不下来了 https://t.co/lql2ItPnmZ</p>
-</article>
-<article class="archive-item">
-<div class="archive-item-heading">
-<h3><a href="https://x.com/dotey/status/2111973062442693023">@dotey: 最新一期科普视频：车头朝下贴在弯道顶上，特斯拉新 Roadster 为什么掉不下来？ 视频 2 是中文版 特斯拉和 SpaceX 一起做的新款 Roadster，在发布会上头朝下停在二十米高...</a></h3>
-<span class="score-badge" data-tier="mid" aria-label="6.0 out of 10">6.0</span>
-</div>
-<p class="source-line">Twitter/X · @dotey · 10月19日 00:09 UTC · 喜欢 52 · 转发 6 · 回复 31 · 浏览 18356</p>
-<p class="archive-item-content">最新一期科普视频：车头朝下贴在弯道顶上，特斯拉新 Roadster 为什么掉不下来？<br>
-视频 2 是中文版<br>
-<br>
-特斯拉和 SpaceX 一起做的新款 Roadster，在发布会上头朝下停在二十米高的弯道顶上，又冲出坡道、在半空翻身落地。<br>
-<br>
-这期用 3D 动画讲明白它背后的两件事：车底的风扇怎么把车“吸”在路上，气罐和喷口怎么把车推上天。<br>
-<br>
-顺着回答几个大家最关心的问题：<br>
-是不是靠速度像过山车？<br>
-能飞多久，能不能开着飞去上班？<br>
-在空中怎么翻身？<br>
-0.81 秒破百轮胎受得了吗？<br>
-这些本事除了表演还有什么用？<br>
-<br>
----<br>
-<br>
-这类视频制作相关 skill 我还在完善中，不过现在的版本可以参考：https://t.co/sYc5CT1m8j<br>
-<br>
-发给你的 Agent（需要配合 Opus 5.5 效果最佳）就可以使用<br>
-<br>
-这个视频素材都是自己联网检索的，发布视频是我制定的，结合了当时的发布视频，以及一些检索的 YouTube 视频，Opus 5.5 帮助做了 3D 建模动画。</p>
-</article>
 </div>
 <div class="archive-panel" role="tabpanel" id="archive-panel-follow-builders" aria-labelledby="archive-tab-follow-builders" data-archive-panel="follow-builders">
 <h3 class="archive-panel-title">其他 Follow Builders 资讯</h3>
 <article class="archive-item">
 <div class="archive-item-heading">
-<h3><a href="https://x.com/swyx/status/2112073533794971941">Swyx: Data engineers &gt; AI engineers there&#x27;s a big difference between a &quot;RAG guy&quot; and a &quot;Data Intens...</a></h3>
+<h3><a href="https://x.com/thsottiaux/status/2112432076767289678">Thibault Sottiaux: Day 15/ Nevermind, we&#x27;re still cooking... and reset. Enjoy. https://t.co/RZ9WhtI802</a></h3>
+<span class="score-badge" data-tier="low" aria-label="4.3 out of 10">4.3</span>
+</div>
+<p class="archive-item-translation archive-title-translation"><span>中文标题</span>Thibault Sottiaux：第 15 天/ 算了，我们还在烹饪……并重置。享受。 https://t.co/RZ9WhtI802</p>
+<p class="source-line">Follow Builders · X 动态 · Thibault Sottiaux · 10月20日 06:33 UTC · 喜欢 1460 · 转发 108 · 回复 627 · 浏览 756862</p>
+<p class="archive-item-content">A cryptic tweet by Thibault Sottiaux suggesting ongoing work and a reset, likely related to Codex, with high engagement.</p>
+<p class="archive-item-translation"><span>中文摘要</span>Thibault Sottiaux 的一条神秘推文，暗示仍在进行开发并进行了重置，可能与 Codex 相关，互动量很高。</p>
+</article>
+<article class="archive-item">
+<div class="archive-item-heading">
+<h3><a href="https://x.com/nikunj/status/2112422877949751491">Nikunj Kothari: Tenzing on Apple TV+ is a must watch.. The acting, the direction, the music. I can’t believe...</a></h3>
+<span class="score-badge" data-tier="low" aria-label="1.0 out of 10">1.0</span>
+</div>
+<p class="archive-item-translation archive-title-translation"><span>中文标题</span>Nikunj Kothari：Apple TV+ 上的《Tenzing》必看……表演、导演、配乐。我简直不敢相信……</p>
+<p class="source-line">Follow Builders · X 动态 · Nikunj Kothari · 10月20日 05:57 UTC · 喜欢 12 · 转发 0 · 回复 1</p>
+<p class="archive-item-content">A brief tweet recommending the Apple TV+ show &#x27;Tenzing&#x27; for its acting, direction, and music, noting it was shot entirely in real environments without green screens.</p>
+<p class="archive-item-translation"><span>中文摘要</span>一条简短推文推荐 Apple TV+ 剧集《Tenzing》，称赞其表演、导演和配乐，并指出该剧完全在真实环境中拍摄，未使用任何绿幕。</p>
+</article>
+<article class="archive-item">
+<div class="archive-item-heading">
+<h3><a href="https://x.com/zarazhangrui/status/2112398939358138862">Zara Zhang: See this in a theater! One of the most interesting things about this documentary was how much...</a></h3>
+<span class="score-badge" data-tier="low" aria-label="1.0 out of 10">1.0</span>
+</div>
+<p class="archive-item-translation archive-title-translation"><span>中文标题</span>Zara Zhang：去影院看这部片子！这部纪录片最有趣的一点之一是……</p>
+<p class="source-line">Follow Builders · X 动态 · Zara Zhang · 10月20日 04:22 UTC · 喜欢 16 · 转发 0 · 回复 2</p>
+<p class="archive-item-content">A personal social media post recommending watching a documentary in a theater and remarking on when audiences laughed during it.</p>
+<p class="archive-item-translation"><span>中文摘要</span>一条个人社交媒体帖子，推荐去影院观看一部纪录片，并谈及观众在片中发笑的时刻。</p>
+</article>
+<article class="archive-item">
+<div class="archive-item-heading">
+<h3><a href="https://x.com/petergyang/status/2112398053185659282">Peter Yang: This doesn&#x27;t mean it&#x27;s a good movie btw. I found it completely ridiculous</a></h3>
+<span class="score-badge" data-tier="low" aria-label="1.0 out of 10">1.0</span>
+</div>
+<p class="archive-item-translation archive-title-translation"><span>中文标题</span>Peter Yang：顺便说一句，这并不意味着它是一部好电影。我觉得它完全荒谬</p>
+<p class="source-line">Follow Builders · X 动态 · Peter Yang · 10月20日 04:18 UTC · 喜欢 3 · 转发 0 · 回复 1</p>
+<p class="archive-item-content">Peter Yang briefly states that despite some implication, he found a particular movie completely ridiculous and not good.</p>
+<p class="archive-item-translation"><span>中文摘要</span>Peter Yang 简短表示，尽管有某种暗示，他认为某部电影完全荒谬，并非好片。</p>
+</article>
+<article class="archive-item">
+<div class="archive-item-heading">
+<h3><a href="https://x.com/nikunj/status/2112368222809034980">Nikunj Kothari: Waiting for someone to sell me a peptide factory built in a data center which is also a robot...</a></h3>
+<span class="score-badge" data-tier="low" aria-label="2.0 out of 10">2.0</span>
+</div>
+<p class="archive-item-translation archive-title-translation"><span>中文标题</span>Nikunj Kothari：等着有人卖给我一个建在数据中心里的肽工厂，同时它还是个机器人……</p>
+<p class="source-line">Follow Builders · X 动态 · Nikunj Kothari · 10月20日 02:20 UTC · 喜欢 36 · 转发 1 · 回复 7</p>
+<p class="archive-item-content">A joke tweet mocking the pile-up of hype-cycle buzzwords founders use to pitch investors.</p>
+<p class="archive-item-translation"><span>中文摘要</span>一条调侃创业者在融资路演中堆砌风口流行语的玩笑推文。</p>
+</article>
+<article class="archive-item">
+<div class="archive-item-heading">
+<h3><a href="https://x.com/danshipper/status/2112308324377203182">Dan Shipper: the ideographic &amp;gt; the nomothetic https://t.co/DT4n8LnA4C</a></h3>
+<span class="score-badge" data-tier="low" aria-label="2.0 out of 10">2.0</span>
+</div>
+<p class="archive-item-translation archive-title-translation"><span>中文标题</span>Dan Shipper：个案式的 &gt; 通则式的</p>
+<p class="source-line">Follow Builders · X 动态 · Dan Shipper · 10月19日 22:22 UTC · 喜欢 6 · 转发 0 · 回复 0</p>
+<p class="archive-item-content">Dan Shipper posts a terse philosophical assertion that idiographic (particular-case) thinking beats nomothetic (general-law) thinking, with only an external link and no elaboration.</p>
+<p class="archive-item-translation"><span>中文摘要</span>Dan Shipper 用一句话断言「个案式（具体）的思路优于通则式（普遍规律）的思路」，仅附一个外链、未作任何展开。</p>
+</article>
+<article class="archive-item">
+<div class="archive-item-heading">
+<h3><a href="https://x.com/petergyang/status/2112292347505688990">Peter Yang: This is super cool I love how visual it is. Can&#x27;t wait to try this @ekuyda! https://t.co/UMkH...</a></h3>
+<span class="score-badge" data-tier="low" aria-label="2.0 out of 10">2.0</span>
+</div>
+<p class="archive-item-translation archive-title-translation"><span>中文标题</span>Peter Yang：这太酷了，我很喜欢它的视觉呈现，等不及要试试这个 @ekuyda！</p>
+<p class="source-line">Follow Builders · X 动态 · Peter Yang · 10月19日 21:18 UTC · 喜欢 23 · 转发 1 · 回复 6</p>
+<p class="archive-item-content">Peter Yang tweets brief praise for an unnamed visual tool by @ekuyda, saying he can&#x27;t wait to try it.</p>
+<p class="archive-item-translation"><span>中文摘要</span>Peter Yang 发推简短称赞 @ekuyda 的一款未具名可视化工具，表示迫不及待想试用。</p>
+</article>
+<article class="archive-item">
+<div class="archive-item-heading">
+<h3><a href="https://x.com/petergyang/status/2112280969382437076">Peter Yang: Very interesting insight into why alot of Netflix original movies and TV shows are slop. I st...</a></h3>
+<span class="score-badge" data-tier="low" aria-label="2.0 out of 10">2.0</span>
+</div>
+<p class="archive-item-translation archive-title-translation"><span>中文标题</span>Peter Yang：关于为什么很多 Netflix 原创电影和电视剧是垃圾的非常有趣的见解。我仍然...</p>
+<p class="source-line">Follow Builders · X 动态 · Peter Yang · 10月19日 20:33 UTC · 喜欢 23 · 转发 0 · 回复 7</p>
+<p class="archive-item-content">Peter Yang shares a link to an insight about why many Netflix original movies and TV shows are low quality.</p>
+<p class="archive-item-translation"><span>中文摘要</span>Peter Yang 分享了一个关于为什么许多 Netflix 原创电影和电视剧质量低劣的有趣见解。</p>
+</article>
+<article class="archive-item">
+<div class="archive-item-heading">
+<h3><a href="https://x.com/garrytan/status/2112278352514162834">Garry Tan: Multiplayer agents as group chat seems quite inevitable and Wabi&#x27;s built it https://t.co/ltcc...</a></h3>
 <span class="score-badge" data-tier="mid" aria-label="5.0 out of 10">5.0</span>
 </div>
-<p class="archive-item-translation archive-title-translation"><span>中文标题</span>Swyx：数据工程师 &gt; AI 工程师，&#x27;RAG 人&#x27;和&#x27;数据密集型应用&#x27;的人之间存在巨大差异</p>
-<p class="source-line">Follow Builders · X 动态 · Swyx · 10月19日 06:49 UTC · 喜欢 4 · 转发 0 · 回复 5</p>
-<p class="archive-item-content">Swyx argues that data engineering skills are in far greater demand than AI engineering skills, distinguishing &#x27;RAG guys&#x27; from &#x27;Data Intensive Applications&#x27; people, and uses the observation to recruit for a role at Latent Space.</p>
-<p class="archive-item-translation"><span>中文摘要</span>Swyx 认为数据工程技能的需求远超 AI 工程技能，并区分了&#x27;RAG 人&#x27;与&#x27;数据密集型应用&#x27;人才，借此为 Latent Space 招募人手。</p>
+<p class="archive-item-translation archive-title-translation"><span>中文标题</span>Garry Tan：多代理以群聊形式协作似乎相当不可避免，而 Wabi 已经把它做出来了</p>
+<p class="source-line">Follow Builders · X 动态 · Garry Tan · 10月19日 20:22 UTC · 喜欢 243 · 转发 16 · 回复 74</p>
+<p class="archive-item-content">Garry Tan argues that multiplayer AI agents interacting in a group chat is an inevitable paradigm, noting that Wabi has already built such a product.</p>
+<p class="archive-item-translation"><span>中文摘要</span>Garry Tan 认为多个 AI 代理以群聊方式协作几乎不可避免，并指出 Wabi 已经实现了这一产品形态。</p>
 </article>
 <article class="archive-item">
 <div class="archive-item-heading">
-<h3><a href="https://x.com/levie/status/2112051081014649303">Aaron Levie: Here’s why agent swarms are going to be a very big deal. We can finally make compute a critic...</a></h3>
-<span class="score-badge" data-tier="mid" aria-label="6.0 out of 10">6.0</span>
-</div>
-<p class="archive-item-translation archive-title-translation"><span>中文标题</span>Aaron Levie：这就是为什么智能体集群将会成为一件非常重大的事。我们终于能够让算力成为关键变量……</p>
-<p class="source-line">Follow Builders · X 动态 · Aaron Levie · 10月19日 05:19 UTC · 喜欢 121 · 转发 13 · 回复 44</p>
-<p class="archive-item-content">Aaron Levie argues that agent swarms will make compute the critical scaling variable for a large class of economically valuable, currently time-bottlenecked tasks such as cybersecurity, life sciences research, trading, and QA testing.</p>
-<p class="archive-item-translation"><span>中文摘要</span>Aaron Levie 认为，智能体集群将使算力成为大量具有经济价值、目前受时间瓶颈限制的任务（如网络安全、生命科学研究、交易和 QA 测试）的关键扩展变量。</p>
-</article>
-<article class="archive-item">
-<div class="archive-item-heading">
-<h3><a href="https://x.com/thsottiaux/status/2112039275344941371">Thibault Sottiaux: I bought a new domain and I’m very excited for it. Very</a></h3>
+<h3><a href="https://x.com/adityaag/status/2112276233363030215">Aditya Agarwal: https://t.co/aEAsDgsa3u</a></h3>
 <span class="score-badge" data-tier="low" aria-label="1.0 out of 10">1.0</span>
 </div>
-<p class="archive-item-translation archive-title-translation"><span>中文标题</span>Thibault Sottiaux：我买了一个新域名，我非常兴奋。非常</p>
-<p class="source-line">Follow Builders · X 动态 · Thibault Sottiaux · 10月19日 04:32 UTC · 喜欢 2948 · 转发 56 · 回复 777</p>
-<p class="archive-item-content">Thibault Sottiaux teases that he purchased a new domain without revealing what it is or what it will be used for.</p>
-<p class="archive-item-translation"><span>中文摘要</span>Thibault Sottiaux 预告自己买下了一个新域名，但没有透露具体内容或用途。</p>
+<p class="archive-item-translation archive-title-translation"><span>中文标题</span>Aditya Agarwal：https://t.co/aEAsDgsa3u</p>
+<p class="source-line">Follow Builders · X 动态 · Aditya Agarwal · 10月19日 20:14 UTC · 喜欢 4 · 转发 0 · 回复 2</p>
+<p class="archive-item-content">A bare tweet from Aditya Agarwal containing only a shortened link with no accompanying context or technical content.</p>
+<p class="archive-item-translation"><span>中文摘要</span>Aditya Agarwal 发布的一条仅含短链接、没有任何上下文或技术内容的推文。</p>
 </article>
 <article class="archive-item">
 <div class="archive-item-heading">
-<h3><a href="https://x.com/thsottiaux/status/2112034328549216593">Thibault Sottiaux: https://t.co/kjNgDoLCWz</a></h3>
+<h3><a href="https://x.com/adityaag/status/2112276231731466420">Aditya Agarwal: Early @PalantirTech. Cofounder of @anduriltech. GP at @foundersfund. Last time @traestephens...</a></h3>
 <span class="score-badge" data-tier="low" aria-label="2.0 out of 10">2.0</span>
 </div>
-<p class="archive-item-translation archive-title-translation"><span>中文标题</span>Thibault Sottiaux：https://t.co/kjNgDoLCWz</p>
-<p class="source-line">Follow Builders · X 动态 · Thibault Sottiaux · 10月19日 04:13 UTC · 喜欢 405 · 转发 9 · 回复 32</p>
-<p class="archive-item-content">A tweet by Thibault Sottiaux consisting solely of a shortened link with no accompanying text or context.</p>
-<p class="archive-item-translation"><span>中文摘要</span>Thibault Sottiaux 发布的一条推文，仅包含一个短链接，没有任何文字说明或背景信息。</p>
+<p class="archive-item-translation archive-title-translation"><span>中文标题</span>Aditya Agarwal：Palantir 早期成员、Anduril 联合创始人、Founders Fund 普通合伙人。上次 @traestephens……</p>
+<p class="source-line">Follow Builders · X 动态 · Aditya Agarwal · 10月19日 20:14 UTC · 喜欢 49 · 转发 6 · 回复 5</p>
+<p class="archive-item-content">Aditya Agarwal (early Palantir, Anduril cofounder, Founders Fund GP) promotes an upcoming Wednesday event featuring Trae Stephens, noting the world has changed since 2022.</p>
+<p class="archive-item-translation"><span>中文摘要</span>Aditya Agarwal（Palantir 早期成员、Anduril 联合创始人、Founders Fund 普通合伙人）宣传一场将于周三举行、由 Trae Stephens 参与的活动，并指出如今的世界已与 2022 年大不相同。</p>
 </article>
 <article class="archive-item">
 <div class="archive-item-heading">
-<h3><a href="https://x.com/thsottiaux/status/2112034063934742720">Thibault Sottiaux: Our team worked with OpenCode to have their users who are also OpenAI API customers back in b...</a></h3>
-<span class="score-badge" data-tier="mid" aria-label="6.0 out of 10">6.0</span>
-</div>
-<p class="archive-item-translation archive-title-translation"><span>中文标题</span>Thibault Sottiaux：我们团队与 OpenCode 合作，让那些同时也是 OpenAI API 客户的用户重新恢复正常……</p>
-<p class="source-line">Follow Builders · X 动态 · Thibault Sottiaux · 10月19日 04:12 UTC · 喜欢 3862 · 转发 166 · 回复 279</p>
-<p class="archive-item-content">An OpenAI team member says they worked with OpenCode to restore affected users and refund credits drained in an attack, and invites developers to request Daybreak Blue access for a cyber-permissive defensive setup.</p>
-<p class="archive-item-translation"><span>中文摘要</span>OpenAI 团队成员表示已与 OpenCode 合作，让受影响用户恢复服务并退还攻击中被盗用的额度，同时邀请开发者申请 Daybreak Blue 权限以启用防御性安全配置。</p>
-</article>
-<article class="archive-item">
-<div class="archive-item-heading">
-<h3><a href="https://x.com/petergyang/status/2112016747838796200">Peter Yang: Best comedy of the year https://t.co/jj4AxqOG1h</a></h3>
-<span class="score-badge" data-tier="low" aria-label="1.0 out of 10">1.0</span>
-</div>
-<p class="archive-item-translation archive-title-translation"><span>中文标题</span>Peter Yang：年度最佳喜剧</p>
-<p class="source-line">Follow Builders · X 动态 · Peter Yang · 10月19日 03:03 UTC · 喜欢 12 · 转发 0 · 回复 3</p>
-<p class="archive-item-content">Peter Yang shares a link on X calling it the &#x27;best comedy of the year&#x27; with no accompanying explanation or technical content.</p>
-<p class="archive-item-translation"><span>中文摘要</span>Peter Yang 在 X 上分享了一个链接，称其为“年度最佳喜剧”，没有附带任何解释或技术内容。</p>
-</article>
-<article class="archive-item">
-<div class="archive-item-heading">
-<h3><a href="https://x.com/nikunj/status/2111986818057118160">Nikunj Kothari: This aged relatively well.. even with the GH growth, I think people are still sleeping on @re...</a></h3>
+<h3><a href="https://x.com/danshipper/status/2112272224782856514">Dan Shipper: a story in 3 parts https://t.co/dabv01DAY3</a></h3>
 <span class="score-badge" data-tier="low" aria-label="2.0 out of 10">2.0</span>
 </div>
-<p class="archive-item-translation archive-title-translation"><span>中文标题</span>Nikunj Kothari：这条推文随时间证明还不错……即使 GitHub 有所增长，我认为人们仍然低估了 @reatools。</p>
-<p class="source-line">Follow Builders · X 动态 · Nikunj Kothari · 10月19日 01:04 UTC · 喜欢 14 · 转发 0 · 回复 3</p>
-<p class="archive-item-content">Nikunj Kothari 发推称，尽管 GitHub 有所增长，人们仍然低估了 @reatools，并称其表现惊人。</p>
+<p class="archive-item-translation archive-title-translation"><span>中文标题</span>Dan Shipper：一个分三部分的故事</p>
+<p class="source-line">Follow Builders · X 动态 · Dan Shipper · 10月19日 19:58 UTC · 喜欢 59 · 转发 0 · 回复 11</p>
+<p class="archive-item-content">Dan Shipper shares a cryptic teaser linking to a three-part story, with no substantive content or context in the post itself.</p>
+<p class="archive-item-translation"><span>中文摘要</span>Dan Shipper 发布了一条隐晦的预告，链接指向一个分三部分的故事，帖子本身没有实质内容或背景信息。</p>
 </article>
 <article class="archive-item">
 <div class="archive-item-heading">
-<h3><a href="https://x.com/garrytan/status/2111971992769565177">Garry Tan: Prediction: you’re all going to be using @AsideAI with your agents in a year or so https://t....</a></h3>
+<h3><a href="https://x.com/thsottiaux/status/2112268918681485431">Thibault Sottiaux: Day 15/ We&#x27;re cooked https://t.co/ciJpOJlmOn</a></h3>
 <span class="score-badge" data-tier="low" aria-label="3.0 out of 10">3.0</span>
 </div>
-<p class="archive-item-translation archive-title-translation"><span>中文标题</span>Garry Tan：预测：一年左右，你们都会把 @AsideAI 与你们的智能体一起使用</p>
-<p class="source-line">Follow Builders · X 动态 · Garry Tan · 10月19日 00:05 UTC · 喜欢 424 · 转发 23 · 回复 87</p>
-<p class="archive-item-content">Garry Tan predicts that within roughly a year, developers will all be using AsideAI alongside their AI agents, without offering technical detail or justification.</p>
-<p class="archive-item-translation"><span>中文摘要</span>Garry Tan 预测，大约一年之内，开发者都会将 AsideAI 与自己的 AI 智能体搭配使用，但并未给出技术细节或论证。</p>
+<p class="archive-item-translation archive-title-translation"><span>中文标题</span>Thibault Sottiaux：第 15 天/ 我们完蛋了</p>
+<p class="source-line">Follow Builders · X 动态 · Thibault Sottiaux · 10月19日 19:45 UTC · 喜欢 4635 · 转发 147 · 回复 2744</p>
+<p class="archive-item-content">OpenAI engineer Thibault Sottiaux posts a cryptic one-line tweet (&#x27;Day 15/ We&#x27;re cooked&#x27;) with a link but no technical details, generating heavy speculation in replies.</p>
+<p class="archive-item-translation"><span>中文摘要</span>OpenAI 工程师 Thibault Sottiaux 发布了一条只有一句话的隐晦推文（“第 15 天/ 我们完蛋了”）并附带链接，没有任何技术细节，引发大量猜测性讨论。</p>
 </article>
 <article class="archive-item">
 <div class="archive-item-heading">
-<h3><a href="https://x.com/swyx/status/2111971887811342582">Swyx: @aiDotEngineer @evanjconrad v nice side efvent https://t.co/Jt88Ncm3VN</a></h3>
-<span class="score-badge" data-tier="low" aria-label="1.0 out of 10">1.0</span>
+<h3><a href="https://x.com/rauchg/status/2112256718281551955">Guillermo Rauch: 1,000 tokens per second btw https://t.co/BdATqYu71F</a></h3>
+<span class="score-badge" data-tier="low" aria-label="4.0 out of 10">4.0</span>
 </div>
-<p class="archive-item-translation archive-title-translation"><span>中文标题</span>Swyx：@aiDotEngineer @evanjconrad 非常不错的周边活动 https://t.co/Jt88Ncm3VN</p>
-<p class="source-line">Follow Builders · X 动态 · Swyx · 10月19日 00:05 UTC · 喜欢 3 · 转发 0 · 回复 0</p>
-<p class="archive-item-content">Swyx posts a brief appreciative tweet tagging two accounts and sharing a shortened link.</p>
-<p class="archive-item-translation"><span>中文摘要</span>Swyx 发布了一条简短的致意推文，@ 了两个账号并分享了一个缩短链接。</p>
+<p class="archive-item-translation archive-title-translation"><span>中文标题</span>Guillermo Rauch：顺便说一句，每秒 1,000 个 token https://t.co/BdATqYu71F</p>
+<p class="source-line">Follow Builders · X 动态 · Guillermo Rauch · 10月19日 18:57 UTC · 喜欢 255 · 转发 11 · 回复 55</p>
+<p class="archive-item-content">Guillermo Rauch posts a brief claim of achieving 1,000 tokens-per-second inference speed, linking out without further technical detail.</p>
+<p class="archive-item-translation"><span>中文摘要</span>Guillermo Rauch 简短宣称实现了每秒 1,000 个 token 的推理速度，并附带链接但未提供更多技术细节。</p>
 </article>
 <article class="archive-item">
 <div class="archive-item-heading">
-<h3><a href="https://x.com/petergyang/status/2111970651326267529">Peter Yang: Make work trials the norm for hiring instead of interviews. From @APompliano: “We had a speci...</a></h3>
-<span class="score-badge" data-tier="low" aria-label="3.0 out of 10">3.0</span>
-</div>
-<p class="archive-item-translation archive-title-translation"><span>中文标题</span>Peter Yang：让工作试用成为招聘常态，而不是面试</p>
-<p class="source-line">Follow Builders · X 动态 · Peter Yang · 10月19日 00:00 UTC · 喜欢 12 · 转发 0 · 回复 20</p>
-<p class="archive-item-content">Peter Yang argues that companies should replace traditional interviews with paid work trials, citing a builder who let a candidate ship a real feature in two weeks.</p>
-<p class="archive-item-translation"><span>中文摘要</span>Peter Yang 主张企业应以实际工作试用取代传统面试，并引述一位创业者让候选人两周内交付一个真实功能的案例。</p>
-</article>
-<article class="archive-item">
-<div class="archive-item-heading">
-<h3><a href="https://x.com/swyx/status/2111962930644402504">Swyx: are we so different, you and i https://t.co/fOqLOgAInI</a></h3>
-<span class="score-badge" data-tier="low" aria-label="1.0 out of 10">1.0</span>
-</div>
-<p class="archive-item-translation archive-title-translation"><span>中文标题</span>Swyx：你和我，我们真有那么不同吗</p>
-<p class="source-line">Follow Builders · X 动态 · Swyx · 10月18日 23:29 UTC · 喜欢 6 · 转发 0 · 回复 1</p>
-<p class="archive-item-content">A cryptic single-line tweet by Swyx (&#x27;are we so different, you and i&#x27;) containing only an unexplained link, with no substantive content or discussion.</p>
-<p class="archive-item-translation"><span>中文摘要</span>Swyx 发布了一条含义模糊的一句话推文（“你和我，我们真有那么不同吗”），仅附一个未加说明的链接，没有任何实质内容或讨论。</p>
-</article>
-<article class="archive-item">
-<div class="archive-item-heading">
-<h3><a href="https://x.com/danshipper/status/2111962665987825809">Dan Shipper: current (mostly) reading: https://t.co/gvZsM7SnfD</a></h3>
+<h3><a href="https://x.com/danshipper/status/2112230653924192274">Dan Shipper: so proud of Quinten + Ajay and team! they&#x27;ve been pushing the boundaries of creativity and st...</a></h3>
 <span class="score-badge" data-tier="low" aria-label="2.0 out of 10">2.0</span>
 </div>
-<p class="archive-item-translation archive-title-translation"><span>中文标题</span>Dan Shipper：目前（主要）在读：https://t.co/gvZsM7SnfD</p>
-<p class="source-line">Follow Builders · X 动态 · Dan Shipper · 10月18日 23:28 UTC · 喜欢 38 · 转发 0 · 回复 7</p>
-<p class="archive-item-content">Dan Shipper shares a link to what he is currently (mostly) reading, with no accompanying commentary or technical detail.</p>
-<p class="archive-item-translation"><span>中文摘要</span>Dan Shipper 分享了一个链接，指向他目前（主要）在阅读的内容，未附带任何评论或技术细节。</p>
+<p class="archive-item-translation archive-title-translation"><span>中文标题</span>Dan Shipper：为 Quinten + Ajay 和团队感到无比自豪！他们一直在推动创造力和故事讲述的边界……</p>
+<p class="source-line">Follow Builders · X 动态 · Dan Shipper · 10月19日 17:13 UTC · 喜欢 60 · 转发 3 · 回复 9</p>
+<p class="archive-item-content">Dan Shipper congratulates Quinten, Ajay and their team for pushing the boundaries of AI-driven creativity and storytelling in consumer products, noting he is a small investor.</p>
+<p class="archive-item-translation"><span>中文摘要</span>Dan Shipper 祝贺 Quinten、Ajay 及其团队在消费级产品中不断突破 AI 创造力与叙事能力的边界，并提到自己是小额投资人。</p>
+</article>
+<article class="archive-item">
+<div class="archive-item-heading">
+<h3><a href="https://x.com/nikunj/status/2112219327881761008">Nikunj Kothari: A few weeks ago, I was ranting about multiplayer AI experiences and that&#x27;s when @ekuyda share...</a></h3>
+<span class="score-badge" data-tier="mid" aria-label="6.0 out of 10">6.0</span>
+</div>
+<p class="archive-item-translation archive-title-translation"><span>中文标题</span>Nikunj Kothari：几周前，我一直在抱怨多人 AI 体验，那时 @ekuyda 分享……</p>
+<p class="source-line">Follow Builders · X 动态 · Nikunj Kothari · 10月19日 16:28 UTC · 喜欢 46 · 转发 6 · 回复 7</p>
+<p class="archive-item-content">Nikunj Kothari shares his experience with Wabi 2.0, praising its orchestrator-plus-episodic-chats paradigm for personal AI agents.</p>
+<p class="archive-item-translation"><span>中文摘要</span>Nikunj Kothari 分享了他对 Wabi 2.0 的使用体验，赞赏其编排器（主代理）加按主题划分的临时聊天的个人 AI 代理范式。</p>
+</article>
+<article class="archive-item">
+<div class="archive-item-heading">
+<h3><a href="https://x.com/trq212/status/2112219173288120531">Thariq: I think most people multi-tasking with agents could benefit from slowing down most of the stu...</a></h3>
+<span class="score-badge" data-tier="mid" aria-label="5.0 out of 10">5.0</span>
+</div>
+<p class="archive-item-translation archive-title-translation"><span>中文标题</span>Thariq：我认为大多数用智能体多任务并行的人，放慢节奏专注于最重要的事会更有收益</p>
+<p class="source-line">Follow Builders · X 动态 · Thariq · 10月19日 16:27 UTC · 喜欢 5458 · 转发 285 · 回复 476</p>
+<p class="archive-item-content">Thariq argues that people juggling multiple AI agents in parallel would get better results by slowing down and giving their single most important task (P0) undivided attention.</p>
+<p class="archive-item-translation"><span>中文摘要</span>Thariq 认为，同时并行使用多个 AI 智能体的人应当放慢节奏，把全部注意力集中到最重要的 P0 任务上，效果会更好。</p>
+</article>
+<article class="archive-item">
+<div class="archive-item-heading">
+<h3><a href="https://x.com/rauchg/status/2112194000639967590">Guillermo Rauch: More free AI https://t.co/9Jd42XA7rw</a></h3>
+<span class="score-badge" data-tier="low" aria-label="3.0 out of 10">3.0</span>
+</div>
+<p class="archive-item-translation archive-title-translation"><span>中文标题</span>Guillermo Rauch：更多免费 AI</p>
+<p class="source-line">Follow Builders · X 动态 · Guillermo Rauch · 10月19日 14:47 UTC · 喜欢 285 · 转发 8 · 回复 59</p>
+<p class="archive-item-content">Guillermo Rauch posted a terse &#x27;More free AI&#x27; message with a shortened link, offering no details about what is being announced.</p>
+<p class="archive-item-translation"><span>中文摘要</span>Guillermo Rauch 发布了一条仅含“更多免费 AI”和短链接的简短推文，未透露任何具体内容。</p>
+</article>
+<article class="archive-item">
+<div class="archive-item-heading">
+<h3><a href="https://x.com/swyx/status/2112182228977348963">Swyx: &quot;O Infallible one, why do the people not heed the sign we tap?&quot; &quot;My dear Parth, each believes...</a></h3>
+<span class="score-badge" data-tier="low" aria-label="4.0 out of 10">4.0</span>
+</div>
+<p class="archive-item-translation archive-title-translation"><span>中文标题</span>Swyx：“哦，无误者，为何人们不理会我们敲出的征兆？”“亲爱的帕尔特，每个人都相信……”</p>
+<p class="source-line">Follow Builders · X 动态 · Swyx · 10月19日 14:01 UTC · 喜欢 58 · 转发 1 · 回复 54</p>
+<p class="archive-item-content">Swyx posts a Bhagavad Gita-style satirical dialogue arguing that tech Twitter&#x27;s repeated wish to &#x27;end chat&#x27; reflects a desire for novelty rather than truth.</p>
+<p class="archive-item-translation"><span>中文摘要</span>Swyx 发布了一段仿《薄伽梵歌》风格的讽刺对话，指出科技推特上反复出现的“终结聊天”呼声，所反映的是对新奇的渴望而非对真理的追求。</p>
 </article>
 </div>
 </section>
