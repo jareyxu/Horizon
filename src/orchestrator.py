@@ -1,6 +1,7 @@
 """Main orchestrator coordinating the entire workflow."""
 
 import asyncio
+import re
 from collections import defaultdict
 from dataclasses import dataclass, field
 from datetime import datetime, timedelta, timezone
@@ -156,9 +157,16 @@ class HorizonOrchestrator:
                 for item in important_items
                 if item.ai_score is not None and item.ai_score >= threshold
             )
-            fallback_items = len(important_items) - threshold_items
+            mandatory_items = sum(bool(item.metadata.get("mandatory_inclusion")) for item in important_items)
+            fallback_items = sum(
+                not item.metadata.get("mandatory_inclusion")
+                and (item.ai_score is None or item.ai_score < threshold)
+                for item in important_items
+            )
 
             self.console.print(f"⭐️ {threshold_items} items scored ≥ {threshold}\n")
+            if mandatory_items:
+                self.console.print(f"📌 {mandatory_items} items included by editorial rules (before deduplication)\n")
             if fallback_items:
                 self.console.print(
                     f"🛟 Added {fallback_items} highest-scoring fallback items "
@@ -615,7 +623,7 @@ class HorizonOrchestrator:
                 item.ai_summary = analyzed.ai_summary
                 item.ai_tags = list(analyzed.ai_tags)
                 if analyzed.id == raw.id:
-                    for key in ("title_zh", "summary_zh", "creator", "creator_eligible"):
+                    for key in ("title_zh", "summary_zh", "creator", "creator_eligible", "analysis_input", "is_model_release", "model_release_name", "mandatory_inclusion"):
                         if key in analyzed.metadata:
                             item.metadata[key] = analyzed.metadata[key]
                 else:
@@ -651,6 +659,12 @@ class HorizonOrchestrator:
     def select_important_items(self, items: List[ContentItem]) -> List[ContentItem]:
         """Select threshold-qualified items and backfill a useful minimum digest."""
         filtering = self.config.filtering
+        mandatory = []
+        for item in items:
+            reason = self._mandatory_inclusion(item)
+            if reason:
+                item.metadata["mandatory_inclusion"] = reason
+                mandatory.append(item)
         ranked = sorted(items, key=lambda item: item.ai_score or 0, reverse=True)
         if self.config.profile.editorial_mode == "creator":
             ranked = [item for item in ranked if item.metadata.get("creator_eligible")]
@@ -673,7 +687,21 @@ class HorizonOrchestrator:
             ]
             selected.extend(fallback[:missing])
 
-        return selected
+        return mandatory + [item for item in selected if item not in mandatory]
+
+    def _mandatory_inclusion(self, item: ContentItem) -> Optional[str]:
+        """Editorial overrides do not inflate or replace the model's score."""
+        filtering = self.config.filtering
+        host = (urlparse(str(item.url)).hostname or "").lower()
+        if (
+            filtering.always_include_aibase_daily
+            and host in {"news.aibase.cn", "www.aibase.cn", "www.aibase.com", "news.aibase.com"}
+            and re.match(r"^AI\s*日报\s*[:：]", item.title, re.I)
+        ):
+            return "AIbase AI 日报固定入选"
+        if filtering.always_include_model_releases and item.metadata.get("is_model_release") is True:
+            return "新模型发布固定入选（去重后）"
+        return None
 
     async def merge_topic_duplicates(
         self, items: List[ContentItem]
@@ -691,6 +719,13 @@ class HorizonOrchestrator:
         """
         if len(items) <= 1:
             return items
+
+        # A roundup is a standalone reading resource, not a duplicate of any
+        # individual headline it happens to mention.
+        roundups = [item for item in items if self._mandatory_inclusion(item) == "AIbase AI 日报固定入选"]
+        if roundups:
+            others = [item for item in items if item not in roundups]
+            return roundups + await self.merge_topic_duplicates(others)
 
         from .ai.prompts import TOPIC_DEDUP_SYSTEM, TOPIC_DEDUP_USER
         from .ai.utils import parse_json_response
@@ -743,6 +778,11 @@ class HorizonOrchestrator:
                 if dup_idx == primary_idx:
                     continue
                 dup = items[dup_idx]
+                if dup.metadata.get("mandatory_inclusion"):
+                    primary.metadata["mandatory_inclusion"] = dup.metadata["mandatory_inclusion"]
+                if dup.metadata.get("is_model_release") is True:
+                    primary.metadata["is_model_release"] = True
+                    primary.metadata["model_release_name"] = dup.metadata.get("model_release_name", "")
                 # Merge comments/content from the duplicate into the primary
                 if dup.content:
                     if not primary.content or dup.content not in primary.content:
@@ -834,6 +874,9 @@ class HorizonOrchestrator:
         default_group = filtering.default_group
 
         for item in sorted_items:
+            if item.metadata.get("mandatory_inclusion") or self._mandatory_inclusion(item):
+                selected.append((item, "mandatory"))
+                continue
             category = item.metadata.get("category")
             group_key = (
                 category_to_group.get(category, default_group)
@@ -853,7 +896,9 @@ class HorizonOrchestrator:
             group_counts[group_key] += 1
 
         if max_items is not None:
-            selected = selected[:max_items]
+            mandatory = [entry for entry in selected if entry[1] == "mandatory"]
+            ordinary = [entry for entry in selected if entry[1] != "mandatory"]
+            selected = mandatory + ordinary[:max(0, max_items - len(mandatory))]
 
         final_counts: Dict[str, int] = defaultdict(int)
         for _, group_key in selected:
@@ -1000,6 +1045,8 @@ class HorizonOrchestrator:
 
     async def _prepare_longform_items(self, items: List[ContentItem]) -> None:
         """Summarize long podcast transcripts before relevance scoring."""
+        if self.config.ai.analysis_input == "title":
+            return
         if not any(
             item.metadata.get("source_variant") == "podcast"
             and len(item.content or "") > 6000

@@ -122,6 +122,11 @@ class WebScraper(BaseScraper):
     async def _articles(self, source, soup):
         items, seen = [], set()
         for link in soup.select(source.link_selector):
+            if source.title_include_keywords and not any(
+                keyword.casefold() in link.get_text(" ", strip=True).casefold()
+                for keyword in source.title_include_keywords
+            ):
+                continue
             target = urljoin(str(source.url), link.get("href", ""))
             parts = urlsplit(target)
             if parts.scheme not in {"http", "https"}:

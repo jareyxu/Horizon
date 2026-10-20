@@ -55,3 +55,17 @@ def test_chinese_publication_date_uses_beijing_timezone():
 def test_modified_date_does_not_create_news():
     soup = BeautifulSoup('<meta property="article:modified_time" content="2026-10-20T12:00:00Z">', "html.parser")
     assert WebScraper._published(soup) is None
+
+
+def test_daily_filter_applies_before_fetch_limit(tmp_path):
+    source = WebSourceConfig(name="AIbase AI 日报", url="https://news.aibase.cn/daily/", link_selector="a", title_include_keywords=["AI日报"], max_items=1)
+    pages = {"/daily/": '<a href="/other">普通资讯</a><a href="/daily/1">AI日报：今日</a>', "/daily/1": '<meta property="article:published_time" content="2026-10-19T03:00:00Z"><main><h1>AI日报：今日</h1>日报正文</main>'}
+    requested = []
+    def handler(request):
+        requested.append(request.url.path)
+        return httpx.Response(200, text=pages[request.url.path])
+    async def run():
+        async with httpx.AsyncClient(transport=httpx.MockTransport(handler)) as client:
+            return await WebScraper([source], client, tmp_path / "state.json").fetch(datetime(2026, 10, 18, tzinfo=timezone.utc))
+    assert len(asyncio.run(run())) == 1
+    assert "/other" not in requested

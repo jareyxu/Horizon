@@ -1,6 +1,7 @@
 import asyncio
 import json
 from datetime import datetime, timezone
+from types import SimpleNamespace
 
 from bs4 import BeautifulSoup
 
@@ -79,3 +80,53 @@ def test_creator_cards_and_empty_summary_have_usable_counts():
     rendered = asyncio.run(summarizer.generate_summary([news], "2026-10-20", 84, "zh"))
     assert "适合谁" in rendered and "可以怎么拍" in rendered
     assert "发布前核实" in rendered
+
+
+def test_title_screening_never_sends_body_or_comments():
+    class Client:
+        config = SimpleNamespace(analysis_input="title")
+
+        async def complete(self, *, system, user):
+            assert "SECRET_BODY" not in user
+            assert "SECRET_COMMENT" not in user
+            assert "Community Comments" not in user
+            assert "Only the title" in user
+            return json.dumps({"score": 4, "reason": "待核实", "summary": "标题摘要", "is_model_release": True, "model_release_name": "Test Model 2"})
+
+    news = item("Test Model 2 正式发布")
+    news.content = "SECRET_BODY\n--- Top Comments ---\nSECRET_COMMENT"
+    asyncio.run(ContentAnalyzer(Client())._analyze_item(news))
+    assert news.metadata["analysis_input"] == "title"
+    assert news.metadata["is_model_release"] is True
+    assert news.ai_reason.startswith("标题初筛")
+    assert "SECRET_BODY" in news.content
+
+
+def test_mandatory_items_bypass_scores_and_caps_without_faking_scores(tmp_path):
+    config = Config.model_validate({"ai": {"provider": "openai", "model": "test", "api_key_env": "TEST_KEY"}, "sources": {}, "profile": {"editorial_mode": "creator"}, "filtering": {"max_items": 1, "default_group_limit": 1, "always_include_aibase_daily": True, "always_include_model_releases": True}})
+    orchestrator = HorizonOrchestrator(config, StorageManager(str(tmp_path)))
+    daily = item("daily", ai_score=3)
+    daily.title = "AI日报：今日资讯"
+    daily.url = "https://news.aibase.cn/daily/123"
+    release = item("release", ai_score=4, metadata={"is_model_release": True})
+    rumor = item("rumor", ai_score=2)
+    ordinary = item("ordinary", ai_score=9, metadata={"creator_eligible": True})
+    selected = orchestrator.select_important_items([ordinary, daily, release, rumor])
+    result = orchestrator.apply_balanced_digest(selected, log=False).items
+    assert {news.id for news in result} == {"daily", "release"}
+    assert daily.ai_score == 3 and release.ai_score == 4
+    assert orchestrator._mandatory_inclusion(rumor) is None
+    impostor = item("impostor")
+    impostor.title = daily.title
+    assert orchestrator._mandatory_inclusion(impostor) is None
+
+
+def test_daily_roundup_not_semantically_merged_with_single_story(tmp_path):
+    config = Config.model_validate({"ai": {"provider": "openai", "model": "test", "api_key_env": "TEST_KEY"}, "sources": {}, "filtering": {"always_include_aibase_daily": True}})
+    orchestrator = HorizonOrchestrator(config, StorageManager(str(tmp_path)))
+    daily = item("daily")
+    daily.title = "AI日报：新模型发布"
+    daily.url = "https://news.aibase.cn/daily/123"
+    single = item("single")
+    result = asyncio.run(orchestrator.merge_topic_duplicates([daily, single]))
+    assert result == [daily, single]

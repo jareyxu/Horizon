@@ -112,6 +112,7 @@ class AIConfig(BaseModel):
     max_tokens: int = 4096
     throttle_sec: float = 0.0
     analysis_concurrency: int = 1
+    analysis_input: str = Field(default="excerpt", pattern="^(excerpt|title)$")
     enrichment_concurrency: int = 1
     languages: List[str] = Field(default_factory=lambda: ["en"])
     # Azure OpenAI specific; required when provider == AZURE
@@ -162,6 +163,7 @@ class WebSourceConfig(BaseModel):
     content_selector: str = "article, main"
     date_selector: Optional[str] = None
     max_items: int = Field(default=6, ge=1, le=20)
+    title_include_keywords: List[str] = Field(default_factory=list)
 
 
 class RedditSubredditConfig(BaseModel):
@@ -398,6 +400,7 @@ class FollowBuildersConfig(BaseModel):
     """Follow Builders public JSON feed configuration."""
 
     enabled: bool = False
+    excluded_x_handles: List[str] = Field(default_factory=list)
     x_feed: HttpUrl = HttpUrl(
         "https://raw.githubusercontent.com/zarazhangrui/follow-builders/main/feed-x.json"
     )
@@ -554,6 +557,8 @@ class FilteringConfig(BaseModel):
     """Content filtering configuration."""
 
     ai_score_threshold: float = 7.0
+    always_include_aibase_daily: bool = False
+    always_include_model_releases: bool = False
     minimum_items: int = Field(default=0, ge=0)
     time_window_hours: int = 24
     max_items: Optional[int] = Field(default=None, gt=0)
