@@ -18,6 +18,7 @@ from .services.verification import SourceVerifier
 from .scrapers.github import GitHubScraper
 from .scrapers.hackernews import HackerNewsScraper
 from .scrapers.rss import RSSScraper
+from .scrapers.web import WebScraper
 from .scrapers.reddit import RedditScraper
 from .scrapers.telegram import TelegramScraper
 from .scrapers.twitter import TwitterScraper
@@ -349,6 +350,11 @@ class HorizonOrchestrator:
             if self.config.sources.rss:
                 rss_scraper = RSSScraper(self.config.sources.rss, client)
                 tasks.append(self._fetch_with_progress("RSS Feeds", rss_scraper, since))
+
+            # Reddit
+            if self.config.sources.web:
+                web_scraper = WebScraper(self.config.sources.web, client)
+                tasks.append(self._fetch_with_progress("Public Websites", web_scraper, since))
 
             # Reddit
             if self.config.sources.reddit.enabled:

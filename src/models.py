@@ -22,6 +22,7 @@ class SourceType(str, Enum):
     GOOGLE_NEWS = "google_news"
     AIHOT = "aihot"
     FOLLOW_BUILDERS = "follow_builders"
+    WEB = "web"
 
 
 class ContentItem(BaseModel):
@@ -145,6 +146,22 @@ class RSSSourceConfig(BaseModel):
     url: HttpUrl
     enabled: bool = True
     category: Optional[str] = None
+    max_items: int = Field(default=20, ge=1, le=100)
+    include_keywords: List[str] = Field(default_factory=list)
+
+
+class WebSourceConfig(BaseModel):
+    """Bounded public-page collection; no browser sessions or login bypass."""
+
+    name: str
+    url: HttpUrl
+    enabled: bool = True
+    category: Optional[str] = None
+    mode: str = Field(default="articles", pattern="^(articles|cards|changelog|snapshot)$")
+    link_selector: str = "article a[href]"
+    content_selector: str = "article, main"
+    date_selector: Optional[str] = None
+    max_items: int = Field(default=6, ge=1, le=20)
 
 
 class RedditSubredditConfig(BaseModel):
@@ -428,6 +445,7 @@ class SourcesConfig(BaseModel):
     github: List[GitHubSourceConfig] = Field(default_factory=list)
     hackernews: HackerNewsConfig = Field(default_factory=HackerNewsConfig)
     rss: List[RSSSourceConfig] = Field(default_factory=list)
+    web: List[WebSourceConfig] = Field(default_factory=list)
     reddit: RedditConfig = Field(default_factory=RedditConfig)
     telegram: TelegramConfig = Field(default_factory=TelegramConfig)
     twitter: Optional[TwitterConfig] = None

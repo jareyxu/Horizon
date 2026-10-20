@@ -28,6 +28,7 @@ class RSSScraper(BaseScraper):
             http_client: Shared async HTTP client
         """
         super().__init__({"sources": sources}, http_client)
+        self.diagnostics = {}
 
     async def fetch(self, since: datetime) -> List[ContentItem]:
         """Fetch RSS feed items.
@@ -78,6 +79,8 @@ class RSSScraper(BaseScraper):
 
             # Parse feed
             feed = feedparser.parse(response.text)
+            if not feed.get("version"):
+                raise ValueError("Response is not a recognized RSS/Atom feed")
 
             for entry in feed.entries:
                 # Parse published date
@@ -94,6 +97,15 @@ class RSSScraper(BaseScraper):
 
                 # Extract content
                 content = self._extract_content(entry)
+                if source.include_keywords and not any(
+                    re.search(
+                        rf"(?<![a-z0-9]){re.escape(keyword)}(?![a-z0-9])"
+                        if keyword.isascii() else re.escape(keyword),
+                        f"{entry.get('title', '')} {content}", re.IGNORECASE,
+                    )
+                    for keyword in source.include_keywords
+                ):
+                    continue
 
                 item = ContentItem(
                     id=self._generate_id("rss", feed_id, entry_hash),
@@ -110,10 +122,16 @@ class RSSScraper(BaseScraper):
                     },
                 )
                 items.append(item)
+            items.sort(key=lambda item: item.published_at, reverse=True)
+            items = items[:source.max_items]
+            logger.info("RSS %s: %d recent items", source.name, len(items))
+            self.diagnostics[source.name] = {"status": "ok", "items": len(items)}
 
         except httpx.HTTPError as e:
+            self.diagnostics[source.name] = {"status": "unavailable", "error": str(e)}
             logger.warning("Error fetching RSS feed %s: %s", source.name, e)
         except Exception as e:
+            self.diagnostics[source.name] = {"status": "invalid", "error": str(e)}
             logger.warning("Error parsing RSS feed %s: %s", source.name, e)
 
         return items

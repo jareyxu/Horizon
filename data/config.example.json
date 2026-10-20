@@ -2,9 +2,17 @@
   "version": "1.0",
   "report_timezone": "UTC",
   "profile": {
-    "interests": ["AI agents", "developer tools"],
-    "negative_topics": ["off-topic entertainment"],
-    "preferred_content": ["technical implementation", "product releases"]
+    "interests": [
+      "AI agents",
+      "developer tools"
+    ],
+    "negative_topics": [
+      "off-topic entertainment"
+    ],
+    "preferred_content": [
+      "technical implementation",
+      "product releases"
+    ]
   },
   "verification": {
     "enabled": false,
@@ -84,6 +92,125 @@
         "url": "https://lwn.net/headlines/full_text?key=${LWN_KEY}",
         "enabled": false,
         "category": "linux"
+      },
+      {
+        "name": "The Rundown AI",
+        "url": "https://www.therundown.ai/feed",
+        "category": "products",
+        "enabled": true,
+        "max_items": 8
+      },
+      {
+        "name": "Ben's Bites",
+        "url": "https://www.bensbites.com/feed",
+        "category": "products",
+        "enabled": true,
+        "max_items": 8
+      },
+      {
+        "name": "One Useful Thing",
+        "url": "https://www.oneusefulthing.org/feed",
+        "category": "insights",
+        "enabled": true,
+        "max_items": 8
+      },
+      {
+        "name": "爱范儿",
+        "url": "https://www.ifanr.com/feed",
+        "category": "products",
+        "enabled": true,
+        "max_items": 8,
+        "include_keywords": [
+          "AI",
+          "人工智能",
+          "大模型",
+          "ChatGPT",
+          "Claude",
+          "Gemini",
+          "NotebookLM",
+          "豆包",
+          "即梦",
+          "可灵",
+          "Kimi",
+          "生成式"
+        ]
+      },
+      {
+        "name": "小众软件",
+        "url": "https://www.appinn.com/feed/",
+        "category": "products",
+        "enabled": true,
+        "max_items": 8,
+        "include_keywords": [
+          "AI",
+          "人工智能",
+          "大模型",
+          "ChatGPT",
+          "Claude",
+          "Gemini",
+          "NotebookLM",
+          "豆包",
+          "即梦",
+          "可灵",
+          "Kimi",
+          "生成式"
+        ]
+      },
+      {
+        "name": "Google Official Blog",
+        "url": "https://blog.google/rss/",
+        "category": "products",
+        "enabled": true,
+        "max_items": 8,
+        "include_keywords": [
+          "AI",
+          "人工智能",
+          "大模型",
+          "ChatGPT",
+          "Claude",
+          "Gemini",
+          "NotebookLM",
+          "豆包",
+          "即梦",
+          "可灵",
+          "Kimi",
+          "生成式"
+        ]
+      },
+      {
+        "name": "ElevenLabs Blog",
+        "url": "https://elevenlabs.io/blog/rss.xml",
+        "category": "products",
+        "enabled": true,
+        "max_items": 8
+      },
+      {
+        "name": "OpenAI News",
+        "url": "https://openai.com/news/rss.xml",
+        "category": "models",
+        "enabled": true,
+        "max_items": 8
+      },
+      {
+        "name": "少数派",
+        "url": "https://sspai.com/feed",
+        "category": "insights",
+        "enabled": true,
+        "max_items": 8,
+        "include_keywords": [
+          "AI",
+          "人工智能",
+          "大模型",
+          "ChatGPT",
+          "Claude",
+          "Gemini",
+          "NotebookLM",
+          "豆包",
+          "即梦",
+          "可灵",
+          "Kimi",
+          "生成式"
+        ]
       }
     ],
     "reddit": {
@@ -111,7 +238,10 @@
     "twitter": {
       "enabled": false,
       "mode": "rapidapi",
-      "users": ["karpathy", "ylecun"],
+      "users": [
+        "karpathy",
+        "ylecun"
+      ],
       "fetch_limit": 10,
       "category": "builders",
       "fetch_reply_text": false,
@@ -144,14 +274,26 @@
           "provider": "yfinance",
           "fetch_limit": 20,
           "category": "equities",
-          "symbols": ["AAPL", "MSFT", "NVDA", "GOOGL", "AMZN", "META", "TSLA"]
+          "symbols": [
+            "AAPL",
+            "MSFT",
+            "NVDA",
+            "GOOGL",
+            "AMZN",
+            "META",
+            "TSLA"
+          ]
         }
       ]
     },
     "ossinsight": {
       "enabled": false,
       "period": "past_24_hours",
-      "languages": ["All", "Python", "TypeScript"],
+      "languages": [
+        "All",
+        "Python",
+        "TypeScript"
+      ],
       "keywords": [],
       "min_stars": 10,
       "max_items": 30
@@ -174,10 +316,73 @@
       "ceid": null,
       "max_results": 100,
       "category": "news"
-    }
+    },
+    "web": [
+      {
+        "enabled": true,
+        "name": "AIBase 中文",
+        "url": "https://www.aibase.cn/",
+        "link_selector": "a[href^=\"https://news.aibase.cn/news/\"]",
+        "category": "products",
+        "max_items": 8
+      },
+      {
+        "enabled": true,
+        "name": "Future Tools",
+        "url": "https://futuretools.io/",
+        "mode": "cards",
+        "link_selector": "a[href*=\"utm_source=futuretools\"]",
+        "date_selector": "span[class=\"text-muted-foreground\"]",
+        "category": "products"
+      },
+      {
+        "enabled": true,
+        "name": "Theoretically Media",
+        "url": "https://theoreticallymedia.com/",
+        "link_selector": "a[href^=\"/blog/\"]",
+        "category": "insights"
+      },
+      {
+        "enabled": true,
+        "name": "ChatGPT Release Notes",
+        "url": "https://help.openai.com/en/articles/6825453-chatgpt-release-notes",
+        "mode": "changelog",
+        "category": "products"
+      },
+      {
+        "enabled": true,
+        "name": "Anthropic News",
+        "url": "https://www.anthropic.com/news",
+        "link_selector": "a[href^=\"/news/\"]:has(time), a[href^=\"/claude-\"]:has(time)",
+        "category": "models",
+        "max_items": 8
+      },
+      {
+        "enabled": true,
+        "name": "Runway News",
+        "url": "https://runway.com/news",
+        "link_selector": "a[href^=\"/news/research/\"], a[href^=\"/news/product/\"]",
+        "category": "products"
+      },
+      {
+        "enabled": true,
+        "name": "Canva Newsroom",
+        "url": "https://www.canva.com/newsroom/news/",
+        "link_selector": "a[href*=\"/newsroom/news/\"]:has(h2), a[href*=\"/newsroom/news/\"]:has(h3)",
+        "category": "products"
+      },
+      {
+        "enabled": true,
+        "name": "即梦官网功能监测",
+        "url": "https://jimeng.jianying.com/",
+        "mode": "snapshot",
+        "content_selector": "body",
+        "category": "products"
+      }
+    ]
   },
   "filtering": {
-    "ai_score_threshold": 6.0,
+    "ai_score_threshold": 6,
     "minimum_items": 0,
     "time_window_hours": 24,
     "max_items": null,
