@@ -110,6 +110,9 @@ class HorizonOrchestrator:
 
             # 2. Fetch content from all sources
             all_items = await self.fetch_all_sources(since)
+            raw_items = [item.model_copy(deep=True) for item in all_items]
+            if raw_items and hasattr(self.storage, "save_candidate_archive"):
+                self.storage.save_candidate_archive(self._report_date(), raw_items)
             self.console.print(f"📥 Fetched {len(all_items)} items from all sources\n")
 
             tracked_x_items = [
@@ -141,6 +144,8 @@ class HorizonOrchestrator:
             # 4. Analyze with AI
             analyzed_items = await self._analyze_content(merged_items)
             self._apply_source_scoring(analyzed_items)
+            if hasattr(self.storage, "save_candidate_archive"):
+                self.storage.save_candidate_archive(self._report_date(), self.build_candidate_archive(raw_items, analyzed_items))
             self.console.print(f"🤖 Analyzed {len(analyzed_items)} items with AI\n")
 
             # 5. Filter by score threshold
@@ -192,10 +197,14 @@ class HorizonOrchestrator:
             await self._enrich_important_items(important_items)
             SourceVerifier.finalize_corroboration(important_items)
 
+            archive_items = self.build_candidate_archive(raw_items, analyzed_items)
+            if hasattr(self.storage, "save_candidate_archive"):
+                self.storage.save_candidate_archive(self._report_date(), archive_items)
+
             # 8. Generate and save daily summaries for each configured language
             today = self._report_date()
             for lang in self.config.ai.languages:
-                summarizer = DailySummarizer()
+                summarizer = DailySummarizer(editorial_mode=self.config.profile.editorial_mode)
                 summary = await summarizer.generate_summary(
                     important_items, today, len(all_items), language=lang
                 )
@@ -204,6 +213,7 @@ class HorizonOrchestrator:
                     follow_builders_items,
                     {item.id for item in important_items},
                     language=lang,
+                    all_items=archive_items,
                 )
 
                 # Save to data/summaries/
@@ -587,6 +597,32 @@ class HorizonOrchestrator:
 
         return merged
 
+    @staticmethod
+    def build_candidate_archive(raw_items, analyzed_items):
+        """Retain every fetched row and its original text, including merged rows."""
+        by_id = {item.id: item for item in analyzed_items}
+        by_url = {}
+        for item in analyzed_items:
+            for url in [str(item.url), *item.metadata.get("original_urls", [])]:
+                by_url[str(url)] = item
+        result = []
+        for raw in raw_items:
+            item = raw.model_copy(deep=True)
+            analyzed = by_id.get(raw.id) or by_url.get(str(raw.url))
+            if analyzed:
+                item.ai_score = analyzed.ai_score
+                item.ai_reason = analyzed.ai_reason
+                item.ai_summary = analyzed.ai_summary
+                item.ai_tags = list(analyzed.ai_tags)
+                if analyzed.id == raw.id:
+                    for key in ("title_zh", "summary_zh", "creator", "creator_eligible"):
+                        if key in analyzed.metadata:
+                            item.metadata[key] = analyzed.metadata[key]
+                else:
+                    item.metadata["archive_analysis_inherited"] = True
+            result.append(item)
+        return result
+
     def _apply_source_scoring(self, items: List[ContentItem]) -> None:
         """Blend personal, upstream, and corroboration signals into final scores."""
         filtering = self.config.filtering
@@ -595,6 +631,10 @@ class HorizonOrchestrator:
                 item.metadata.get("personal_ai_score") or item.ai_score or 0
             )
             score = personal
+            if self.config.profile.editorial_mode == "creator":
+                eligible = item.metadata.get("creator_eligible", False)
+                item.ai_score = round(min(10 if eligible else 5.5, max(0, score)), 2)
+                continue
             upstream = item.metadata.get("upstream_score")
             if item.source_type.value == "aihot" and isinstance(upstream, (int, float)):
                 weight = filtering.aihot_score_weight
@@ -612,6 +652,8 @@ class HorizonOrchestrator:
         """Select threshold-qualified items and backfill a useful minimum digest."""
         filtering = self.config.filtering
         ranked = sorted(items, key=lambda item: item.ai_score or 0, reverse=True)
+        if self.config.profile.editorial_mode == "creator":
+            ranked = [item for item in ranked if item.metadata.get("creator_eligible")]
         selected = [
             item
             for item in ranked
@@ -922,7 +964,7 @@ class HorizonOrchestrator:
 
         self.console.print("📚 Enriching with background knowledge...")
         ai_client = create_ai_client(self.config.ai)
-        enricher = ContentEnricher(ai_client)
+        enricher = ContentEnricher(ai_client, self.config.profile)
         await enricher.enrich_batch(items)
         self.console.print(f"   Enriched {len(items)} items\n")
 

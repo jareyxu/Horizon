@@ -446,7 +446,7 @@ class HorizonPipelineService:
             )
 
         ai_client = ctx.runtime.create_ai_client(ctx.config.ai)
-        enricher = ctx.runtime.ContentEnricher(ai_client)
+        enricher = ctx.runtime.ContentEnricher(ai_client, ctx.config.profile)
         await enricher.enrich_batch(items)
 
         self.run_store.save_items(run_id, "enriched", items_to_dicts(items))

@@ -919,7 +919,7 @@ a.site-brand {
 
 .archive-tablist {
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
   gap: 8px;
   margin: 16px 0;
   padding: 5px;
@@ -963,6 +963,25 @@ a.site-brand {
 
 .archive-panel {
   padding: 8px 0;
+}
+
+.archive-original-title,
+.archive-assessment {
+  color: var(--hz-text-muted);
+  font-size: 0.9rem;
+  overflow-wrap: anywhere;
+}
+
+.archive-original summary {
+  min-height: 44px;
+  padding: 10px 0;
+  cursor: pointer;
+  color: var(--hz-primary);
+}
+
+.archive-original p {
+  overflow-wrap: anywhere;
+  font-size: 0.95rem;
 }
 
 .archive-tabs:not(.is-enhanced) .archive-panel + .archive-panel {

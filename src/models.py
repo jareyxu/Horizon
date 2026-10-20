@@ -424,6 +424,7 @@ class ProfileConfig(BaseModel):
     interests: List[str] = Field(default_factory=list)
     negative_topics: List[str] = Field(default_factory=list)
     preferred_content: List[str] = Field(default_factory=list)
+    editorial_mode: str = Field(default="technical", pattern="^(technical|creator)$")
 
 
 class VerificationConfig(BaseModel):

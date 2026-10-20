@@ -19,6 +19,7 @@ from .client import AIClient
 from .prompts import (
     CONCEPT_EXTRACTION_SYSTEM, CONCEPT_EXTRACTION_USER,
     CONTENT_ENRICHMENT_SYSTEM, CONTENT_ENRICHMENT_USER,
+    CREATOR_ENRICHMENT_SYSTEM, CREATOR_ENRICHMENT_EXTRA,
 )
 from .utils import parse_json_response
 from ..models import ContentItem
@@ -27,8 +28,9 @@ from ..models import ContentItem
 class ContentEnricher:
     """Enriches high-scoring content items with background knowledge."""
 
-    def __init__(self, ai_client: AIClient):
+    def __init__(self, ai_client: AIClient, profile=None):
         self.client = ai_client
+        self.creator_mode = getattr(profile, "editorial_mode", "technical") == "creator"
 
     def _get_concurrency(self) -> int:
         """Return the configured enrichment concurrency, clamped to 1 or above."""
@@ -148,15 +150,20 @@ class ContentEnricher:
         content_text = ""
         comments_text = ""
         if item.content:
-            if "--- Top Comments ---" in item.content:
-                main, comments_part = item.content.split("--- Top Comments ---", 1)
+            if self.creator_mode:
+                from bs4 import BeautifulSoup
+                clean_content = BeautifulSoup(item.content, "html.parser").get_text(" ", strip=True)
+            else:
+                clean_content = item.content
+            if "--- Top Comments ---" in clean_content:
+                main, comments_part = clean_content.split("--- Top Comments ---", 1)
                 content_text = main.strip()[:4000]
                 comments_text = comments_part.strip()[:2000]
             else:
-                content_text = item.content[:4000]
+                content_text = clean_content[:4000]
 
         # Step 1: AI identifies concepts to explain
-        queries = await self._extract_concepts(item, content_text)
+        queries = [f"{item.title} official announcement availability"] if self.creator_mode else await self._extract_concepts(item, content_text)
 
         # Step 2: Search web for each concept
         all_results = []
@@ -186,8 +193,8 @@ class ContentEnricher:
         )
 
         response = await self.client.complete(
-            system=CONTENT_ENRICHMENT_SYSTEM,
-            user=user_prompt,
+            system=CREATOR_ENRICHMENT_SYSTEM if self.creator_mode else CONTENT_ENRICHMENT_SYSTEM,
+            user=user_prompt + (CREATOR_ENRICHMENT_EXTRA if self.creator_mode else ""),
         )
 
         # Parse JSON response with robust fallback
@@ -201,6 +208,12 @@ class ContentEnricher:
 
         # Combine structured sub-fields into per-language detailed_summary
         for lang in ("en", "zh"):
+            if self.creator_mode:
+                item.metadata["editorial_mode"] = "creator"
+                for key in ("audience", "content_angle", "visual_plan", "availability", "verification_needed"):
+                    value = result.get(f"{key}_{lang}")
+                    if isinstance(value, str):
+                        item.metadata[f"{key}_{lang}"] = value.strip()
             if result.get(f"title_{lang}"):
                 val = result[f"title_{lang}"]
                 item.metadata[f"title_{lang}"] = val.get("text") or str(val) if isinstance(val, dict) else str(val)
