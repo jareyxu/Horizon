@@ -179,7 +179,14 @@ class ContentAnalyzer:
 
         # Get AI completion
         if creator_mode:
-            user_prompt = user_prompt.replace("Importance score", "Creator topic suitability score")
+            user_prompt = (
+                f"{profile_section}\nTitle: {item.title}\nSource: {item.source_type.value}\n"
+                f"Author: {item.author or 'Unknown'}\nURL: {item.url}\n"
+                f"{content_section}\n{discussion_section}\n"
+                'Return JSON with title_zh (faithful Chinese title), summary_zh (one concise Chinese sentence), '
+                'reason (one short Chinese sentence), and the creator object below. '
+                'Do not generate English translations, tags, audience descriptions or content angles.'
+            )
         input_instructions = (
             "\nOnly the title and source identity are provided for preliminary screening. "
             "Do not infer body details, availability, prices or verification. "
@@ -233,7 +240,7 @@ class ContentAnalyzer:
         item.ai_reason = result.get("reason", "")
         if title_only:
             item.ai_reason = "标题初筛（未依据正文）：" + item.ai_reason
-        item.ai_summary = result.get("summary", item.title)
+        item.ai_summary = result.get("summary") or result.get("summary_zh") or item.title
         item.ai_tags = result.get("tags", [])
         if item.source_type.value == "follow_builders" or creator_mode:
             if result.get("title_zh"):

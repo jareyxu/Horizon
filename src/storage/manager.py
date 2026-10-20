@@ -117,6 +117,18 @@ class StorageManager:
 
         return filepath
 
+    def save_token_usage(self, date: str, usage: dict) -> Path:
+        """Keep each run's provider-reported usage; no prompts or secrets."""
+        from datetime import datetime, timezone
+        directory = self.data_dir / "usage"
+        directory.mkdir(parents=True, exist_ok=True)
+        stamp = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%S%fZ")
+        path = directory / f"horizon-{date}-{stamp}.json"
+        temporary = path.with_suffix(".tmp")
+        temporary.write_text(json.dumps({"report_date": date, "recorded_at_utc": stamp, **usage}, ensure_ascii=False, indent=2), encoding="utf-8")
+        temporary.replace(path)
+        return path
+
     def save_candidate_archive(self, date: str, items) -> Path:
         """Persist the complete fetched pool so later review needs no recrawl."""
         directory = self.data_dir / "candidates"
