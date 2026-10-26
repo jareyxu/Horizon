@@ -5,194 +5,158 @@ date: 2026-10-26
 lang: zh
 ---
 
-> 从 25 条内容中筛选出 0 条重要资讯。
+> 从 19 条内容中筛选出 1 条重要资讯。
 
-今天没有足够合适的精选选题，可在下方全部资讯中自行挑选。
+---
+
+1. [KRAFTON AI 发布 Raon-1 mini 预览版：30B-A4B 架构并开源](#item-1) ⭐️ 2.65/10
+
+---
+
+<a id="item-1"></a>
+## [KRAFTON AI 发布 Raon-1 mini 预览版：30B-A4B 架构并开源](https://news.aibase.cn/news/31857) ⭐️ 2.65/10
+
+韩国游戏企业 KRAFTON 旗下 KRAFTON AI 公布 Raon-1 mini 预览版，称其从零训练，采用 MoE 架构，引入线性注意力并支持推测解码，标注为 30B-A4B，即总参数约 300 亿、单次激活约 40 亿。模型主攻韩语并兼顾英语，以 Apache 2.0 许可开源，官网提供限时免费 API 试用。KRAFTON AI 声称该预览版在编程与智能体任务上与 Meta 的 Muse Glimmer 30B 同档，且更快、更省内存；相关性能说法尚待独立验证，正式版和更大后续型号尚未发布。
+
+web · AIBase 中文 · 10月26日 02:09
+
+---
 
 <hr class="archive-divider">
 <section class="archive-tabs" data-archive-tabs>
 <h2>更多资讯，供你自行挑选</h2>
 <p class="archive-intro">以下内容已成功抓取，因评分、数量限制或同题合并未进入精选。AI 判断仅供参考，你可以继续阅读并自行挑选；各来源切换是全部列表的子集。</p>
 <div class="archive-tablist" role="tablist" aria-label="更多追踪内容来源" hidden>
-<button type="button" role="tab" id="archive-tab-all" aria-controls="archive-panel-all" aria-selected="true" tabindex="0" data-archive-tab="all" data-count="25"><span>全部未入选</span><span class="archive-tab-count">25</span></button>
-<button type="button" role="tab" id="archive-tab-follow-builders" aria-controls="archive-panel-follow-builders" aria-selected="false" tabindex="-1" data-archive-tab="follow-builders" data-count="15"><span>其他 Follow Builders 资讯</span><span class="archive-tab-count">15</span></button>
+<button type="button" role="tab" id="archive-tab-all" aria-controls="archive-panel-all" aria-selected="true" tabindex="0" data-archive-tab="all" data-count="18"><span>全部未入选</span><span class="archive-tab-count">18</span></button>
+<button type="button" role="tab" id="archive-tab-follow-builders" aria-controls="archive-panel-follow-builders" aria-selected="false" tabindex="-1" data-archive-tab="follow-builders" data-count="4"><span>其他 Follow Builders 资讯</span><span class="archive-tab-count">4</span></button>
 </div>
 <div class="archive-panel" role="tabpanel" id="archive-panel-all" aria-labelledby="archive-tab-all" data-archive-panel="all">
 <h3 class="archive-panel-title">全部未入选</h3>
 <article class="archive-item candidate-item">
-<div class="archive-item-heading"><h3><a href="https://www.reuters.com/world/europe/serbia-votes-students-seek-unseat-vucic-snap-election-2026-10-25/">塞尔维亚武契奇承认选举落败，学生运动取得历史性胜利</a></h3><span class="score-badge" data-tier="low">1.8</span></div>
-<p class="archive-original-title">Serbia&#x27;s Vucic concedes election defeat in historic win for student movement</p><p class="source-line">consumer451 · 10-25 21:08 UTC</p>
-<p class="archive-item-content">据标题信息，塞尔维亚举行提前选举，武契奇承认败选，学生运动获得历史性胜利。</p>
-<p class="archive-assessment">AI 判断：标题初筛（未依据正文）：仅凭标题判断，这是塞尔维亚政治选举新闻，与 AI 无关，对国内普通观众缺乏实用性和可演示画面，不建议作为 AI 选题。</p>
-<details class="archive-original"><summary>展开原始摘录</summary><p>--- Top Comments ---<br><br>[input_sh]: What a beautiful day. 14 years of oppression, absolute power, no media freedom, and the most ridiculously botted internet down the drain.<br><br>[puchatek]: I&#x27;m just afraid Elon will invite the Russian but operators onto xAI servers in time for the midterms. Or they find another home in Kasachstan. I&#x27;m guessing they are quite mobile.<br><br>[evek]: Finally, time for the cleanup.<br><br>[comrade1234]: This is great! I never understood the Serbian view of allying with a loser country like Russia. I assume it was all corruption and oligarchs.<br><br>[mrtksn]: Meanwhile, in Bulgaria there was the presidential election that no one cared about so the turnout is in the %20 and the pro-Russian candidate severely underperformed. It was expected to be %47 vs %30, ended up being in the %30 for both the pro-Russian and the pro-western candidates. Also the stronghold of Erdogan is crumbling with the collapse of $20B ponzi scheme where all the winners happen to be from Erdogan’s inner circle. It’s overall a feeling of earth moving in Europe again.</p></details>
+<div class="archive-item-heading"><h3><a href="https://news.aibase.cn/news/31860">Reddit开源子版块颁布AI禁令，全面封杀人工智能相关项目</a></h3><span class="score-badge" data-tier="low">3.1</span></div>
+<p class="source-line">AIBase 中文 · 10-26 03:04 UTC</p>
+<p class="archive-item-content">Reddit的r/opensource版块宣布禁止发布使用或包含AI的开源项目，引发开源社区关于AI代码与治理边界的分歧。</p>
+<p class="archive-assessment">AI 判断：这是开发者社区治理争议，普通用户难以直接使用或亲自演示，按技术类评分。</p>
+<details class="archive-original"><summary>展开原始摘录</summary><p>AI资讯 AI新闻资讯 正文 Reddit开源子版块颁布AI禁令，全面封杀人工智能相关项目 发布于AI新闻资讯 发布时间 : 2026年10月26号 11:04 阅读 : 1 分钟 Reddit社区的 r/opensource 子版块版主Wolvereness于2026年10月25日宣布实施一项重大规则调整，全面禁止在开源项目中引入人工智能及AI生成内容。 根据新规，任何使用、制造或旨在供人工智能使用的开源项目将不再被允许在该子版块发布，这意味着不接受包含AI贡献的代码或人工编写的模型上下文协议（MCP）。 这一决定迅速引发行业争议，批评者指出，由于Linux内核等主流开源项目早已开始引入如Claude Code等人工智能辅助编程工具，该禁令实际上将Linux等核心开源项目排除在外。 与此同时，由于消费级AI代码反编译技术的普及，大量利用AI进行代码逆向和复刻的项目涌现，促使部分开发者另起炉灶创建了支持AI的 r/TrueOpenSource 子版块。 此事件凸显了当前开源社区在面对人工智能深度渗透时，关于代码溯源、版权与社区理念的巨大分歧，或将进一步重塑未来开源生态的技术边界与治理规则。 相关推荐 巴掌大小却能跑千亿大模型：联想AI主机P7 预览版正式亮相，搭载国产双芯 10月25日，联想AI主机P7预览版亮相。该机主打本地化运行与高效能，重仅300克，巴掌大小，可7×24小时桌面不间断运行。硬件搭载国产双芯：一颗负责AI算力推理，一颗负责系统调度与任务执行，双芯协同释放整体算力。性能上最高可本地运行122B参数大模型，整体定位为紧凑型本地AI计算设备。 2026年10月26号 10:51 112.4k Claude桌面端迎来重大改版：AI全程参与设计，从草图到上线仅用不到 3 周 Anthropic旗下AI助手Claude桌面端应用推出全新界面，引入新UI布局与侧边栏功能。此次改版由Claude自身深度协助设计，从构思草图到正式上线耗时不到3周，展现了AI极速孵化产品的高效能力。 2026年10月26号 10:14 133.9k 韩国游戏巨头 KRAFTON 放出 Raon-1 mini，叫板 Meta 同档模型 韩国游戏企业 KRAFTON 旗下 AI 分支 KRAFTON AI 公布从零训练的 Raon-1 mini 预览版，正式版及更大后续型号在研。该模型采用混合专家架构，引入线性注意力并支持推测解码，体量标注为 30B-A4B，总参数约 300 亿，凸显游戏公司跨界基础模型的野心。 2026年10月26号 10:09 126.4k Block 发布全新语音模型 Dessa:打破文字中转桎梏，实现逼真全双工交互 2026年10月24日，杰克·多西旗下Block发布全新语音模型Dessa。它完全基于人类语音数据训练，支持本地部署，发音异常逼真，能模拟笑声、停顿、哭泣等情感；作为全双工语音转语音模型，可同时聆听与对话，知识库直接来自对话数据，无需依赖大型语言模型检索，区别于以文本为生成输入的传统语音模型。 2026年10月26号 9:48 124.6k Kimi 就 K3.1 Pro 限流致歉：全体订阅会员补 25% 额度 Kimi智能助手10月26日凌晨发公开信，就近期会员使用K3.1 Pro的糟糕体验致歉。问题主要是模型限流，高峰期响应卡顿、任务推进受阻；以及用户额度在无必要情况下悄然流失，没怎么用就耗尽。官方承认错在自身，且本应更早堵上漏洞，并公布补救方案：今日内对所有档位订阅会员统一处理。 2026年10月26号 9:32 87.1k 智启未来，您的人工智能解决方案智库 简体中文 © 2026 AIBase 备案号：闽ICP备08105208号-24</p></details>
 </article>
 <article class="archive-item candidate-item">
-<div class="archive-item-heading"><h3><a href="https://arstechnica.com/health/2026/10/personalized-mrna-cancer-vaccine-cut-melanoma-death-recurrence-by-42/">Moderna 和 Merck 称其 mRNA 癌症疫苗将死亡和复发率降低 42%</a></h3><span class="score-badge" data-tier="low">4.85</span></div>
-<p class="archive-original-title">Moderna and Merck say their mRNA cancer vaccine cut death, recurrence by 42%</p><p class="source-line">_Microft · 10-25 19:29 UTC</p>
-<p class="archive-item-content">Moderna 与 Merck 表示，其个性化 mRNA 癌症疫苗在黑色素瘤中将死亡和复发风险降低了 42%。</p>
-<p class="archive-assessment">AI 判断：标题初筛（未依据正文）：标题显示这是肿瘤疫苗临床结果，与 AI 无直接关系且缺少普通人可用信息，仅适合健康新闻而非 AI 选题。</p>
-<details class="archive-original"><summary>展开原始摘录</summary><p>--- Top Comments ---<br><br>[wrs]: Moderna&#x27;s business model was always to be an on-demand vaccine platform, meaning a cost-effective service for ordering a few doses of a fully custom personalized vaccine. Their infrastructure looks more like a just-in-time 3D printer service than like a traditional vaccine development lab. It was a happy accident that the platform was available when we needed to come up with a COVID vaccine rapidly, and that&#x27;s what made them a household name (and wildly skewed their revenue mix from...<br><br>[zetazzed]: Amazingly, when this (IMHO quite good) data leaked, Moderna stock took a huge drop:  https://finance.yahoo.com/markets/stocks/article/moderna-sto ...<br>(Seems like people were expecting absolutely incredible, &quot;cure for cancer&quot; results and had already bid up the price a lot in advance.)<br><br>[_Microft]: Related, if you are curious: this is what BioNTech is currently working on.  https://www.biontech.com/int/en/home/pipeline-and-products/p...<br><br>[pavlov]: The Trump administration and RFK Jr. are actively working to prevent mRNA vaccines from reaching the market. People like Marc Andreessen, Larry Ellison and Elon Musk are actively supporting the administration, including hundreds of millions in donations to MAGA political campaigns in recent months. Should we hold these people accountable for the damage they&#x27;re indirectly doing to public health? If not, why?<br><br>[TaupeRanger]: So the absolute risk of recurrence/death on Keytruda alone was 30%, reduced to 18% with Keytruda plus intismeran. That will definitely make a noticeable difference in this disease if the real world results hold.</p></details>
+<div class="archive-item-heading"><h3><a href="https://news.aibase.cn/news/31859">巴掌大小却能跑千亿大模型：联想AI主机P7预览版正式亮相，搭载国产双芯</a></h3><span class="score-badge" data-tier="mid">6.75</span></div>
+<p class="archive-original-title">巴掌大小却能跑千亿大模型：联想AI主机P7 预览版正式亮相，搭载国产双芯</p><p class="source-line">AIBase 中文 · 10-26 02:51 UTC</p>
+<p class="archive-item-content">联想发布300克重的AI主机P7预览版，称可本地运行122B参数大模型、支持256K上下文，并搭载国产双芯与天禧AI。</p>
+<p class="archive-assessment">AI 判断：产品概念有新意且切中本地隐私与云端成本话题，但目前仅是预览，价格、上市地区和实测效果均缺失，需谨慎表述。</p>
+<details class="archive-original"><summary>展开原始摘录</summary><p>AI资讯 AI新闻资讯 正文 巴掌大小却能跑千亿大模型：联想AI主机P7 预览版正式亮相，搭载国产双芯 发布于AI新闻资讯 发布时间 : 2026年10月26号 10:51 阅读 : 1 分钟 10月25日，联想AI主机P7预览版正式对外亮相。这款设备主打本地化运行与高效能，整机重量仅有300克，凭借巴掌大小的紧凑机身，可实现7×24小时不间断在桌面运行。 在硬件配置上，该主机搭载了国产双芯，两颗芯片分工明确:一颗专门负责AI算力推理，另一颗承担系统调度与任务执行，双芯协同配合 最大 化释放整体算力。在性能表现上，它 最高 可本地运行122B参数的大模型，支持256K超长上下文，在断网状态下的推理速度可达每秒50Tokens。同时，整机满载功耗不到30W，运行噪音低于35dBA，即使长时间放在办公桌旁也不会对日常工作造成干扰。 在软件生态与功能设计方面，设备内置了丰富的本地模型库，涵盖通用大模型、图像生成、文档识别以及语音转写等多种类型，无需每次都依赖云端接口。此外，新机内置了联想天禧AI，实现开箱即用，并支持用户自行配置Agent。在Auto模式下，天禧AI能够在确保任务效果的前提下，根据任务复杂度在本地与云端模型之间智能选择更合适、更经济的方案，兼顾处理效果与使用成本。 针对当前用户在云端AI调用中面临的费用高昂、数据隐私泄露以及网络不稳定导致任务中断等痛点，本地AI主机将数据全部留在本地处理，有效保障了信息安全。目前，联想AI主机P7在正式发售前启动了“先享计划”，首批邀请用户在真实的编程与办公场景中试用并反馈，通过深度参与产品共创将体验优化到 最佳 状态。 相关推荐 Reddit开源子版块颁布AI禁令，全面封杀人工智能相关项目 Reddit社区r/opensource版主Wolvereness于2026年10月25日宣布，全面禁止在开源项目中引入AI及AI生成内容。新规禁止使用、制造或供AI使用的开源项目在该版发布，也不接受含AI贡献的代码或人工编写的MCP。此举引发行业争议，批评者指出Linux内核等主流开源项目早已使用AI，禁令与现实脱节。 2026年10月26号 11:04 104.9k Claude桌面端迎来重大改版：AI全程参与设计，从草图到上线仅用不到 3 周 Anthropic旗下AI助手Claude桌面端应用推出全新界面，引入新UI布局与侧边栏功能。此次改版由Claude自身深度协助设计，从构思草图到正式上线耗时不到3周，展现了AI极速孵化产品的高效能力。 2026年10月26号 10:14 133.9k 韩国游戏巨头 KRAFTON 放出 Raon-1 mini，叫板 Meta 同档模型 韩国游戏企业 KRAFTON 旗下 AI 分支 KRAFTON AI 公布从零训练的 Raon-1 mini 预览版，正式版及更大后续型号在研。该模型采用混合专家架构，引入线性注意力并支持推测解码，体量标注为 30B-A4B，总参数约 300 亿，凸显游戏公司跨界基础模型的野心。 2026年10月26号 10:09 126.4k Block 发布全新语音模型 Dessa:打破文字中转桎梏，实现逼真全双工交互 2026年10月24日，杰克·多西旗下Block发布全新语音模型Dessa。它完全基于人类语音数据训练，支持本地部署，发音异常逼真，能模拟笑声、停顿、哭泣等情感；作为全双工语音转语音模型，可同时聆听与对话，知识库直接来自对话数据，无需依赖大型语言模型检索，区别于以文本为生成输入的传统语音模型。 2026年10月26号 9:48 124.6k Kimi 就 K3.1 Pro 限流致歉：全体订阅会员补 25% 额度 Kimi智能助手10月26日凌晨发公开信，就近期会员使用K3.1 Pro的糟糕体验致歉。问题主要是模型限流，高峰期响应卡顿、任务推进受阻；以及用户额度在无必要情况下悄然流失，没怎么用就耗尽。官方承认错在自身，且本应更早堵上漏洞，并公布补救方案：今日内对所有档位订阅会员统一处理。 2026年10月26号 9:32 87.1k 智启未来，您的人工智能解决方案智库 简体中文 © 2026 AIBase 备案号：闽ICP备08105208号-24</p></details>
 </article>
 <article class="archive-item candidate-item">
-<div class="archive-item-heading"><h3><a href="https://imaginationlibrary.com/">多莉·帕顿的想象力图书馆</a></h3><span class="score-badge" data-tier="low">0.9</span></div>
-<p class="archive-original-title">Dolly Parton&#x27;s Imagination Library</p><p class="source-line">jumploops · 10-25 18:23 UTC</p>
-<p class="archive-item-content">多莉·帕顿的想象力图书馆项目。</p>
-<p class="archive-assessment">AI 判断：标题初筛（未依据正文）：仅凭标题无法确认与AI相关，也未提供普通人可用的AI新功能或可演示案例。</p>
-<details class="archive-original"><summary>展开原始摘录</summary><p>With today&#x27;s news, I thought I&#x27;d share this great program:<br>“When I was growing up in the hills of East Tennessee, I knew my dreams would come true. I know there are children in your community with their own dreams. They dream of becoming a doctor or an inventor or a minister. Who knows, maybe there is a little girl whose dream is to be a writer and singer.<br>The seeds of these dreams are often found in books and the seeds you help plant in your community can grow across the world.”<br><br><br>--- Top Comments ---<br><br>[arjie]: My daughter receives books through this program and I was curious how it was sustained at a $2.5/book wholesale cost. Interestingly, the coordinating body that selects books, facilitates distribution, and negotiates wholesale pricing is the Dolly Parton Imagination Library, but per-book funding is actually entirely through local charities and so on. This means that where charities are unable to act as partners, children will not receive books, but it also means that the program can opera...<br><br>[peterleiser]: In Tennessee hospitals a nurse, staff member, or authorized volunteer will swing by your room in the mother-baby unit and sign you up. Then you start receiving free books by mail each month until age 5. An amazing program by an amazing person!<br><br>[sarchertech]: My 5 year old just got his last imagination library book. It showed up right after Dolly passed away. There was a letter from Dolly to him that ended “I will always love you”. Made my wife tear up.<br><br>[dead_hn_theory]: We should be more ambitious with the people we build.<br><br>[turtleburger]: These books are really nice quality. Anyone who has children should absolutely look into this. The content is thoughtful and diverse.</p></details>
+<div class="archive-item-heading"><h3><a href="https://news.aibase.cn/news/31858">Claude桌面端迎来重大改版：AI全程参与设计，从草图到上线仅用不到3周</a></h3><span class="score-badge" data-tier="low">4.9</span></div>
+<p class="archive-original-title">Claude桌面端迎来重大改版：AI全程参与设计，从草图到上线仅用不到 3 周</p><p class="source-line">AIBase 中文 · 10-26 02:14 UTC</p>
+<p class="archive-item-content">Anthropic推出Claude桌面端全新界面，官方称由Claude深度参与设计、从草图到上线不到3周，但部分用户反馈信息密度偏低、标志性衬线字体与暖色调被取消、整体风格变得冷峻。</p>
+<p class="archive-assessment">AI 判断：这是可核实的AI产品改版新闻，能做界面前后对比并引出人机协同设计的讨论，但缺少普通人可直接上手的实用价值。</p>
+<details class="archive-original"><summary>展开原始摘录</summary><p>AI资讯 AI新闻资讯 正文 Claude桌面端迎来重大改版：AI全程参与设计，从草图到上线仅用不到 3 周 发布于AI新闻资讯 发布时间 : 2026年10月26号 10:14 阅读 : 1 分钟 近日，Anthropic设计工程师蔡斯·麦科伊对外宣布，旗下AI助手Claude的桌面端应用正式推出全新界面。此次改版不仅引入了全新的UI布局与侧边栏功能，其背后由AI深度参与并极速孵化的开发过程更是引发了广泛关注。 据了解，这一全新界面的诞生过程相当高效，由Claude自身深度协助设计，从最初的构思草图到最终正式上线，整个周期耗时不到3周。这一成果生动展现了大模型在产品设计与工程落地方面的高效能。 不过，新界面上线后也在用户群体中引发了不同的反响。部分用户在体验后指出，新版界面的信息密度相对较低，同时摒弃了以往标志性的衬线字体和暖色调背景，整体视觉风格显得更加沉闷和冷峻，甚至在感观上与同类产品较为相似，这也对项目面板的可读性造成了一定影响。尽管如此，作为一次人机协同开发软件界面的创新尝试，此次更新仍为未来AI在产品设计领域的应用提供了一个颇具讨论价值的现实案例。 相关推荐 Reddit开源子版块颁布AI禁令，全面封杀人工智能相关项目 Reddit社区r/opensource版主Wolvereness于2026年10月25日宣布，全面禁止在开源项目中引入AI及AI生成内容。新规禁止使用、制造或供AI使用的开源项目在该版发布，也不接受含AI贡献的代码或人工编写的MCP。此举引发行业争议，批评者指出Linux内核等主流开源项目早已使用AI，禁令与现实脱节。 2026年10月26号 11:04 104.9k 巴掌大小却能跑千亿大模型：联想AI主机P7 预览版正式亮相，搭载国产双芯 10月25日，联想AI主机P7预览版亮相。该机主打本地化运行与高效能，重仅300克，巴掌大小，可7×24小时桌面不间断运行。硬件搭载国产双芯：一颗负责AI算力推理，一颗负责系统调度与任务执行，双芯协同释放整体算力。性能上最高可本地运行122B参数大模型，整体定位为紧凑型本地AI计算设备。 2026年10月26号 10:51 112.4k 韩国游戏巨头 KRAFTON 放出 Raon-1 mini，叫板 Meta 同档模型 韩国游戏企业 KRAFTON 旗下 AI 分支 KRAFTON AI 公布从零训练的 Raon-1 mini 预览版，正式版及更大后续型号在研。该模型采用混合专家架构，引入线性注意力并支持推测解码，体量标注为 30B-A4B，总参数约 300 亿，凸显游戏公司跨界基础模型的野心。 2026年10月26号 10:09 126.4k Block 发布全新语音模型 Dessa:打破文字中转桎梏，实现逼真全双工交互 2026年10月24日，杰克·多西旗下Block发布全新语音模型Dessa。它完全基于人类语音数据训练，支持本地部署，发音异常逼真，能模拟笑声、停顿、哭泣等情感；作为全双工语音转语音模型，可同时聆听与对话，知识库直接来自对话数据，无需依赖大型语言模型检索，区别于以文本为生成输入的传统语音模型。 2026年10月26号 9:48 124.6k Kimi 就 K3.1 Pro 限流致歉：全体订阅会员补 25% 额度 Kimi智能助手10月26日凌晨发公开信，就近期会员使用K3.1 Pro的糟糕体验致歉。问题主要是模型限流，高峰期响应卡顿、任务推进受阻；以及用户额度在无必要情况下悄然流失，没怎么用就耗尽。官方承认错在自身，且本应更早堵上漏洞，并公布补救方案：今日内对所有档位订阅会员统一处理。 2026年10月26号 9:32 87.1k 智启未来，您的人工智能解决方案智库 简体中文 © 2026 AIBase 备案号：闽ICP备08105208号-24</p></details>
 </article>
 <article class="archive-item candidate-item">
-<div class="archive-item-heading"><h3><a href="https://theintercept.com/2026/10/01/oregon-police-misconduct-public-records-cost-fee/">俄勒冈警方就一名警察的记录向当地新闻媒体索要250万美元</a></h3><span class="score-badge" data-tier="low">2.6</span></div>
-<p class="archive-original-title">Oregon Police Are Charging a Local News Outlet $2.5M for Records About One Cop</p><p class="source-line">tdeck · 10-25 18:04 UTC</p>
-<p class="archive-item-content">据标题，俄勒冈警方要求一家当地新闻媒体支付250万美元，才能获取关于一名警察的记录。</p>
-<p class="archive-assessment">AI 判断：标题初筛（未依据正文）：该选题与AI无关，属于新闻自由与信息公开议题，不符合面向普通人的AI频道定位，且标题信息有限。</p>
+<div class="archive-item-heading"><h3><a href="https://www.ifanr.com/1685755?utm_source=rss&amp;utm_medium=rss&amp;utm_campaign=">早报｜iPhone Duo破发/企业微信回应色情引流信息/曝触屏MacBook Pro周四登场</a></h3><span class="score-badge" data-tier="low">3.0</span></div>
+<p class="source-line">爱范儿 · 10-26 00:16 UTC</p>
+<p class="archive-item-content">这则早报汇总了iPhone Duo破发、企业微信回应色情引流信息，以及触屏MacBook Pro据曝周四登场等消息。</p>
+<p class="archive-assessment">AI 判断：标题初筛（未依据正文）：标题显示这是多条消费科技新闻的汇总，未体现可亲自演示或普通人可直接使用的AI新功能。</p>
+<details class="archive-original"><summary>展开原始摘录</summary><p>· OpenAI 给 AI 建「离线世界」，隔离模型仍用 CPU 缓存传话<br>· Reddit 开源社区禁止 AI 项目，连 AI 翻译发帖也被排除<br>#欢迎关注爱范儿官方微信公众号：爱范儿（微信号：ifanr），更多精彩内容第一时间为您奉上。</p></details>
+</article>
+<article class="archive-item candidate-item">
+<div class="archive-item-heading"><h3><a href="https://sspai.com/post/117460">派早报：iFixit 拆解 iPhone Duo，肯定可维修性但指出内屏隐患</a></h3><span class="score-badge" data-tier="low">3.2</span></div>
+<p class="source-line">少数派 · 10-25 23:36 UTC</p>
+<p class="archive-item-content">据标题，少数派早报提到 iFixit 拆解 iPhone Duo，认为其可维修性值得肯定，但内屏存在隐患。</p>
+<p class="archive-assessment">AI 判断：标题初筛（未依据正文）：这是手机拆解与可维修性新闻，与 AI 无直接关系，且仅有标题信息，缺少可演示教程或普通人可用的 AI 价值，故评分偏低。</p>
+<details class="archive-original"><summary>展开原始摘录</summary><p>派早报：iFixit 拆解 iPhone Duo，肯定可维修性但指出内屏隐患<br>Spotify 将要求家庭组成员定期扫码验证<br>Arc 浏览器宣布下线<br>央广总台澄清「国补停止」说法<br>谷歌建设虚拟电厂，付费激励电网用户省电留给 AI<br>iTunes Store 重受歌手青睐<br>看看就行的简讯<br>少数派的近期动态<br>你可能错过的好文章<br>查看全文</p></details>
+</article>
+<article class="archive-item candidate-item">
+<div class="archive-item-heading"><h3><a href="https://minimaxir.com/2026/10/cheap-llms/">OpenAI 和 Anthropic 在几个月内将大模型价格下调最高 80%，为什么？</a></h3><span class="score-badge" data-tier="mid">5.7</span></div>
+<p class="archive-original-title">OpenAI and Anthropic cut their LLM prices by up to 80% within a few months. Why?</p><p class="source-line">minimaxir · 10-25 21:11 UTC</p>
+<p class="archive-item-content">文章分析了 OpenAI 与 Anthropic 在数月内大幅降低大语言模型价格背后的原因。</p>
+<p class="archive-assessment">AI 判断：这是有事实基础的价格趋势解读，但对普通人的直接实用性有限，也缺少可演示的操作。</p>
+<details class="archive-original"><summary>展开原始摘录</summary><p>--- Top Comments ---<br><br>[buckleyourshoe]: Competition drives prices down. We tried Kimi and GLM models after hitting &#x27;cybersecurity&#x27; blocks on OpenAI and Anthropic. We found them to be much cheaper to access and helped us complete our work without &#x27;cybersecurity&#x27; refusals blocking us.<br><br>[redrix]: This is why Anthropic and OpenAI are pushing for more “regulation”. You can’t show ROI to investors by  cutting  inference costs. Regulation might inconvenience them a little, but the upside is huge if it means open models out of China get banned.<br><br>[332451b]: DeepSeek claims $38 of revenue per GPU, per hour for Flash V4. That is $332,880 per GPU, per year. This matches their DeepInfer numbers: 25,600 output tokens/s per GPU sold at $0.60 per million -&gt; $55 minus some other overhead to arrive at $38. For the bigger Anthropic and OpenAI models (and associated higher prices) there are many unknown factors. But presumably they also work hard on optimizations, and it&#x27;s not so crazy to think they had or still have a lot of wiggle room to ad...<br><br>[chakintosh]: It’s a race to the bottom to see who blinks first and goes bankrupt. It’s not sustainable.<br><br>[skhameneh]: Well they did pull back on ZDR a few times and at least Anthropic has made their arguments (that I disagree with) that model outputs, no matter how much user context was fed, do not fall under their definition of &quot;user data&quot;. Are these prices subsidized by user generated outputs?  <br>Can I even trust any answer to not be carefully worded and rephrase the response to &quot;user data&quot;?  <br>Even so, what&#x27;s to prevent some &quot;oops&quot; event that seems to be all too common?  <br>...</p></details>
+</article>
+<article class="archive-item candidate-item">
+<div class="archive-item-heading"><h3><a href="https://www.disneyanimation.com/process/">制作一部动画电影需要经历什么？</a></h3><span class="score-badge" data-tier="low">2.5</span></div>
+<p class="archive-original-title">What goes into making an animated film?</p><p class="source-line">embedding-shape · 10-25 20:27 UTC</p>
+<p class="archive-item-content">迪士尼动画工作室介绍动画电影从创意到成片的制作流程。</p>
+<p class="archive-assessment">AI 判断：该内容与 AI 无关且不是新事件，不适合作为面向普通人的 AI 选题。</p>
+<details class="archive-original"><summary>展开原始摘录</summary><p>--- Top Comments ---<br><br>[proc0]: How much of this is AI automating? That drawing of the car design, the storyboarding... isn&#x27;t generative AI aiming to do away with most of it? I&#x27;ve been seeing some of the lengthier AI films on X (i.e. the one about badgers vs. rats that looks like Lord of the Rings), and there is certainly a lot of work put into them. However the type of work that goes into them is substantially different than what is shown in this article about Zootopia. There are a lot less decisions made by huma...<br><br>[nickjj]: I remember seeing a Pixar documentary a really long time ago where someone talked about attention to detail. The designers would fully texture out the inside of a dresser draw that will never be shown in the film. The idea was imagine how much attention to detail and time is spent on the things that will be seen. Pure craftsmanship.<br><br>[Animats]: Now go watch &quot;Kono Express&quot;. Disney laid off an animator from the Star Wars factory, and he&#x27;s cranking out stuff about as good as Disney Animation all by himself. With Unreal Engine and AI tools, of course. It&#x27;s been a long time since there was an ink and paint department.<br><br>[zuInnp]: Hm that’s interesting, I would have thought that Pixar and Disney Animation use the same render software, but no.<br><br>[gnabgib]: Popular in: 2022 (276 points, 167 comments)  https://news.ycombinator.com/item?id=30241966  2024 (118 points, 22 comments)  https://news.ycombinator.com/item?id=41204228</p></details>
+</article>
+<article class="archive-item candidate-item">
+<div class="archive-item-heading"><h3><a href="https://www.alfie.wtf/programming/why-i-am-a-programmer.html">Why I Am a Programmer</a></h3><span class="score-badge" data-tier="low">0</span></div>
+<p class="source-line">jruohonen · 10-25 19:11 UTC</p>
+<p class="archive-item-content">Why I Am a Programmer</p>
+<p class="archive-assessment">AI 判断：前置规则过滤：HN 标题及已抓取内容未命中 AI 主题</p>
+<details class="archive-original"><summary>展开原始摘录</summary><p>--- Top Comments ---<br><br>[chr15m]: Conan the Barbarian and Below the Root on our Apple IIe. Tiny worlds behind the glowing Orange CRT. How do I make something like this? My mum (lol) helped me figure out how to get keyboard input in BASIC. I made a little game where an O character chases your X character around the screen. Core game loop. Browsing pirate CGA games at the warung in Pondok Indah, well outside the jurisdiction of US law. Glorious rack upon rack of tiny worlds to explore. Death Track and Prince of Persia. More BAS...<br><br>[christophilus]: For me, it was the creative, puzzle-solving, game-like nature of it. Then I got my first job, and I had 100% autonomy, so a friend of mine and I got to solve real problems for real people in the real world. It was a rush. Making people’s lives better through software is still the biggest motivation for me.<br><br>[Krei-se]: I started programming on my schools CASIO Graphics Calculator. It was slow but allowed some text based games we then shared. No internet so did it all from trial and error. Then ... i wanted a 3D Cube rotating. At 15/16 this was a bit too much i guess i had no idea about rotation matrices back then and deemed myself a bit dense. Never got around doing 3D stuff at work, only databases all the time. I dabbled some with ThreeJS but i guess i was still haunted. BUT THEN. Geometric algebra! S...<br><br>[gnabgib]: (2015) Even links to the HN discussion at the time (89 points, 59 comments)  https://news.ycombinator.com/item?id=8837545<br><br>[1n3nt0r]: I took a course at a college in &#x27;79 using fortran on a mainframe (though I was just in middle school at the time).  I can&#x27;t say I understood all of the incantations required (IBM had JCL), but realized it was &quot;magical&quot; and wanted to be part of this tribe. I saved up to buy a VIC-20 (a 4K computer) and later a C64, writing games for both.  Those were magical days I will look back to fondly.  That sparkle has not left, though I sometimes miss the purity of near-bare-metal sy...</p></details>
+</article>
+<article class="archive-item candidate-item">
+<div class="archive-item-heading"><h3><a href="https://imaginationlibrary.com/">Dolly Parton&#x27;s Imagination Library</a></h3><span class="score-badge" data-tier="low">0</span></div>
+<p class="source-line">jumploops · 10-25 18:23 UTC</p>
+<p class="archive-item-content">Dolly Parton&#x27;s Imagination Library</p>
+<p class="archive-assessment">AI 判断：前置规则过滤：HN 标题及已抓取内容未命中 AI 主题</p>
+<details class="archive-original"><summary>展开原始摘录</summary><p>With today&#x27;s news, I thought I&#x27;d share this great program:<br>“When I was growing up in the hills of East Tennessee, I knew my dreams would come true. I know there are children in your community with their own dreams. They dream of becoming a doctor or an inventor or a minister. Who knows, maybe there is a little girl whose dream is to be a writer and singer.<br>The seeds of these dreams are often found in books and the seeds you help plant in your community can grow across the world.”<br><br><br>--- Top Comments ---<br><br>[arjie]: My daughter receives books through this program and I was curious how it was sustained at a $2.5/book wholesale cost. Interestingly, the coordinating body that selects books, facilitates distribution, and negotiates wholesale pricing is the Dolly Parton Imagination Library, but per-book funding is actually entirely through local charities and so on. This means that where charities are unable to act as partners, children will not receive books, but it also means that the program can opera...<br><br>[brokenmouse]: I don&#x27;t need Imagination Library. We are very well off for now, however, someone signed us up for it and I was pissed cause we can buy all this and not take away from someone who needs it. Then we received our first book. My 3 year old loves going to the mail with me and if there&#x27;s a book, it makes him so happy he opens it and sits in his chair and just looks at it and asks for it to be read to him. He doesn&#x27;t know about bank accounts or anything, all he cares about is books, h...<br><br>[peterleiser]: In Tennessee hospitals a nurse, staff member, or authorized volunteer will swing by your room in the mother-baby unit and sign you up. Then you start receiving free books by mail each month until age 5. An amazing program by an amazing person!<br><br>[sarchertech]: My 5 year old just got his last imagination library book. It showed up right after Dolly passed away. There was a letter from Dolly to him that ended “I will always love you”. Made my wife tear up.<br><br>[dead_hn_theory]: We should be more ambitious with the people we build.</p></details>
+</article>
+<article class="archive-item candidate-item">
+<div class="archive-item-heading"><h3><a href="https://theintercept.com/2026/10/01/oregon-police-misconduct-public-records-cost-fee/">Oregon Police Are Charging a Local News Outlet $2.5M for Records About One Cop</a></h3><span class="score-badge" data-tier="low">0</span></div>
+<p class="source-line">tdeck · 10-25 18:04 UTC</p>
+<p class="archive-item-content">Oregon Police Are Charging a Local News Outlet $2.5M for Records About One Cop</p>
+<p class="archive-assessment">AI 判断：前置规则过滤：HN 标题及已抓取内容未命中 AI 主题</p>
 <details class="archive-original"><summary>展开原始摘录</summary><p>--- Top Comments ---<br><br>[rahimnathwani]: Some agencies have a different tactic: go really slowly. I sent a public records request to my local school district on March 9th 2026. They responded on 19th March 2026 saying they&#x27;d respond on in late April. Since then, every month they&#x27;ve sent an email with some small portion of the records, with a PDF letter saying they&#x27;ll send a follow up a month later. I&#x27;ve received 8 of those responses so far, and there&#x27;s no indication when, if ever, I will have received all th...<br><br>[cactacea]: &gt; the Eugene Police Department claimed searching for records and processing the request would take at least 44,816 hours of staff time and cost approximately $2,484,599.04. 44k hours is ~21 years. Beyond absurd<br><br>[black_puppydog]: Worth pointing out that Germany is having an ongoing battle over our FOIA equivalent, in which a host of people who were bitten badly by it (most notably Jens Spahn) are proposing to allow exactly this kind of prohibitive fee, as well as reducing access to natural persons (so the individual reporter, not the newspaper) and only to people who have a reasonable interest, etc. Sure, the current form of the law has some issues on the receiving end, but boy is this an obvious move to cover their o...<br><br>[ghusto]: Freedom of Information Act in the UK means I make a request, and I get the information I asked for within 30 days. No excuses, no nonsense &quot;fees&quot;. Just what in the hell is happening in the USA?<br><br>[dabinat]: This is comparatively a bargain compared to what the DoD wanted to charge: &gt; In 2015, the Department of Defense told a Freedom of Information Act requester, who was asking for records on tools used to preserve data on seized devices, that fulfilling their request would take 15 million hours and cost $660 million. (15 million hours = over 1700 years)</p></details>
 </article>
 <article class="archive-item candidate-item">
-<div class="archive-item-heading"><h3><a href="https://talkweb.eu/openweb/4558/">我拒绝接受被审查的互联网。来 FOSDEM 27 和我一起</a></h3><span class="score-badge" data-tier="low">2.05</span></div>
+<div class="archive-item-heading"><h3><a href="https://talkweb.eu/openweb/4558/">我拒绝接受被审查的互联网。来 FOSDEM 27 和我一起</a></h3><span class="score-badge" data-tier="low">1.65</span></div>
 <p class="archive-original-title">I refuse to accept a censored Internet. Join Me at FOSDEM 27</p><p class="source-line">Tomte · 10-25 17:30 UTC</p>
-<p class="archive-item-content">作者呼吁人们参加 FOSDEM 27，表达对网络审查的拒绝。</p>
-<p class="archive-assessment">AI 判断：标题初筛（未依据正文）：标题仅涉及网络审查与会议号召，未体现 AI 功能或普通人可用的 AI 场景，且信息不足以评估内容。</p>
-<details class="archive-original"><summary>展开原始摘录</summary><p>--- Top Comments ---<br><br>[saidnooneever]: Is there an uncensored intetnet, because i dont think there is. if there is any, it can be turned off because its being routed on the censored net wrapped in encryption. that being said, that makes me pretty interested in this talk. outside of hacking sattelites and such things and/or infra i really dont see any opportunities to break free of the will of corporations as they can simply pay infra providers to do their bidding. I dont think software can solve all problems because internet ...<br><br>[haunter]: Most people prefer censored internet as long as it aligns with their political leaning. Maybe that wasn&#x27;t the case 15 years ago but it&#x27;s pretty much true nowadays. I myself consider this as a fact.<br><br>[rustyconover]: FOSDEM is a great conference! If you ever get the chance to go, please go! Especially if you&#x27;re an American I recommend it. It is so different than any other conference I&#x27;ve ever been to in the US. It doesn&#x27;t have a lot of sales pitches, the technical content is top notch, and overall it is really fun and interesting to see what everybody is talking about and working on.<br><br>[shayanbahal]: Totally with you. The same refusal/frustration made me start Mother of all VPNs (moav.sh) early this year. A talk I gave about the experience and what MoaV came out to be: Rage-coding the mother of all VPNs<br> https://www.youtube.com/watch?v=uYygWN1MZDE  &gt; Amidst the Internet shutdowns in Iran, as a technologist and member of the Iranian diaspora, I felt so much frustration, helplessness, and anger because I couldn’t do anything. After a few days of processing the initial...<br><br>[Dwedit]: &quot;Censorship&quot; vs &quot;Content moderation&quot;.  You can&#x27;t have online discussions without moderation, and that makes moderation some form of censorship.  Thus you can&#x27;t have online discussions without some form of censorship.  Only difference is who is doing the censoring.</p></details>
+<p class="archive-item-content">作者号召人们参加 FOSDEM 27，共同讨论拒绝互联网审查。</p>
+<p class="archive-assessment">AI 判断：该内容与 AI 无关，属于活动号召和观点表达，对普通人的 AI 实用价值很低。</p>
+<details class="archive-original"><summary>展开原始摘录</summary><p>--- Top Comments ---<br><br>[saidnooneever]: Is there an uncensored intetnet, because i dont think there is. if there is any, it can be turned off because its being routed on the censored net wrapped in encryption. that being said, that makes me pretty interested in this talk. outside of hacking sattelites and such things and/or infra i really dont see any opportunities to break free of the will of corporations as they can simply pay infra providers to do their bidding. I dont think software can solve all problems because internet ...<br><br>[haunter]: Most people prefer censored internet as long as it aligns with their political leaning. Maybe that wasn&#x27;t the case 15 years ago but it&#x27;s pretty much true nowadays. I myself consider this as a fact.<br><br>[rustyconover]: FOSDEM is a great conference! If you ever get the chance to go, please go! Especially if you&#x27;re an American I recommend it. It is so different than any other conference I&#x27;ve ever been to in the US. It doesn&#x27;t have a lot of sales pitches, the technical content is top notch, and overall it is really fun and interesting to see what everybody is talking about and working on.<br><br>[lexwhite]: We absolutely should not accept the way the internet has been going in modern times.  I personally support initiatives like Reticulum/NomadNet, I2P, the Gemini protocol, etc, and think that we need more large-scale adoption of these types of networks as well as FOSS-based software just to maintain our freedom and keep some semblance of the old internet that I grew up loving in the 90s and 00s.  The modern commercialized internet with its increasingly authoritarian government monitoring a...<br><br>[Dwedit]: &quot;Censorship&quot; vs &quot;Content moderation&quot;.  You can&#x27;t have online discussions without moderation, and that makes moderation some form of censorship.  Thus you can&#x27;t have online discussions without some form of censorship.  Only difference is who is doing the censoring.</p></details>
 </article>
 <article class="archive-item candidate-item">
-<div class="archive-item-heading"><h3><a href="https://lynchlab.net/llm-skin-cancer">一个10年前的CNN在皮肤癌诊断上超越前沿大语言模型</a></h3><span class="score-badge" data-tier="low">3.85</span></div>
+<div class="archive-item-heading"><h3><a href="https://lynchlab.net/llm-skin-cancer">一个10年前的CNN在皮肤癌诊断上胜过前沿LLM</a></h3><span class="score-badge" data-tier="low">4.0</span></div>
 <p class="archive-original-title">A 10-year-old CNN outperforms frontier LLMs for skin cancer diagnosis</p><p class="source-line">sungam · 10-25 17:15 UTC</p>
-<p class="archive-item-content">标题称，一个十年前开发的卷积神经网络在皮肤癌诊断任务中表现优于当前前沿大语言模型。</p>
-<p class="archive-assessment">AI 判断：标题初筛（未依据正文）：这是基准对比类技术信息，普通人难以直接使用，标题也未提供可演示教程或消费级功能。</p>
+<p class="archive-item-content">一篇研究称，十年前的老式CNN在皮肤癌诊断任务上表现优于当前前沿大语言模型。</p>
+<p class="archive-assessment">AI 判断：这是医学影像基准对比，普通用户无法直接使用，实用性和受众相关性有限。</p>
 <details class="archive-original"><summary>展开原始摘录</summary><p>--- Top Comments ---<br><br>[snitty]: This is an example of why I&#x27;m a little stumped about why people are excited about Jev-style decision models. For any application at scale it&#x27;d be way more accurate to have a dedicated classifier using the right architecture (neural net, bayesian, etc.) LLMs drive the cost of making those models down to near zero. Just use the LLM to make a thing that&#x27;s actually good at what you need it to do.<br><br>[tasuki]: &gt; I compared to a 10-year old CNN and to my surprise found that this was superior. I&#x27;m surprised he&#x27;s surprised. &gt; A small, old, specialised network using an outdated architecture recognises skin lesions far better than two frontier LLMs. Yes of course. A 30m params Katago network with one playout is superhuman in playing go, while frontier LLMs have over 10,000 times more parameters and aren&#x27;t any good at playing go. They&#x27;re good at other things (such as helping you...<br><br>[Legend2440]: &gt; I used Inception v3 pretrained on everyday photographs and then fine-tuned all layers on 68,011 dermoscopic and clinical images from the ISIC Archive on a single H100 GPU. &gt;These 200 test lesions, and every other photograph of the same lesion or patient, were removed from its data (including the validation set) before training, so it had never seen them, and they were not used to choose the model or set its threshold. This is just benchmaxxing. A benchmaxxed model will always beat an ...<br><br>[MitPitt]: And a calculator outperforms LLMs at multiplication and division...<br><br>[jonex]: As people have mentioned, it isn&#x27;t that surprising that a specially trained model beats a general purpose model. However, I think it kinda misses the potential of llms for diagnosis. What happens if we also include journal notes? What if we let the model generate questions to ask the patient and include those? What if the images aren&#x27;t perfect examples and happen to contain out of distribution content like a tattoo?</p></details>
 </article>
 <article class="archive-item candidate-item">
-<div class="archive-item-heading"><h3><a href="https://www.dailycal.org/news/campus/academics/ai-use-leads-uc-berkeley-math-professor-to-see-no-point-in-grading-homework/article_bdf1eae2-c08b-491f-b9f1-81a7cea177de.html">AI 使用让加州大学伯克利分校数学教授觉得批改作业“毫无意义”</a></h3><span class="score-badge" data-tier="mid">6.2</span></div>
-<p class="archive-original-title">AI use leads UC Berkeley math professor to see &#x27;no point&#x27; in grading homework</p><p class="source-line">romanhn · 10-25 16:28 UTC</p>
-<p class="archive-item-content">据标题信息，加州大学伯克利分校一位数学教授因学生使用 AI 而认为批改作业已失去意义。</p>
-<p class="archive-assessment">AI 判断：标题初筛（未依据正文）：标题基于教育场景且涉及学生、家长与教师，讨论角度强，但缺乏可演示的操作细节，实用性中等（仅依据标题判断）。</p>
-<details class="archive-original"><summary>展开原始摘录</summary><p>--- Top Comments ---<br><br>[parsimo2010]: The irony here is perhaps missed by many. He didn’t grade homework in the first place. He paid assistants to grade. This is common practice among tenured professors with grant money to spend and graduate students beholden to them (I’m not making a moral statement, just noting this is common practice). Aside from the irony that Borcherds probably hasn’t graded a homework set in a while, instead let’s examine the purpose of homework. It helps you learn. You can read a chapter and think you unde...<br><br>[seanhunter]: As an aside, the professor in question is Richard Borcherds, fields medalist.  He is probably most well known for proving the “Monstrous Moonshine” conjecture of Conway and Norton that there is some sort of correspondence between modular functions and representations of the Monster Group. When the conjecture was made in the 1970s, it was purely because someone noticed that a certain number was the same as the cardinality of the monster group.  It seemed a crazy coincidence, so John H Conway s...<br><br>[vhiremath4]: This is quite sad. Even if students would cheat off each other, someone had to do the homework. And even the collaboration of cheating on homework always served as a forcing function for me or others to think about the material. If not actively, at least in the form of a quasi background radiation. With AI that is completely gone, and without reward loops for incremental work, the truth is there is a large number of people (especially 18-20 year olds) who will not do well on the exams because...<br><br>[proc0]: With some exceptions I think higher education should probably go back to being about academia and not necessarily teaching skills for industry. I think companies can now easily invest in their own extended training and grab people out of high school. Just a thought.<br><br>[arjie]: What is the point of grading homework for college students anyway? The objective of exams is to determine mastery of the subject. It makes sense to have a grade act as a certificate of mastery. Grading homework is a measure of conscientiousness and perhaps a pedagogical tool to force learning but by college perhaps we should have moved out of the need for the latter. One can simply measure conscientiousness through attendance grade and mastery through exam grade and then we have two grades th...</p></details>
+<div class="archive-item-heading"><h3><a href="https://www.dreamhoststatus.com/">Dreamhost 发生活跃事件，强制用户重置密码</a></h3><span class="score-badge" data-tier="low">1.5</span></div>
+<p class="archive-original-title">Active incident at Dreamhost forcing password reset</p><p class="source-line">greenchair · 10-25 13:09 UTC</p>
+<p class="archive-item-content">Dreamhost 状态页显示正在发生故障事件，并要求用户重置密码。</p>
+<p class="archive-assessment">AI 判断：这是主机服务的安全故障通知，与 AI 无关，普通用户难以据此制作有用内容。</p>
+<details class="archive-original"><summary>展开原始摘录</summary><p>--- Top Comments ---<br><br>[duskwuff]: Reading the tea leaves: given that the outage started with &quot;connectivity issues affecting the File Manager&quot;, which was an install of Monsta FTP [1] - a commercial PHP application - I suspect the file manager got popped by one of the recently published PHP vulnerabilities, and users&#x27; FTP credentials may have been exfiltrated. [1]:  https://www.monstaftp.com/<br><br>[lexwhite]: This has been a real annoyance for me lately since I run a lot of my music production business out of my website lexwhite.net hosted on Dreamhost and Dreamhost VPS.  I love and trust Dreamhost a lot, though, as they have been an exceptionally solid company that I have worked with for, dang, nearly 20 years now I think!  All of this new AI stuff has been exposing vulnerabilites at a rate that is hard to keep up with for anyone.  We just have to really harden our cybersecurity as much as possib...<br><br>[paulbjensen]: Dreamhost - gosh that brings back memories…<br><br>[hmokiguess]: I migrated all my stuff from dreamhost about 5 years ago, got this email today and felt validated from having made that decision.<br><br>[xmddmx]: Super displeased with DreamHost&#x27;s handling of this.  I have multiple master accounts.  One of them got the email around 12pm today (over 48 hours after the incident started) saying... &quot;As a precaution, we have expired the passwords for some email and FTP/SFTP users on your DreamHost account. Their old passwords no longer work, and no new password has been set.&quot; But none of those email passwords were actually expired - all were working.  This is confusing - did they only ex...</p></details>
 </article>
 <article class="archive-item candidate-item">
-<div class="archive-item-heading"><h3><a href="https://github.com/JetBrains/thinkrail">JetBrains Thinkrail</a></h3><span class="score-badge" data-tier="low">2.05</span></div>
-<p class="source-line">hmokiguess · 10-25 16:27 UTC</p>
-<p class="archive-item-content">JetBrains 在 GitHub 上发布了一个名为 Thinkrail 的项目。</p>
-<p class="archive-assessment">AI 判断：标题初筛（未依据正文）：仅凭标题和 GitHub 来源判断，这是面向开发者的项目，普通人难以直接使用，且缺少可核实的消费级功能细节。</p>
-<details class="archive-original"><summary>展开原始摘录</summary><p>--- Top Comments ---<br><br>[exizt88]: I refuse to take a repo with an AI-generated readme seriously. If you haven&#x27;t bothered to write a readme, what else have you not bothered to do? (100% AI according to Pangram btw)<br><br>[dr_faustus]: I’ve been using JetBrains IDEs for over a decade but rarely open them anymore because working on several worktrees concurrently is extremely frustrating and wasteful. Their AI strategy is all over the place and they always wanted to sell their opaque and overpriced tokens, which made no sense. I hope they get their act together.<br><br>[Deukhoofd]: Didn&#x27;t JetBrains release JetBrains Air recently? This looks like it&#x27;s basically the same basic premise, except implemented differently. What&#x27;s their strategy here, are they just launching competing products?  https://www.jetbrains.com/air/<br><br>[sigotirandolas]: My take: I don&#x27;t see the point of those new-IDEs. They are mostly just worktrees+sandbox+tabs+prompts, which is just git+docker+tmux+thinking, but if you actually learn to use those tools instead of handcuffing your agents to whatever take the IDE has, you&#x27;re going to be much happier and effective. (That&#x27;s also why there are so many of them: It just isn&#x27;t that hard, everyone feels like a genius when they figure it out, and it&#x27;s a great way to resume-build in the AI era).<br><br>[VMG]: It feels like the day after I got comfortable with jj everybody become obsessed with git worktrees</p></details>
-</article>
-<article class="archive-item candidate-item">
-<div class="archive-item-heading"><h3><a href="https://www.therundown.ai/articles/sap-s-philipp-herzig-on-ai-built-for-business-data">SAP 的 Philipp Herzig 谈为业务数据构建的 AI</a></h3><span class="score-badge" data-tier="low">2.45</span></div>
+<div class="archive-item-heading"><h3><a href="https://www.therundown.ai/articles/sap-s-philipp-herzig-on-ai-built-for-business-data">SAP 的 Philipp Herzig 谈为企业数据打造的 AI</a></h3><span class="score-badge" data-tier="low">3.05</span></div>
 <p class="archive-original-title">SAP&#x27;s Philipp Herzig on AI built for business data</p><p class="source-line">The Rundown AI · 10-25 10:00 UTC</p>
-<p class="archive-item-content">SAP 的 Philipp Herzig 谈论围绕企业业务数据构建的 AI。</p>
-<p class="archive-assessment">AI 判断：标题初筛（未依据正文）：标题只显示这是企业数据 AI 的高管访谈，缺少普通人可用的具体功能或演示，判断基于标题。</p>
+<p class="archive-item-content">SAP 的 Philipp Herzig 在访谈中谈论面向企业业务数据构建的 AI。</p>
+<p class="archive-assessment">AI 判断：标题初筛（未依据正文）：仅据标题看，这是企业软件高管访谈，缺少普通人可亲自演示或直接使用的功能，实用性和画面感较弱。</p>
 <details class="archive-original"><summary>展开原始摘录</summary><p>What the &quot;SaaS is dead&quot; debate misses, according to SAP&#x27;s CTO</p></details>
 </article>
 <article class="archive-item candidate-item">
-<div class="archive-item-heading"><h3><a href="https://x.com/thsottiaux/status/2114237083652882932">Thibault Sottiaux：一切都已传播。明天尽情体验一番疯狂的 codexing 吧，接下来一周也很有趣。https://t.co/qOrz...</a></h3><span class="score-badge" data-tier="low">1.45</span></div>
+<div class="archive-item-heading"><h3><a href="https://x.com/thsottiaux/status/2114237083652882932">Thibault Sottiaux：一切都已经传播开了。明天好好享受疯狂的 codexing 吧，接下来也会是精彩的一周。</a></h3><span class="score-badge" data-tier="low">1.65</span></div>
 <p class="archive-original-title">Thibault Sottiaux: It is all propagated. Enjoy some mad codexing tomorrow. Fun week ahead too. https://t.co/qOrz...</p><p class="source-line">Thibault Sottiaux · 10-25 06:06 UTC</p>
-<p class="archive-item-content">Thibault Sottiaux 发帖称“一切都已传播”，预告明天将有一番疯狂的 codexing，并表示接下来一周也很有趣。</p>
-<p class="archive-assessment">AI 判断：标题初筛（未依据正文）：标题仅是一条含糊预告，未说明具体功能、使用范围或对普通人的价值，且内容偏开发者编程。</p>
+<p class="archive-item-content">这条推文只预告“明天可以尽情 codexing”，并称接下来一周会很精彩，没有说明具体是什么功能或消息。</p>
+<p class="archive-assessment">AI 判断：标题初筛（未依据正文）：标题只有一句含糊的预告，没说明功能、开放范围或可演示内容，普通观众无法核实也无法使用，因此只能按仅依据标题的低分选题处理。</p>
 <details class="archive-original"><summary>展开原始摘录</summary><p>It is all propagated. Enjoy some mad codexing tomorrow. Fun week ahead too. https://t.co/qOrzwSeIZZ https://t.co/xKaK95EAly</p></details>
 </article>
 <article class="archive-item candidate-item">
-<div class="archive-item-heading"><h3><a href="https://x.com/zarazhangrui/status/2114225607022412049">Zara Zhang：给别人提建议，比把同样的建议用在自己身上容易得多</a></h3><span class="score-badge" data-tier="low">1.8</span></div>
+<div class="archive-item-heading"><h3><a href="https://x.com/zarazhangrui/status/2114225607022412049">Zara Zhang：给别人提建议比把同样的建议用在自己身上容易多了</a></h3><span class="score-badge" data-tier="low">1.6</span></div>
 <p class="archive-original-title">Zara Zhang: It is so much easier to give advice to other people than to apply the same advice to yourself</p><p class="source-line">Zara Zhang · 10-25 05:20 UTC</p>
-<p class="archive-item-content">Zara Zhang 在社交平台上感慨：给别人提建议很容易，把同样的建议用在自己身上却难得多。</p>
-<p class="archive-assessment">AI 判断：标题初筛（未依据正文）：仅凭标题可见这是一句个人感悟，与 AI 新功能、工具或可核实的 AI 事件无关，缺少普通人可用的信息和画面感。</p>
+<p class="archive-item-content">Zara Zhang 表示，给别人提建议远比把同样的建议应用到自己身上容易。</p>
+<p class="archive-assessment">AI 判断：标题初筛（未依据正文）：标题只是一句个人感悟，未涉及可核实的 AI 新功能或普通人可用信息，选题相关性低。</p>
 <details class="archive-original"><summary>展开原始摘录</summary><p>It is so much easier to give advice to other people than to apply the same advice to yourself</p></details>
 </article>
 <article class="archive-item candidate-item">
-<div class="archive-item-heading"><h3><a href="https://x.com/thsottiaux/status/2114200291319124163">Thibault Sottiaux：太平洋时间午夜前</a></h3><span class="score-badge" data-tier="low">0.65</span></div>
+<div class="archive-item-heading"><h3><a href="https://x.com/thsottiaux/status/2114200291319124163">Thibault Sottiaux：太平洋标准时间午夜前</a></h3><span class="score-badge" data-tier="low">0.8</span></div>
 <p class="archive-original-title">Thibault Sottiaux: By midnight PST</p><p class="source-line">Thibault Sottiaux · 10-25 03:40 UTC</p>
-<p class="archive-item-content">Thibault Sottiaux 仅发布了一句“太平洋时间午夜前”，没有说明具体事项。</p>
-<p class="archive-assessment">AI 判断：标题初筛（未依据正文）：标题只是模糊的倒计时式预告，缺少可核实内容，难以形成普通人可用的教程或观点。</p>
+<p class="archive-item-content">该帖仅称某事将在太平洋标准时间午夜前发生，未说明具体内容。</p>
+<p class="archive-assessment">AI 判断：标题初筛（未依据正文）：标题是缺乏上下文的悬念式预告，无法确认事件、产品或用处，暂不宜作为普通人的选题。</p>
 <details class="archive-original"><summary>展开原始摘录</summary><p>By midnight PST</p></details>
 </article>
 <article class="archive-item candidate-item">
-<div class="archive-item-heading"><h3><a href="https://x.com/thsottiaux/status/2114200152701575656">Thibault Sottiaux：第20天／休息与重置</a></h3><span class="score-badge" data-tier="low">1.4</span></div>
+<div class="archive-item-heading"><h3><a href="https://x.com/thsottiaux/status/2114200152701575656">Thibault Sottiaux：第20天／休息与重置</a></h3><span class="score-badge" data-tier="low">1.55</span></div>
 <p class="archive-original-title">Thibault Sottiaux: Day 20/ Rest and reset</p><p class="source-line">Thibault Sottiaux · 10-25 03:39 UTC</p>
-<p class="archive-item-content">这是 Thibault Sottiaux 个人连载「第20天」中一条关于休息与重置的短帖，标题未透露任何具体 AI 功能或产品信息。</p>
-<p class="archive-assessment">AI 判断：标题初筛（未依据正文）：仅凭标题判断，这只是个人日常感悟式发帖，既无可演示的 AI 功能，也无普通用户可用的实用信息，因此不适合作为面向大众的选题。</p>
+<p class="archive-item-content">这是一条仅含标题的个人动态，内容似乎是某位人士在第20天休息与调整状态，未涉及具体 AI 功能或产品信息。</p>
+<p class="archive-assessment">AI 判断：标题初筛（未依据正文）：仅凭标题判断，这是一条个人休息感悟式动态，没有可演示的 AI 功能、可核实的新能力或普通人可用的信息，实用性与时效性都很弱。</p>
 <details class="archive-original"><summary>展开原始摘录</summary><p>Day 20/ Rest and reset</p></details>
-</article>
-<article class="archive-item candidate-item">
-<div class="archive-item-heading"><h3><a href="https://x.com/ryolu_/status/2114187660734668884">Ryo Lu：https://t.co/0E2zuZ5M3N</a></h3><span class="score-badge" data-tier="low">1.4</span></div>
-<p class="archive-original-title">Ryo Lu: https://t.co/0E2zuZ5M3N</p><p class="source-line">Ryo Lu · 10-25 02:49 UTC</p>
-<p class="archive-item-content">Ryo Lu 发布了一条仅附带短链接的推文，标题中没有任何可辨识的具体内容。</p>
-<p class="archive-assessment">AI 判断：标题初筛（未依据正文）：标题只是单一短链接，无事实信息可供核实或演示，无法判断对普通人的价值（基于标题判断）。</p>
-<details class="archive-original"><summary>展开原始摘录</summary><p>https://t.co/0E2zuZ5M3N</p></details>
-</article>
-<article class="archive-item candidate-item">
-<div class="archive-item-heading"><h3><a href="https://x.com/ryolu_/status/2114187405251219954">Ryo Lu：一起挣扎，我通过尝试、失败、再尝试学会了编程和设计。当……</a></h3><span class="score-badge" data-tier="low">1.9</span></div>
-<p class="archive-original-title">Ryo Lu: struggle together i learned programming and design by trying, failing, and trying again. when...</p><p class="source-line">Ryo Lu · 10-25 02:48 UTC</p>
-<p class="archive-item-content">这是一条个人感悟，讲述通过反复尝试与失败来学习编程和设计。</p>
-<p class="archive-assessment">AI 判断：标题初筛（未依据正文）：标题仅为个人学习感悟，缺乏可演示的 AI 新功能、实用信息或时效性，不适合作为普通人的 AI 教程或新闻选题。</p>
-<details class="archive-original"><summary>展开原始摘录</summary><p>struggle together<br><br>i learned programming and design by trying, failing, and trying again.<br><br>when i hit a wall, i figured out how to climb it. read something i barely understood. took things apart. asked someone for help. started over.<br><br>when i began my career, i kept doing things i had never done before. trying different ways to make something work. when i stopped learning, i moved on to the next struggle.<br><br>many things i made weren’t very good. but after enough rounds, something stuck. what once took so much effort became part of how i thought. i could feel something was wrong before i knew how to explain it.<br><br>it became like water.<br><br>i think about what went into that. the bug i couldn’t fix. the design that looked right until someone used it. the conversation that made me realize my flaws.<br><br>now we can ask a machine.<br><br>i’ve made things with these tools that i might never have made otherwise. i don’t miss every tedious task. but i wonder what happens when we remove the difficulty before we understand what it was teaching us.<br><br>we ask. something appears. it works well enough. we move on.<br><br>we learn how to get results without necessarily understanding how it works. and because the result looks complete, it becomes easy to miss the questions we never learned to ask.<br><br>there is another side to this.<br><br>working with people is uncomfortable.<br><br>everyone wants something different. everyone has a history you don’t know. someone cares about a detail you think is unimportant. someone pushes back when you want to move. someone needs time when you feel certain.<br><br>it takes a while to find each other.<br><br>but sometimes, after struggling together, you become a band.<br><br>you know who notices what you miss. who can pull an idea apart without killing it. when to step in, when to slow down, when to let someone else carry the rhythm.<br><br>you share something unfinished. admit you don’t know. hurt each other, apologize, try again. eventually you make something none of you could have made alone.<br><br>some of my closest friendships came from working this way. smart, caring humans who saw me confused, wrong, tired, excited. people i could be vulnerable with. people whose ideas changed mine.<br><br>i worry we are making it easier to avoid that beginning.<br><br>an agent is always there. patient. ready to keep going. talking to it can feel easier than reaching toward someone who might misunderstand you, disagree, or have somewhere else to be.<br><br>sometimes that ease helps. but if we keep choosing it, where do the friendships begin?<br><br>i picture each of us with our own agents. our own explanations. our own little worlds. making more things, with fewer reasons to leave the screen or work through a difference with another person.<br><br>and these worlds aren’t entirely ours.<br><br>they run on machines in server farms, owned by companies, shaped by interests we may not see. we bring them our questions, our work, our loneliness. they become part of how we understand what is real.<br><br>is that freedom?<br><br>or a comfortable kind of confinement, where everything responds to us but fewer things reach us?<br><br>i don’t think pain makes something good. there are struggles nobody should have to endure. but i don’t want to lose the difficulty of learning something unfamiliar, or getting to know someone who isn’t like me.<br><br>maybe we need tools that help us spend more time with the world, instead of giving us fewer reasons to enter it. tools that make it easier to find people, share something unfinished, and work through what we couldn’t figure out alone.<br><br>sometimes i want to close the laptop.<br><br>sit with people i love. play something we haven’t figured out yet. miss a note, lose the rhythm, listen until we find each other again.<br><br>like a jazz band. everyone bringing something different. nobody knowing where we’ll end up.<br><br>i don’t want a life without struggle. i want people to struggle with. something we can feel, change, and make our own.<br><br>music we couldn’t have made alone, instead of the silent static of the server farm.</p></details>
-</article>
-<article class="archive-item candidate-item">
-<div class="archive-item-heading"><h3><a href="https://x.com/levie/status/2114187326406766604">Aaron Levie：不久后流经网络代理的 token 数量可能达到今天的 1000 倍</a></h3><span class="score-badge" data-tier="low">3.35</span></div>
-<p class="archive-original-title">Aaron Levie: We’ll likely have 1,000X more tokens flowing through cyber agents soon than we do today. As t...</p><p class="source-line">Aaron Levie · 10-25 02:48 UTC</p>
-<p class="archive-item-content">Aaron Levie 预测，未来流经网络代理的 token 数量可能达到目前的 1000 倍。</p>
-<p class="archive-assessment">AI 判断：标题初筛（未依据正文）：这是仅有标题的行业高管预测，缺少可演示细节和普通人可用信息，实用性有限。</p>
-<details class="archive-original"><summary>展开原始摘录</summary><p>We’ll likely have 1,000X more tokens flowing through cyber agents soon than we do today. <br><br>As the surface area of cyber risk increases, at some point soon it will be nearly impossible to keep up with the volume of new risks (we’re essentially already there). Large companies barely had the resources to pull this off before, but the vast majority of companies don’t. <br><br>There’s a never ending set of libraries to keep up with, tools to leverage, and sprawling infrastructure and code to secure. We’ll have agent swarms that can fan out, leverage any security tool, test various perpetuations of attacks, read through logs, process enterprise data for risk level, and more. <br><br>This capability only emerged in the past few months. Wouldn’t have been possible before long running agents and computer use were good enough, and models hadn’t been trained on cyber deeply. That’s all changing now.<br><br>This is a huge area of opportunity right now for every layer of the security stack across identity, firewall, network, code scanning, data protection, and more. And it’s at least one reason to be optimistic about the balance of offensive and defensive capability.</p></details>
-</article>
-<article class="archive-item candidate-item">
-<div class="archive-item-heading"><h3><a href="https://www.cerebras.ai/blog/how-we-deploy-trillion-parameter-frontier-models-on-cerebras">Cerebras 部署万亿参数 AI 模型</a></h3><span class="score-badge" data-tier="low">2.55</span></div>
-<p class="archive-original-title">Cerebras Deploys Trillion-Parameter AI Models</p><p class="source-line">gmays · 10-25 01:33 UTC</p>
-<p class="archive-item-content">Cerebras 介绍了其平台部署万亿参数前沿 AI 模型的相关情况。</p>
-<p class="archive-assessment">AI 判断：标题初筛（未依据正文）：仅凭标题判断，这是面向开发者的部署工程内容，普通用户难以直接使用。</p>
-<details class="archive-original"><summary>展开原始摘录</summary><p>--- Top Comments ---<br><br>[ilaksh]: From my testing, the problem Cerebras has is they need to give people a taste to get new customers in, but since it requires so much hardware to get that speed and they don&#x27;t have OpenAI-type money (&lt; $3 billion compared to over $100 billion) and it&#x27;s just incredibly hard regardless to manufacture that many of these types of crazy giant wafer nodes, there is just no way for them to keep up with the demand. So what they do is they have these cheap plans that let anyone get a littl...<br><br>[piterrro]: Lots of folks here say Cerebras serves outdated models. Here’s my view: lets assume the above is true and the average serve with a delay of 6-9 months. Given that, its fair to expect them to start serving DS flash v4, glm 5.3, mimo 2.6 pro or kimi 3.1 pro in a matter of months. DS flash is already fast to the point I’ve became a bottleneck. But my point is: Cerebras should soon release better models that are not that far from frontier ones, at a fraction of cost and with multiples of the spee...<br><br>[keyle]: Cerebras is good on paper but all I can reasonably access is &quot;GPT OSS 120b, Qwen 3.8 27B&quot; which aren&#x27;t very good for my use. Openrouter on nitro gets me there. Although the TPS is 5X less still. I have tried GPT OSS 120b on cerebras and it flies. But it&#x27;s mostly wrong.<br><br>[xpct]: Ah, this prompted a few questions from me. Perhaps someone with more hardware background could chime in. They don&#x27;t really show it here, but supposedly a Cerebras&#x27; chip is sub-divided into a 2D mesh of what they call PEs (cores). So data flow generally flows in two axis, and maintains consistent timings to its 4 neighboring cores. They show the layers flowing from left-to-right being streamed by PEs, but I wonder how true that ends up being: maybe the communications are easier to st...<br><br>[pat64]: Having dealt with them professionally my view is they’re a company with truly remarkable technology and a bafflingly inadequate team. They need to hire better. Almost stopped me using their stuff wholesale. Groq are somehow worse.</p></details>
-</article>
-<article class="archive-item candidate-item">
-<div class="archive-item-heading"><h3><a href="https://x.com/rauchg/status/2114164830403989880">Guillermo Rauch：我莫名喜欢这些模型使用的工程行话：gate、evidence、culprit、durable、provenance……</a></h3><span class="score-badge" data-tier="low">1.7</span></div>
-<p class="archive-original-title">Guillermo Rauch: I oddly love the models&#x27; engineering vernacular: gate, evidence, culprit, durable, provenance...</p><p class="source-line">Guillermo Rauch · 10-25 01:19 UTC</p>
-<p class="archive-item-content">Guillermo Rauch 表示自己莫名喜欢 AI 模型使用“gate、evidence、culprit、durable、provenance”等工程行话。</p>
-<p class="archive-assessment">AI 判断：标题初筛（未依据正文）：仅基于标题看，这是对模型用词偏好的个人感慨，缺少普通人可用的功能、演示或可核实信息。</p>
-<details class="archive-original"><summary>展开原始摘录</summary><p>I oddly love the models&#x27; engineering vernacular: gate, evidence, culprit, durable, provenance, contract…<br><br>A lot of these stem from most engineering being debugging and understanding existing systems, where you take on the detective / auditor roles. You do forensics.<br><br>I wonder what the *minimum viable English* in fact is to be productive. ASD-STE100 Simplified Technical English contains ~900 approved words. I suspect we need far fewer.</p></details>
-</article>
-<article class="archive-item candidate-item">
-<div class="archive-item-heading"><h3><a href="https://x.com/ryolu_/status/2114153611005702542">Ryo Lu：更多细节 + 我的精选播放列表，点这里播放：https://t.co/8nOipsQ4q3</a></h3><span class="score-badge" data-tier="low">1.1</span></div>
-<p class="archive-original-title">Ryo Lu: lots more detail + my curated playlist play here: https://t.co/8nOipsQ4q3</p><p class="source-line">Ryo Lu · 10-25 00:34 UTC</p>
-<p class="archive-item-content">这条帖子只提到更多细节和一个精选播放列表链接，没有说明具体AI内容。</p>
-<p class="archive-assessment">AI 判断：标题初筛（未依据正文）：标题是含糊的链接分享，缺少可核实的AI功能或普通人可用信息，按标题判断价值很低。</p>
-<details class="archive-original"><summary>展开原始摘录</summary><p>lots more detail + my curated playlist<br>play here:<br>https://t.co/8nOipsQ4q3</p></details>
-</article>
-<article class="archive-item candidate-item">
-<div class="archive-item-heading"><h3><a href="https://x.com/swyx/status/2114149330135519730">Swyx：欢迎兼职和一次性客座投稿 https://t.co/XoIbSxRbod</a></h3><span class="score-badge" data-tier="low">1.3</span></div>
-<p class="archive-original-title">Swyx: part time and oneoff guest posts welcome https://t.co/XoIbSxRbod</p><p class="source-line">Swyx · 10-25 00:17 UTC</p>
-<p class="archive-item-content">这是一条征稿推文，Swyx 表示欢迎兼职和一次性客座文章投稿。</p>
-<p class="archive-assessment">AI 判断：标题初筛（未依据正文）：仅为征稿启事，没有可演示的 AI 功能，也没有普通人可用的信息，而且标题信息有限。</p>
-<details class="archive-original"><summary>展开原始摘录</summary><p>part time and oneoff guest posts welcome https://t.co/XoIbSxRbod</p></details>
-</article>
-<article class="archive-item candidate-item">
-<div class="archive-item-heading"><h3><a href="https://x.com/alexalbert__/status/2114145722320969943">Alex Albert：@addyosmani @lydiahallie @_catwu @bcherny @sidbid @jarredsumner @adocomplete @delba_oliveira……</a></h3><span class="score-badge" data-tier="low">1.85</span></div>
-<p class="archive-original-title">Alex Albert: @addyosmani @lydiahallie @_catwu @bcherny @sidbid @jarredsumner @adocomplete @delba_oliveira...</p><p class="source-line">Alex Albert · 10-25 00:03 UTC</p>
-<p class="archive-item-content">Alex Albert 发了一条只列出多位 AI 开发者账号的推文，没有给出具体内容。</p>
-<p class="archive-assessment">AI 判断：标题初筛（未依据正文）：仅凭标题可见，这只是一条罗列账号、没有实质信息的预告式帖子，普通人难以从中获得可用价值。</p>
-<details class="archive-original"><summary>展开原始摘录</summary><p>@addyosmani @lydiahallie @_catwu @bcherny @sidbid @jarredsumner @adocomplete @delba_oliveira @connerphillippi @dsp_ @gcemaj @karbon0x and @davidsuttonca on Duet as well!</p></details>
-</article>
-<article class="archive-item candidate-item">
-<div class="archive-item-heading"><h3><a href="https://x.com/alexalbert__/status/2114145588686233612">Alex Albert：@addyosmani @lydiahallie @_catwu @bcherny @sidbid @jarredsumner @adocomplete @delba_oliveira……</a></h3><span class="score-badge" data-tier="low">0.3</span></div>
-<p class="archive-original-title">Alex Albert: @addyosmani @lydiahallie @_catwu @bcherny @sidbid @jarredsumner @adocomplete @delba_oliveira...</p><p class="source-line">Alex Albert · 10-25 00:02 UTC</p>
-<p class="archive-item-content">Alex Albert 发布了一条仅提及多位开发者账号的推文，标题未说明具体主题。</p>
-<p class="archive-assessment">AI 判断：标题初筛（未依据正文）：仅从标题看只有账号提及，缺少可验证的 AI 功能、事件或演示信息，难以形成面向普通人的实用选题。</p>
-<details class="archive-original"><summary>展开原始摘录</summary><p>@addyosmani @lydiahallie @_catwu @bcherny @sidbid @jarredsumner @adocomplete @delba_oliveira @connerphillippi @dsp_ https://t.co/4ea5te3d8w @gcemaj @karbon0x for Claude Managed Agents!</p></details>
-</article>
-<article class="archive-item candidate-item">
-<div class="archive-item-heading"><h3><a href="https://x.com/swyx/status/2114145315196711194">Swyx：我们正在为新的 @latentspacepod 编辑团队招聘撰稿人、审稿人和记者（嗨……）</a></h3><span class="score-badge" data-tier="low">1.1</span></div>
-<p class="archive-original-title">Swyx: we are hiring writers, reviewers and reporters for the new @latentspacepod editorial team (hi...</p><p class="source-line">Swyx · 10-25 00:01 UTC</p>
-<p class="archive-item-content">Swyx 发帖招募撰稿人、审稿人和记者，组建 @latentspacepod 的新编辑团队。</p>
-<p class="archive-assessment">AI 判断：标题初筛（未依据正文）：仅依据标题判断，这是一条媒体团队的招聘启事，与普通人的 AI 使用、教程或可演示功能无关，缺乏实用价值。</p>
-<details class="archive-original"><summary>展开原始摘录</summary><p>we are hiring writers, reviewers and reporters for the new @latentspacepod editorial team (hit up @ricmac and @adlinzainal) and i’m gonna put a version of this in the welcome package for everyone we hire https://t.co/fYPQURjQoy</p></details>
-</article>
-<article class="archive-item candidate-item">
-<div class="archive-item-heading"><h3><a href="https://x.com/alexalbert__/status/2114145290970357953">Alex Albert：@addyosmani @lydiahallie @_catwu @bcherny @sidbid @jarredsumner @adocomplete @delba_oliveira……</a></h3><span class="score-badge" data-tier="low">0.8</span></div>
-<p class="archive-original-title">Alex Albert: @addyosmani @lydiahallie @_catwu @bcherny @sidbid @jarredsumner @adocomplete @delba_oliveira...</p><p class="source-line">Alex Albert · 10-25 00:01 UTC</p>
-<p class="archive-item-content">Alex Albert 的这条内容仅列出多位开发者账号，标题未说明具体信息。</p>
-<p class="archive-assessment">AI 判断：标题初筛（未依据正文）：标题只有账号列表，缺乏可演示或可核实的具体内容，按标题判断价值很低。</p>
-<details class="archive-original"><summary>展开原始摘录</summary><p>@addyosmani @lydiahallie @_catwu @bcherny @sidbid @jarredsumner @adocomplete @delba_oliveira @connerphillippi https://t.co/3GqTnbWxxB @dsp_ as well!</p></details>
-</article>
-<article class="archive-item candidate-item">
-<div class="archive-item-heading"><h3><a href="https://x.com/adityaag/status/2114135237806760097">Aditya Agarwal：沉迷 AI 的一个奇怪影响是，我开始真正珍惜现实中的时间……</a></h3><span class="score-badge" data-tier="low">3.25</span></div>
-<p class="archive-original-title">Aditya Agarwal: One weird effect of being max AI pilled is that I have started to really treasure IRL time wi...</p><p class="source-line">Aditya Agarwal · 10-24 23:21 UTC</p>
-<p class="archive-item-content">Aditya Agarwal 称，深度沉迷 AI 后，一个奇怪的影响是他开始格外珍惜现实生活中的时间。</p>
-<p class="archive-assessment">AI 判断：标题初筛（未依据正文）：仅从标题看，这是个人感受型观点，缺少可演示功能或可核实的新事实，实用性和时效性较弱。</p>
-<details class="archive-original"><summary>展开原始摘录</summary><p>One weird effect of being max AI pilled is that I have started to really treasure IRL time with my family and my friends.<br><br>Put on some techno, dance with friends, take your kids to the park. <br><br>Let the agents cook (or not).<br><br>But dear god, celebrate humans.</p></details>
 </article>
 </div>
 <div class="archive-panel" role="tabpanel" id="archive-panel-follow-builders" aria-labelledby="archive-tab-follow-builders" data-archive-panel="follow-builders">
@@ -200,137 +164,38 @@ lang: zh
 <article class="archive-item">
 <div class="archive-item-heading">
 <h3><a href="https://x.com/thsottiaux/status/2114237083652882932">Thibault Sottiaux: It is all propagated. Enjoy some mad codexing tomorrow. Fun week ahead too. https://t.co/qOrz...</a></h3>
-<span class="score-badge" data-tier="low" aria-label="1.45 out of 10">1.45</span>
+<span class="score-badge" data-tier="low" aria-label="1.65 out of 10">1.65</span>
 </div>
-<p class="archive-item-translation archive-title-translation"><span>中文标题</span>Thibault Sottiaux：一切都已传播。明天尽情体验一番疯狂的 codexing 吧，接下来一周也很有趣。https://t.co/qOrz...</p>
+<p class="archive-item-translation archive-title-translation"><span>中文标题</span>Thibault Sottiaux：一切都已经传播开了。明天好好享受疯狂的 codexing 吧，接下来也会是精彩的一周。</p>
 <p class="source-line">Follow Builders · X 动态 · Thibault Sottiaux · 10月25日 06:06 UTC · 喜欢 1398 · 转发 74 · 回复 343</p>
-<p class="archive-item-content">Thibault Sottiaux 发帖称“一切都已传播”，预告明天将有一番疯狂的 codexing，并表示接下来一周也很有趣。</p>
+<p class="archive-item-content">这条推文只预告“明天可以尽情 codexing”，并称接下来一周会很精彩，没有说明具体是什么功能或消息。</p>
 </article>
 <article class="archive-item">
 <div class="archive-item-heading">
 <h3><a href="https://x.com/zarazhangrui/status/2114225607022412049">Zara Zhang: It is so much easier to give advice to other people than to apply the same advice to yourself</a></h3>
-<span class="score-badge" data-tier="low" aria-label="1.8 out of 10">1.8</span>
+<span class="score-badge" data-tier="low" aria-label="1.6 out of 10">1.6</span>
 </div>
-<p class="archive-item-translation archive-title-translation"><span>中文标题</span>Zara Zhang：给别人提建议，比把同样的建议用在自己身上容易得多</p>
+<p class="archive-item-translation archive-title-translation"><span>中文标题</span>Zara Zhang：给别人提建议比把同样的建议用在自己身上容易多了</p>
 <p class="source-line">Follow Builders · X 动态 · Zara Zhang · 10月25日 05:20 UTC · 喜欢 33 · 转发 1 · 回复 15</p>
-<p class="archive-item-content">Zara Zhang 在社交平台上感慨：给别人提建议很容易，把同样的建议用在自己身上却难得多。</p>
+<p class="archive-item-content">Zara Zhang 表示，给别人提建议远比把同样的建议应用到自己身上容易。</p>
 </article>
 <article class="archive-item">
 <div class="archive-item-heading">
 <h3><a href="https://x.com/thsottiaux/status/2114200291319124163">Thibault Sottiaux: By midnight PST</a></h3>
-<span class="score-badge" data-tier="low" aria-label="0.65 out of 10">0.65</span>
+<span class="score-badge" data-tier="low" aria-label="0.8 out of 10">0.8</span>
 </div>
-<p class="archive-item-translation archive-title-translation"><span>中文标题</span>Thibault Sottiaux：太平洋时间午夜前</p>
+<p class="archive-item-translation archive-title-translation"><span>中文标题</span>Thibault Sottiaux：太平洋标准时间午夜前</p>
 <p class="source-line">Follow Builders · X 动态 · Thibault Sottiaux · 10月25日 03:40 UTC · 喜欢 1470 · 转发 48 · 回复 304</p>
-<p class="archive-item-content">Thibault Sottiaux 仅发布了一句“太平洋时间午夜前”，没有说明具体事项。</p>
+<p class="archive-item-content">该帖仅称某事将在太平洋标准时间午夜前发生，未说明具体内容。</p>
 </article>
 <article class="archive-item">
 <div class="archive-item-heading">
 <h3><a href="https://x.com/thsottiaux/status/2114200152701575656">Thibault Sottiaux: Day 20/ Rest and reset</a></h3>
-<span class="score-badge" data-tier="low" aria-label="1.4 out of 10">1.4</span>
+<span class="score-badge" data-tier="low" aria-label="1.55 out of 10">1.55</span>
 </div>
 <p class="archive-item-translation archive-title-translation"><span>中文标题</span>Thibault Sottiaux：第 20 天／休息与重置</p>
 <p class="source-line">Follow Builders · X 动态 · Thibault Sottiaux · 10月25日 03:39 UTC · 喜欢 6524 · 转发 369 · 回复 839</p>
-<p class="archive-item-content">这是 Thibault Sottiaux 个人连载「第 20 天」中一条关于休息与重置的短帖，标题未透露任何具体 AI 功能或产品信息。</p>
-</article>
-<article class="archive-item">
-<div class="archive-item-heading">
-<h3><a href="https://x.com/ryolu_/status/2114187660734668884">Ryo Lu: https://t.co/0E2zuZ5M3N</a></h3>
-<span class="score-badge" data-tier="low" aria-label="1.4 out of 10">1.4</span>
-</div>
-<p class="archive-item-translation archive-title-translation"><span>中文标题</span>Ryo Lu：https://t.co/0E2zuZ5M3N</p>
-<p class="source-line">Follow Builders · X 动态 · Ryo Lu · 10月25日 02:49 UTC · 喜欢 21 · 转发 0 · 回复 1</p>
-<p class="archive-item-content">Ryo Lu 发布了一条仅附带短链接的推文，标题中没有任何可辨识的具体内容。</p>
-</article>
-<article class="archive-item">
-<div class="archive-item-heading">
-<h3><a href="https://x.com/ryolu_/status/2114187405251219954">Ryo Lu: struggle together i learned programming and design by trying, failing, and trying again. when...</a></h3>
-<span class="score-badge" data-tier="low" aria-label="1.9 out of 10">1.9</span>
-</div>
-<p class="archive-item-translation archive-title-translation"><span>中文标题</span>Ryo Lu：一起挣扎，我通过尝试、失败、再尝试学会了编程和设计。当……</p>
-<p class="source-line">Follow Builders · X 动态 · Ryo Lu · 10月25日 02:48 UTC · 喜欢 511 · 转发 32 · 回复 26</p>
-<p class="archive-item-content">这是一条个人感悟，讲述通过反复尝试与失败来学习编程和设计。</p>
-</article>
-<article class="archive-item">
-<div class="archive-item-heading">
-<h3><a href="https://x.com/levie/status/2114187326406766604">Aaron Levie: We’ll likely have 1,000X more tokens flowing through cyber agents soon than we do today. As t...</a></h3>
-<span class="score-badge" data-tier="low" aria-label="3.35 out of 10">3.35</span>
-</div>
-<p class="archive-item-translation archive-title-translation"><span>中文标题</span>Aaron Levie：不久后流经网络代理的 token 数量可能达到今天的 1000 倍</p>
-<p class="source-line">Follow Builders · X 动态 · Aaron Levie · 10月25日 02:48 UTC · 喜欢 88 · 转发 8 · 回复 50</p>
-<p class="archive-item-content">Aaron Levie 预测，未来流经网络代理的 token 数量可能达到目前的 1000 倍。</p>
-</article>
-<article class="archive-item">
-<div class="archive-item-heading">
-<h3><a href="https://x.com/rauchg/status/2114164830403989880">Guillermo Rauch: I oddly love the models&#x27; engineering vernacular: gate, evidence, culprit, durable, provenance...</a></h3>
-<span class="score-badge" data-tier="low" aria-label="1.7 out of 10">1.7</span>
-</div>
-<p class="archive-item-translation archive-title-translation"><span>中文标题</span>Guillermo Rauch：我莫名喜欢这些模型使用的工程行话：gate、evidence、culprit、durable、provenance……</p>
-<p class="source-line">Follow Builders · X 动态 · Guillermo Rauch · 10月25日 01:19 UTC · 喜欢 219 · 转发 8 · 回复 91</p>
-<p class="archive-item-content">Guillermo Rauch 表示自己莫名喜欢 AI 模型使用“gate、evidence、culprit、durable、provenance”等工程行话。</p>
-</article>
-<article class="archive-item">
-<div class="archive-item-heading">
-<h3><a href="https://x.com/ryolu_/status/2114153611005702542">Ryo Lu: lots more detail + my curated playlist play here: https://t.co/8nOipsQ4q3</a></h3>
-<span class="score-badge" data-tier="low" aria-label="1.1 out of 10">1.1</span>
-</div>
-<p class="archive-item-translation archive-title-translation"><span>中文标题</span>Ryo Lu：更多细节 + 我的精选播放列表，点这里播放：https://t.co/8nOipsQ4q3</p>
-<p class="source-line">Follow Builders · X 动态 · Ryo Lu · 10月25日 00:34 UTC · 喜欢 4 · 转发 0 · 回复 0</p>
-<p class="archive-item-content">这条帖子只提到更多细节和一个精选播放列表链接，没有说明具体 AI 内容。</p>
-</article>
-<article class="archive-item">
-<div class="archive-item-heading">
-<h3><a href="https://x.com/swyx/status/2114149330135519730">Swyx: part time and oneoff guest posts welcome https://t.co/XoIbSxRbod</a></h3>
-<span class="score-badge" data-tier="low" aria-label="1.3 out of 10">1.3</span>
-</div>
-<p class="archive-item-translation archive-title-translation"><span>中文标题</span>Swyx：欢迎兼职和一次性客座投稿 https://t.co/XoIbSxRbod</p>
-<p class="source-line">Follow Builders · X 动态 · Swyx · 10月25日 00:17 UTC · 喜欢 7 · 转发 0 · 回复 5</p>
-<p class="archive-item-content">这是一条征稿推文，Swyx 表示欢迎兼职和一次性客座文章投稿。</p>
-</article>
-<article class="archive-item">
-<div class="archive-item-heading">
-<h3><a href="https://x.com/alexalbert__/status/2114145722320969943">Alex Albert: @addyosmani @lydiahallie @_catwu @bcherny @sidbid @jarredsumner @adocomplete @delba_oliveira...</a></h3>
-<span class="score-badge" data-tier="low" aria-label="1.85 out of 10">1.85</span>
-</div>
-<p class="archive-item-translation archive-title-translation"><span>中文标题</span>Alex Albert：@addyosmani @lydiahallie @_catwu @bcherny @sidbid @jarredsumner @adocomplete @delba_oliveira……</p>
-<p class="source-line">Follow Builders · X 动态 · Alex Albert · 10月25日 00:03 UTC · 喜欢 3 · 转发 0 · 回复 0</p>
-<p class="archive-item-content">Alex Albert 发了一条只列出多位 AI 开发者账号的推文，没有给出具体内容。</p>
-</article>
-<article class="archive-item">
-<div class="archive-item-heading">
-<h3><a href="https://x.com/alexalbert__/status/2114145588686233612">Alex Albert: @addyosmani @lydiahallie @_catwu @bcherny @sidbid @jarredsumner @adocomplete @delba_oliveira...</a></h3>
-<span class="score-badge" data-tier="low" aria-label="0.3 out of 10">0.3</span>
-</div>
-<p class="archive-item-translation archive-title-translation"><span>中文标题</span>Alex Albert：@addyosmani @lydiahallie @_catwu @bcherny @sidbid @jarredsumner @adocomplete @delba_oliveira……</p>
-<p class="source-line">Follow Builders · X 动态 · Alex Albert · 10月25日 00:02 UTC · 喜欢 4 · 转发 0 · 回复 2</p>
-<p class="archive-item-content">Alex Albert 发布了一条仅提及多位开发者账号的推文，标题未说明具体主题。</p>
-</article>
-<article class="archive-item">
-<div class="archive-item-heading">
-<h3><a href="https://x.com/swyx/status/2114145315196711194">Swyx: we are hiring writers, reviewers and reporters for the new @latentspacepod editorial team (hi...</a></h3>
-<span class="score-badge" data-tier="low" aria-label="1.1 out of 10">1.1</span>
-</div>
-<p class="archive-item-translation archive-title-translation"><span>中文标题</span>Swyx：我们正在为新的 @latentspacepod 编辑团队招聘撰稿人、审稿人和记者（嗨……）</p>
-<p class="source-line">Follow Builders · X 动态 · Swyx · 10月25日 00:01 UTC · 喜欢 171 · 转发 5 · 回复 55</p>
-<p class="archive-item-content">Swyx 发帖招募撰稿人、审稿人和记者，组建 @latentspacepod 的新编辑团队。</p>
-</article>
-<article class="archive-item">
-<div class="archive-item-heading">
-<h3><a href="https://x.com/alexalbert__/status/2114145290970357953">Alex Albert: @addyosmani @lydiahallie @_catwu @bcherny @sidbid @jarredsumner @adocomplete @delba_oliveira...</a></h3>
-<span class="score-badge" data-tier="low" aria-label="0.8 out of 10">0.8</span>
-</div>
-<p class="archive-item-translation archive-title-translation"><span>中文标题</span>Alex Albert：@addyosmani @lydiahallie @_catwu @bcherny @sidbid @jarredsumner @adocomplete @delba_oliveira……</p>
-<p class="source-line">Follow Builders · X 动态 · Alex Albert · 10月25日 00:01 UTC · 喜欢 3 · 转发 1 · 回复 1</p>
-<p class="archive-item-content">Alex Albert 的这条内容仅列出多位开发者账号，标题未说明具体信息。</p>
-</article>
-<article class="archive-item">
-<div class="archive-item-heading">
-<h3><a href="https://x.com/adityaag/status/2114135237806760097">Aditya Agarwal: One weird effect of being max AI pilled is that I have started to really treasure IRL time wi...</a></h3>
-<span class="score-badge" data-tier="low" aria-label="3.25 out of 10">3.25</span>
-</div>
-<p class="archive-item-translation archive-title-translation"><span>中文标题</span>Aditya Agarwal：沉迷 AI 的一个奇怪影响是，我开始真正珍惜现实中的时间……</p>
-<p class="source-line">Follow Builders · X 动态 · Aditya Agarwal · 10月24日 23:21 UTC · 喜欢 80 · 转发 2 · 回复 7</p>
-<p class="archive-item-content">Aditya Agarwal 称，深度沉迷 AI 后，一个奇怪的影响是他开始格外珍惜现实生活中的时间。</p>
+<p class="archive-item-content">这是一条仅含标题的个人动态，内容似乎是某位人士在第 20 天休息与调整状态，未涉及具体 AI 功能或产品信息。</p>
 </article>
 </div>
 </section>
