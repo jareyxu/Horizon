@@ -33,17 +33,15 @@ uv run python -m scripts.check_creator_sources --days 7
 
 | 账号 | 用途 | 建议 |
 |---|---|---|
-| [归藏 @op7418](https://x.com/op7418) | 图像、视频、提示词与中文创作玩法 | 继续优先观察，贴近教程和效果演示 |
 | [Tim Simmons @TheoMediaAI](https://x.com/TheoMediaAI) | AI 影视工具实测、制作方法和局限 | 重点候选；作者网站和 YouTube 可补充 |
 | [Matt Wolfe @mreflow](https://x.com/mreflow) | 新工具、产品体验、新闻整理 | 重点候选；Future Tools 已补充同作者内容 |
 | [Rowan Cheung @rowancheung](https://x.com/rowancheung) | 大众 AI 新闻、产品功能与应用案例 | 重点候选；The Rundown RSS 已接入 |
 | [Ethan Mollick @emollick](https://x.com/emollick) | AI 对工作、教育和个人能力的影响 | 观点解读候选；One Useful Thing 已接入 |
 | [Min Choi @minchoi](https://x.com/minchoi) | 视觉效果、有趣案例、应用合集 | 发现线索；回到案例原作者核验，区分赞助与实测 |
-| [宝玉 @dotey](https://x.com/dotey) | 中文翻译、技术理解、工程观点 | 保留作解释补充，不作为唯一主来源 |
 
-归藏的[公开提示词库](https://github.com/op7418/guizang-s-prompt)包含图像和视频示例；Tim 的[官网](https://theoreticallymedia.com/)结构化资料链接到 @TheoMediaAI；[Matt 官网](https://mattwolfe.com/)、[The Rundown](https://www.therundown.ai/)、[Ethan 自述](https://www.oneusefulthing.org/about)用于交叉核对作者定位。
+Tim 的[官网](https://theoreticallymedia.com/)结构化资料链接到 @TheoMediaAI；[Matt 官网](https://mattwolfe.com/)、[The Rundown](https://www.therundown.ai/)、[Ethan 自述](https://www.oneusefulthing.org/about)用于交叉核对作者定位。
 
-现有 Twitter135 配置限制每天最多 2 次请求，两个现有账号约消耗 60 次/月（按 30 天）。7 个账号每天抓取约需 210 次/月，另有 ID 解析和人工测试请求。保持现有请求预算，不在未确认套餐前增加自动调用。通过作者博客补充覆盖不等于已抓到其全部 X 帖子。
+当前 Twitter135 采集关闭，账号列表为空；Follow Builders 对共享 Feed 中的账号统一处理。以后若启用专门追踪，应按账号数和轮询频率核算请求预算，并计入 ID 解析和人工测试请求。通过作者博客补充覆盖不等于已抓到其全部 X 帖子。
 
 ## 视频与社交平台获取方法
 

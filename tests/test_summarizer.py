@@ -152,20 +152,20 @@ def test_pages_archive_tabs_render_unselected_x_and_follow_builders_content():
     selected.metadata.update(
         {
             "source_variant": "twitter135_rapidapi",
-            "rapidapi_account_username": "dotey",
+            "rapidapi_account_username": "builder_one",
         }
     )
     archived = ContentItem(
         id="twitter:tweet:2",
         source_type=SourceType.TWITTER,
-        title="@op7418: 一条没有进入主列表的推文",
-        url="https://x.com/op7418/status/2",
+        title="@builder_two: 一条没有进入主列表的推文",
+        url="https://x.com/builder_two/status/2",
         content="完整推文第一行\n\n完整推文第二行",
-        author="op7418",
+        author="builder_two",
         published_at=datetime(2026, 7, 13, 2, 0, tzinfo=timezone.utc),
         metadata={
             "source_variant": "twitter135_rapidapi",
-            "rapidapi_account_username": "op7418",
+            "rapidapi_account_username": "builder_two",
             "favorite_count": 5,
             "retweet_count": 2,
             "reply_count": 1,
@@ -204,7 +204,7 @@ def test_pages_archive_tabs_render_unselected_x_and_follow_builders_content():
     assert 'data-archive-tab="follow-builders" data-count="1"' in result
     assert "其他追踪推文" in result
     assert "其他 Follow Builders 资讯" in result
-    assert "@op7418" in result
+    assert "@builder_two" in result
     assert 'data-tier="low"' in result
     assert "完整推文第一行<br>\n<br>\n完整推文第二行" in result
     assert "喜欢 5 · 转发 2 · 回复 1 · 浏览 100" in result

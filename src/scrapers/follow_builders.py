@@ -5,6 +5,7 @@ from __future__ import annotations
 import asyncio
 from datetime import datetime, timedelta, timezone
 import hashlib
+import logging
 from typing import Any, List
 
 from dateutil.parser import isoparse
@@ -12,6 +13,8 @@ import httpx
 
 from .base import BaseScraper
 from ..models import ContentItem, FollowBuildersConfig, SourceType
+
+logger = logging.getLogger(__name__)
 
 
 class FollowBuildersScraper(BaseScraper):
@@ -36,9 +39,13 @@ class FollowBuildersScraper(BaseScraper):
         )
 
         items: list[ContentItem] = []
-        for result in results:
+        for (kind, _), result in zip(requests, results):
             if isinstance(result, list):
                 items.extend(result)
+            else:
+                code = result.response.status_code if isinstance(result, httpx.HTTPStatusError) else None
+                self.diagnostics[kind] = {"status": "restricted" if code in {401, 403} else "unavailable", "http_status": code, "error": type(result).__name__, "items": 0}
+                logger.warning("Follow Builders %s failed: %s", kind, type(result).__name__)
         return items
 
     async def _fetch_feed(
@@ -60,13 +67,19 @@ class FollowBuildersScraper(BaseScraper):
             hours=self.config.max_feed_age_hours
         )
         if generated_at < oldest_allowed:
+            self.diagnostics[kind] = {"status": "stale_feed", "feed_generated_at": generated_at.isoformat(), "items": 0}
             return []
 
         if kind == "x":
-            return self._parse_x(payload, since, generated_at)
-        if kind == "podcast":
-            return self._parse_podcasts(payload, since, generated_at)
-        return self._parse_blogs(payload, since, generated_at)
+            items = self._parse_x(payload, since, generated_at)
+            entries = [tweet for builder in payload.get("x", []) for tweet in builder.get("tweets", [])]
+            dates = [self._parse_datetime(row.get("createdAt")) for row in entries]
+        else:
+            items = self._parse_podcasts(payload, since, generated_at) if kind == "podcast" else self._parse_blogs(payload, since, generated_at)
+            entries = payload.get("podcasts" if kind == "podcast" else "blogs", [])
+            dates = [self._parse_datetime(row.get("publishedAt")) for row in entries]
+        self.diagnostics[kind] = {"status": "ok" if items else "no_recent_items" if entries else "empty_feed", "items": len(items), "entries": len(entries), "feed_generated_at": generated_at.isoformat(), "latest_published_at": max((d.isoformat() for d in dates if d), default=None)}
+        return items
 
     def _parse_x(
         self,
@@ -82,8 +95,6 @@ class FollowBuildersScraper(BaseScraper):
         for builder in builders:
             name = str(builder.get("name") or builder.get("handle") or "Unknown")
             handle = str(builder.get("handle") or "")
-            if handle.lower().lstrip("@") in {h.lower().lstrip("@") for h in self.config.excluded_x_handles}:
-                continue
             tweets = builder.get("tweets", [])
             if not isinstance(tweets, list):
                 continue
@@ -126,7 +137,7 @@ class FollowBuildersScraper(BaseScraper):
                             "quoted_tweet_id": tweet.get("quotedTweetId"),
                             "feed_generated_at": generated_at.isoformat(),
                             "original_url": url,
-                            "verification_status": "original_checked",
+                            "verification_status": "feed_provided",
                         },
                     )
                 )
@@ -179,7 +190,7 @@ class FollowBuildersScraper(BaseScraper):
                         "transcript_chars": len(transcript),
                         "transcript_compacted": len(compact) < len(transcript),
                         "original_url": url,
-                        "verification_status": "original_checked",
+                        "verification_status": "feed_provided",
                     },
                 )
             )
@@ -223,7 +234,7 @@ class FollowBuildersScraper(BaseScraper):
                         "feed_name": post.get("name"),
                         "feed_generated_at": generated_at.isoformat(),
                         "original_url": url,
-                        "verification_status": "original_checked",
+                        "verification_status": "feed_provided",
                     },
                 )
             )

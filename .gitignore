@@ -44,6 +44,11 @@ data/subscribers.json
 data/mcp.secrets.json
 data/mcp-secrets.json
 data/mcp-runs/
+data/source-health/
+data/candidates/
+data/usage/
+data/backups/
+data/web-source-state.json
 data/x_cookies_*.json
 
 docs/_posts/*.md

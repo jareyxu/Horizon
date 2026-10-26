@@ -47,7 +47,13 @@
     ],
     "analysis_concurrency": 4,
     "analysis_input": "title",
-    "enrichment_concurrency": 2
+    "enrichment_concurrency": 2,
+    "screening_excerpt_sources": [
+      "github",
+      "hackernews",
+      "web"
+    ],
+    "screening_excerpt_chars": 600
   },
   "sources": {
     "aihot": {
@@ -69,7 +75,6 @@
     },
     "follow_builders": {
       "enabled": true,
-      "excluded_x_handles": ["dotey", "op7418"],
       "x_feed": "https://raw.githubusercontent.com/zarazhangrui/follow-builders/main/feed-x.json",
       "podcast_feed": "https://raw.githubusercontent.com/zarazhangrui/follow-builders/main/feed-podcasts.json",
       "blog_feed": "https://raw.githubusercontent.com/zarazhangrui/follow-builders/main/feed-blogs.json",
@@ -88,14 +93,16 @@
         "owner": "anthropics",
         "repo": "claude-code",
         "enabled": true,
-        "category": "releases"
+        "category": "releases",
+        "include_prereleases": false
       },
       {
         "type": "repo_releases",
         "owner": "openai",
         "repo": "codex",
         "enabled": true,
-        "category": "releases"
+        "category": "releases",
+        "include_prereleases": false
       }
     ],
     "hackernews": {
@@ -253,22 +260,7 @@
       "rapidapi_max_requests_per_run": 2,
       "rapidapi_include_replies": false,
       "rapidapi_include_retweets": false,
-      "rapidapi_users": [
-        {
-          "username": "dotey",
-          "rest_id": "3178231",
-          "enabled": false,
-          "category": "builders",
-          "fetch_every_days": 1
-        },
-        {
-          "username": "op7418",
-          "rest_id": "1669276256",
-          "enabled": false,
-          "category": "builders",
-          "fetch_every_days": 1
-        }
-      ]
+      "rapidapi_users": []
     },
     "ossinsight": {
       "enabled": true,
@@ -294,7 +286,10 @@
         "name": "AIbase AI 日报",
         "url": "https://news.aibase.cn/daily/",
         "link_selector": "a[href^=\"/daily/\"]",
-        "title_include_keywords": ["AI日报", "AI 日报"],
+        "title_include_keywords": [
+          "AI日报",
+          "AI 日报"
+        ],
         "category": "daily-roundup",
         "max_items": 3
       },
@@ -327,13 +322,16 @@
         "name": "ChatGPT Release Notes",
         "url": "https://help.openai.com/en/articles/6825453-chatgpt-release-notes",
         "mode": "changelog",
-        "category": "products"
+        "category": "products",
+        "fallback_sources": [
+          "OpenAI News"
+        ]
       },
       {
         "enabled": true,
         "name": "Anthropic News",
         "url": "https://www.anthropic.com/news",
-        "link_selector": "a[href^=\"/news/\"]:has(time), a[href^=\"/claude-\"]:has(time)",
+        "link_selector": "a[href^=\"/news/\"]:has(h2), a[href^=\"/news/\"]:has(h3), a[href^=\"/news/\"][class*=\"TableView\"][class*=\"title-link\"], a[href^=\"/claude-\"]:has(h2), a[href^=\"/claude-\"]:has(h3)",
         "category": "models",
         "max_items": 8
       },
@@ -349,7 +347,11 @@
         "name": "Canva Newsroom",
         "url": "https://www.canva.com/newsroom/news/",
         "link_selector": "a[href*=\"/newsroom/news/\"]:has(h2), a[href*=\"/newsroom/news/\"]:has(h3)",
-        "category": "products"
+        "category": "products",
+        "fallback_sources": [
+          "AIBase 中文",
+          "AI HOT"
+        ]
       },
       {
         "enabled": true,
@@ -402,6 +404,7 @@
       }
     },
     "default_group": "other",
-    "default_group_limit": 1
+    "default_group_limit": 1,
+    "creator_prefilter": true
   }
 }

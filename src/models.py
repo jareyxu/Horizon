@@ -113,6 +113,8 @@ class AIConfig(BaseModel):
     throttle_sec: float = 0.0
     analysis_concurrency: int = 1
     analysis_input: str = Field(default="excerpt", pattern="^(excerpt|title)$")
+    screening_excerpt_sources: List[SourceType] = Field(default_factory=list)
+    screening_excerpt_chars: int = Field(default=600, ge=100, le=1200)
     enrichment_concurrency: int = 1
     languages: List[str] = Field(default_factory=lambda: ["en"])
     # Azure OpenAI specific; required when provider == AZURE
@@ -129,6 +131,7 @@ class GitHubSourceConfig(BaseModel):
     repo: Optional[str] = None
     enabled: bool = True
     category: Optional[str] = None
+    include_prereleases: bool = True
 
 
 class HackerNewsConfig(BaseModel):
@@ -157,6 +160,8 @@ class WebSourceConfig(BaseModel):
     name: str
     url: HttpUrl
     enabled: bool = True
+    disabled_reason: Optional[str] = None
+    fallback_sources: List[str] = Field(default_factory=list)
     category: Optional[str] = None
     mode: str = Field(default="articles", pattern="^(articles|cards|changelog|snapshot)$")
     link_selector: str = "article a[href]"
@@ -400,7 +405,6 @@ class FollowBuildersConfig(BaseModel):
     """Follow Builders public JSON feed configuration."""
 
     enabled: bool = False
-    excluded_x_handles: List[str] = Field(default_factory=list)
     x_feed: HttpUrl = HttpUrl(
         "https://raw.githubusercontent.com/zarazhangrui/follow-builders/main/feed-x.json"
     )
@@ -557,6 +561,7 @@ class FilteringConfig(BaseModel):
     """Content filtering configuration."""
 
     ai_score_threshold: float = 7.0
+    creator_prefilter: bool = False
     always_include_aibase_daily: bool = False
     always_include_model_releases: bool = False
     minimum_items: int = Field(default=0, ge=0)

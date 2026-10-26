@@ -69,9 +69,11 @@ class HackerNewsScraper(BaseScraper):
                 if item:
                     items.append(item)
 
+            self.diagnostics["Hacker News"] = {"status": "ok" if items else "no_recent_items", "items": len(items), "inspected_stories": len(story_ids), "failed_stories": sum(isinstance(s, Exception) or s is None for s in stories)}
             return items
 
         except httpx.HTTPError as e:
+            self.diagnostics["Hacker News"] = {"status": "unavailable", "items": 0, "error": type(e).__name__}
             logger.warning("Error fetching Hacker News stories: %s", e)
             return []
 

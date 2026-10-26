@@ -59,6 +59,8 @@ class SourceVerifier:
                 return
 
             soup = BeautifulSoup(response.text, "html.parser")
+            if soup.select_one("#challenge-running, #challenge-form") or "Enable JavaScript and cookies to continue" in soup.get_text(" ", strip=True):
+                raise ValueError("Challenge page is not the original article")
             for tag in soup(["script", "style", "nav", "footer", "header", "noscript"]):
                 tag.decompose()
             title = soup.title.get_text(" ", strip=True) if soup.title else ""
@@ -73,14 +75,14 @@ class SourceVerifier:
                 )
             if title:
                 item.metadata["original_title"] = title
-            item.metadata["verification_status"] = "original_checked"
+            item.metadata["verification_status"] = "original_read" if excerpt else "original_reachable"
         except Exception as exc:
             item.metadata["verification_status"] = "unverified"
             item.metadata["verification_error"] = type(exc).__name__
 
     @staticmethod
     def finalize_corroboration(items: list[ContentItem]) -> None:
-        """Upgrade verification when enrichment found another independent domain."""
+        """Record domain diversity separately; it does not establish independence."""
         for item in items:
             primary_domain = urlparse(str(item.url)).hostname or ""
             source_domains = {
@@ -90,4 +92,4 @@ class SourceVerifier:
             }
             source_domains.discard("")
             if any(domain != primary_domain for domain in source_domains):
-                item.metadata["verification_status"] = "corroborated"
+                item.metadata["coverage_status"] = "multiple_domains"

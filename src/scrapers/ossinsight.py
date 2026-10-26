@@ -8,12 +8,15 @@ configured languages flow through.
 """
 
 from datetime import datetime, timezone
+import logging
 from typing import List, Optional
 
 import httpx
 
 from ..models import ContentItem, OSSInsightConfig, SourceType
 from .base import BaseScraper
+
+logger = logging.getLogger(__name__)
 
 
 class OSSInsightScraper(BaseScraper):
@@ -42,6 +45,7 @@ class OSSInsightScraper(BaseScraper):
 
         for lang in self.cfg.languages:
             rows = await self._fetch_period(self.cfg.period, lang)
+            before = len(items)
             for row in rows:
                 item = self._row_to_item(row, lang)
                 if item is None:
@@ -54,6 +58,11 @@ class OSSInsightScraper(BaseScraper):
                     continue
                 seen_ids.add(item.id)
                 items.append(item)
+            diagnostic = self.diagnostics.get(lang)
+            if diagnostic and diagnostic["status"] in {"ok", "empty_feed"}:
+                diagnostic["items"] = len(items) - before
+                if rows and len(items) == before:
+                    diagnostic["status"] = "filtered_out"
 
         items.sort(key=lambda x: x.metadata.get("stars_gained", 0), reverse=True)
         return items[: self.cfg.max_items]
@@ -69,12 +78,23 @@ class OSSInsightScraper(BaseScraper):
                 timeout=20.0,
             )
             response.raise_for_status()
-        except httpx.HTTPError:
+        except (httpx.HTTPError, ValueError) as exc:
+            self.diagnostics[language] = {"status": "unavailable", "error": type(exc).__name__, "items": 0}
             return []
 
-        payload = response.json()
+        try:
+            payload = response.json()
+        except ValueError:
+            self.diagnostics[language] = {"status": "invalid", "items": 0}
+            return []
+        quality = payload.get("data_quality") or {}
+        if quality.get("status") == "unavailable":
+            self.diagnostics[language] = {"status": "data_unavailable", "http_status": response.status_code, "reason": quality.get("reason"), "unavailable_since": quality.get("unavailable_since"), "items": 0}
+            logger.warning("OSS Insight %s ranking unavailable: %s", language, quality.get("reason"))
+            return []
         data = payload.get("data") or {}
         rows = data.get("rows") or []
+        self.diagnostics[language] = {"status": "ok" if rows else "empty_feed", "rows": len(rows), "items": 0}
         return rows
 
     def _row_to_item(self, row: dict, language: str) -> Optional[ContentItem]:
@@ -125,6 +145,7 @@ class OSSInsightScraper(BaseScraper):
                 "period": self.cfg.period,
                 "collection_names": collections,
                 "description": description,
+                "date_precision": "observation",
                 "category": self.cfg.category,
             },
         )
