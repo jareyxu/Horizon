@@ -184,3 +184,17 @@ def test_fetch_stage_persists_source_health_before_any_ai(tmp_path,monkeypatch):
     assert health['run_status']=='fetched'
     assert health['sources']['RSS Feeds/Offline RSS']['status']=='restricted'
     assert health['sources']['RSS Feeds/Offline RSS']['fetched_items']==0
+
+
+def test_single_collector_name_is_not_duplicated_in_stage_counts(tmp_path):
+    orchestrator=HorizonOrchestrator(config(),StorageManager(str(tmp_path)))
+    class Collector:
+        diagnostics={'AI HOT':{'status':'ok','items':1}}
+        async def fetch(self,since):return [news(SourceType.AIHOT,metadata={'upstream_source':'AI HOT'})]
+    async def run():
+        items=await orchestrator._fetch_with_progress('AI HOT',Collector(),datetime.now(timezone.utc))
+        orchestrator._save_source_health('fetched',fetched=items)
+        return items
+    items=asyncio.run(run())
+    assert items[0].metadata['source_health_keys']==['AI HOT']
+    assert orchestrator.source_health['AI HOT']['fetched_items']==1

@@ -536,7 +536,7 @@ class HorizonOrchestrator:
                 self.console.print(f"   [yellow]{key}: {diagnostic['status']}[/yellow]")
         for item in items:
             label = item.metadata.get("source_variant") if name == "Follow Builders" else item.metadata.get("primary_language") if name == "OSS Insight" else self._sub_source_label(item)
-            key = f"{name}/{label}" if label in diagnostics else name
+            key = f"{name}/{label}" if label in diagnostics and label != name else name
             item.metadata["source_health_keys"] = [key]
         self.console.print(f"   Found {len(items)} items from {name}")
 
