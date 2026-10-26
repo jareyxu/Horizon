@@ -17,9 +17,11 @@ published under the correct Beijing date.
 Configure which AI model scores and summarizes your content.
 
 The Chinese preset uses `ai.analysis_input: "title"`: the initial scoring call
-receives the title and source identity, not article text, comments or engagement.
-Unselected items retain their fetched text for manual reading; their Chinese
-summary only paraphrases the title. Selected items still go through source
+normally receives the title and source identity, without comments or engagement.
+`screening_excerpt_sources` adds at most 600 characters of article text for
+GitHub, HN and web items in the preset; other source types stay title-only.
+Unselected items retain their fetched text for manual reading; title-only
+summaries only paraphrase the title. Selected items still go through source
 verification and body-based enrichment. Use `"excerpt"` to restore excerpt scoring.
 This saves scoring input tokens, not all AI costs, and can miss stories with
 uninformative titles. Long podcast condensation is skipped before title screening.
@@ -46,9 +48,9 @@ These editorial exceptions retain their actual scores, undergo topic deduplicati
 (roundups remain separate), and survive category/global caps. The final count may
 exceed `max_items` if the mandatory items alone exceed that limit.
 
-The Chinese preset disables the dedicated X collector for `dotey` and `op7418`.
-`sources.follow_builders.excluded_x_handles` also excludes those handles from
-the shared Follow Builders X feed; other Follow Builders sources remain enabled.
+The Chinese preset leaves the dedicated X collector disabled with no configured
+accounts. Follow Builders processes all accounts supplied by its shared X feed
+using the same rules, without account-specific exclusions.
 
 `api_key_env` is always an environment variable name, not the API key value.
 Store secrets in `.env` or your shell environment, then point `api_key_env` at
@@ -907,3 +909,58 @@ uv run horizon-mcp
 Available tools include `hz_validate_config`, `hz_fetch_items`, `hz_score_items`, `hz_filter_items`, `hz_enrich_items`, `hz_generate_summary`, and `hz_run_pipeline`.
 
 See [`src/mcp/README.md`](../src/mcp/README.md) for the full tool reference and [`src/mcp/integration.md`](../src/mcp/integration.md) for client setup.
+
+## Source health and creator screening
+
+Each run writes a unique `data/source-health/horizon-<date>-<UTC timestamp>.json`
+and updates `data/source-health/latest.json`. Fetch results are saved before AI
+calls, including empty and failed sources; later stages add URL-deduplicated,
+prefiltered and selected counts. Failed runs retain the observations already
+collected. Each row counts toward every recorded collector that supplied it.
+Health files contain diagnostics and counts, not credentials or article bodies.
+
+Web diagnostics distinguish `restricted` (401/403), `no_matching_links`,
+`parse_failed`, `partial`, and `no_recent_items`. Relative card dates accept
+minutes, hours, days and weeks; their precision remains `relative`. Snapshot
+sources separately report `baseline_created` and `unchanged`. Follow Builders
+records X, podcast and blog freshness independently, including stale feeds and
+empty upstream lists. OSS Insight's `data_quality.status: unavailable` suppresses
+ranking rows even when HTTP succeeds; it is recorded as `data_unavailable`.
+Unavailable rankings are never treated as evidence that no repositories trend.
+
+The Chinese preset uses a conservative, configurable `filtering.creator_prefilter`:
+HN rows without AI topic terms in their title/fetched content and GitHub
+maintenance releases without feature signals skip model scoring. They remain in
+the full candidate archive with `prefilter_reason`; feature releases and reports
+merged from different collectors still reach the scorer. Repository configs set
+`include_prereleases: false` to omit prereleases at collection time. These rules
+are heuristics and can miss indirectly titled AI stories; disable the prefilter
+to compare against an unfiltered sample.
+
+`ai.screening_excerpt_sources` enables a short body excerpt for selected source
+types while other types retain title screening. The Chinese preset includes
+`github`, `hackernews` and `web`, capped by `screening_excerpt_chars: 600`; fetched
+comments are excluded from this short input. Mixed runs use the `mixed_screening`
+token stage. This improves context but does not promise a particular cost saving.
+
+Follow Builders items start as `feed_provided`. A successful article fetch records
+`original_read`, which means text was read, not that claims were fact-checked.
+Challenge pages do not qualify. Different reporting domains only set
+`coverage_status: multiple_domains`; they do not establish independent confirmation.
+
+ChatGPT Release Notes and Canva Newsroom may return 403. Their health rows retain
+`fallback_sources`: OpenAI News supplements ChatGPT coverage; AIBase and AI HOT
+provide Canva-related discovery leads. These are already enabled collectors and
+are not guarantees of complete or official replacement coverage. No login or
+challenge bypass is attempted. Existing direct RSS subscriptions remain independent
+of the Follow Builders blog list; infrequent podcasts are reported as no recent
+content rather than treated as outages.
+
+Run the following for a public-source-only check with isolated temporary state:
+
+```sh
+uv run python -m scripts.check_source_health --hours 168 --output /tmp/horizon-health.json
+```
+
+This command disables all dedicated X backends and OpenBB for the check. It does
+not call AI, deliver notifications, publish pages, or modify production baselines.
