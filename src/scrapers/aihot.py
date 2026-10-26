@@ -60,6 +60,7 @@ class AIHotScraper(BaseScraper):
             if not payload.get("hasNext") or not cursor:
                 break
 
+        self.diagnostics["AI HOT"] = {"status": "ok" if items else "no_recent_items", "items": len(items), "latest_published_at": max((i.published_at.isoformat() for i in items), default=None)}
         return items
 
     def _to_content_item(

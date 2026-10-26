@@ -139,6 +139,20 @@ class StorageManager:
         temporary.replace(target)
         return target
 
+    def save_source_health(self, date: str, health: dict, path: Path | None = None) -> Path:
+        """Save a run snapshot and a latest view, including failed/empty runs."""
+        from datetime import datetime, timezone
+        directory = self.data_dir / "source-health"
+        directory.mkdir(parents=True, exist_ok=True)
+        stamp = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%S%fZ")
+        target = path or directory / f"horizon-{date}-{stamp}.json"
+        data = json.dumps({"report_date": date, "recorded_at_utc": stamp, **health}, ensure_ascii=False, indent=2)
+        for destination in (target, directory / "latest.json"):
+            temporary = destination.with_suffix(".tmp")
+            temporary.write_text(data, encoding="utf-8")
+            temporary.replace(destination)
+        return target
+
     def load_subscribers(self) -> list:
         """Loads the list of email subscribers."""
         subscribers_path = self.data_dir / "subscribers.json"

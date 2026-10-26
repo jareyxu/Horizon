@@ -87,6 +87,10 @@ class ContentAnalyzer:
         """
         creator_mode = self.profile.editorial_mode == "creator"
         title_only = getattr(getattr(self.client, "config", None), "analysis_input", "excerpt") == "title"
+        excerpt_sources = getattr(getattr(self.client, "config", None), "screening_excerpt_sources", [])
+        short_excerpt = title_only and item.source_type in excerpt_sources
+        if short_excerpt:
+            title_only = False
         # Prepare content section
         content_section = ""
         if item.content and not title_only:
@@ -108,6 +112,12 @@ class ContentAnalyzer:
             discussion_parts.append(f"Community Comments:\n{comments_part[:1500]}")
 
         meta = item.metadata
+        if short_excerpt:
+            from bs4 import BeautifulSoup
+            limit = getattr(self.client.config, "screening_excerpt_chars", 600)
+            text = (item.content or "").split("--- Top Comments ---", 1)[0]
+            text = BeautifulSoup(text, "html.parser").get_text(" ", strip=True)
+            content_section = f"Content excerpt: {text[:limit]}" if text else ""
         engagement_items = []
         if meta.get("score"):
             engagement_items.append(f"score: {meta['score']}")
@@ -133,7 +143,7 @@ class ContentAnalyzer:
             discussion_parts.append(f"Community Note: {meta['community_note']}")
 
         discussion_section = "\n".join(discussion_parts) if discussion_parts else ""
-        if title_only:
+        if title_only or short_excerpt:
             discussion_section = ""
 
         # Generate user prompt

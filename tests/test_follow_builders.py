@@ -7,12 +7,13 @@ from src.models import FollowBuildersConfig
 from src.scrapers.follow_builders import FollowBuildersScraper
 
 
-def test_excludes_removed_x_accounts_from_shared_feed():
+def test_shared_feed_processes_all_accounts_equally():
     now = datetime.now(timezone.utc)
-    payload = {"x": [{"name": handle, "handle": handle, "tweets": [{"id": str(index), "text": "AI news", "url": f"https://x.com/{handle.lstrip('@')}/status/{index}", "createdAt": now.isoformat()}]} for index, handle in enumerate(["@Dotey", "op7418", "other"])]}
-    scraper = FollowBuildersScraper(FollowBuildersConfig(excluded_x_handles=["dotey", "op7418"]), None)
+    handles = ["@BuilderOne", "builder_two", "other"]
+    payload = {"x": [{"name": handle, "handle": handle, "tweets": [{"id": str(index), "text": "AI news", "url": f"https://x.com/{handle.lstrip('@')}/status/{index}", "createdAt": now.isoformat()}]} for index, handle in enumerate(handles)]}
+    scraper = FollowBuildersScraper(FollowBuildersConfig(), None)
     items = scraper._parse_x(payload, now - timedelta(hours=1), now)
-    assert [news.metadata["handle"] for news in items] == ["other"]
+    assert [news.metadata["handle"] for news in items] == handles
 
 
 def test_follow_builders_parses_three_feeds_and_compacts_transcript():

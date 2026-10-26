@@ -82,6 +82,7 @@ class RSSScraper(BaseScraper):
             if not feed.get("version"):
                 raise ValueError("Response is not a recognized RSS/Atom feed")
 
+            dates = [self._parse_date(entry) for entry in feed.entries]
             for entry in feed.entries:
                 # Parse published date
                 published_at = self._parse_date(entry)
@@ -125,13 +126,17 @@ class RSSScraper(BaseScraper):
             items.sort(key=lambda item: item.published_at, reverse=True)
             items = items[:source.max_items]
             logger.info("RSS %s: %d recent items", source.name, len(items))
-            self.diagnostics[source.name] = {"status": "ok", "items": len(items)}
+            status = "ok" if items else "filtered_out" if any(d and d >= since for d in dates) else "no_recent_items" if feed.entries else "empty_feed"
+            if feed.entries and not any(dates):
+                status = "parse_failed"
+            self.diagnostics[source.name] = {"status": status, "items": len(items), "entries": len(feed.entries), "date_parse_failures": sum(d is None for d in dates), "latest_published_at": max((d.isoformat() for d in dates if d), default=None)}
 
         except httpx.HTTPError as e:
-            self.diagnostics[source.name] = {"status": "unavailable", "error": str(e)}
+            code = e.response.status_code if isinstance(e, httpx.HTTPStatusError) else None
+            self.diagnostics[source.name] = {"status": "restricted" if code in {401, 403} else "unavailable", "http_status": code, "error": type(e).__name__, "items": 0}
             logger.warning("Error fetching RSS feed %s: %s", source.name, e)
         except Exception as e:
-            self.diagnostics[source.name] = {"status": "invalid", "error": str(e)}
+            self.diagnostics[source.name] = {"status": "invalid", "error": type(e).__name__, "items": 0}
             logger.warning("Error parsing RSS feed %s: %s", source.name, e)
 
         return items

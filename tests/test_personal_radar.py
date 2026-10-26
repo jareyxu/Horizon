@@ -161,9 +161,9 @@ def test_verifier_extracts_original_and_renderer_shows_status():
         DailySummarizer().generate_summary([item], "2026-07-12", 1, language="zh")
     )
 
-    assert item.metadata["verification_status"] == "original_checked"
+    assert item.metadata["verification_status"] == "original_read"
     assert "Verified facts here" in item.metadata["verified_excerpt"]
-    assert "已核对原文" in rendered
+    assert "原文已读取（未作事实核查）" in rendered
     assert "中文阅读" in rendered
 
 

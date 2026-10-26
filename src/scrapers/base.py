@@ -20,6 +20,7 @@ class BaseScraper(ABC):
         """
         self.config = config
         self.client = http_client
+        self.diagnostics = {}
 
     @abstractmethod
     async def fetch(self, since: datetime) -> List[ContentItem]:

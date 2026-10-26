@@ -2,6 +2,7 @@
 
 import asyncio
 import re
+import time
 from collections import defaultdict
 from dataclasses import dataclass, field
 from datetime import datetime, timedelta, timezone
@@ -71,6 +72,8 @@ class HorizonOrchestrator:
         self.storage = storage
         self.delivery_enabled = delivery_enabled
         self.console = Console()
+        self.source_health = {}
+        self._source_health_path = None
         self.email_manager = (
             EmailManager(config.email, console=self.console)
             if delivery_enabled and config.email
@@ -129,11 +132,13 @@ class HorizonOrchestrator:
             ]
 
             if not all_items:
+                self._save_source_health("no_content")
                 self.console.print("[yellow]No new content found. Exiting.[/yellow]")
                 return
 
             # 3. Merge cross-source duplicates (same URL from different sources)
             merged_items = self.merge_cross_source_duplicates(all_items)
+            self._save_source_health("deduplicated", merged=merged_items)
             if len(merged_items) < len(all_items):
                 self.console.print(
                     f"🔗 Merged {len(all_items) - len(merged_items)} cross-source duplicates "
@@ -145,9 +150,10 @@ class HorizonOrchestrator:
                 await self._prepare_longform_items(merged_items)
 
             # 4. Analyze with AI
-            with usage_stage("title_scoring" if self.config.ai.analysis_input == "title" else "excerpt_scoring"):
+            with usage_stage("mixed_screening" if self.config.ai.screening_excerpt_sources else "title_scoring" if self.config.ai.analysis_input == "title" else "excerpt_scoring"):
                 analyzed_items = await self._analyze_content(merged_items)
             self._apply_source_scoring(analyzed_items)
+            self._save_source_health("analyzed", prefiltered=[i for i in analyzed_items if i.metadata.get("prefilter_reason")])
             if hasattr(self.storage, "save_candidate_archive"):
                 self.storage.save_candidate_archive(self._report_date(), self.build_candidate_archive(raw_items, analyzed_items))
             self.console.print(f"🤖 Analyzed {len(analyzed_items)} items with AI\n")
@@ -210,6 +216,7 @@ class HorizonOrchestrator:
             with usage_stage("selected_summary"):
                 await self._enrich_important_items(important_items)
             SourceVerifier.finalize_corroboration(important_items)
+            self._save_source_health("selected", selected=important_items)
 
             archive_items = self.build_candidate_archive(raw_items, analyzed_items)
             if hasattr(self.storage, "save_candidate_archive"):
@@ -302,6 +309,7 @@ class HorizonOrchestrator:
             self.console.print(
                 "[bold green]✅ Horizon completed successfully![/bold green]"
             )
+            self._save_source_health("success")
             usage = get_usage_snapshot()
             if hasattr(self.storage, "save_token_usage"):
                 self.storage.save_token_usage(today, {
@@ -336,6 +344,7 @@ class HorizonOrchestrator:
 
         except Exception as e:
             self.console.print(f"[bold red]❌ Error: {e}[/bold red]")
+            self._save_source_health("failed")
             if hasattr(self.storage, "save_token_usage"):
                 try:
                     self.storage.save_token_usage(self._report_date(), {
@@ -381,6 +390,8 @@ class HorizonOrchestrator:
         Returns:
             List[ContentItem]: All fetched items
         """
+        self.source_health = {}
+        self._source_health_path = None
         async with httpx.AsyncClient(timeout=30.0) as client:
             tasks = []
 
@@ -403,7 +414,7 @@ class HorizonOrchestrator:
 
             # Reddit
             if self.config.sources.web:
-                web_scraper = WebScraper(self.config.sources.web, client)
+                web_scraper = WebScraper(self.config.sources.web, client, self.storage.data_dir / "web-source-state.json")
                 tasks.append(self._fetch_with_progress("Public Websites", web_scraper, since))
 
             # Reddit
@@ -492,6 +503,7 @@ class HorizonOrchestrator:
                 elif isinstance(result, list):
                     all_items.extend(result)
 
+            self._save_source_health("fetched", fetched=all_items)
             return all_items
 
     async def _fetch_with_progress(
@@ -508,7 +520,24 @@ class HorizonOrchestrator:
             List[ContentItem]: Fetched items
         """
         self.console.print(f"🔍 Fetching from {name}...")
-        items = await scraper.fetch(since)
+        started = time.monotonic()
+        try:
+            items = await scraper.fetch(since)
+        except Exception as exc:
+            self.source_health[name] = {"status": "unavailable", "error": type(exc).__name__, "items": 0, "seconds": round(time.monotonic() - started, 2)}
+            raise
+        diagnostics = getattr(scraper, "diagnostics", {})
+        if not diagnostics:
+            diagnostics = {name: {"status": "ok" if items else "no_recent_items", "items": len(items)}}
+        for label, diagnostic in diagnostics.items():
+            key = name if label == name else f"{name}/{label}"
+            self.source_health[key] = {**diagnostic, "seconds": round(time.monotonic() - started, 2)}
+            if diagnostic.get("status") in {"restricted", "unavailable", "data_unavailable", "stale_feed", "parse_failed", "no_matching_links", "partial", "invalid"}:
+                self.console.print(f"   [yellow]{key}: {diagnostic['status']}[/yellow]")
+        for item in items:
+            label = item.metadata.get("source_variant") if name == "Follow Builders" else item.metadata.get("primary_language") if name == "OSS Insight" else self._sub_source_label(item)
+            key = f"{name}/{label}" if label in diagnostics else name
+            item.metadata["source_health_keys"] = [key]
         self.console.print(f"   Found {len(items)} items from {name}")
 
         # Show per-sub-source breakdown when there are multiple sub-sources
@@ -520,6 +549,23 @@ class HorizonOrchestrator:
                 self.console.print(f"      • {sub}: {count}")
 
         return items
+
+    def _save_source_health(self, status: str, **stages) -> None:
+        if not hasattr(self.storage, "save_source_health"):
+            return
+        for stage, items in stages.items():
+            counts = defaultdict(int)
+            for item in items:
+                for key in set(item.metadata.get("source_health_keys", [])):
+                    counts[key] += 1
+            for key, diagnostic in self.source_health.items():
+                diagnostic[f"{stage}_items"] = counts[key]
+        try:
+            self._source_health_path = self.storage.save_source_health(
+                self._report_date(), {"run_status": status, "sources": self.source_health}, self._source_health_path
+            )
+        except OSError as exc:
+            self.console.print(f"[yellow]Could not persist source health: {type(exc).__name__}[/yellow]")
 
     @staticmethod
     def _sub_source_label(item: ContentItem) -> str:
@@ -598,6 +644,7 @@ class HorizonOrchestrator:
 
             # Pick the item with the richest content as primary
             primary = max(group, key=lambda x: len(x.content or ""))
+            health_keys = {key for item in group for key in item.metadata.get("source_health_keys", [])}
 
             # Merge metadata and source info from other items
             all_sources = set()
@@ -633,6 +680,7 @@ class HorizonOrchestrator:
             primary.metadata["source_count"] = len(source_details)
             primary.metadata["original_urls"] = list(dict.fromkeys(original_urls))
             primary.metadata["sources"] = source_details
+            primary.metadata["source_health_keys"] = sorted(health_keys)
             merged.append(primary)
 
         return merged
@@ -655,7 +703,7 @@ class HorizonOrchestrator:
                 item.ai_summary = analyzed.ai_summary
                 item.ai_tags = list(analyzed.ai_tags)
                 if analyzed.id == raw.id:
-                    for key in ("title_zh", "summary_zh", "creator", "creator_eligible", "analysis_input", "is_model_release", "model_release_name", "mandatory_inclusion"):
+                    for key in ("title_zh", "summary_zh", "creator", "creator_eligible", "analysis_input", "is_model_release", "model_release_name", "mandatory_inclusion", "prefilter_reason", "verification_status", "coverage_status"):
                         if key in analyzed.metadata:
                             item.metadata[key] = analyzed.metadata[key]
                 else:
@@ -842,6 +890,7 @@ class HorizonOrchestrator:
                         }
                     )
                 primary.metadata["merged_sources"] = sorted(merged_sources)
+                primary.metadata["source_health_keys"] = sorted(set(primary.metadata.get("source_health_keys", [])) | set(dup.metadata.get("source_health_keys", [])))
                 primary.metadata["original_urls"] = original_urls
                 primary.metadata["sources"] = source_details
                 primary.metadata["source_count"] = max(
@@ -1053,7 +1102,7 @@ class HorizonOrchestrator:
         verifier = SourceVerifier(self.config.verification)
         await verifier.verify_batch(items)
         verified = sum(
-            item.metadata.get("verification_status") != "unverified" for item in items
+            item.metadata.get("verification_status") in {"original_read", "original_reachable"} for item in items
         )
         self.console.print(
             f"   Verified or reached {verified}/{len(items)} shortlisted items\n"
@@ -1070,10 +1119,43 @@ class HorizonOrchestrator:
         """
         self.console.print("🤖 Analyzing content with AI...")
 
+        candidates = []
+        for item in items:
+            reason = self._creator_prefilter_reason(item)
+            if reason:
+                item.ai_score = 0
+                item.ai_reason = f"前置规则过滤：{reason}"
+                item.ai_summary = item.title
+                item.metadata.update({"prefilter_reason": reason, "creator_eligible": False})
+            else:
+                candidates.append(item)
+        if not candidates:
+            return items
         ai_client = create_ai_client(self.config.ai)
         analyzer = ContentAnalyzer(ai_client, self.config.profile)
 
-        return await analyzer.analyze_batch(items)
+        await analyzer.analyze_batch(candidates)
+        return items
+
+    def _creator_prefilter_reason(self, item: ContentItem) -> str | None:
+        if not self.config.filtering.creator_prefilter or self.config.profile.editorial_mode != "creator":
+            return None
+        # A second collector's report may add relevant context; let AI assess it.
+        if len(item.metadata.get("merged_sources", [])) > 1:
+            return None
+        from bs4 import BeautifulSoup
+        text = BeautifulSoup(item.content or "", "html.parser").get_text(" ", strip=True)
+        if item.source_type.value == "github" and item.metadata.get("tag"):
+            if item.metadata.get("prerelease"):
+                return "GitHub 预发布版本"
+            feature = re.search(r"\b(new|add(?:ed|s)?|introduc\w*|support\w*|feature\w*|launch\w*|model)\b|新增|支持|新功能", text, re.I)
+            if text and not feature and re.search(r"\b(fix(?:ed|es)?|bug|maintenance|chore)\b|修复|维护", text, re.I):
+                return "GitHub 常规修复与维护"
+        if item.source_type.value == "hackernews" and not re.search(
+            r"\b(ai|llms?|gpt\w*|agents?|models?|neural|robot\w*|prompt\w*|diffusion|transformer\w*|intelligence|machine learning|deep learning|chatgpt|claude|gemini|openai|anthropic|deepseek|codex|copilot|sora|midjourney)\b|人工智能|大模型|生图|智能体", f"{item.title} {text}", re.I
+        ):
+            return "HN 标题及已抓取内容未命中 AI 主题"
+        return None
 
     async def _prepare_longform_items(self, items: List[ContentItem]) -> None:
         """Summarize long podcast transcripts before relevance scoring."""

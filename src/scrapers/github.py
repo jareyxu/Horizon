@@ -107,7 +107,10 @@ class GitHubScraper(BaseScraper):
                 if item:
                     items.append(item)
 
+            self.diagnostics[source.username] = {"status": "ok" if items else "no_recent_items", "items": len(items), "entries": len(events)}
+
         except httpx.HTTPError as e:
+            self.diagnostics[source.username] = {"status": "unavailable", "items": 0, "error": type(e).__name__}
             logger.warning("Error fetching GitHub events for %s: %s", source.username, e)
 
         return items
@@ -192,6 +195,10 @@ class GitHubScraper(BaseScraper):
             releases = response.json()
 
             for release in releases:
+                if release.get("draft") or (release.get("prerelease") and not source.include_prereleases):
+                    continue
+                if not release.get("published_at"):
+                    continue
                 published_at = datetime.fromisoformat(
                     release["published_at"].replace("Z", "+00:00")
                 )
@@ -216,7 +223,9 @@ class GitHubScraper(BaseScraper):
                 )
                 items.append(item)
 
+            self.diagnostics[f"{owner}/{repo}"] = {"status": "ok" if items else "no_recent_items", "items": len(items), "entries": len(releases), "skipped_prereleases": sum(bool(r.get("prerelease")) for r in releases) if not source.include_prereleases else 0}
         except httpx.HTTPError as e:
+            self.diagnostics[f"{owner}/{repo}"] = {"status": "unavailable", "items": 0, "error": type(e).__name__}
             logger.warning("Error fetching releases for %s/%s: %s", owner, repo, e)
 
         return items

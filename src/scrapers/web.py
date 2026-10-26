@@ -32,9 +32,12 @@ class WebScraper(BaseScraper):
         items = []
         for source in self.sources:
             if not source.enabled:
+                self.diagnostics[source.name] = {"status": "disabled", "reason": source.disabled_reason, "fallback_sources": source.fallback_sources, "items": 0}
                 continue
             try:
                 self._article_failures = 0
+                self._stats = {"matched_links": 0, "inspected_links": 0, "date_parse_failures": 0}
+                self._snapshot_status = None
                 soup = await self._page(str(source.url))
                 if source.mode == "snapshot":
                     found = self._snapshot(source, soup)
@@ -45,9 +48,17 @@ class WebScraper(BaseScraper):
                 recent = [i for i in found if since <= i.published_at <= datetime.now(timezone.utc)]
                 items.extend(sorted(recent, key=lambda i: i.published_at, reverse=True)[:source.max_items])
                 logger.info("Web %s: %d recent items", source.name, len(recent))
-                self.diagnostics[source.name] = {"status": "partial" if self._article_failures else "ok", "items": len(recent), "skipped_articles": self._article_failures}
+                status = "ok" if recent else "no_recent_items"
+                if self._snapshot_status:
+                    status = self._snapshot_status
+                elif source.mode in {"articles", "cards"} and not self._stats["matched_links"]:
+                    status = "no_matching_links"
+                elif self._article_failures or self._stats["date_parse_failures"]:
+                    status = "partial" if recent else "parse_failed"
+                self.diagnostics[source.name] = {"status": status, "items": len(recent), "skipped_articles": self._article_failures, **self._stats, "latest_published_at": max((i.published_at.isoformat() for i in found), default=None)}
             except (httpx.HTTPError, ValueError) as exc:
-                self.diagnostics[source.name] = {"status": "unavailable", "error": str(exc)}
+                code = exc.response.status_code if isinstance(exc, httpx.HTTPStatusError) else None
+                self.diagnostics[source.name] = {"status": "restricted" if code in {401, 403} else "unavailable", "http_status": code, "error": type(exc).__name__, "fallback_sources": source.fallback_sources, "items": 0}
                 logger.warning("Web %s unavailable: %s", source.name, exc)
             except Exception:
                 self.diagnostics[source.name] = {"status": "error"}
@@ -121,7 +132,9 @@ class WebScraper(BaseScraper):
 
     async def _articles(self, source, soup):
         items, seen = [], set()
-        for link in soup.select(source.link_selector):
+        links = soup.select(source.link_selector)
+        self._stats["matched_links"] = len(links)
+        for link in links:
             if source.title_include_keywords and not any(
                 keyword.casefold() in link.get_text(" ", strip=True).casefold()
                 for keyword in source.title_include_keywords
@@ -137,17 +150,19 @@ class WebScraper(BaseScraper):
             seen.add(target)
             if len(seen) > source.max_items:
                 break
+            self._stats["inspected_links"] += 1
             if source.mode == "cards":
                 date_node = link.select_one(source.date_selector or "time")
                 raw = (date_node.get("datetime") or date_node.get_text(strip=True)) if date_node else ""
                 date = self._date(raw)
                 precision = "publication"
                 # Relative times are explicitly identified, never called exact publication times.
-                if date is None and (m := re.fullmatch(r"(\d+)([hm]) ago", raw)):
-                    count = int(m[1])
-                    date = datetime.now(timezone.utc) - timedelta(minutes=count if m[2] == "m" else count * 60)
+                if date is None and (m := re.fullmatch(r"(\d+)\s*(m|min(?:ute)?s?|h|hours?|d|days?|w|weeks?)\s+ago", raw, re.IGNORECASE)):
+                    count, unit = int(m[1]), m[2].lower()[0]
+                    date = datetime.now(timezone.utc) - timedelta(minutes=count * {"m": 1, "h": 60, "d": 1440, "w": 10080}[unit])
                     precision = "relative"
                 if date is None:
+                    self._stats["date_parse_failures"] += 1
                     continue
                 title = link.select_one("h2, h3")
                 items.append(self._item(source, title.get_text(" ", strip=True) if title else link.get_text(" ", strip=True)[:200], target, link.get_text(" ", strip=True), date, date_precision=precision))
@@ -161,6 +176,8 @@ class WebScraper(BaseScraper):
                     items.append(self._item(source, title.get_text(" ", strip=True), target, content, date))
                 else:
                     self._article_failures += 1
+                    if date is None:
+                        self._stats["date_parse_failures"] += 1
                     logger.info("Web %s skipped undated/empty article: %s", source.name, target)
             except httpx.HTTPError as exc:
                 self._article_failures += 1
@@ -204,6 +221,7 @@ class WebScraper(BaseScraper):
         state = json.loads(self.state_path.read_text()) if self.state_path.exists() else {}
         previous = state.get(str(source.url))
         if previous == digest:
+            self._snapshot_status = "unchanged"
             return []
         state[str(source.url)] = digest
         self.state_path.parent.mkdir(parents=True, exist_ok=True)
@@ -211,6 +229,7 @@ class WebScraper(BaseScraper):
         temporary.write_text(json.dumps(state))
         temporary.replace(self.state_path)
         if previous is None:
+            self._snapshot_status = "baseline_created"
             logger.info("Web %s: first baseline stored; no launch date inferred", source.name)
             return []
         content = "这是官网内容变化线索，观察时间不是产品发布日期；尚未核实是否为新功能，不应直接称为今日发布。\n" + content
